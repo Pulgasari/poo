@@ -4,7 +4,7 @@ Coding sucks.
 
 ## Write a block of code
 
-```c
+```php
 {
   def $name = 'Udo';
   def $pet  = 'cat';
@@ -41,7 +41,7 @@ def theMostEmptyObjectEver = {
 
 It can contain `def` and `do` statements.
 
-```c
+```javascript
 def person = {
   def name = 'Udo';
   def age  = 69;
@@ -76,11 +76,7 @@ A **class** is a functional object returning an instance of itself.
 
 
 
-```c
-do while (cond) {
-    body();
-} until (cond);
-```
+
 
 ## Keywords
 
@@ -122,14 +118,34 @@ do {
 
 #### `for while until` loop
 
-```c
+Would run at least once until post-block-condition becomes `false` if pre-block-condition were `true`.
 
+```c
+do for $i while ($i < 10) {
+    body();
+} until (cond);
 ```
 
 ### `if` | `or`
 
 ```c
+if <condExpr> {
 
+}
+
+// oneliner
+if <condExpr> do <statment>;
+```
+
+```c
+//
+if <condExpr> {...}
+or <condExpr> {...}  // like 'else if'
+or            {...}; // like `else'
+
+// oneliners
+if <condExpr> or <condExpr> do <statment>;
+if <condExpr> or <condExpr> or do <statment>;
 ```
 
 ## Types
