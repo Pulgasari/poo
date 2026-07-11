@@ -184,16 +184,16 @@ def myFn     = (sth) => sth ?> print(sth);
 
 #### Math / Calculation
 
-Operator | Name    |
----------|---------|---
+Operator | Name    | ...
+---------|---------|----
 `+`      |         |
 `-`      |         |
 `?>`     |         |
 
 ####
 
-Operator | Name    |
----------|---------|---
+Operator | Name    | ...
+---------|---------|----
 `??`     | Nullish |
 `|>`     | Pipe    |
 `?>`     |         | 
