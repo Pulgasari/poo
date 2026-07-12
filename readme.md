@@ -19,7 +19,7 @@ Write a block of code.
 
 Now give it a name and call it.
 
-```scala
+```rust
 {
   prop block = {
     prop name = 'Udo';
@@ -28,11 +28,13 @@ Now give it a name and call it.
     print("@name has a @pet.");
   }
 
-  block(name: 'Hans');
+  block(); // "Udo has a cat."
 }
 ```
 
+Congratulations! You now know how to create [objects](#objects), [functions](#functions), [classes](#classes) and [traits](#traits). ^-^
 
+There is more to learn but one needs to start somewhere.
 
 ## Definitions
 
