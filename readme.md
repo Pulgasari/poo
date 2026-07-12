@@ -110,7 +110,7 @@ do helloFoxbuddy('Anne', '23');
 
 ### the `new` keyword
 
-```c
+```scala
 prop person = {
   prop name = 'Udo';
   prop age  = 60;
