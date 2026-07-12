@@ -300,6 +300,56 @@ def myArray  = ['bird', 'cat', 'dog', 'fish'];
 def myFn     = (sth) => sth ?> print(sth);
 ```
 
+### Number
+
+```c
+pp num = 60;
+pp dec = 10.5;
+pp abc = 10_000_000; // 10000000
+```
+
+### String
+
+```c
+pp name = 'Udo':
+pp text = 'Coding sucks.';
+```
+
+### Arrays
+
+...
+
+```c
+pp sth = new Array ();
+pp sth = ['abc', 123, true];
+```
+
+### List
+
+A **List** is a special form of an array with:
+- identical typed values
+
+```c
+pp pets = new List ();
+pp pets = #['bird', 'cat', 'dog', 'fish'];
+pp nums = #[1, 2, 3];
+```
+
+A **List** has all the builtin methods of **Array** *(outer type)* and depending on the type of it's values *(inner type)* one could use all those methods in combination.
+
+```c
+pp pets = #['bird', 'cat', 'dog', 'fish'];
+
+// #['BIRD', 'CAT', 'DOG', 'FISH']
+do pets.map(toUpperCase);
+
+// #['DRIB', 'TAC', 'DOG', 'GOD', 'HSIF']
+do pets.map(toUpperCase, reverse);
+
+// #[HSIF, 'GOD', 'TAC', 'DRIB']
+do pets.map(toUpperCase, reverse).reverse();
+```
+
 ## Operators
 
 #### Math / Calculation
