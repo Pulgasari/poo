@@ -316,9 +316,9 @@ Operator | Name      | ...
 Operator | Name    | ...
 ---------|---------|----
 `??`     | Nullish |
-`|>`     | Pipe    |
+`\|>`    | Pipe    |
 `?>`     |         | 
-`||`     | Or      |
+`\|\|`   | Or      |
 `&&`     | And     |
 
 #### Assignment
