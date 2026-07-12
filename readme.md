@@ -8,8 +8,8 @@ Coding sucks.
 
 ```php
 {
-  def name = 'Udo';
-  def pet  = 'cat';
+  prop name = 'Udo';
+  prop pet  = 'cat';
 
   print("@name has a @pet.");
 }
@@ -17,7 +17,9 @@ Coding sucks.
 
 ## Definitions
 
-The `def` keyword introduces a declaration statement.
+The `prop` keyword introduces a declaration statement to define a **property** in the current scope.
+
+***Note:** This keyword has also the aliases `pp` and `property`.*
 
 ### define a constant
 
@@ -27,7 +29,7 @@ A **constant** is
 - not mutable.
 
 ```c
-def MY_LITTLE_CONSTANT = 'Moin!';
+prop MY_LITTLE_CONSTANT = 'Moin!';
 ```
 
 ### define a variable
@@ -38,8 +40,8 @@ A **variable** is
 - mutable (until you seal it).
 
 ```c
-def myVariable   = true;
-def my_other_var = 3;
+prop myVariable   = true;
+prop my_other_var = 3;
 ```
 
 ### define a object
@@ -51,10 +53,9 @@ An **object**
 - may contain `def` and `do` statements.
 
 ```javascript
-def person = {
-  def name = 'Udo';
-  def age  = 69;
-  def 
+pp person = {
+  pp name = 'Udo';
+  pp age  = 69; 
 };
 ```
 
@@ -66,8 +67,8 @@ A **function**
 - 
 
 ```c
-def helloFoxbuddy = (name, age) => {
-  def pet  = 'fox';
+pp helloFoxbuddy = (name, age) => {
+  pp pet  = 'fox';
 
   do print("@name is @age years old and has a @pet.");
 };
@@ -79,22 +80,22 @@ do helloFoxbuddy('Anne', '23');
 ### the `new` keyword
 
 ```c
-def person = {
-  def name = 'Udo';
-  def age  = 60;
-  def printInfo = () => {
+prop person = {
+  prop name = 'Udo';
+  prop age  = 60;
+  prop printInfo = () => {
     return print('@name is @age years old.');
   };
 };
 
 // creates copy/clone/instance of 'person' in its current state
-def inst1 = new person;
+prop inst1 = new person;
 
 person.age = 61;
 print(person.age); // 61
 
 
-def inst2 = new person;
+prop inst2 = new person;
 person.age = 62;
 
 print(person.age); // 62
@@ -118,6 +119,38 @@ def p3 = new person (age: 20, name: 'Stella');
 p1.printInfo(); //    Udo is 60 years old.
 p2.printInfo(); //    Udo is 61 years old.
 p3.printInfo(); // Stella is 20 years old.
+```
+
+### the `use` keyword
+
+By the `use` keyword one could apply the value of a ding when defining another one.
+
+```python
+prop Person = () => {
+  prop name;
+  prop age;
+  prop country;
+  prop whoAmI = () => {
+    print('@name is from @country and @age years old.');
+  };
+};
+
+prop Male = () => {
+  use Person;
+  prop sex = 'male';
+}
+
+prop Female = () => {
+  use Person;
+  prop sex = 'female';
+}
+
+// change the value of a prop on init
+prop Hans = new Male   (name: 'Hans', age: 44);
+prop Gabi = new Female (name: 'Gabi', age: 30);
+
+// change the value of a prop when calling
+Hans(country: 'Austria').whoAmI();
 ```
 
 ### define a class
