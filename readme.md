@@ -4,6 +4,12 @@ Coding sucks.
 
 ![Logo](./logo.jpg)
 
+- [Let's code! (Introduction)](#lets-code)
+- [Declarations](#declarations)
+- [Control Flow](#control-flow)
+  - [Conditional](#)
+  - [Loops](#loops)
+
 ## Let's code!
 
 Write a block of code.
@@ -262,6 +268,8 @@ do {
 #### `for while until` loop
 
 Would run at least once until post-block-condition becomes `false` if pre-block-condition were `true`.
+
+***Note:** If you will ever use this in practice you are a nerd.*
 
 ```c
 do for $i while ($i < 10) {
