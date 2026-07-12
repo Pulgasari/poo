@@ -346,6 +346,7 @@ Operator | Alias           | Read
 `switch` |        |
 `until`  |        | [Control Flow](#control-flow)
 `use`    |        |
+`wait`   |        |
 `while`  |        | [Control Flow](#control-flow)
 
 ## Philosophy
