@@ -2,6 +2,8 @@
 
 Coding sucks.
 
+![Logo](./logo.jpg)
+
 ## Write a block of code
 
 ```php
@@ -72,6 +74,50 @@ def helloFoxbuddy = (name, age) => {
 
 do helloFoxbuddy('Anne', '23');
 // "Anne is 23 years old and has a fox."
+```
+
+### the `new` keyword
+
+```c
+def person = {
+  def name = 'Udo';
+  def age  = 60;
+  def printInfo = () => {
+    return print('@name is @age years old.');
+  };
+};
+
+// creates copy/clone/instance of 'person' in its current state
+def inst1 = new person;
+
+person.age = 61;
+print(person.age); // 61
+
+
+def inst2 = new person;
+person.age = 62;
+
+print(person.age); // 62
+print(inst1.age);  // 60
+print(inst2.age);  // 61
+```
+
+```c
+def person = (name, age) => {
+  def name = 'Udo';
+  def age  = 60;
+  def printInfo = () => {
+    return print('@name is @age years old.');
+  };
+};
+
+def p1 = new person;
+def p2 = new person (age: 61);
+def p3 = new person (age: 20, name: 'Stella');
+
+p1.printInfo(); //    Udo is 60 years old.
+p2.printInfo(); //    Udo is 61 years old.
+p3.printInfo(); // Stella is 20 years old.
 ```
 
 ### define a class
