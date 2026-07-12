@@ -9,6 +9,10 @@ Coding sucks.
 - [Control Flow](#control-flow)
   - [Conditional](#)
   - [Loops](#loops)
+- [Operators](#operators)
+- [Keywords](#keywords)
+- [Types](#types)
+- [Philosophy](#philosophy)
 
 ## Let's code!
 
