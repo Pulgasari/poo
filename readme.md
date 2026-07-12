@@ -228,7 +228,7 @@ or <condExpr> {...}  // like 'else if'
 or            {...}; // like `else'
 ```
 
-### Loops: `for` | `while` | `until'
+### Loops: `for` | `while` | `until`
 
 #### `for` loop
 
