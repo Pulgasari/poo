@@ -134,7 +134,7 @@ print(inst1.age);  // 60
 print(inst2.age);  // 61
 ```
 
-```c
+```javascript
 def person = (name, age) => {
   def name = 'Udo';
   def age  = 60;
@@ -220,6 +220,14 @@ if <condExpr> or <condExpr> do <statment>;
 if <condExpr> or <condExpr> or do <statment>;
 ```
 
+```zig
+//
+if <condExpr>
+&& <condExpr> {...}
+or <condExpr> {...}  // like 'else if'
+or            {...}; // like `else'
+```
+
 ### Loops: `for` | `while` | `until'
 
 #### `for` loop
@@ -296,11 +304,12 @@ def myFn     = (sth) => sth ?> print(sth);
 
 #### Math / Calculation
 
-Operator | Name    | ...
----------|---------|----
-`+`      |         |
-`-`      |         |
-`?>`     |         |
+Operator | Name      | ...
+---------|-----------|----
+`+`      | Add       |
+`-`      | Substract |
+`*`      | Multiply  |
+`/`      | Divide    |
 
 ####
 
@@ -309,4 +318,40 @@ Operator | Name    | ...
 `??`     | Nullish |
 `|>`     | Pipe    |
 `?>`     |         | 
+`||`     | Or      |
+`&&`     | And     |
+
+#### Assignment
+
+Operator | Name    | ...
+---------|---------|----
+`+=`     |         |
+`-=`     |         |
+`*=`     |         |
+`/=`     |         |
+
+## Keywords
+
+Operator | Alias           | Read
+---------|-----------------|---
+`catch`  | |
+`do`     | |
+`for`    |        | [Control Flow](#control-flow)
+`if`     |        | [Control Flow](#control-flow)
+`kill`   | |
+`or`     | |
+`pkg`    | `package`        |
+`prop`   | `pp`, `property` |
+`seal`   |        |
+`switch` |        |
+`until`  |        | [Control Flow](#control-flow)
+`use`    |        |
+`while`  |        | [Control Flow](#control-flow)
+
+## Philosophy
+
+### About POO
+
+...
+
 
