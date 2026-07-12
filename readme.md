@@ -4,7 +4,9 @@ Coding sucks.
 
 ![Logo](./logo.jpg)
 
-## Write a block of code
+## Let's code!
+
+Write a block of code.
 
 ```php
 {
@@ -14,6 +16,23 @@ Coding sucks.
   print("@name has a @pet.");
 }
 ```
+
+Now give it a name and call it.
+
+```scala
+{
+  prop block = {
+    prop name = 'Udo';
+    prop pet  = 'cat';
+
+    print("@name has a @pet.");
+  }
+
+  block(name: 'Hans');
+}
+```
+
+
 
 ## Definitions
 
