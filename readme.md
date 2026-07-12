@@ -67,7 +67,7 @@ prop MY_LITTLE_CONSTANT = 'Moin!';
 
 A **variable** is 
 - a named value.
-- written in `pascalCase` or 'snake_case`.
+- written in `pascalCase` or `snake_case`.
 - mutable (until you seal it).
 
 ```c
