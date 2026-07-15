@@ -439,6 +439,8 @@ Operator | Alias           | Read
 `kill`   | |
 `or`     | |
 `pkg`    | `package`        |
+`pnt`    | |
+`ref`    | |
 `prop`   | `pp`, `property` |
 `seal`   |        |
 `switch` |        |
@@ -453,4 +455,28 @@ Operator | Alias           | Read
 
 ...
 
+###
+
+```javascript
+prop globalCounter = 0;
+prop configName    = 'dev';
+prop baseStats     = { hp: 100 };
+
+prop player = {
+  use baseStats;      // Statische Kopie
+  ref configName;     // Live-Ansicht (Copy-on-Write)
+  pnt globalCounter;  // Aktiver Pointer
+
+  prop tick = () => {
+    // 1. Lokaler Zugriff (Kein Präfix)
+    print baseStats.hp; 
+
+    // 2. Live-Read-Zugriff (Präfix @)
+    print @configName; 
+
+    // 3. Durchschreibender Zugriff (Präfix &)
+    &globalCounter += 1; 
+  };
+};
+```
 
