@@ -18,7 +18,7 @@ Coding sucks.
 
 Write a block of code.
 
-```php
+```
 {
   prop name = 'Udo';
   prop pet  = 'cat';
@@ -29,7 +29,7 @@ Write a block of code.
 
 Now give it a name and call it from anywhere in the current scope.
 
-```rust
+```
 {
   prop country = 'Austria';
 
@@ -46,7 +46,7 @@ Now give it a name and call it from anywhere in the current scope.
 
 now give it parenthesis `()` and fat arrow `=>`.
 
-```rust
+```
 {
   prop country = 'Austria';
 
@@ -65,11 +65,29 @@ now give it parenthesis `()` and fat arrow `=>`.
 
 create a copy of the block in current state of props by i assigning it with `new` keyword to another `prop`.
 
-```c
+```
 prop abc = new block; // name = 'Udo'
 block.name = 'Hans'
 prop xyz = new block; // name = 'Hans'
 xyz.name = 'Max'; // name = 'Max'
+```
+
+ok now do this:
+
+```c
+{
+  prop PeopleCallThatClass = () => {
+    construct {
+      prop size  = 15;
+      prop color = 'blue';
+    }
+    static {
+      prop doSth = () => {
+        print('Hi from static in @color!');
+      }
+    }
+  }
+}
 ```
 
 Congratulations! You now know how to create [objects](#objects), [functions](#functions), [classes](#classes) and [traits](#traits). ^-^
