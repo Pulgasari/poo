@@ -43,9 +43,9 @@ prop main = () => {
 
 Variable States
 
-​The keyword `prop` introduces a declaration statement to define a named value or block of code.
+​The keyword `prop` introduces a declaration statement to define a named *value* or *block of code*.
 
-​The `#` prefix defines a **compile-time constant**. Casing rules are not enforced; the prefix is the sole indicator of immutability.
+​The `#` prefix defines a ***compile-time constant***. Casing rules are not enforced; the prefix is the sole indicator of immutability.
 
 ​The `#=` operator makes it possible to seal a variable on runtime so it becomes immutable. They assign a value and freeze the variable recursively (deep-freeze).
 
