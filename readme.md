@@ -133,7 +133,7 @@ if (isBroken or isCrying) { ... }; // Compile-time error
 
 ​Pipelines allow sequence chaining. Conditional pipes prevent runtime crashes by short-circuiting on empty states.
 
-* The `​|>` Standard Pipe: Forwards the left-hand value to the right-hand function call. Supports implicit function reference (val |> fn) and explicit positioning via the @ placeholder (val |> fn(1, @)).
+* The `​|>` Standard Pipe: Forwards the left-hand value to the right-hand function call. Supports implicit function reference `(val |> fn)` and explicit positioning via the `@` placeholder (val |> fn(1, @)).
 ​* The `??>` Nullish-Safe Pipe: Halts evaluation and returns `null` if the pipeline value evaluates to nullish (`null` or `undefined`).
 ​* The `?!>` Falsy-Safe Pipe: Halts evaluation and returns the falsy value if the pipeline value is falsy (false, 0, "", []).
 
@@ -148,7 +148,7 @@ prop contacts = fetchUser(id) ??> parseProfile() ?!> getContacts();
 
 ### ​Symmetrical Cast Failbacks
 
-* ​In `strict{ directory mode, `as` crashes or throws a compiler error on failure.
+* ​In `strict` directory mode, `as` crashes or throws a compiler error on failure.
 * ​In `relaxed` directory mode, `as` falls back to the target type's default value (`0`, `false`, `""`).
 * ​In both modes, `as?` returns `null` on failure, allowing seamless coalescing chains.
 
@@ -179,6 +179,10 @@ prop getErrors = () => {
 // Skips object and array allocations entirely.
 prop alert = getErrors() as string;
 ```
+
+
+
+
 
 ---
 
