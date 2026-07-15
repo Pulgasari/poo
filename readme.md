@@ -14,6 +14,78 @@ Coding sucks.
 - [Types](#types)
 - [Philosophy](#philosophy)
 
+## Table of Contents
+- [Let's code!](#lets-code)
+- [Declarations & Memory Management](#declarations--memory-management)
+- [Types & Structures](#types--structures)
+- [Operators](#operators)
+- [Typecasting & Context-Aware Return Types](#typecasting--context-aware-return-types)
+- [Keywords](#keywords)
+
+---
+
+## Let's code!
+
+A basic program to display the inevitable void of software development:
+
+```javascript
+prop main = () => {
+  prop status = "coding";
+  print "Current state: $status"; // Output: Current state: coding
+  
+  if (status == "coding") do {
+    print("Compiler is crying again.");
+  };
+};
+```
+
+## Declarations & Memory Management
+
+Variable States
+
+​The keyword `prop` introduces a declaration statement to define a named value or block of code.
+
+​The `#` prefix defines a **compile-time constant**. Casing rules are not enforced; the prefix is the sole indicator of immutability.
+
+​The `#=` operator makes it possible to seal a variable on runtime so it becomes immutable. They assign a value and freeze the variable recursively (deep-freeze).
+
+```javascript
+prop #compilerState = "broken"; // compile-time constant
+
+prop cat = 'miau';
+cat += '!!!'; // allowed
+
+cat #= 'wuff'; // assigned and sealed permanently
+cat = 'meow';  // compile-time error: variable is sealed.
+```
+
+### Boundary Control (The Three-Tier Scope Model)
+
+Keyword | Dependency Type | Prefix in Code | Write Behavior
+--------|-----------------|----------------|---------------
+`use`   | Static Snapshot | `variable`     | Mutates only the local copy inside the object.
+`ref`   | Dynamic View    | `@variable`    | Live-read from outside. Writing creates a local override (Copy-on-Write).
+`pnt`   | Direct Pointer  | `&variable`    | Live-read and direct write-through to the external variable.
+
+```javascript
+prop globalCounter = 0;
+prop configName    = 'dev';
+prop baseStats     = { hp: 100 };
+
+prop player = {
+  use baseStats;
+  ref configName;
+  pnt globalCounter;
+
+  prop tick = () => {
+    print baseStats.hp; // reads the snapshot copy
+    print @configName;  // reads current external value
+    
+    &globalCounter += 1; // mutates the actual external variable
+  };
+};
+```
+
 ## Let's code!
 
 Write a block of code.
