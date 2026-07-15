@@ -86,6 +86,75 @@ prop player = {
 };
 ```
 
+## Types & Structures
+
+​The `#` symbol acts as the universal indicator for structural rigidity.
+
+```javascript
+prop dynamicList = [1, "garbage", true]; // Standard dynamic array
+prop strictList = #[1, 2, 3];            // Homogeneous strict list (frozen type)
+prop userTuple = #("Udo", 60);           // Strict heterogenous tuple (fixed size/types)
+```
+
+* Lists (#[...]): Elements must share the exact same type. Under the hood, this compiles to contiguous, unboxed memory blocks for cache friendliness.
+* ​Tuples (#(...)): Fixed size and fixed type per index. Values can be updated as long as they respect the declared type at that position.
+* ​Ranges: Defined using ... (inclusive) or ..< (exclusive). Useful for loops, slicing, and pattern matching.
+
+```javascript
+// Inclusive Loop
+do for 1...5 as @i {
+  print("Line @i: This is garbage.");
+}
+
+// Exclusive Slicing
+prop list = ['a', 'b', 'c', 'd'];
+prop slice = list[1..<3]; // ['b', 'c']
+```
+
+## Operators
+
+​This language utilizes symmetric, non-overlapping operators to separate expression logic from control flow.
+
+### ​Expression Operators vs. Statement Operators
+
+​Logical operations on the expression level use traditional **symbolic operators**. Flow control and boundary-breaking logic use **keyword operators**.
+
+```javascript
+// Valid expression-level logical evaluation
+if (isBroken || isCrying) { ... };
+
+// Invalid: logical word operators cannot live in expressions
+if (isBroken or isCrying) { ... }; // Compile-time error
+```
+
+### Symmetric Pipelines
+
+​Pipelines allow sequence chaining. Conditional pipes prevent runtime crashes by short-circuiting on empty states.
+
+* The `​|>` Standard Pipe: Forwards the left-hand value to the right-hand function call. Supports implicit function reference (val |> fn) and explicit positioning via the @ placeholder (val |> fn(1, @)).
+​* The `??>` Nullish-Safe Pipe: Halts evaluation and returns `null` if the pipeline value evaluates to nullish (`null` or `undefined`).
+​* The `?!>` Falsy-Safe Pipe: Halts evaluation and returns the falsy value if the pipeline value is falsy (false, 0, "", []).
+
+```javascript
+// Safely parse a profile only if fetching the user actually returned data
+prop contacts = fetchUser(id) ??> parseProfile() ?!> getContacts();
+```
+
+## Typecasting & Context-Aware Return Types
+
+​Explicit typecasting is handled via the `as` and `as?` operators.
+
+### ​Symmetrical Cast Failbacks
+
+* ​In `strict{ directory mode, `as` crashes or throws a compiler error on failure.
+* ​In `relaxed` directory mode, `as` falls back to the target type's default value (`0`, `false`, `""`).
+* ​In both modes, `as?` returns `null` on failure, allowing seamless coalescing chains.
+
+
+
+
+---
+
 ## Let's code!
 
 Write a block of code.
