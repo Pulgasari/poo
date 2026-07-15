@@ -27,18 +27,37 @@ Write a block of code.
 }
 ```
 
-Now give it a name and call it.
+Now give it a name and call it from anywhere in the current scope.
 
 ```rust
 {
+  prop country = 'Austria';
+
   prop block = {
     prop name = 'Udo';
     prop pet  = 'cat';
 
-    print("@name has a @pet.");
+    print("@name has a @pet and lives in @country.");
   }
 
-  block(); // "Udo has a cat."
+  block(); // "Udo has a cat and lives in Austria."
+}
+```
+
+now give it parenthesis `()` and fat arrow `=>`.
+
+```rust
+{
+  prop country = 'Austria';
+
+  prop block = () => {
+    prop name = 'Udo';
+    prop pet  = 'cat';
+
+    print("@name has a @pet and lives in @country.");
+    // now here @country becomes 'undefined'
+  }
+  block(); // "Udo has a cat and lives in 'undefined'."
 }
 ```
 
