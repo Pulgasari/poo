@@ -61,6 +61,8 @@ cat = 'meow';  // compile-time error: variable is sealed.
 
 ### Boundary Control (The Three-Tier Scope Model)
 
+When defining objects, outer scopes are closed off by default. You must explicitly bridge dependencies across object boundaries using one of three keywords:
+
 Keyword | Dependency Type | Prefix in Code | Write Behavior
 --------|-----------------|----------------|---------------
 `use`   | Static Snapshot | `variable`     | Mutates only the local copy inside the object.
@@ -150,8 +152,33 @@ prop contacts = fetchUser(id) ??> parseProfile() ?!> getContacts();
 * ​In `relaxed` directory mode, `as` falls back to the target type's default value (`0`, `false`, `""`).
 * ​In both modes, `as?` returns `null` on failure, allowing seamless coalescing chains.
 
+```c
+prop rawInput = "not_a_number";
 
+// Explicit cast with falsy fallback
+prop age1 = rawInput as number ?! 123; // Result: 123 (fails to 0, which is falsy, triggers ?!)
 
+// Explicit safe cast with nullish fallback (preserves valid 0 values)
+prop age2 = rawInput as? number ?? 123; // Result: 123 (fails to null, triggers ??)
+```
+
+### Implicit Optimization (Zero-Allocation Casts)
+
+​Object-level `as` casting handlers look like runtime converters, but the compiler optimizes them into direct conditional branches.
+
+```javascript
+prop getErrors = () => {
+  return {
+    prop list = ["syntax error", "compiler crying"];
+    as string = () => list.join(", ");
+    as number = () => list.len();
+  };
+};
+
+// Compiled directly to getErrors(@as = string)
+// Skips object and array allocations entirely.
+prop alert = getErrors() as string;
+```
 
 ---
 
