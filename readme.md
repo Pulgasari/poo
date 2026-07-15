@@ -56,9 +56,20 @@ now give it parenthesis `()` and fat arrow `=>`.
 
     print("@name has a @pet and lives in @country.");
     // now here @country becomes 'undefined'
+    // because block is now closed scope
   }
+  
   block(); // "Udo has a cat and lives in 'undefined'."
 }
+```
+
+create a copy of the block in current state of props by i assigning it with `new` keyword to another `prop`.
+
+```c
+prop abc = new block; // name = 'Udo'
+block.name = 'Hans'
+prop xyz = new block; // name = 'Hans'
+xyz.name = 'Max'; // name = 'Max'
 ```
 
 Congratulations! You now know how to create [objects](#objects), [functions](#functions), [classes](#classes) and [traits](#traits). ^-^
