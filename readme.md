@@ -27,6 +27,16 @@ Coding sucks.
 
 ## Let's code!
 
+Some people do like **poo**. ^-^
+
+```javascript
+prop whileLoop = cond => decorateCombinator (
+  p => #[] |> (cond ~= function && !cond.many)
+    ? while (cond p) do @ += p.next()
+    : while          do @ += runWithBacktrack(p, cond) ?? break
+);
+```
+
 A basic program to display the inevitable void of software development:
 
 ```javascript
