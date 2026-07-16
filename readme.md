@@ -8,6 +8,7 @@ Coding sucks.
 - [Declarations](#declarations)
 - [Control Flow](#control-flow)
   - [Conditional](#)
+  - [Switch][#switch]
   - [Loops](#loops)
 - [Operators](#operators)
 - [Keywords](#keywords)
@@ -446,6 +447,61 @@ if <condExpr>
 && <condExpr> {...}
 or <condExpr> {...}  // like 'else if'
 or            {...}; // like `else'
+```
+
+### `switch`
+
+...        | ...
+-----------|--------
+`switch`   | `true`
+`?switch`  | *nullish*
+`!switch`  | 'false'
+`?!switch` | *falsy*
+
+```cpp
+// implicit comparing against 'true'
+switch {
+  a  do bark();
+  b  do meow();
+  c  do woof();
+  or do cry();
+};
+
+// implicit comparing against 'false'
+!switch {
+  a  do bark();
+  b  do meow();
+  c  do woof();
+  or do cry();
+};
+
+// implicit comparing against nullish values
+?switch {
+  a  do bark();
+  b  do meow();
+  c  do woof();
+  or do cry();
+};
+
+// implicit comparing against falsy values
+?!switch {
+  a  do bark();
+  b  do meow();
+  c  do woof();
+  or do cry();
+};
+
+
+
+```
+ 
+```cpp
+prop parseToken = token => switch (token.type) {
+  "EOF"   => null; //
+  "SEMI"  do continue;
+  "IDENT" do processIdentifier(token.value);
+  or      do print "Unexpected token: $token" and return "error";
+};
 ```
 
 ### Loops: `for` | `while` | `until`
