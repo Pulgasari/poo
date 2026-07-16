@@ -167,3 +167,143 @@ Program = { Statement } ;
 
 (* ===== 10. PLATZHALTER (noch zu definieren) ===== *)
 (* ObjectBody = ... ;   (* für prop <identifier> = <objectBody> *) *)
+
+
+
+// @cosmonaut/presets/languages/javascript.js
+
+import { cStyleComments } from './../index.js';
+
+export const builtins = [
+  'Array',
+  'BigInt',
+  'Boolean',
+  'Date',
+  'Error',
+  'Function',
+  'Map',
+  'Number',
+  'Object',
+  'Promise',
+  'RegExp',
+  'Set',
+  'String',
+  'Symbol',
+];
+
+export const comments = cStyleComments;
+
+export const globals = [
+  'clearInterval',
+  'clearTimeout',
+  'console',
+  'document',
+  'globalThis',
+  'process',
+  'setInterval',
+  'setTimeout',
+  'window',
+];
+
+export const keywords = [
+  'as',
+  'async',
+  'await',
+  'break',
+  'case',
+  'catch',
+  'class',
+  'const',
+  'continue',
+  'default',
+  'delete',
+  'do',
+  'else',
+  'export',
+  'extends',
+  'finally',
+  'for',
+  'function',
+  'if',
+  'import',
+  'in',
+  'instanceof',
+  'let',
+  'match',
+  'new',
+  'of',
+  'return',
+  'static',
+  'super',
+  'switch',
+  'this',
+  'throw',
+  'try',
+  'typeof',
+  'use',
+  'var',
+  'void',
+  'while',
+  'yield',
+];
+
+export const literals = [
+  'false',
+  'null',
+  'true',
+  'undefined',
+  'Infinity',
+  'NaN',
+];
+
+def operators : (precedence: int, associativity: string ) {
+  '='          : { precedence:  1, associativity: 'right' },
+  '+='         : { precedence:  1, associativity: 'right' },
+  '-='         : { precedence:  1, associativity: 'right' },
+  '*='         : { precedence:  1, associativity: 'right' },
+  '/='         : { precedence:  1, associativity: 'right' },
+  '%='         : { precedence:  1, associativity: 'right' },
+  '<<='        : { precedence:  1, associativity: 'right' },
+  '>>='        : { precedence:  1, associativity: 'right' },
+  '>>>='       : { precedence:  1, associativity: 'right' },
+  '&='         : { precedence:  1, associativity: 'right' },
+  '^='         : { precedence:  1, associativity: 'right' },
+  '|='         : { precedence:  1, associativity: 'right' },
+  '||'         : { precedence:  4, associativity: 'left'  },
+  '&&'         : { precedence:  5, associativity: 'left'  },
+  '??'         : { precedence:  6, associativity: 'left'  },
+  '==='        : { precedence:  7, associativity: 'left'  },
+  '!=='        : { precedence:  7, associativity: 'left'  },
+  '=='         : { precedence:  7, associativity: 'left'  },
+  '!='         : { precedence:  7, associativity: 'left'  },
+  '<'          : { precedence:  8, associativity: 'left'  },
+  '>'          : { precedence:  8, associativity: 'left'  },
+  '<='         : { precedence:  8, associativity: 'left'  },
+  '>='         : { precedence:  8, associativity: 'left'  },
+  'in'         : { precedence:  8, associativity: 'left'  },
+  'instanceof' : { precedence:  8, associativity: 'left'  },
+  '<<'         : { precedence:  9, associativity: 'left'  },
+  '>>'         : { precedence:  9, associativity: 'left'  },
+  '>>>'        : 12 left,
+  '+'          : 12 left,
+  '-'          : 12 left,
+  '*'          : 13 left,
+  '/'        : 13 left,
+  '%'        : 13 left,
+  '!'        : 15 right,
+  '~'        : 15 right,
+  typeof     : 15 right,
+  void       : 15 right,
+  delete     : 15 right,
+
+export const puncts = ['{', '}', '(', ')', '[', ']', ',', ';', '.', ':', '?'];
+
+default export {
+  builtins,
+  comments,
+  globals,
+  keywords,
+  literals,
+  operators,
+  puncts
+}
