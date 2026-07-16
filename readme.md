@@ -455,7 +455,7 @@ or            {...}; // like `else'
 -----------|--------
 `switch`   | `true`
 `?switch`  | *nullish*
-`!switch`  | 'false'
+`!switch`  | `false`
 `?!switch` | *falsy*
 
 ```cpp
