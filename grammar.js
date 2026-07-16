@@ -278,11 +278,27 @@ export const keywords = [
 
 
 default export {
-  builtins,
   comments,
-  globals,
   keywords,
-  literals,
-  operators,
-  puncts
 }
+
+
+RULE Expression = (
+  | atom      is char
+  | operation is Array (char, Expression)
+){
+  cn::dispatch
+  | operation ('-',
+     operation ('*',
+      atom('a'),
+      atom('b'),
+     ),
+     operation ('/',
+      atom('1'),
+      atom('a'),
+     ),
+}
+
+
+
+
