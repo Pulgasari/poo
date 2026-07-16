@@ -79,6 +79,8 @@ keyword-decl-intro ::= break | continue | do | for| if | pnt | prop | ref | retu
 
 expr-fn-call-      ::= identifier ["("] fn-call-args [")"]
 expr-fn-call-naked ::= identifier expr
+expr-fn-arg        ::= argument
+expr-fn-args-call  ::= expr-fn-arg { "," expr-fn-arg } 
 
 expr-id         ::=  string
 expr-id-const   ::= #string
@@ -95,10 +97,10 @@ expr-lit-str-back   ::= `string`
 op               ::= op-binary | op-unary
 op-binary        ::= op-binary-assign | op-binary-decl | op-binary-pipe
 op-binary-assign ::= "=" | "#=" | "+=" | "-=" | "*=" | "??=" | "?!="
-op-binary-decl  ::= "=" | "#="
-op-binary-pipe  ::= "|>" | "??>" | "?!>"
-op-unary        ::= op-unary-prefix
-op-unary-prefix ::= "?" | "??" | "!" | "!!" | "?!"
+op-binary-decl   ::= "=" | "#="
+op-binary-pipe   ::= "|>" | "??>" | "?!>"
+op-unary         ::= op-unary-prefix
+op-unary-prefix  ::= "?" | "??" | "!" | "!!" | "?!"
 
 id ::= 
 
