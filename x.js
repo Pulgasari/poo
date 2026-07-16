@@ -450,3 +450,51 @@ prop whileLoop = cond => decorateCombinator (
     : while          do @ += runWithBacktrack(p, cond) ?? break
 );
 
+
+
+//
+
+// poo
+prop Token = #( 
+  str  atom,
+  str  operator,
+  bool eof,
+);
+prop Lexer = #Token[];
+
+// rust
+enum   Token { Atom(char), Op(char), Eof }
+struct Lexer { tokens: Vec<Token> }
+
+
+
+
+// poo
+prop Token = #{ atom: String, operator: String:, eof: Bool };
+prop Lexer = #[Token];
+
+// under the hood
+obj Token = new Struct ( atom: String, operator: String:, eof: Bool );
+obj Lexer = new List   ( type: Token ); 
+
+{
+  pkg poo;
+  
+  prop Struct = (props) => {
+    
+  }
+
+  prop List = (type) {
+    prop 
+    return {
+      
+    }
+  }
+}
+
+
+
+
+
+
+
