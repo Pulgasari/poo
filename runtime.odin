@@ -163,12 +163,19 @@ list_get :: proc (lst: ^List, idx: int) -> Value {
 make_tuple :: proc (allocator: mem.Allocator, values: []Value) -> ^Tuple {
   tup := new(Tuple, allocator)
   tup.items = make([]Value, len(values), allocator)
-  copy(tup.items, values) // Kopie, sicher vor Änderungen
+  copy (tup.items, values) // copy to prevent change
   return tup
 }
 
 // FUNCTION // creation (for closures)
-make_function :: proc(allocator: mem.Allocator, prototype: ^Object, env: ^Object, proc_ptr: proc(env: ^Object, args: []Value) -> Value) -> ^Function {
+make_function :: proc(
+  allocator : mem.Allocator, 
+  prototype : ^Object, 
+  env       : ^Object, 
+  proc_ptr  : proc(
+    env  : ^Object, 
+    args : []Value
+) -> Value ) -> ^Function {
   fn := new (Function, allocator)
   fn.prototype = prototype
   fn.env       = env
@@ -179,8 +186,8 @@ make_function :: proc(allocator: mem.Allocator, prototype: ^Object, env: ^Object
 // CLASS // creation
 make_class :: proc(allocator: mem.Allocator, name: string, prototype: ^Object, constructor: proc(allocator: mem.Allocator, args: []Value) -> ^Object) -> ^Class {
   cls := new(Class, allocator)
-  cls.name = name
-  cls.prototype = prototype
+  cls.name        = name
+  cls.prototype   = prototype
   cls.constructor = constructor
   return cls
 }
