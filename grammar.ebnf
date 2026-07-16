@@ -1,0 +1,178 @@
+(* ================================================================
+   KOMPLETTE EBNF-GRAMMATIK – STAND 12
+   ================================================================
+   Enthaltene Features:
+   - Literale (Zahlen, Strings mit Escapes & Interpolation, Booleans, null/undefined)
+   - Collections (Arrays, Listen, Tuples, Records)
+   - Ausdrücke (Prioritäten: Range, Multiplikativ, Additiv, Vergleich, Pipe, Ternary, Assignment)
+   - Variablen-Deklarationen (prop, @)
+   - Funktionen (FunctionExpression als First-Class-Citizen)
+   - Kontrollfluss (if/or, for, while, until)
+   - Sprünge (break, continue, return)
+   - Imports (use, pnt, ref mit "as"-Alias)
+   - Blöcke & Statements
+   ================================================================ *)
+
+(* ===== OPERATORS ===== *)
+
+op-assign = "=" | "#=" ;
+
+(* ===== IDENTIFIER ===== *)
+
+id           = ? Letter { Letter | Digit | "_" } ? ;
+id-const     = "#" id ;
+id-label     = "$" id ;
+id-pointer   = "&" id ;
+id-temp      = "@" id ;
+id-qualified = id { "::" id } ;
+
+(* ===== LITERALS ===== *)
+
+literal-bool    = "true" | "false" ;
+literal-nullish = "null" | "undefined" ;
+
+literal-int   = [ "-" ] ( ? Ziffer ? { ? Ziffer ? | "_" } ) ;
+literal-float = [ "-" ] ( ? Ziffer ? { ? Ziffer ? | "_" } "." ? Ziffer ? { ? Ziffer ? } ) ;
+literal-range = Primary { ".." Primary } ;
+
+literal-array =  "[" [ expr { "," expr } [ "," ] ] "]" ;
+literal-list  = "#[" [ expr { "," expr } [ "," ] ] "]" ;  (* no nesting *)
+literal-tuple = "#(" [ expr { "," expr } [ "," ] ] ")" ;  (* no nesting *)
+
+(* ===== BLOCKS ===== *)
+
+block = "{" { Statement } "}" ;
+
+(* ===== STATEMENTS ===== *)
+
+statement-use = "use" ImportList ";" ;
+statement-pnt = "pnt" ImportList ";" ;
+statement-ref = "ref" ImportList ";" ;
+
+statement-decl-prop = "prop" ( id | id-const ) op-assign expr ";" ;
+statement-decl-temp =        id-temp           op-assign expr ";" ;
+statement-decl-var  = decl-prop | decl-temp ;
+
+statement-jump   = ( "break" | "continue" ) [ literal-int | id-label ] ";" ;
+statement-return = "return" [ expr ] ";" ;
+
+
+         
+(* ===== 2. LITERALE ===== *)
+(* 2.1 Escapes für Strings *)
+EscapeSequence     = "\\" ( "n" | "t" | "\\" | "'" | '"' | "`" ) ;
+
+(* 2.2 Einfache Anführungszeichen – pure Strings *)
+SingleStringChar    = ? beliebiges Zeichen außer "'" und "\\" ? | EscapeSequence ;
+SingleStringLiteral = "'" { SingleStringChar } "'" ;
+
+(* 2.3 Doppelte Anführungszeichen – mit $-Expansion *)
+DoubleStringChar      = ? beliebiges Zeichen außer '"' und "\\" ? | EscapeSequence ;
+DoubleStringExpansion = "$" [ "@" | "#" | "&" ] Identifier ;
+DoubleStringLiteral   = '"' { DoubleStringChar | DoubleStringExpansion } '"' ;
+
+(* 2.4 Backticks – mit ${}-Interpolation *)
+TemplateStringChar       = ? beliebiges Zeichen außer '`' und "\\" ? | EscapeSequence ;
+TemplateStringExpression = "${" Expression "}" ;
+TemplateStringLiteral    = '`' { TemplateStringChar | TemplateStringExpression } '`' ;
+
+(* 2.5 Zahlen (mit optionalem Vorzeichen) *)
+
+(* 2.6 Schlüsselwort-Literale *)
+
+
+(* 2.7 Collections *)
+ RecordEntry   = Identifier ":" Expression ;
+RecordLiteral = "#{" [ RecordEntry { "," RecordEntry } [ "," ] ] "}" ;
+
+(* ===== 3. FUNKTIONEN ===== *)
+FunctionArgs = [ Identifier { "," Identifier } ] ;   (* () oder (a) oder (a,b) *)
+FunctionBody = Block | Expr ";" ;            
+FunctionExpr = "(" FunctionArgs ")" "=>" FunctionBody ;
+
+(* ===== 4. AUSDRÜCKE (nach Priorität geordnet) ===== *)
+(* 4.1 Argumente für Funktionsaufrufe *)
+ArgumentItem    = "..." Expression
+                | Identifier ":" Expression
+                | Expression ;
+ArgumentList    = ArgumentItem { "," ArgumentItem } ;
+
+(* 4.2 Primäre Ausdrücke (kleinste Einheiten) *)
+Primary = ConstIdentifier
+        | QualifiedIdentifier [ ( Expression | "(" [ ArgumentList ] ")" ) ]
+        | LabelIdentifier
+        | SingleStringLiteral | DoubleStringLiteral | TemplateStringLiteral
+        | IntegerLiteral | FloatLiteral | BooleanLiteral | NullLiteral
+        | ArrayLiteral | ListLiteral | TupleLiteral | RecordLiteral
+        | FunctionExpression
+        | "(" Expression ")" ;
+
+(* 4.3 Operatoren-Hierarchie (niedrigste Priorität = Assignment) *)
+
+op-multi  = Range { ("*" | "/") Range } ;
+Additive   = Multiplicative { ("+" | "-") Multiplicative } ;
+Comparison = Additive { ("==" | "===" | "<" | ">" | "<=" | ">=" | "!=" | "!==" | "~=") Additive } ;
+op-pipe            = Comparison { ("|>" | "??>" | "?!>") Comparison } ;
+op-ternary = Pipe { "?" Expression ":" Expression } ;   (* rechtsassoziativ wie JS *)
+op-assign  = Ternary { ("=" | "+=" | "-=" | "*=" | "/=" | "??=" | "?!=") Ternary } ;
+expr       = op-assign ;
+
+(* ===== 5. BLÖCKE ===== *)
+
+
+(* ===== 6. KONTROLLFLUSS ===== *)
+(* 6.1 if / or *)
+statement-if = "if"   "(" Expression ")"   Block
+             { "or" [ "(" Expression ")" ] Block }
+             [ ";" ] ;
+
+(* 6.2 Schleifen *)
+
+ForStatement    = "for" "(" ForSpec ")"
+                  [ "while" "(" Expression ")" | "until" "(" Expression ")" ]
+                  Block
+                  [ ";" ] ;
+
+spec-cond = ;
+spec-for  = ( id | literal-range ) [ "as" id-temp ] ;
+
+loop-until  = "until" "(" spec-cond ")" Block [ ";" ] ;
+loop-while  = "while" "(" spec-cond ")" Block [ ";" ] ;
+
+statement-loop-inline
+
+
+
+Target          =  ;
+
+
+
+(* ===== 8. IMPORTS ===== *)
+AsExpr          = Identifier [ "as" Identifier ] ;
+ImportList      = AsExpr { "," AsExpr } ;
+
+ImportLikeStatement = UseStatement | PntStatement | RefStatement ;
+
+(* ===== 9. STATEMENTS & PROGRAMM ===== *)
+
+Statement = VariableDeclaration
+          | statement-if
+          | statement-jump
+          | ImportLikeStatement
+          | statement-return
+          | statement-loop-for
+          | statement-loop-while
+          | statement-loop-until
+          | block
+          | expr ";" 
+
+          (* PLATZHALTER FÜR SPÄTER *)
+          | "do" ...   (* kommt später – kein Loop, sondern separater Mechanismus *)
+          | "switch" ...
+          | ObjectBodyDeclaration ...   (* für prop <identifier> = <objectBody> *)
+          ;
+
+Program = { Statement } ;
+
+(* ===== 10. PLATZHALTER (noch zu definieren) ===== *)
+(* ObjectBody = ... ;   (* für prop <identifier> = <objectBody> *) *)
