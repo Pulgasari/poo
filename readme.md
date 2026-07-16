@@ -50,7 +50,7 @@ const whileLoop = (cond) => decorateCombinator (p => {
 
 ```javascript
 prop whileLoop = cond => decorateCombinator (
-  p => #[] |> (cond ~= function.!many)
+  p => #[] |> (p ~= function && !cond.many)
     ? while (cond p) do @ += p.next()
     : while          do @ += runWithBacktrack(p, cond) ?? break
 );
