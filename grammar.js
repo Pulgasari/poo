@@ -1,44 +1,41 @@
 (* ================================================================
-   KOMPLETTE EBNF-GRAMMATIK – STAND 12
+   POO :: Grammar & Parser Instructions
    ================================================================
-   Enthaltene Features:
-   - Literale (Zahlen, Strings mit Escapes & Interpolation, Booleans, null/undefined)
-   - Collections (Arrays, Listen, Tuples, Records)
-   - Ausdrücke (Prioritäten: Range, Multiplikativ, Additiv, Vergleich, Pipe, Ternary, Assignment)
-   - Variablen-Deklarationen (prop, @)
-   - Funktionen (FunctionExpression als First-Class-Citizen)
-   - Kontrollfluss (if/or, for, while, until)
-   - Sprünge (break, continue, return)
-   - Imports (use, pnt, ref mit "as"-Alias)
-   - Blöcke & Statements
+   
    ================================================================ *)
 
-def operators = (
+LIST builtins = ( Identifier is String ) Array BigInt Boolean Date Error Function Map Number Object Promise RegExp Set String Symbol
+LIST globals  = ( Identifier is String ) clearInterval clearTimeout console document globalThis process setInterval setTimeout window
+LIST literals = ( Identifier is String ) false null true undefined Infinity NaN
+LIST puncts   = ( Identifier is String ) { } ( ) [ ] , ; . : ?
+
+
+LIST operators = (
   | operator      as o is String
   | precedence    as p is Number
-  | associativity as a is Number
-) {
-  // Zuweisungsoperatoren
+  | associativity as a is String
+){
+  // assign
   | p: 1,  a: right, o: = += -= *= /= %= <<= >>= >>>= &= ^= |=
   
-  // Logische Operatoren (Singletons)
+  // logical (singletons)
   || 4 left
   && 5 left
   ?? 6 left
   
-  // Vergleichsoperatoren
+  // compare
   | p: 7,  a: left,  o: === !== == !=
   | p: 8,  a: left,  o: < > <= >= in instanceof
   
-  // Bitweise Operatoren
+  // bitwise
   | p: 9,  a: left,  o: << >>
   
-  // Mathematische Operatoren (Punkt- vor Strichrechnung)
+  // math
   | p: 12, a: left,  o: >>> + -
   | p: 13, a: left,  o: * / %
   
-  // Unäre Operatoren
-  | p: 15, a: right, o: ! ~ typeof void delete
+  // unary
+  | p: 15, a: right, o: delete typeof void ! ~
 }
 
 
@@ -207,36 +204,9 @@ Program = { Statement } ;
 
 import { cStyleComments } from './../index.js';
 
-export const builtins = [
-  'Array',
-  'BigInt',
-  'Boolean',
-  'Date',
-  'Error',
-  'Function',
-  'Map',
-  'Number',
-  'Object',
-  'Promise',
-  'RegExp',
-  'Set',
-  'String',
-  'Symbol',
-];
 
 export const comments = cStyleComments;
 
-export const globals = [
-  'clearInterval',
-  'clearTimeout',
-  'console',
-  'document',
-  'globalThis',
-  'process',
-  'setInterval',
-  'setTimeout',
-  'window',
-];
 
 export const keywords = [
   'as',
@@ -280,56 +250,10 @@ export const keywords = [
   'yield',
 ];
 
-export const literals = [
-  'false',
-  'null',
-  'true',
-  'undefined',
-  'Infinity',
-  'NaN',
-];
 
-def operators : (precedence: int, associativity: string ) {
-  '='          : { precedence:  1, associativity: 'right' },
-  '+='         : { precedence:  1, associativity: 'right' },
-  '-='         : { precedence:  1, associativity: 'right' },
-  '*='         : { precedence:  1, associativity: 'right' },
-  '/='         : { precedence:  1, associativity: 'right' },
-  '%='         : { precedence:  1, associativity: 'right' },
-  '<<='        : { precedence:  1, associativity: 'right' },
-  '>>='        : { precedence:  1, associativity: 'right' },
-  '>>>='       : { precedence:  1, associativity: 'right' },
-  '&='         : { precedence:  1, associativity: 'right' },
-  '^='         : { precedence:  1, associativity: 'right' },
-  '|='         : { precedence:  1, associativity: 'right' },
-  '||'         : { precedence:  4, associativity: 'left'  },
-  '&&'         : { precedence:  5, associativity: 'left'  },
-  '??'         : { precedence:  6, associativity: 'left'  },
-  '==='        : { precedence:  7, associativity: 'left'  },
-  '!=='        : { precedence:  7, associativity: 'left'  },
-  '=='         : { precedence:  7, associativity: 'left'  },
-  '!='         : { precedence:  7, associativity: 'left'  },
-  '<'          : { precedence:  8, associativity: 'left'  },
-  '>'          : { precedence:  8, associativity: 'left'  },
-  '<='         : { precedence:  8, associativity: 'left'  },
-  '>='         : { precedence:  8, associativity: 'left'  },
-  'in'         : { precedence:  8, associativity: 'left'  },
-  'instanceof' : { precedence:  8, associativity: 'left'  },
-  '<<'         : { precedence:  9, associativity: 'left'  },
-  '>>'         : { precedence:  9, associativity: 'left'  },
-  '>>>'        : 12 left,
-  '+'          : 12 left,
-  '-'          : 12 left,
-  '*'          : 13 left,
-  '/'        : 13 left,
-  '%'        : 13 left,
-  '!'        : 15 right,
-  '~'        : 15 right,
-  typeof     : 15 right,
-  void       : 15 right,
-  delete     : 15 right,
 
-export const puncts = ['{', '}', '(', ')', '[', ']', ',', ';', '.', ':', '?'];
+
+
 
 default export {
   builtins,
