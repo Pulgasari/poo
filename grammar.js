@@ -299,6 +299,10 @@ RULE Expression = (
      ),
 }
 
+(- (* a b) (/ 1 a))
 
+## prefixed notation
+
+1 + 2 * 3                  (+ 1(* 2 3))
 
 
