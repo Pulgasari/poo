@@ -782,19 +782,14 @@ prop player = {
 
 ```c
 prop processPayload = filePath => {
-  // read file | exit if file doesn't exist
-  @rawText = fs::read(filePath) ?? return "file missing";
+  @text = fs::read(filePath) ?? return "file missing";
+  @data = json::parse(text)  ?? return "invalid json structure";
 
-  // parse json | exit if syntax is broken
-  @data = json::parse(rawText) ?? return "invalid json structure";
-
-  // 3. Structural pattern matching against the expected object shape
   if (@data ~= object{ id: number, targetUrl: string }) {
-    // 4. Transform data smoothly using pipelines and web namespaces
     @safeUrl = @data.targetUrl |> url::decode |> html::escape;
-    
     print "Processing safe target: $@safeUrl";
   }
+  
   or return "payload fields are garbage";
 };
 
