@@ -13,6 +13,39 @@
    - Blöcke & Statements
    ================================================================ *)
 
+def operators = (
+  | operator      as o is String
+  | precedence    as p is Number
+  | associativity as a is Number
+) {
+  // Zuweisungsoperatoren
+  | p: 1,  a: right, o: = += -= *= /= %= <<= >>= >>>= &= ^= |=
+  
+  // Logische Operatoren (Singletons)
+  || 4 left
+  && 5 left
+  ?? 6 left
+  
+  // Vergleichsoperatoren
+  | p: 7,  a: left,  o: === !== == !=
+  | p: 8,  a: left,  o: < > <= >= in instanceof
+  
+  // Bitweise Operatoren
+  | p: 9,  a: left,  o: << >>
+  
+  // Mathematische Operatoren (Punkt- vor Strichrechnung)
+  | p: 12, a: left,  o: >>> + -
+  | p: 13, a: left,  o: * / %
+  
+  // Unäre Operatoren
+  | p: 15, a: right, o: ! ~ typeof void delete
+}
+
+
+
+
+
+      
 (* ===== OPERATORS ===== *)
 
 op-assign   = ("=" | "#=") ;
