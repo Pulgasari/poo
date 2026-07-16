@@ -67,8 +67,10 @@ while
 
 #### function call
 
+```ebnf
 fn-call-expr       := identifier ["("] fn-call-args [")"]
 fn-call-expr-naked := identifier expr
+```
 
 
 
