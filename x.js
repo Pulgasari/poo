@@ -91,23 +91,11 @@ const many = (combinator) => decorateCombinator((p) => {
   do return [] |> while (true) @ += runWithBacktrack(p, combinator) ?? break;
 });
 
-const many = c => decorateCombinator(p => {
-  const results = [];
-  while (true) {
-    const res = runWithBacktrack(p,c);
-    if (isNullish(res)) break;
-    results.push(res);
-  }
-  return results;
-});
+// javascript original
 
-prop many = c => decorateCombinator (
-  p => [] |> while (true) do @ += runWithBacktrack(p,c) ?? break;
-);
 
-prop many = c => decorateCombinator p => [] |> while (true) do @ += runWithBacktrack(p,c) ?? break;
-prop many = c => decorateCombinator p => [] |> while true do @ += runWithBacktrack(p,c) ?? break;
-prop many = c => decorateCombinator p => [] |> while do @ += runWithBacktrack(p,c) ?? break;
+
+
 
 const many1 = c => decorateCombinator(p => {
   start = p.index; first = c(p);
@@ -147,6 +135,7 @@ const whileLoop = (cond) => decorateCombinator(p => {
   return results;
 });
 
+
 prop whileLoop = cond => decorateCombinator(p => {
   results = [];
   
@@ -169,7 +158,7 @@ prop whileLoop = cond => decorateCombinator(
 );
 
 prop whileLoop = cond => decorateCombinator(
-  p => #[] |> (cond is function && !cond.many)
+  p => #[] |> (cond ~= function && !cond.many)
     ? while (cond p) do @ += p.next()
     : while          do @ += runWithBacktrack(p, cond) ?? break
 );
@@ -404,4 +393,60 @@ function decorateCombinator (fn) {
   Object.setPrototypeOf(fn, combinatorPrototype);
   return fn;
 }
+
+
+
+
+
+
+
+
+
+// beispiel 1
+// javascript
+const many = c => decorateCombinator (p => {
+  const results = [];
+  while (true) {
+    const result = runWithBacktrack(p,c);
+    if (result === null) break;
+    results.push(result);
+  }
+  return results;
+});
+
+// poo
+prop many = c => decorateCombinator (p => {
+  return [] |> while (true) do @ += runWithBacktrack(p,c) ?? break;
+});
+prop many = c => decorateCombinator (
+  p => [] |> while (true) do @ += runWithBacktrack(p,c) ?? break;
+);
+
+// gültige poo extremformen, die sich aus unserer grammar ergeben
+prop many = c => decorateCombinator p => #[] |> while (true) do @ += runWithBacktrack(p,c) ?? break;
+prop many = c => decorateCombinator p => #[] |> while true do @ += runWithBacktrack(p,c) ?? break;
+prop many = c => decorateCombinator p => #[] |> while do @ += runWithBacktrack(p,c) ?? break;
+
+// beispiel 2
+// javascript original
+const whileLoop = (cond) => decorateCombinator (p => {
+  const results = [];
+  if (typeof p === 'function' && !cond.many) {
+    while (cond(p)) results.push(p.next());
+    return results;
+  }
+  while (true) {
+    const result = runWithBacktrack(p, cond);
+    if (result === null) break;
+    results.push(result);
+  }
+  return results;
+});
+
+// poo
+prop whileLoop = cond => decorateCombinator (
+  p => #[] |> (cond ~= function && !cond.many)
+    ? while (cond p) do @ += p.next()
+    : while          do @ += runWithBacktrack(p, cond) ?? break
+);
 
