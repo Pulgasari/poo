@@ -1,14 +1,13 @@
 (* ================================================================
    POO :: Grammar & Parser Instructions
-   ================================================================
-   
    ================================================================ *)
 
+==============================================================
 LIST builtins = ( Identifier is String ) Array BigInt Boolean Date Error Function Map Number Object Promise RegExp Set String Symbol
 LIST globals  = ( Identifier is String ) clearInterval clearTimeout console document globalThis process setInterval setTimeout window
 LIST literals = ( Identifier is String ) false null true undefined Infinity NaN
 LIST puncts   = ( Identifier is String ) { } ( ) [ ] , ; . : ?
-
+==============================================================
 
 LIST operators = (
   | operator      as o is String
