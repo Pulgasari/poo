@@ -27,11 +27,30 @@ Coding sucks.
 
 ## Let's code!
 
-Some people do like **poo**. ^-^
+A lot of people do like **JavaScript** ...
+
+```javascript
+// javascript original
+const whileLoop = (cond) => decorateCombinator (p => {
+  const results = [];
+  if (typeof p === 'function' && !cond.many) {
+    while (cond(p)) results.push(p.next());
+    return results;
+  }
+  while (true) {
+    const result = runWithBacktrack(p, cond);
+    if (result === null) break;
+    results.push(result);
+  }
+  return results;
+});
+```
+
+... but some people do like **poo**. ^-^
 
 ```javascript
 prop whileLoop = cond => decorateCombinator (
-  p => #[] |> (cond ~= function && !cond.many)
+  p => #[] |> (cond ~= function.!many)
     ? while (cond p) do @ += p.next()
     : while          do @ += runWithBacktrack(p, cond) ?? break
 );
