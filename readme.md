@@ -7,8 +7,8 @@ Coding sucks.
 - [Let's code! (Introduction)](#lets-code)
 - [Declarations](#declarations)
 - [Control Flow](#control-flow)
-  - [Conditional](#)
-  - [Switch][#switch]
+  - [Conditional](#cond)
+  - [Switch](#switch)
   - [Loops](#loops)
 - [Operators](#operators)
 - [Keywords](#keywords)
