@@ -10,6 +10,29 @@ LIST puncts   = ( Identifier is String ) { } ( ) [ ] , ; . : ?
 ==============================================================
 
 LIST operators = (
+  | group         as g is String
+  | precedence    as p is Number
+  | associativity as a is String
+  | operator      as o is String
+){
+  assign   1 right ...( = += -= *= /= %= <<= >>= >>>= &= ^= |= )...
+  logical  4 left  ||
+  logical  5 left  &&
+  logical  6 left  ??
+  compare  7 left  ...( === !== == != )...
+  compare  8 left  ...( < > <= >= in instanceof )...
+  bitwise  9 left  ...( << >> )...
+  math    12 left  ...( >>> + - )...
+  math    13 left  ...( * / % )...
+  unary   15 right ...( delete typeof void ! ~ )...
+}
+
+
+
+
+   
+LIST operators = (
+  | group         as g is String
   | operator      as o is String
   | precedence    as p is Number
   | associativity as a is String
