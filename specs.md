@@ -98,7 +98,7 @@ op-binary-assign ::= "=" | "#=" | "+=" | "-=" | "*=" | "??=" | "?!="
 op-binary-decl  ::= "=" | "#="
 op-binary-pipe  ::= "|>" | "??>" | "?!>"
 op-unary        ::= op-unary-prefix
-op-unary-prefix ::= ? | ?? | ! | !! | ?!
+op-unary-prefix ::= "?" | "??" | "!" | "!!" | "?!"
 
 id ::= 
 
