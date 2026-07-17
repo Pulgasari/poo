@@ -187,14 +187,25 @@ if (isBroken or isCrying) { ... }; // Compile-time error
 
 ​Pipelines allow sequence chaining. Conditional pipes prevent runtime crashes by short-circuiting on empty states.
 
-* The `​|>` Standard Pipe: Forwards the left-hand value to the right-hand function call. Supports implicit function reference `(val |> fn)` and explicit positioning via the `@` placeholder (val |> fn(1, @)).
-​* The `??>` Nullish-Safe Pipe: Halts evaluation and returns `null` if the pipeline value evaluates to nullish (`null` or `undefined`).
-​* The `?!>` Falsy-Safe Pipe: Halts evaluation and returns the falsy value if the pipeline value is falsy (false, 0, "", []).
+#### `|>`
+
+The `​|>` Standard Pipe: Forwards the left-hand value to the right-hand function call. Supports implicit function reference `(val |> fn)` and explicit positioning via the `@` placeholder (val |> fn(1, @)).
+
+#### `??>`
+
+​The `??>` Nullish-Safe Pipe: Halts evaluation and returns `null` if the pipeline value evaluates to *nullish* (`null` or `undefined`).
+
+#### `?!>`
+
+​The `?!>` Falsy-Safe Pipe: Halts evaluation and returns the falsy value if the pipeline value is *falsy*.
 
 ```javascript
-// Safely parse a profile only if fetching the user actually returned data
 prop contacts = fetchUser(id) ??> parseProfile() ?!> getContacts();
 ```
+
+#### `!>`
+
+...
 
 ## Typecasting & Context-Aware Return Types
 
@@ -224,8 +235,9 @@ prop age2 = rawInput as? number ?? 123; // Result: 123 (fails to null, triggers 
 prop getErrors = () => {
   return {
     prop list = ["syntax error", "compiler crying"];
-    as string = () => list.join(", ");
+    
     as number = () => list.len();
+    as string = () => list.join(", ");
   };
 };
 
@@ -238,87 +250,9 @@ prop alert = getErrors() as string;
 
 
 
+
+
 ---
-
-## Let's code!
-
-Write a block of code.
-
-```
-{
-  prop name = 'Udo';
-  prop pet  = 'cat';
-
-  print("@name has a @pet.");
-}
-```
-
-Now give it a name and call it from anywhere in the current scope.
-
-```
-{
-  prop country = 'Austria';
-
-  prop block = {
-    prop name = 'Udo';
-    prop pet  = 'cat';
-
-    print("@name has a @pet and lives in @country.");
-  }
-
-  block(); // "Udo has a cat and lives in Austria."
-}
-```
-
-now give it parenthesis `()` and fat arrow `=>`.
-
-```
-{
-  prop country = 'Austria';
-
-  prop block = () => {
-    prop name = 'Udo';
-    prop pet  = 'cat';
-
-    print("@name has a @pet and lives in @country.");
-    // now here @country becomes 'undefined'
-    // because block is now closed scope
-  }
-  
-  block(); // "Udo has a cat and lives in 'undefined'."
-}
-```
-
-create a copy of the block in current state of props by i assigning it with `new` keyword to another `prop`.
-
-```
-prop abc = new block; // name = 'Udo'
-block.name = 'Hans'
-prop xyz = new block; // name = 'Hans'
-xyz.name = 'Max'; // name = 'Max'
-```
-
-ok now do this:
-
-```c
-{
-  prop PeopleCallThatClass = () => {
-    construct {
-      prop size  = 15;
-      prop color = 'blue';
-    }
-    static {
-      prop doSth = () => {
-        print('Hi from static in @color!');
-      }
-    }
-  }
-}
-```
-
-Congratulations! You now know how to create [objects](#objects), [functions](#functions), [classes](#classes) and [traits](#traits). ^-^
-
-There is more to learn but one needs to start somewhere.
 
 ## Definitions
 
@@ -330,11 +264,12 @@ The `prop` keyword introduces a declaration statement to define a **property** i
 
 A **constant** is 
 - a named value.
-- written in `SCREAMING_SNAKE_CASE`.
 - not mutable.
+- created on compile time.
+- globally accessable.
 
-```c
-prop MY_LITTLE_CONSTANT = 'Moin!';
+```scala
+val #konstante = 'Moin!';
 ```
 
 ### define a variable
@@ -345,8 +280,8 @@ A **variable** is
 - mutable (until you seal it).
 
 ```c
-prop myVariable   = true;
-prop my_other_var = 3;
+val myVariable   = true;
+val my_other_var = 3;
 ```
 
 ### define a object
@@ -358,9 +293,9 @@ An **object**
 - may contain `def` and `do` statements.
 
 ```javascript
-pp person = {
-  pp name = 'Udo';
-  pp age  = 69; 
+obj person = {
+  val name = 'Udo';
+  val age  = 69; 
 };
 ```
 
@@ -372,10 +307,10 @@ A **function**
 - 
 
 ```c
-pp helloFoxbuddy = (name, age) => {
-  pp pet  = 'fox';
+fn helloFoxbuddy = (name, age) => {
+  val pet  = 'fox';
 
-  do print("@name is @age years old and has a @pet.");
+  do print "$name is $age years old and has a $pet.";
 };
 
 do helloFoxbuddy('Anne', '23');
@@ -385,41 +320,39 @@ do helloFoxbuddy('Anne', '23');
 ### the `new` keyword
 
 ```scala
-prop person = {
-  prop name = 'Udo';
-  prop age  = 60;
-  prop printInfo = () => {
-    return print('@name is @age years old.');
-  };
+obj person = {
+  val name = 'Udo';
+  val age  = 60;
+  
+  fn printInfo = () => print "$name is $age years old.";
 };
 
 // creates copy/clone/instance of 'person' in its current state
-prop inst1 = new person;
+obj inst1 = new person;
 
 person.age = 61;
 print(person.age); // 61
 
 
-prop inst2 = new person;
+obj inst2 = new person;
 person.age = 62;
 
-print(person.age); // 62
-print(inst1.age);  // 60
-print(inst2.age);  // 61
+print person.age; // 62
+print inst1.age;  // 60
+print inst2.age;  // 61
 ```
 
 ```javascript
-def person = (name, age) => {
-  def name = 'Udo';
-  def age  = 60;
-  def printInfo = () => {
-    return print('@name is @age years old.');
-  };
+obj person = (name, age) => {
+  val name = 'Udo';
+  val age  = 60;
+  
+  fn printInfo = () => print('@name is @age years old.');
 };
 
-def p1 = new person;
-def p2 = new person (age: 61);
-def p3 = new person (age: 20, name: 'Stella');
+obj p1 = new person;
+obj p2 = new person (age: 61);
+obj p3 = new person (age: 20, name: 'Stella');
 
 p1.printInfo(); //    Udo is 60 years old.
 p2.printInfo(); //    Udo is 61 years old.
@@ -431,28 +364,27 @@ p3.printInfo(); // Stella is 20 years old.
 By the `use` keyword one could apply the value of a ding when defining another one.
 
 ```python
-prop Person = () => {
-  prop name;
-  prop age;
-  prop country;
-  prop whoAmI = () => {
-    print('@name is from @country and @age years old.');
-  };
+obj Person = () => {
+  val name;
+  val age;
+  val country;
+
+  fn whoAmI = () => print "$name is from $country and $age years old.";
 };
 
-prop Male = () => {
+obj Male = () => {
   use Person;
-  prop sex = 'male';
+  val sex = 'male';
 }
 
-prop Female = () => {
+obj Female = () => {
   use Person;
-  prop sex = 'female';
+  val sex = 'female';
 }
 
 // change the value of a prop on init
-prop Hans = new Male   (name: 'Hans', age: 44);
-prop Gabi = new Female (name: 'Gabi', age: 30);
+obj Hans = new Male   (name: 'Hans', age: 44);
+obj Gabi = new Female (name: 'Gabi', age: 30);
 
 // change the value of a prop when calling
 Hans(country: 'Austria').whoAmI();
