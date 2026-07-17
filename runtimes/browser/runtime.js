@@ -1,19 +1,18 @@
-// runtime.js
-// Reine ES-Module – läuft im Browser und im Worker.
+// @poo/runtimes/browser/runtime.js
 
 // ---------- Typ-Enum ----------
 export const ValueType = Object.freeze({
-    Nil: 'Nil',
-    Bool: 'Bool',
-    Int: 'Int',
-    Float: 'Float',
-    String: 'String',
-    Object: 'Object',
-    Array: 'Array',
-    List: 'List',
-    Tuple: 'Tuple',
-    Function: 'Function',
-    Class: 'Class',
+    Nil      : 'Nil',
+    Bool     : 'Bool',
+    Int      : 'Int',
+    Float    : 'Float',
+    String   : 'String',
+    Object   : 'Object',
+    Array    : 'Array',
+    List     : 'List',
+    Tuple    : 'Tuple',
+    Function : 'Function',
+    Class    : 'Class',
 });
 
 // ---------- Value Wrapper ----------
