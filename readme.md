@@ -46,7 +46,7 @@ const whileLoop = (cond) => decorateCombinator (p => {
 
 ```scala
 fn whileLoop = cond => decorateCombinator (
-  p => #[] |> (p ~= function && !cond.many)
+  p => #[] |> (p ~= fn && !cond.many)
     ? while (cond p) do @ += p.next()
     : while          do @ += runWithBacktrack(p, cond) ?? break
 );
