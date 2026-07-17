@@ -279,7 +279,7 @@ A **variable** is
 - written in `pascalCase` or `snake_case`.
 - mutable (until you seal it).
 
-```c
+```scala
 val myVariable   = true;
 val my_other_var = 3;
 ```
@@ -292,7 +292,7 @@ An **object**
 - is mutable (until you seal it).
 - may contain `def` and `do` statements.
 
-```javascript
+```scala
 obj person = {
   val name = 'Udo';
   val age  = 69; 
@@ -306,7 +306,7 @@ A **function**
 - has bindable values when calling.
 - 
 
-```c
+```scala
 fn helloFoxbuddy = (name, age) => {
   val pet  = 'fox';
 
