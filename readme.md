@@ -44,8 +44,8 @@ const whileLoop = (cond) => decorateCombinator (p => {
 
 ... but some people do like **poo**. ^-^
 
-```javascript
-prop whileLoop = cond => decorateCombinator (
+```scala
+fn whileLoop = cond => decorateCombinator (
   p => #[] |> (p ~= function && !cond.many)
     ? while (cond p) do @ += p.next()
     : while          do @ += runWithBacktrack(p, cond) ?? break
