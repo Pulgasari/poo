@@ -19,10 +19,6 @@ Coding sucks.
   - [Typecasting](#typecasting)
 - [Philosophy](#philosophy)
 
-
-- [Declarations & Memory Management](#declarations--memory-management)
-- [Types & Structures](#types--structures)
-
 ---
 
 ## Let's code!
