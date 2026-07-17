@@ -207,3 +207,63 @@ destroy_object :: proc (obj: ^Object, allocator: mem.Allocator) {
   delete(obj.properties)
   free(obj, allocator)
 )
+
+// =============================
+
+// Forward declarations for recursive types
+
+Array    :: struct
+Class    :: struct
+Function :: struct
+List     :: struct
+Object   :: struct
+Tuple    :: struct
+
+Value :: union {
+  // Primitive values
+  bool,
+  f64,
+  i64,
+  string,
+
+  // Heap-allocated values
+  ^Array,
+  ^Class,
+  ^Function,
+  ^List,
+  ^Object,
+  ^Tuple,
+}
+
+// so konstruiert man dann:
+
+a: Value = true
+b: Value = f64(3.14)
+c: Value = i64(42)
+d: Value = "hello"
+e: Value = array_pointer
+
+// und so matcht man
+
+print_value :: proc (value: Value) {
+  switch v in value {
+    case bool      : fmt.println (v)
+    case f64       : fmt.println (v)
+    case i64       : fmt.println (v)
+    case string    : fmt.println (v)
+    case ^Array    : print_array(v)
+    case ^Class    : print_class(v)
+    case ^Function : print_function(v)
+    case ^List     : print_list   (v)
+    case ^Object   : print_object (v)
+    case ^Tuple    : print_tuple  (v)
+    case           : fmt.println ("nil")
+  }
+}
+
+
+
+
+
+
+
