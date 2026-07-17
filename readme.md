@@ -493,13 +493,13 @@ prop parseToken = token => switch (token.type) {
 
 #### `for` loop
 
-```c
+```scala
 def animals  = ['bird', 'cat', 'dog' ];
-def helloPet = (pet) => print('I love my @pet.');
+def helloPet = (pet) => print "I love my $pet.";
 
-do for animals as animal {
-  helloPet(animal);
-}
+for (animals as @animal) {
+  helloPet @animal;
+};
 
 // oneliner
 do for animals as animal helloPet(animal);
@@ -510,8 +510,7 @@ do for animals as animal helloPet(animal);
 ```c
 def zustand = 'true';
 
-do while (zustand) {
-  
+while (zustand) {
   zustand = false;
 }
 ```
@@ -521,9 +520,7 @@ do while (zustand) {
 The `until` loop runs at least once and stops if the conditions matches `false`.
 
 ```c
-do {
-  ...
-} until <condExpression>;
+loop until <condExpression> {...};
 ```
 
 #### `for while` loop
@@ -536,18 +533,6 @@ do {
 
 ```c
 
-```
-
-#### `for while until` loop
-
-Would run at least once until post-block-condition becomes `false` if pre-block-condition were `true`.
-
-***Note:** If you will ever use this in practice you are a nerd.*
-
-```c
-do for $i while ($i < 10) {
-    body();
-} until (cond);
 ```
 
 
@@ -572,8 +557,8 @@ pp abc = 10_000_000; // 10000000
 ### String
 
 ```c
-pp name = 'Udo':
-pp text = 'Coding sucks.';
+str name = 'Udo':
+str text = 'Coding sucks.';
 ```
 
 ### Arrays
@@ -591,9 +576,9 @@ A **List** is a special form of an array with:
 - identical typed values
 
 ```c
-pp pets = new List ();
-pp pets = #['bird', 'cat', 'dog', 'fish'];
-pp nums = #[1, 2, 3];
+obj pets = new List ();
+obj pets = #['bird', 'cat', 'dog', 'fish'];
+obj nums = #[1, 2, 3];
 ```
 
 A **List** has all the builtin methods of **Array** *(outer type)* and depending on the type of it's values *(inner type)* one could use all those methods in combination.
@@ -602,13 +587,13 @@ A **List** has all the builtin methods of **Array** *(outer type)* and depending
 pp pets = #['bird', 'cat', 'dog', 'fish'];
 
 // #['BIRD', 'CAT', 'DOG', 'FISH']
-do pets.map(toUpperCase);
+do pets.map (toUpperCase);
 
 // #['DRIB', 'TAC', 'DOG', 'GOD', 'HSIF']
-do pets.map(toUpperCase, reverse);
+do pets.map (toUpperCase, reverse);
 
 // #[HSIF, 'GOD', 'TAC', 'DRIB']
-do pets.map(toUpperCase, reverse).reverse();
+do pets.map (toUpperCase, reverse).reverse();
 ```
 
 ## Operators
@@ -629,13 +614,21 @@ Operator | Name    | ...
 `??`     | Nullish |
 `\|>`    | Pipe    |
 `?>`     |         | 
+
+#### Comparison
+
+Operator | Name    | ...
+---------|---------|----
 `\|\|`   | Or      |
 `&&`     | And     |
+`~=`     | Pattern | Pattern Matching
 
 #### Assignment
 
 Operator | Name    | ...
 ---------|---------|----
+`=`      |         |
+`#=`     | Seal    | seal an value or object
 `+=`     |         |
 `-=`     |         |
 `*=`     |         |
@@ -643,24 +636,24 @@ Operator | Name    | ...
 
 ## Keywords
 
-Operator | Alias           | Read
----------|-----------------|---
-`catch`  | |
-`do`     | |
-`for`    |        | [Control Flow](#control-flow)
-`if`     |        | [Control Flow](#control-flow)
-`kill`   | |
-`or`     | |
-`pkg`    | `package`        |
-`pnt`    | |
-`ref`    | |
-`prop`   | `pp`, `property` |
-`seal`   |        |
-`switch` |        |
-`until`  |        | [Control Flow](#control-flow)
-`use`    |        |
-`wait`   |        |
-`while`  |        | [Control Flow](#control-flow)
+Operator | Read
+---------|-----
+`catch`  |
+`do`     |
+`for`    | [Control Flow](#control-flow)
+`if`     | [Control Flow](#control-flow)
+`kill`   |
+`or`     |
+`pkg`    |
+`pnt`    |
+`ref`    |
+`prop`   |
+`seal`   |
+`switch` |
+`until`  | [Control Flow](#control-flow)
+`use`    |
+`wait`   |
+`while`  | [Control Flow](#control-flow)
 
 ## Philosophy
 
