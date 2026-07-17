@@ -4,24 +4,24 @@ Coding sucks.
 
 ![Logo](./logo.jpg)
 
+## Table of Contents
+
 - [Let's code! (Introduction)](#lets-code)
 - [Declarations](#declarations)
 - [Control Flow](#control-flow)
   - [Conditional](#cond)
   - [Switch](#switch)
   - [Loops](#loops)
-- [Operators](#operators)
 - [Keywords](#keywords)
+- [Operators](#operators)
 - [Types](#types)
+  - [Context-Aware Return Types](#context-aware-return-types)
+  - [Typecasting](#typecasting)
 - [Philosophy](#philosophy)
 
-## Table of Contents
-- [Let's code!](#lets-code)
+
 - [Declarations & Memory Management](#declarations--memory-management)
 - [Types & Structures](#types--structures)
-- [Operators](#operators)
-- [Typecasting & Context-Aware Return Types](#typecasting--context-aware-return-types)
-- [Keywords](#keywords)
 
 ---
 
@@ -54,19 +54,6 @@ prop whileLoop = cond => decorateCombinator (
     ? while (cond p) do @ += p.next()
     : while          do @ += runWithBacktrack(p, cond) ?? break
 );
-```
-
-A basic program to display the inevitable void of software development:
-
-```javascript
-prop main = () => {
-  prop status = "coding";
-  print "Current state: $status"; // Output: Current state: coding
-  
-  if (status == "coding") do {
-    print("Compiler is crying again.");
-  };
-};
 ```
 
 ## Declarations & Memory Management
