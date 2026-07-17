@@ -1,8 +1,8 @@
 # poo
 
-## data-types
+## Data-Types
 
-[Array](#array) [Color](#color) [Date](#date) [List](#list) [Number](#number) [Record](#record) [Stack](#stack) [String](#string) [Tree](#tree) [Tuple](#tuple)
+[Array](#array) [Bool](#bool) [Color](#color) [Date](#date) [List](#list) [Number](#number) [Record](#record) [RegExp](#regexp) [Stack](#stack) [String](#string) [Tree](#tree) [Tuple](#tuple)
 
 ### Array
 
