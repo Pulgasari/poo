@@ -9,9 +9,9 @@ Coding sucks.
 - [Let's code! (Introduction)](#lets-code)
 - [Operators & Keywords](#operators-keywords)
 - [Declarations](#declarations)
-  - [Declare a Value](#declare-a-value)
-  - [Declare a Function](#declare-a-function)
-  - [Declare an Object](#declare-an-object)
+  - [Value Declaration](#declare-a-value)
+  - [Function Declaration](#declare-a-function)
+  - [Object Declaration](#declare-an-object)
 - [Control Flow](#control-flow)
   - [Conditional](#cond)
   - [Switch](#switch)
@@ -473,7 +473,136 @@ print(fishsticks); // origin is still 'true'
 The `pnt` keyword introduces a statement to ... (*direct pointer*).
 
 
+### the `new` keyword
 
+```scala
+obj person = {
+  val name = 'Udo';
+  val age  = 60;
+  
+  fn printInfo = () => print "$name is $age years old.";
+};
+
+// creates copy/clone/instance of 'person' in its current state
+obj inst1 = new person;
+
+person.age = 61;
+print(person.age); // 61
+
+
+obj inst2 = new person;
+person.age = 62;
+
+print person.age; // 62
+print inst1.age;  // 60
+print inst2.age;  // 61
+```
+
+```javascript
+obj person = (name, age) => {
+  val name = 'Udo';
+  val age  = 60;
+  
+  fn printInfo = () => print('@name is @age years old.');
+};
+
+obj p1 = new person;
+obj p2 = new person (age: 61);
+obj p3 = new person (age: 20, name: 'Stella');
+
+p1.printInfo(); //    Udo is 60 years old.
+p2.printInfo(); //    Udo is 61 years old.
+p3.printInfo(); // Stella is 20 years old.
+```
+
+### the `use` keyword
+
+By the `use` keyword one could apply the value of a ding when defining another one.
+
+```python
+obj Person = () => {
+  val name;
+  val age;
+  val country;
+
+  fn whoAmI = () => print "$name is from $country and $age years old.";
+};
+
+obj Male = () => {
+  use Person;
+  val sex = 'male';
+}
+
+obj Female = () => {
+  use Person;
+  val sex = 'female';
+}
+
+// change the value of a prop on init
+obj Hans = new Male   (name: 'Hans', age: 44);
+obj Gabi = new Female (name: 'Gabi', age: 30);
+
+// change the value of a prop when calling
+Hans(country: 'Austria').whoAmI();
+```
+
+
+```cpp
+prop parseToken = token => switch (token.type) {
+  "EOF"   => null; //
+  "SEMI"  do continue;
+  "IDENT" do processIdentifier(token.value);
+  or      do print "Unexpected token: $token" and return "error";
+};
+```
+
+## Philosophy
+
+### About POO
+
+...
+
+###
+
+```javascript
+prop globalCounter = 0;
+prop configName    = 'dev';
+prop baseStats     = { hp: 100 };
+
+prop player = {
+  use baseStats;      // Statische Kopie
+  ref configName;     // Live-Ansicht (Copy-on-Write)
+  pnt globalCounter;  // Aktiver Pointer
+
+  prop tick = () => {
+    // 1. Lokaler Zugriff (Kein Präfix)
+    print baseStats.hp; 
+
+    // 2. Live-Read-Zugriff (Präfix @)
+    print @configName; 
+
+    // 3. Durchschreibender Zugriff (Präfix &)
+    &globalCounter += 1; 
+  };
+};
+```
+
+###
+
+```c
+prop processPayload = filePath => {
+  @text = fs::read(filePath) ?? return "file missing";
+  @data = json::parse(text)  ?? return "invalid json structure";
+
+  if (@data ~= object{ id: number, targetUrl: string }) {
+    @safeUrl = @data.targetUrl |> url::decode |> html::escape;
+    print "Processing safe target: $@safeUrl";
+  }
+  
+  or return "payload fields are garbage";
+};
+
+```
 
 ## Operators
 
