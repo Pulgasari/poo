@@ -8,6 +8,8 @@ Coding sucks.
 
 - [Let's code! (Introduction)](#lets-code)
 - [Operators & Keywords](#operators-keywords)
+  - [Keywords](#keywords)
+  - [Operators](#operators)
 - [Declarations](#declarations)
   - [Value Declaration](#declare-a-value)
   - [Function Declaration](#declare-a-function)
@@ -16,8 +18,8 @@ Coding sucks.
   - [Conditional](#cond)
   - [Switch](#switch)
   - [Loops](#loops)
-- [Keywords](#keywords)
-- [Operators](#operators)
+
+
 - [Types](#types)
   - [Data-Types](#data-types)
   - [Context-Aware Return Types](#context-aware-return-types)
@@ -703,7 +705,14 @@ prop alert = getErrors() as string;
 
 ## Philosophy
 
+The language sees itself as an *weird bastard like JavaScript* but with more time to intensionally become like that.
+
 ### About POO
+
+
+
+
+---
 
 > [!NOTE]
 > Useful information that users should know, even when skimming content.
