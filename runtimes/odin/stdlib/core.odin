@@ -74,12 +74,19 @@ global_type :: proc (env: ^Object, args: []Value) -> Value {
 // ---------- EXPORT: Globale Funktionen ----------
 // Werden in das globale Umgebungsobjekt eingetragen
 
+global_defs := []Method_Def{
+  { "print", global_print },
+  { "len",   global_len   },
+  { "type",  global_type  },
+}
+
 get_global_functions :: proc (allocator: mem.Allocator) -> map[string]Value {
   globals := make (map[string]Value, allocator)
-
-  globals["print"] = Value { type = .Function, data = {function = make_function(allocator, nil, nil, global_print )}}
-  globals["len"]   = Value { type = .Function, data = {function = make_function(allocator, nil, nil, global_len )}}
-  globals["type"]  = Value { type = .Function, data = {function = make_function(allocator, nil, nil, global_type )}}  
-
+  register_methods (globals, global_defs, allocator)
   return globals
 }
+
+
+
+
+
