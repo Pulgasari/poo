@@ -12,6 +12,27 @@
 
 ### Color
 
+### String
+
+#### Methods
+
+Name | ...
+-----|----
+[`toCamelCase`](#toCamelCase)       | 
+[`toConstantCase`](#toConstantCase) | 
+[`toKebabCase`](#toKebabCase)       | 
+[`toPascalCase`](#toPascalCase)     |
+[`toSnakeCase`](#toSnakeCase)       | 
+[`toTitleCase`](#toTitleCase)       | 
+
+##### `toCamelCase`
+
+##### `toKebabCase`
+
+##### `toPascalCase`
+
+##### `toTitleCase`
+
 ## Keywords
 
 [`and`](#and) [`as`](#as) [`break`](#break) [`catch`](#catch) [`continue`](#continue) [`do`](#do) [`fn`](#fn) [`if`](#if) [`kill`](#kill) [`loop`](#loop) [`new`](#new) [`or`](#or) [`pkg`](#pkg) [`return`](#return) [`switch`](#switch) [`use`](#use)
