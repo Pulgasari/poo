@@ -90,3 +90,72 @@ call_string_method :: proc(obj: ^Object, method_name: string, args: []Value) -> 
 
     return fn.proc_ptr(fn.env, new_args)
 }
+
+// runtimes/odin/runtime.odin (Erweitert)
+package runtime
+
+import "core:mem"
+import "core:fmt"
+
+// ---------- INITIALISIERUNG DER RUNTIME ----------
+
+init_runtime :: proc(allocator: mem.Allocator) -> ^Object {
+    // 1. Das Ur-Objekt erstellen (Root-Prototyp)
+    root := create_base_object(allocator)
+
+    // 2. String-Prototypen erstellen (aus stdlib/string.odin)
+    string_proto := make_object(allocator, root)
+    string_methods := get_string_methods(allocator)
+    for key, val in string_methods {
+        string_proto.properties[key] = val
+    }
+    root.properties["_string_prototype"] = Value{type = .Object, data = {object = string_proto}}
+
+    // 3. Array-Prototypen erstellen (aus stdlib/array.odin)
+    array_proto := make_object(allocator, root)
+    array_methods := get_array_methods(allocator)
+    for key, val in array_methods {
+        array_proto.properties[key] = val
+    }
+    root.properties["_array_prototype"] = Value{type = .Object, data = {object = array_proto}}
+
+    // 4. List-Prototypen erstellen (erbt von Array-Prototyp)
+    list_proto := make_object(allocator, array_proto)
+    // List-Methoden sind bereits in array_methods enthalten
+    // Wir fügen noch spezifische hinzu, falls nötig
+    root.properties["_list_prototype"] = Value{type = .Object, data = {object = list_proto}}
+
+    // 5. Globale Funktionen (aus stdlib/core.odin)
+    globals := get_global_functions(allocator)
+    for key, val in globals {
+        root.properties[key] = val
+    }
+
+    // 6. Spezielle globale Funktion für Arrays (schneller Zugriff)
+    root.properties["Array"] = Value{
+        type = .Function,
+        data = {function = make_function(allocator, nil, nil, proc(env: ^Object, args: []Value) -> Value {
+            // Array-Konstruktor: Erstellt ein Array aus den Argumenten
+            arr := make_array(env, env) // env ist hier der Array-Prototyp
+            for arg in args {
+                append(&arr.items, arg)
+            }
+            return Value{type = .Array, data = {array = arr}}
+        })}
+    }
+
+    // 7. Spezielle globale Funktion für Listen
+    root.properties["List"] = Value{
+        type = .Function,
+        data = {function = make_function(allocator, nil, nil, proc(env: ^Object, args: []Value) -> Value {
+            if len(args) < 1 {
+                return from_nil()
+            }
+            // Erster Parameter ist der Typ (als Value_Type)
+            // Zweiter Parameter ist das initiale Array (optional)
+            return from_nil() // Wird später implementiert
+        })}
+    }
+
+    return root
+}
