@@ -14,7 +14,7 @@
 
 ### Keywords
 
-[`and`](#and) [`as`](#as) [`break`](#break) [`catch`](#catch) [`continue`](#continue) [`fn`](#fn) [`if`](#if) [`kill`](#kill) [`loop`](#loop) [`new`](#new) [`or`](#or) [`pkg`](#pkg) [`return`](#return) [`switch`](#switch) [`use`](#use)
+[`and`](#and) [`as`](#as) [`break`](#break) [`catch`](#catch) [`continue`](#continue) [`do`](#do) [`fn`](#fn) [`if`](#if) [`kill`](#kill) [`loop`](#loop) [`new`](#new) [`or`](#or) [`pkg`](#pkg) [`return`](#return) [`switch`](#switch) [`use`](#use)
 
 ### Operators
 
@@ -24,25 +24,18 @@
 
 [`|>`](#) [`!>`](#) [`?!>`](#) [`??>`](#)
 
+### Packages
+
+[`audio`](#audio) [`db`](#db) [`fs`](#fs) [`img`](#img) [`io`](#io) [`md`](#md) [`video`](#video)
+
 ```txt
-as
-break
-catch
-continue
-do
 exit
 for
-fn
-if
 obj
-or
 pnt
 prop (fn val obj def)
 ref
-return
-switch
 until
-use
 val
 while
 ```
