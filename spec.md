@@ -2,7 +2,9 @@
 
 ## Data-Types
 
-[`Array`](#array) [`Blob`](#blob) [`Bool`](#bool) [`Char`](#char) [`Color`](#color) [`Date`](#date) [`Enum`](#enum) [`Generator`](#generator) [`List`](#list) [`Map`](#map) [`Number`](#number) [`Queue`](#queue) [`Pattern`](#pattern) [`Record`](#record) [`RegExp`](#regexp) [`Set`](#set) [`Stack`](#stack) [`String`](#string) [`Store`](#store) [`Symbol`](#symbol) [`Tree`](#tree) [`Tuple`](#tuple) [`Type`](#type)
+[`Array`](#array) 
+[`Blob`](#blob) 
+[`Bool`](#bool) [`Char`](#char) [`Color`](#color) [`Date`](#date) [`Enum`](#enum) [`Generator`](#generator) [`List`](#list) [`Map`](#map) [`Number`](#number) [`Queue`](#queue) [`Pattern`](#pattern) [`Record`](#record) [`RegExp`](#regexp) [`Set`](#set) [`Stack`](#stack) [`String`](#string) [`Store`](#store) [`Symbol`](#symbol) [`Tree`](#tree) [`Tuple`](#tuple) [`Type`](#type)
 
 ### Array
 
@@ -35,7 +37,31 @@ Name | ...
 
 ## Keywords
 
-[`and`](#and) [`as`](#as) [`break`](#break) [`catch`](#catch) [`continue`](#continue) [`do`](#do) [`fn`](#fn) [`if`](#if) [`kill`](#kill) [`loop`](#loop) [`new`](#new) [`or`](#or) [`pkg`](#pkg) [`return`](#return) [`switch`](#switch) [`use`](#use)
+### Expression Level
+
+[`as`](#as)
+[`new`](#new)
+
+### Statement Level
+
+[`and`](#and) 
+[`break`](#break)
+[`catch`](#catch)
+[`continue`](#continue)
+[`do`](#do)
+[`if`](#if) 
+[`kill`](#kill) 
+[`loop`](#loop) 
+[`or`](#or) 
+[`return`](#return) 
+[`switch`](#switch) 
+
+#### Declaration Statement Introducers
+
+[`fn`](#fn)
+[`pkg`](#pkg)
+[`use`](#use)
+[`val`](#val)
 
 ## Operators
 
