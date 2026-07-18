@@ -12,15 +12,14 @@ import "core:slice"
 // ============================================================
 
 make_method :: proc(
-    p: proc(env:^Object, args:[]Value)->Value,
-    allocator: mem.Allocator,
-    prototype: ^Object = nil,
+  p: proc(env:^Object, args:[]Value)->Value,
+  allocator: mem.Allocator,
+  prototype: ^Object = nil,
 ) -> Value {
-
-    return Value{
-        type = .Function,
-        data = {function = make_function(allocator, prototype, nil, p)},
-    }
+  return Value{
+    type = .Function,
+    data = {function = make_function(allocator, prototype, nil, p)},
+  }
 }
 
 // Setzt eine einzelne Methode in einem Objekt (für Prototypen)
@@ -127,20 +126,11 @@ wrap_string :: proc(s: string, allocator: mem.Allocator) -> Value {
     return from_string(copy)
 }
 
-// Konvertiert einen Odin-Int zu einem Int-Value
-wrap_int :: proc(i: i64) -> Value {
-    return from_int(i)
-}
+wrap_bool  :: proc (b: bool) -> Value { return from_bool  (b) } // Konvertiert einen Odin-Bool zu einem Bool-Value
+wrap_float :: proc (f: f64)  -> Value { return from_float (f) } // Konvertiert einen Odin-Float zu einem Float-Value
+wrap_int   :: proc (i: i64)  -> Value { return from_int   (i) } // Konvertiert einen Odin-Int zu einem Int-Value
 
-// Konvertiert einen Odin-Float zu einem Float-Value
-wrap_float :: proc(f: f64) -> Value {
-    return from_float(f)
-}
 
-// Konvertiert einen Odin-Bool zu einem Bool-Value
-wrap_bool :: proc(b: bool) -> Value {
-    return from_bool(b)
-}
 
 // Konvertiert ein Value zu einem String (für Debug/Join)
 value_to_string :: proc(v: Value) -> string {
@@ -165,39 +155,37 @@ value_to_string :: proc(v: Value) -> string {
 // ============================================================
 
 // Prüft, ob zwei Values gleich sind (für primitive Typen)
-values_equal :: proc(a, b: Value) -> bool {
-    if a.type != b.type {
-        return false
-    }
-    switch a.type {
-    case .Nil:  return true
-    case .Bool: return a.data.(bool) == b.data.(bool)
-    case .Int:  return a.data.(i64) == b.data.(i64)
-    case .Float: return a.data.(f64) == b.data.(f64)
-    case .String: return a.data.(string) == b.data.(string)
-    case: return false // Objekte werden nicht verglichen
-    }
+values_equal :: proc (a, b: Value) -> bool {
+  if a.type != b.type { return false }
+    
+  switch a.type {
+    case .Nil    : return true
+    case .Bool   : return a.data.(bool)   == b.data.(bool)
+    case .Int    : return a.data.(i64)    == b.data.(i64)
+    case .Float  : return a.data.(f64)    == b.data.(f64)
+    case .String : return a.data.(string) == b.data.(string)
+    case         : return false // Objekte werden nicht verglichen
+  }
 }
 
 // Vergleich für Sortierung (gibt -1, 0, 1 zurück)
 compare_values :: proc(a, b: Value) -> int {
-    if a.type != b.type {
-        return int(a.type) - int(b.type)
-    }
-    switch a.type {
-    case .Nil:  return 0
-    case .Bool: return int(a.data.(bool)) - int(b.data.(bool))
-    case .Int:  return int(a.data.(i64) - b.data.(i64))
+  if a.type != b.type { return int(a.type) - int(b.type) }
+
+  switch a.type {
+    case .Nil  : return 0
+    case .Bool : return int(a.data.(bool)) - int(b.data.(bool))
+    case .Int  : return int(a.data.(i64) - b.data.(i64))
     case .Float: 
         if a.data.(f64) < b.data.(f64) { return -1 }
-        if a.data.(f64) > b.data.(f64) { return 1 }
+        if a.data.(f64) > b.data.(f64) { return  1 }
         return 0
     case .String:
         if a.data.(string) < b.data.(string) { return -1 }
-        if a.data.(string) > b.data.(string) { return 1 }
+        if a.data.(string) > b.data.(string) { return  1 }
         return 0
     case: return 0
-    }
+  }
 }
 
 // ============================================================
@@ -254,29 +242,23 @@ array_to_strings :: proc(arr: ^Array, allocator: mem.Allocator) -> []string {
 // 7. FEHLERBEHANDLUNG (FÜR KONSISTENTE RETURNS)
 // ============================================================
 
-// Gibt einen TypeError als Nil zurück (mit Log)
-type_error :: proc(expected: string, got: Value_Type, loc: string = "") -> Value {
-    if loc != "" {
-        fmt.eprintf("[%s] TypeError: erwartet %s, bekam %v\n", loc, expected, got)
-    } else {
-        fmt.eprintf("TypeError: erwartet %s, bekam %v\n", expected, got)
-    }
-    return from_nil()
+// Prüft, ob ein Value ein Nil ist (für Fehlererkennung)
+is_error :: proc(v: Value) -> bool {
+  return v.type == .Nil
 }
 
 // Gibt einen Runtime-Fehler als Nil zurück
 runtime_error :: proc(msg: string, loc: string = "") -> Value {
-    if loc != "" {
-        fmt.eprintf("[%s] RuntimeError: %s\n", loc, msg)
-    } else {
-        fmt.eprintf("RuntimeError: %s\n", msg)
-    }
-    return from_nil()
+  if loc != "" { fmt.eprintf("[%s] RuntimeError: %s\n", loc, msg) } 
+  else { fmt.eprintf("RuntimeError: %s\n", msg) }
+  return from_nil()
 }
 
-// Prüft, ob ein Value ein Nil ist (für Fehlererkennung)
-is_error :: proc(v: Value) -> bool {
-    return v.type == .Nil
+// Gibt einen TypeError als Nil zurück (mit Log)
+type_error :: proc(expected: string, got: Value_Type, loc: string = "") -> Value {
+  if loc != "" { fmt.eprintf("[%s] TypeError: erwartet %s, bekam %v\n", loc, expected, got) } 
+  else { fmt.eprintf("TypeError: erwartet %s, bekam %v\n", expected, got) }
+  return from_nil()
 }
 
 // ============================================================
@@ -297,13 +279,11 @@ destroy_object_recursive :: proc(obj: ^Object, allocator: mem.Allocator) {
 }
 
 // Zerstört ein Array und seine Items (nicht-rekursiv für Items)
-destroy_array :: proc(arr: ^Array, allocator: mem.Allocator) {
+destroy_array :: proc (arr: ^Array, allocator: mem.Allocator) {
     delete(arr.items)
     free(arr, allocator)
 }
-
-// Zerstört eine Liste
-destroy_list :: proc(lst: ^List, allocator: mem.Allocator) {
+destroy_list :: proc (lst: ^List, allocator: mem.Allocator) {
     delete(lst.items)
     free(lst, allocator)
 }
