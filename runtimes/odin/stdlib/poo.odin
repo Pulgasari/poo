@@ -11,6 +11,18 @@ import "core:slice"
 // 1. METHODEN-REGISTRIERUNG (DER BOILERPLATE-KILLER)
 // ============================================================
 
+make_method :: proc(
+    p: proc(env:^Object, args:[]Value)->Value,
+    allocator: mem.Allocator,
+    prototype: ^Object = nil,
+) -> Value {
+
+    return Value{
+        type = .Function,
+        data = {function = make_function(allocator, prototype, nil, p)},
+    }
+}
+
 // Setzt eine einzelne Methode in einem Objekt (für Prototypen)
 set_method :: proc(
   obj: ^Object, 
