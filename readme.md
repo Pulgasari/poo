@@ -254,106 +254,6 @@ loop animals as animal helloPet (animal);
 loop animals as animal helloPet (animal);
 ```
 
----
-
-## Data-Types
-
-[`Array`](#array) 
-[`Blob`](#blob) 
-[`Bool`](#bool)
-[`Char`](#char)
-[`Color`](#color)
-[`Date`](#date)
-[`Enum`](#enum)
-[`Generator`](#generator)
-[`List`](#list)
-[`Map`](#map)
-[`Number`](#number)
-[`Queue`](#queue) 
-[`Pattern`](#pattern)
-[`Record`](#record)
-[`RegExp`](#regexp)
-[`Set`](#set)
-[`Stack`](#stack)
-[`String`](#string)
-[`Store`](#store)
-[`Symbol`](#symbol)
-[`Tree`](#tree) 
-[`Tuple`](#tuple) 
-[`Type`](#type)
-
-### Array
-
-
-
-### List
-
-A **List** is a special form of an array with:
-- identical typed values
-
-```c
-obj pets = new List ();
-obj pets = #['bird', 'cat', 'dog', 'fish'];
-obj nums = #[1, 2, 3];
-```
-
-A **List** has all the builtin methods of **Array** *(outer type)* and depending on the type of it's values *(inner type)* one could use all those methods in combination.
-
-```c
-pp pets = #['bird', 'cat', 'dog', 'fish'];
-
-// #['BIRD', 'CAT', 'DOG', 'FISH']
-do pets.map (toUpperCase);
-
-// #['DRIB', 'TAC', 'DOG', 'GOD', 'HSIF']
-do pets.map (toUpperCase, reverse);
-
-// #[HSIF, 'GOD', 'TAC', 'DRIB']
-do pets.map (toUpperCase, reverse).reverse();
-```
-
-
-## Packages
-
-[`audio`](#audio) [`db`](#db) [`fs`](#fs) [`img`](#img) [`io`](#io) [`md`](#md) [`url`](#url) [`video`](#video)
-
-
-
-
-
-
-
-
-
-
-
-
-### Number
-
-```c
-pp num = 60;
-pp dec = 10.5;
-pp abc = 10_000_000; // 10000000
-```
-
-### String
-
-```c
-str name = 'Udo':
-str text = 'Coding sucks.';
-```
-
-### Arrays
-
-...
-
-```c
-pp sth = new Array ();
-pp sth = ['abc', 123, true];
-```
-
-
-
 ### Boundary Control (The Three-Tier Scope Model)
 
 When defining objects, outer scopes are closed off by default. You must explicitly bridge dependencies across object boundaries using one of three keywords:
@@ -394,7 +294,7 @@ prop nerd = {
 do nerd.hurt(5) and print nerd.hp;
 ```
 
-#### `ref`
+#### `cpy`
 
 The `ref` keyword introduces a statement to ... (*dynamic view*).
 
@@ -419,9 +319,93 @@ nerd.print(); // "Fishsticks are disgusting."
 print(fishsticks); // origin is still 'true'
 ```
 
-#### `pnt`
+#### `ref`
 
 The `pnt` keyword introduces a statement to ... (*direct pointer*).
+
+---
+
+## Data-Types
+
+[`Array`](#array) 
+[`Blob`](#blob) 
+[`Bool`](#bool)
+[`Char`](#char)
+[`Color`](#color)
+[`Date`](#date)
+[`Enum`](#enum)
+[`Generator`](#generator)
+[`List`](#list)
+[`Map`](#map)
+[`Number`](#number)
+[`Queue`](#queue) 
+[`Pattern`](#pattern)
+[`Record`](#record)
+[`RegExp`](#regexp)
+[`Set`](#set)
+[`Stack`](#stack)
+[`String`](#string)
+[`Store`](#store)
+[`Symbol`](#symbol)
+[`Tree`](#tree) 
+[`Tuple`](#tuple) 
+[`Type`](#type)
+
+### Array
+
+### List
+
+A **List** is a special form of an array with:
+- identical typed values
+
+```c
+obj pets = new List ();
+obj pets = #['bird', 'cat', 'dog', 'fish'];
+obj nums = #[1, 2, 3];
+```
+
+A **List** has all the builtin methods of **Array** *(outer type)* and depending on the type of it's values *(inner type)* one could use all those methods in combination.
+
+```c
+val pets = #['bird', 'cat', 'dog', 'fish'];
+
+// #['BIRD', 'CAT', 'DOG', 'FISH']
+pets.map (toUpperCase);
+
+// #['DRIB', 'TAC', 'DOG', 'GOD', 'HSIF']
+pets.map (toUpperCase, reverse);
+
+// #[HSIF, 'GOD', 'TAC', 'DRIB']
+pets.map (toUpperCase, reverse).reverse();
+
+// note: these syntaxes would also be possible:
+pets.map (toUpperCase reverse).reverse();
+pets.map (toUpperCase reverse) |> @.reverse();
+pets.map >> toUpperCase reverse |> @.reverse();
+```
+
+### Number
+
+```c
+pp num = 60;
+pp dec = 10.5;
+pp abc = 10_000_000; // 10000000
+```
+
+### String
+
+```c
+str name = 'Udo':
+str text = 'Coding sucks.';
+```
+
+---
+
+## Packages
+
+[`audio`](#audio) [`db`](#db) [`fs`](#fs) [`img`](#img) [`io`](#io) [`md`](#md) [`url`](#url) [`video`](#video)
+
+
 
 
 ### the `new` keyword
@@ -557,51 +541,10 @@ prop processPayload = filePath => {
 - [Typecasting](#typecasting)
 
 
-## Declarations & Memory Management
-
-Variable States
-
-​The keyword `prop` introduces a declaration statement to define a named *value* or *block of code*.
-
-​The `#` prefix defines a ***compile-time constant***. Casing rules are not enforced; the prefix is the sole indicator of immutability.
-
-​The `#=` operator makes it possible to seal a variable on runtime so it becomes immutable. They assign a value and freeze the variable recursively (deep-freeze).
-
-```javascript
-prop #compilerState = "broken"; // compile-time constant
-
-prop cat = 'miau';
-cat += '!!!'; // allowed
-
-cat #= 'wuff'; // assigned and sealed permanently
-cat = 'meow';  // compile-time error: variable is sealed.
-```
 
 
-## Types & Structures
 
-​The `#` symbol acts as the universal indicator for structural rigidity.
 
-```javascript
-prop dynamicList = [1, "garbage", true]; // Standard dynamic array
-prop strictList = #[1, 2, 3];            // Homogeneous strict list (frozen type)
-prop userTuple = #("Udo", 60);           // Strict heterogenous tuple (fixed size/types)
-```
-
-* Lists (#[...]): Elements must share the exact same type. Under the hood, this compiles to contiguous, unboxed memory blocks for cache friendliness.
-* ​Tuples (#(...)): Fixed size and fixed type per index. Values can be updated as long as they respect the declared type at that position.
-* ​Ranges: Defined using ... (inclusive) or ..< (exclusive). Useful for loops, slicing, and pattern matching.
-
-```javascript
-// Inclusive Loop
-do for 1...5 as @i {
-  print("Line @i: This is garbage.");
-}
-
-// Exclusive Slicing
-prop list = ['a', 'b', 'c', 'd'];
-prop slice = list[1..<3]; // ['b', 'c']
-```
 
 
 ### Symmetric Pipelines
@@ -628,44 +571,7 @@ prop contacts = fetchUser(id) ??> parseProfile() ?!> getContacts();
 
 ...
 
-## Typecasting & Context-Aware Return Types
 
-​Explicit typecasting is handled via the `as` and `as?` operators.
-
-### ​Symmetrical Cast Failbacks
-
-* ​In `strict` directory mode, `as` crashes or throws a compiler error on failure.
-* ​In `relaxed` directory mode, `as` falls back to the target type's default value (`0`, `false`, `""`).
-* ​In both modes, `as?` returns `null` on failure, allowing seamless coalescing chains.
-
-```c
-prop rawInput = "not_a_number";
-
-// Explicit cast with falsy fallback
-prop age1 = rawInput as number ?! 123; // Result: 123 (fails to 0, which is falsy, triggers ?!)
-
-// Explicit safe cast with nullish fallback (preserves valid 0 values)
-prop age2 = rawInput as? number ?? 123; // Result: 123 (fails to null, triggers ??)
-```
-
-### Implicit Optimization (Zero-Allocation Casts)
-
-​Object-level `as` casting handlers look like runtime converters, but the compiler optimizes them into direct conditional branches.
-
-```javascript
-prop getErrors = () => {
-  return {
-    prop list = ["syntax error", "compiler crying"];
-    
-    as number = () => list.len();
-    as string = () => list.join(", ");
-  };
-};
-
-// Compiled directly to getErrors(@as = string)
-// Skips object and array allocations entirely.
-prop alert = getErrors() as string;
-```
 
 ```
 first class function
@@ -712,6 +618,96 @@ Operator | Name    | ...
 `-=`     |         |
 `*=`     |         |
 `/=`     |         |
+
+---
+
+## Misc
+
+## Declarations & Memory Management
+
+Variable States
+
+​The keyword `prop` introduces a declaration statement to define a named *value* or *block of code*.
+
+​The `#` prefix defines a ***compile-time constant***. Casing rules are not enforced; the prefix is the sole indicator of immutability.
+
+​The `#=` operator makes it possible to seal a variable on runtime so it becomes immutable. They assign a value and freeze the variable recursively (deep-freeze).
+
+```javascript
+prop #compilerState = "broken"; // compile-time constant
+
+prop cat = 'miau';
+cat += '!!!'; // allowed
+
+cat #= 'wuff'; // assigned and sealed permanently
+cat = 'meow';  // compile-time error: variable is sealed.
+```
+
+## Types & Structures
+
+​The `#` symbol acts as the universal indicator for structural rigidity.
+
+```javascript
+prop dynamicList = [1, "garbage", true]; // Standard dynamic array
+prop strictList = #[1, 2, 3];            // Homogeneous strict list (frozen type)
+prop userTuple = #("Udo", 60);           // Strict heterogenous tuple (fixed size/types)
+```
+
+* Lists (#[...]): Elements must share the exact same type. Under the hood, this compiles to contiguous, unboxed memory blocks for cache friendliness.
+* ​Tuples (#(...)): Fixed size and fixed type per index. Values can be updated as long as they respect the declared type at that position.
+* ​Ranges: Defined using ... (inclusive) or ..< (exclusive). Useful for loops, slicing, and pattern matching.
+
+```javascript
+// Inclusive Loop
+do for 1...5 as @i {
+  print("Line @i: This is garbage.");
+}
+
+// Exclusive Slicing
+prop list = ['a', 'b', 'c', 'd'];
+prop slice = list[1..<3]; // ['b', 'c']
+```
+
+## Typecasting & Context-Aware Return Types
+
+​Explicit typecasting is handled via the `as` and `as?` operators.
+
+### ​Symmetrical Cast Failbacks
+
+* ​In `strict` directory mode, `as` crashes or throws a compiler error on failure.
+* ​In `relaxed` directory mode, `as` falls back to the target type's default value (`0`, `false`, `""`).
+* ​In both modes, `as?` returns `null` on failure, allowing seamless coalescing chains.
+
+```c
+prop rawInput = "not_a_number";
+
+// Explicit cast with falsy fallback
+prop age1 = rawInput as number ?! 123; // Result: 123 (fails to 0, which is falsy, triggers ?!)
+
+// Explicit safe cast with nullish fallback (preserves valid 0 values)
+prop age2 = rawInput as? number ?? 123; // Result: 123 (fails to null, triggers ??)
+```
+
+### Implicit Optimization (Zero-Allocation Casts)
+
+​Object-level `as` casting handlers look like runtime converters, but the compiler optimizes them into direct conditional branches.
+
+```javascript
+prop getErrors = () => {
+  return {
+    prop list = ["syntax error", "compiler crying"];
+    
+    as number = () => list.len();
+    as string = () => list.join(", ");
+  };
+};
+
+// Compiled directly to getErrors(@as = string)
+// Skips object and array allocations entirely.
+prop alert = getErrors() as string;
+```
+
+---
 
 ## Philosophy
 
