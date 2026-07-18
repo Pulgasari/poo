@@ -2,7 +2,7 @@
 
 ## Data-Types
 
-[`Array`](#array) [`Bool`](#bool) [`Color`](#color) [`Date`](#date) [`List`](#list) [`Map`](#map) [`Number`](#number) [`Record`](#record) [`RegExp`](#regexp) [`Set`](#set) [`Stack`](#stack) [`String`](#string) [`Store`](#store) [`Tree`](#tree) [`Tuple`](#tuple)
+[`Array`](#array) [`Blob`](#blob) [`Bool`](#bool) [`Char`](#char) [`Color`](#color) [`Date`](#date) [`Enum`](#enum) [`Generator`](#generator) [`List`](#list) [`Map`](#map) [`Number`](#number) [`Queue`](#queue) [`Pattern`](#pattern) [`Record`](#record) [`RegExp`](#regexp) [`Set`](#set) [`Stack`](#stack) [`String`](#string) [`Store`](#store) [`Symbol`](#symbol) [`Tree`](#tree) [`Tuple`](#tuple) [`Type`](#type)
 
 ### Array
 
