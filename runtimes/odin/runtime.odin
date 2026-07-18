@@ -159,3 +159,70 @@ init_runtime :: proc(allocator: mem.Allocator) -> ^Object {
 
     return root
 }
+
+
+
+
+
+
+// runtimes/odin/runtime.odin
+package runtime
+
+import "core:mem"
+
+init_runtime :: proc(allocator: mem.Allocator) -> ^Object {
+    root := create_base_object(allocator)
+
+    // --- Prototypen erstellen ---
+    string_proto := make_object(allocator, root)
+    array_proto := make_object(allocator, root)
+    file_proto := create_file_prototype(allocator, root)
+
+    // --- Methoden registrieren ---
+    string_methods := get_string_methods(allocator)
+    for key, val in string_methods {
+        string_proto.properties[key] = val
+    }
+
+    array_methods := get_array_methods(allocator)
+    for key, val in array_methods {
+        array_proto.properties[key] = val
+    }
+
+    fs_methods := get_fs_methods(allocator)
+    for key, val in fs_methods {
+        root.properties[key] = val
+    }
+
+    io_methods := get_io_methods(allocator)
+    for key, val in io_methods {
+        root.properties[key] = val
+    }
+
+    // --- Globale Funktionen ---
+    globals := get_global_functions(allocator)
+    for key, val in globals {
+        root.properties[key] = val
+    }
+
+    // --- Prototypen im Root speichern (für Autoboxing) ---
+    root.properties["_string_prototype"] = Value{type = .Object, data = {object = string_proto}}
+    root.properties["_array_prototype"] = Value{type = .Object, data = {object = array_proto}}
+    root.properties["_file_prototype"] = Value{type = .Object, data = {object = file_proto}}
+
+    // --- Array-Konstruktor ---
+    root.properties["Array"] = Value{
+        type = .Function,
+        data = {function = make_function(allocator, nil, nil, 
+            proc(env: ^Object, args: []Value) -> Value {
+                arr := make_array(env.allocator, env)
+                for arg in args {
+                    append(&arr.items, arg)
+                }
+                return Value{type = .Array, data = {array = arr}}
+            }
+        )}
+    }
+
+    return root
+}
