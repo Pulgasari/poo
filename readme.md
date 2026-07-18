@@ -120,6 +120,22 @@ val num  = 123; // mutable
 val str #= "moin!"; // immutable
 ```
 
+​The `#` prefix on a name of a variable (*identifier*) defines a ***compile-time constant***. Casing rules are not enforced; the prefix is the sole indicator of immutability.
+
+​The `#=` operator makes it possible to seal a variable on runtime so it becomes immutable. They assign a value and freeze the variable recursively (deep-freeze).
+
+This operator could also be used to make an value immutable at any later point.
+
+```javascript
+val #compilerState = "broken"; // compile-time constant
+
+val cat = 'miau';
+cat += '!!!'; // allowed
+
+cat #= 'wuff'; // assigned and sealed permanently
+cat  = 'meow';  // compile-time error: variable is sealed.
+```
+
 ### Function Declaration
 
 ```java
@@ -250,8 +266,8 @@ loop (animals as @animal) {
 };
 
 // oneliner
-loop animals as animal helloPet (animal);
-loop animals as animal helloPet (animal);
+loop animals as animal do helloPet (animal);
+loop animals as animal do helloPet animal;
 ```
 
 ### Boundary Control (The Three-Tier Scope Model)
@@ -282,12 +298,12 @@ nerd.printMood();
 ```
 
 ```javascript
-prop hurtable #= {
-  prop hp = 100;
-  prop hurt = (n) => hp -= n ?? 1;
+obj hurtable #= {
+  val hp = 100;
+  val hurt = (n) => hp -= n ?? 1;
 };
 
-prop nerd = {
+obj nerd = {
   use hurtable;
 };
 
@@ -296,16 +312,16 @@ do nerd.hurt(5) and print nerd.hp;
 
 #### `cpy`
 
-The `ref` keyword introduces a statement to ... (*dynamic view*).
+The `cpy` keyword introduces a statement to ... (*dynamic view*).
 
 The name will be prefixed with an `@`-symbol.
 
 Assigning a new value to does not change the origin's value.
 
 ```javascript
-prop fishsticks = 'yummy'; 
+val fishsticks = 'yummy';
 
-prop nerd = {
+val nerd = {
   ref fishsticks;
   prop doYouLikeFishsticks = (b) => @fishsticks = b ? 'yummy' : 'disgusting';
   prop print = () => print("Fishsticks are $@fishsticks.");
@@ -321,7 +337,7 @@ print(fishsticks); // origin is still 'true'
 
 #### `ref`
 
-The `pnt` keyword introduces a statement to ... (*direct pointer*).
+The `ref` keyword introduces a statement to ... (*direct pointer*).
 
 ---
 
@@ -353,15 +369,17 @@ The `pnt` keyword introduces a statement to ... (*direct pointer*).
 
 ### Array
 
+### Blob
+
 ### List
 
 A **List** is a special form of an array with:
 - identical typed values
 
 ```c
-obj pets = new List ();
-obj pets = #['bird', 'cat', 'dog', 'fish'];
-obj nums = #[1, 2, 3];
+val pets = new List;
+val pets = #['bird', 'cat', 'dog', 'fish'];
+val nums = #[1, 2, 3];
 ```
 
 A **List** has all the builtin methods of **Array** *(outer type)* and depending on the type of it's values *(inner type)* one could use all those methods in combination.
@@ -387,16 +405,16 @@ pets.map >> toUpperCase reverse |> @.reverse();
 ### Number
 
 ```c
-pp num = 60;
-pp dec = 10.5;
-pp abc = 10_000_000; // 10000000
+val num = 60;
+val dec = 10.5;
+val abc = 10_000_000; // 10000000
 ```
 
 ### String
 
 ```c
-str name = 'Udo':
-str text = 'Coding sucks.';
+val name = "Udo":
+val text = "Coding sucks.";
 ```
 
 ---
@@ -520,25 +538,8 @@ prop player = {
 };
 ```
 
-###
 
-```c
-prop processPayload = filePath => {
-  @text = fs::read(filePath) ?? return "file missing";
-  @data = json::parse(text)  ?? return "invalid json structure";
 
-  if (@data ~= object{ id: number, targetUrl: string }) {
-    @safeUrl = @data.targetUrl |> url::decode |> html::escape;
-    print "Processing safe target: $@safeUrl";
-  }
-  
-  or return "payload fields are garbage";
-};
-
-```
-
-- [Context-Aware Return Types](#context-aware-return-types)
-- [Typecasting](#typecasting)
 
 
 
@@ -629,28 +630,16 @@ Variable States
 
 ​The keyword `prop` introduces a declaration statement to define a named *value* or *block of code*.
 
-​The `#` prefix defines a ***compile-time constant***. Casing rules are not enforced; the prefix is the sole indicator of immutability.
 
-​The `#=` operator makes it possible to seal a variable on runtime so it becomes immutable. They assign a value and freeze the variable recursively (deep-freeze).
-
-```javascript
-prop #compilerState = "broken"; // compile-time constant
-
-prop cat = 'miau';
-cat += '!!!'; // allowed
-
-cat #= 'wuff'; // assigned and sealed permanently
-cat = 'meow';  // compile-time error: variable is sealed.
-```
 
 ## Types & Structures
 
 ​The `#` symbol acts as the universal indicator for structural rigidity.
 
 ```javascript
-prop dynamicList = [1, "garbage", true]; // Standard dynamic array
-prop strictList = #[1, 2, 3];            // Homogeneous strict list (frozen type)
-prop userTuple = #("Udo", 60);           // Strict heterogenous tuple (fixed size/types)
+val dynamicList = [1, "garbage", true]; // Standard dynamic array
+val strictList = #[1, 2, 3];            // Homogeneous strict list (frozen type)
+val userTuple = #("Udo", 60);           // Strict heterogenous tuple (fixed size/types)
 ```
 
 * Lists (#[...]): Elements must share the exact same type. Under the hood, this compiles to contiguous, unboxed memory blocks for cache friendliness.
@@ -659,13 +648,13 @@ prop userTuple = #("Udo", 60);           // Strict heterogenous tuple (fixed siz
 
 ```javascript
 // Inclusive Loop
-do for 1...5 as @i {
+loop 1...5 as @i {
   print("Line @i: This is garbage.");
 }
 
 // Exclusive Slicing
-prop list = ['a', 'b', 'c', 'd'];
-prop slice = list[1..<3]; // ['b', 'c']
+val list = ['a', 'b', 'c', 'd'];
+val slice = list[1..<3]; // ['b', 'c']
 ```
 
 ## Typecasting & Context-Aware Return Types
@@ -682,10 +671,10 @@ prop slice = list[1..<3]; // ['b', 'c']
 prop rawInput = "not_a_number";
 
 // Explicit cast with falsy fallback
-prop age1 = rawInput as number ?! 123; // Result: 123 (fails to 0, which is falsy, triggers ?!)
+val age1 = rawInput as number ?! 123; // Result: 123 (fails to 0, which is falsy, triggers ?!)
 
 // Explicit safe cast with nullish fallback (preserves valid 0 values)
-prop age2 = rawInput as? number ?? 123; // Result: 123 (fails to null, triggers ??)
+val age2 = rawInput as? number ?? 123; // Result: 123 (fails to null, triggers ??)
 ```
 
 ### Implicit Optimization (Zero-Allocation Casts)
@@ -693,7 +682,7 @@ prop age2 = rawInput as? number ?? 123; // Result: 123 (fails to null, triggers 
 ​Object-level `as` casting handlers look like runtime converters, but the compiler optimizes them into direct conditional branches.
 
 ```javascript
-prop getErrors = () => {
+fn getErrors = () => {
   return {
     prop list = ["syntax error", "compiler crying"];
     
@@ -727,3 +716,22 @@ prop alert = getErrors() as string;
 
 > [!CAUTION]
 > Advises about risks or negative outcomes of certain actions.
+
+
+## Examples
+
+###
+
+```c
+fn processPayload = filePath => {
+  val text = fs::read(filePath) or return "file missing";
+  val data = json::parse(text)  or return "invalid json structure";
+
+  if (data ~= obj{ id: Number, targetUrl: String }) {
+    safeUrl = data.targetUrl >> url::decode >> html::escape;
+    print "Processing safe target: $safeUrl";
+  }
+  or return "payload fields are garbage";
+};
+
+```
