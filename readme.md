@@ -62,22 +62,6 @@ fn whileLoop = cond => decorateCombinator (
 
 ## Operators & Keywords
 
-### ​Expression Operators vs. Statement Operators
-
-​Logical operations on the expression level use traditional **symbolic operators**.
-
-Flow control and boundary-breaking logic use **keyword operators**.
-
-```javascript
-// Valid expression-level logical evaluation
-if (isBroken || isCrying) { ... };
-
-// Invalid: logical word operators cannot live in expressions
-if (isBroken or isCrying) { ... }; // Compile-time error
-```
-
----
-
 ### Operators
 
 #### Assignment
@@ -300,32 +284,7 @@ loop animals as animal helloPet (animal);
 
 ### Array
 
-#### Static Methods
 
-#### Instance Methods
-
-### Color
-
-### String
-
-#### Methods
-
-Name | ...
------|----
-[`toCamelCase`](#toCamelCase)       | convert a string to camel case
-[`toConstantCase`](#toConstantCase) | convert a string to constant case
-[`toKebabCase`](#toKebabCase)       | convert a string to kebab case
-[`toPascalCase`](#toPascalCase)     | convert a string to pascal case
-[`toSnakeCase`](#toSnakeCase)       | convert a string to snake case
-[`toTitleCase`](#toTitleCase)       | convert a string to title case
-
-##### `toCamelCase`
-
-##### `toKebabCase`
-
-##### `toPascalCase`
-
-##### `toTitleCase`
 
 ### List
 
