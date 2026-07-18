@@ -6,22 +6,22 @@ import "core:fmt"
 import "core:strings"
 import "core:slice"
 
-//
 
-// poo.odin – Erweiterung
+// ============================================================
+// 9. METHODEN-EINZELZUWEISUNG (FÜR PROTOTYPEN)
+// ============================================================
 
-// Setzt eine Methode direkt in die Properties eines Objekts
-set_method :: proc (obj: ^Object, name: string, proc_ptr: proc(env: ^Object, args: []Value) -> Value, allocator: mem.Allocator) {
+// Setzt eine einzelne Methode in einem Objekt (für Prototypen)
+set_method :: proc(obj: ^Object, name: string, proc_ptr: proc(env: ^Object, args: []Value) -> Value, allocator: mem.Allocator) {
     obj.properties[name] = Value{
         type = .Function,
         data = {function = make_function(allocator, nil, nil, proc_ptr)}
     }
 }
 
-// poo.odin – erweiterte Version
-set_method :: proc(obj: ^Object, name: string, proc_ptr: proc(env: ^Object, args: []Value) -> Value) {
-    // Allocator aus dem Objekt holen (oder über Kontext)
-    allocator := context.allocator // oder obj.allocator, falls vorhanden
+// Wie oben, aber mit Allocator aus dem Kontext
+set_method_ctx :: proc(obj: ^Object, name: string, proc_ptr: proc(env: ^Object, args: []Value) -> Value) {
+    allocator := context.allocator
     obj.properties[name] = Value{
         type = .Function,
         data = {function = make_function(allocator, nil, nil, proc_ptr)}
