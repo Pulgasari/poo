@@ -45,9 +45,9 @@ fs_open :: proc(env: ^Object, args: []Value) -> Value {
     }
 
     file_handle := new(FileHandle, env.allocator)
-    file_handle.handle = handle
-    file_handle.path = strings.clone(path, env.allocator)
-    file_handle.mode = mode
+    file_handle.handle    = handle
+    file_handle.path      = strings.clone(path, env.allocator)
+    file_handle.mode      = mode
     file_handle.allocator = env.allocator
 
     file_obj := make_object(env.allocator, env)
@@ -271,20 +271,26 @@ get_fs_methods :: proc(allocator: mem.Allocator) -> map[string]Value {
 }
 
 // ---------- FILE-PROTOTYP ----------
-create_file_prototype :: proc(allocator: mem.Allocator, parent: ^Object) -> ^Object {
-    proto := make_object(allocator, parent)
-    // Methoden für File-Objekte (werden im Prototyp gehalten)
-    proto.properties["read"] = Value{
-        type = .Function,
-        data = {function = make_function(allocator, nil, nil, fs_read)}
-    }
-    proto.properties["write"] = Value{
-        type = .Function,
-        data = {function = make_function(allocator, nil, nil, fs_write)}
-    }
-    proto.properties["close"] = Value{
-        type = .Function,
-        data = {function = make_function(allocator, nil, nil, fs_close)}
-    }
-    return proto
+create_file_prototype :: proc (allocator: mem.Allocator, parent: ^Object) -> ^Object {
+  proto := make_object(allocator, parent)
+    
+  set_method (proto, "close", fs_close, allocator)
+  set_method (proto, "read",  fs_read,  allocator)
+  set_method (proto, "write", fs_write, allocator)
+
+  return proto
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
