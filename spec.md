@@ -60,8 +60,8 @@ Name | ...
 
 [`fn`](#fn)
 [`pkg`](#pkg)
+[`obj`](#obj)
 [`use`](#use)
-[`type`](#type)
 [`val`](#val)
 
 ## Operators
