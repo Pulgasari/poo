@@ -6,6 +6,18 @@ import "core:fmt"
 import "core:strings"
 import "core:slice"
 
+//
+
+// poo.odin – Erweiterung
+
+// Setzt eine Methode direkt in die Properties eines Objekts
+set_method :: proc (obj: ^Object, name: string, proc_ptr: proc(env: ^Object, args: []Value) -> Value, allocator: mem.Allocator) {
+    obj.properties[name] = Value{
+        type = .Function,
+        data = {function = make_function(allocator, nil, nil, proc_ptr)}
+    }
+}
+
 // ============================================================
 // 1. METHODEN-REGISTRIERUNG (DER BOILERPLATE-KILLER)
 // ============================================================
