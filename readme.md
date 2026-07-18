@@ -171,17 +171,7 @@ prop slice = list[1..<3]; // ['b', 'c']
 
 ​This language utilizes symmetric, non-overlapping operators to separate expression logic from control flow.
 
-### ​Expression Operators vs. Statement Operators
 
-​Logical operations on the expression level use traditional **symbolic operators**. Flow control and boundary-breaking logic use **keyword operators**.
-
-```javascript
-// Valid expression-level logical evaluation
-if (isBroken || isCrying) { ... };
-
-// Invalid: logical word operators cannot live in expressions
-if (isBroken or isCrying) { ... }; // Compile-time error
-```
 
 ### Symmetric Pipelines
 
