@@ -703,3 +703,11 @@ prop processPayload = filePath => {
 
 ```
 
+```
+first class function
+higher order function
+pattern matching
+```
+
+
+
