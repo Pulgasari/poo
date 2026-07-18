@@ -53,11 +53,103 @@ fn whileLoop = cond => decorateCombinator (
 );
 ```
 
+---
+
+## Declarations
+
+### Declare a Value
+
+```go
+val num  = 123; // mutable
+val str #= "moin!"; // immutable
+```
+
+### Declare a Function
+
+```java
+// functions with no arguments
+fn doSomething = () => print "moin!";
+fn doSomething      => print "moin"!;
+
+// with arguments
+fn sum = (a, b) => print (a * b);
+```
+
+Call a function
+
+```c#
+// no arguments = enforced parens
+callSth ();
+
+// exactly 1 argument = optional parens
+callSth ("i hate compilers");
+callSth "i hate compilers";
+
+// multiple arguments
+callSth (100, "moin!"); // positional call
+callSth (100 "moin!"); // positional call = optional commas
+callSth (b: "moin!", a: 100); // lexical call ("named arguments")
+```
+
+### Declare an Object
+
+The `obj` keyword is used to declare a **new type of object**.
+
+```js
+obj Cat = {
+  val color  = "black";
+  val mood  #= "grumpy"; // grumpy forever >.<
+
+  fn makeNoise = () => print "meow!";
+};
+```
+
+For declaration of *key-value-pairs* see the [Data-Types](#data-types) section.
+
+
+// 
+```
+
+
+---
+
+## Control Flow
+
+---
+
+## Keywords
+
+---
+
+## Operators
+
+---
+
 ## Data-Types
 
 [`Array`](#array) 
 [`Blob`](#blob) 
-[`Bool`](#bool) [`Char`](#char) [`Color`](#color) [`Date`](#date) [`Enum`](#enum) [`Generator`](#generator) [`List`](#list) [`Map`](#map) [`Number`](#number) [`Queue`](#queue) [`Pattern`](#pattern) [`Record`](#record) [`RegExp`](#regexp) [`Set`](#set) [`Stack`](#stack) [`String`](#string) [`Store`](#store) [`Symbol`](#symbol) [`Tree`](#tree) [`Tuple`](#tuple) [`Type`](#type)
+[`Bool`](#bool)
+[`Char`](#char)
+[`Color`](#color)
+[`Date`](#date)
+[`Enum`](#enum)
+[`Generator`](#generator)
+[`List`](#list)
+[`Map`](#map)
+[`Number`](#number)
+[`Queue`](#queue) 
+[`Pattern`](#pattern)
+[`Record`](#record)
+[`RegExp`](#regexp)
+[`Set`](#set)
+[`Stack`](#stack)
+[`String`](#string)
+[`Store`](#store)
+[`Symbol`](#symbol)
+[`Tree`](#tree) 
+[`Tuple`](#tuple) 
+[`Type`](#type)
 
 ### Array
 
@@ -73,12 +165,12 @@ fn whileLoop = cond => decorateCombinator (
 
 Name | ...
 -----|----
-[`toCamelCase`](#toCamelCase)       | 
-[`toConstantCase`](#toConstantCase) | 
-[`toKebabCase`](#toKebabCase)       | 
-[`toPascalCase`](#toPascalCase)     |
-[`toSnakeCase`](#toSnakeCase)       | 
-[`toTitleCase`](#toTitleCase)       | 
+[`toCamelCase`](#toCamelCase)       | convert a string to camel case
+[`toConstantCase`](#toConstantCase) | convert a string to constant case
+[`toKebabCase`](#toKebabCase)       | convert a string to kebab case
+[`toPascalCase`](#toPascalCase)     | convert a string to pascal case
+[`toSnakeCase`](#toSnakeCase)       | convert a string to snake case
+[`toTitleCase`](#toTitleCase)       | convert a string to title case
 
 ##### `toCamelCase`
 
