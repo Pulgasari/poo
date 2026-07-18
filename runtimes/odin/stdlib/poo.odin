@@ -8,11 +8,17 @@ import "core:slice"
 
 
 // ============================================================
-// 9. METHODEN-EINZELZUWEISUNG (FÜR PROTOTYPEN)
+// 1. METHODEN-REGISTRIERUNG (DER BOILERPLATE-KILLER)
 // ============================================================
 
 // Setzt eine einzelne Methode in einem Objekt (für Prototypen)
-set_method :: proc(obj: ^Object, name: string, proc_ptr: proc(env: ^Object, args: []Value) -> Value, allocator: mem.Allocator) {
+set_method :: proc(
+  obj: ^Object, 
+  name: string, 
+  proc_ptr: proc(
+    env: ^Object, 
+    args: []Value
+  ) -> Value, allocator: mem.Allocator) {
     obj.properties[name] = Value{
         type = .Function,
         data = {function = make_function(allocator, nil, nil, proc_ptr)}
@@ -21,17 +27,9 @@ set_method :: proc(obj: ^Object, name: string, proc_ptr: proc(env: ^Object, args
 
 // Wie oben, aber mit Allocator aus dem Kontext
 set_method_ctx :: proc(obj: ^Object, name: string, proc_ptr: proc(env: ^Object, args: []Value) -> Value) {
-    allocator := context.allocator
-    obj.properties[name] = Value{
-        type = .Function,
-        data = {function = make_function(allocator, nil, nil, proc_ptr)}
-    }
+  allocator := context.allocator
+  set_method (obj, name, proc_ptr, allocator);
 }
-
-
-// ============================================================
-// 1. METHODEN-REGISTRIERUNG (DER BOILERPLATE-KILLER)
-// ============================================================
 
 Method_Def :: struct {
     name: string,
@@ -50,10 +48,10 @@ register_methods :: proc(methods: map[string]Value, defs: []Method_Def, allocato
 
 // Wie oben, aber mit einem zusätzlichen Prototyp für die Function-Objekte
 register_methods_with_prototype :: proc(
-    methods: map[string]Value, 
-    defs: []Method_Def, 
-    prototype: ^Object,
-    allocator: mem.Allocator,
+    methods   : map[string]Value, 
+    defs      : []Method_Def, 
+    prototype : ^Object,
+    allocator : mem.Allocator,
 ) {
     for def in defs {
         methods[def.name] = Value{
@@ -67,68 +65,44 @@ register_methods_with_prototype :: proc(
 // 2. VALUE-HELFER (TYPSICHERER ZUGRIFF)
 // ============================================================
 
-// Extrahiert einen String aus einem Value (mit Fehlerprüfung)
-unwrap_string :: proc(v: Value) -> (string, bool) {
-    if v.type != .String {
-        return "", false
-    }
-    return v.data.(string), true
+unwrap_string :: proc (v: Value) -> (string, bool) {
+  if v.type != .String { return "", false }
+  return v.data.(string), true
 }
 
-// Extrahiert ein Array aus einem Value
-unwrap_array :: proc(v: Value) -> (^Array, bool) {
-    if v.type != .Array {
-        return nil, false
-    }
-    return v.data.(^Array), true
+unwrap_array :: proc (v: Value) -> (^Array, bool) {
+  if v.type != .Array { return nil, false }
+  return v.data.(^Array), true
 }
 
-// Extrahiert eine Liste aus einem Value
-unwrap_list :: proc(v: Value) -> (^List, bool) {
-    if v.type != .List {
-        return nil, false
-    }
-    return v.data.(^List), true
+unwrap_list :: proc (v: Value) -> (^List, bool) {
+  if v.type != .List { return nil, false }
+  return v.data.(^List), true
 }
 
-// Extrahiert ein Object aus einem Value
-unwrap_object :: proc(v: Value) -> (^Object, bool) {
-    if v.type != .Object {
-        return nil, false
-    }
-    return v.data.(^Object), true
+unwrap_object :: proc (v: Value) -> (^Object, bool) {
+  if v.type != .Object { return nil, false }
+  return v.data.(^Object), true
 }
 
-// Extrahiert eine Function aus einem Value
-unwrap_function :: proc(v: Value) -> (^Function, bool) {
-    if v.type != .Function {
-        return nil, false
-    }
-    return v.data.(^Function), true
+unwrap_function :: proc (v: Value) -> (^Function, bool) {
+  if v.type != .Function { return nil, false }
+  return v.data.(^Function), true
 }
 
-// Extrahiert einen Int aus einem Value
-unwrap_int :: proc(v: Value) -> (i64, bool) {
-    if v.type != .Int {
-        return 0, false
-    }
-    return v.data.(i64), true
+unwrap_int :: proc (v: Value) -> (i64, bool) {
+  if v.type != .Int { return 0, false }
+  return v.data.(i64), true
 }
 
-// Extrahiert einen Float aus einem Value
-unwrap_float :: proc(v: Value) -> (f64, bool) {
-    if v.type != .Float {
-        return 0.0, false
-    }
-    return v.data.(f64), true
+unwrap_float :: proc (v: Value) -> (f64, bool) {
+  if v.type != .Float { return 0.0, false }
+  return v.data.(f64), true
 }
 
-// Extrahiert einen Bool aus einem Value
-unwrap_bool :: proc(v: Value) -> (bool, bool) {
-    if v.type != .Bool {
-        return false, false
-    }
-    return v.data.(bool), true
+unwrap_bool :: proc (v: Value) -> (bool, bool) {
+  if v.type != .Bool { return false, false }
+  return v.data.(bool), true
 }
 
 // ============================================================
