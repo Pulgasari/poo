@@ -18,6 +18,17 @@ set_method :: proc (obj: ^Object, name: string, proc_ptr: proc(env: ^Object, arg
     }
 }
 
+// poo.odin – erweiterte Version
+set_method :: proc(obj: ^Object, name: string, proc_ptr: proc(env: ^Object, args: []Value) -> Value) {
+    // Allocator aus dem Objekt holen (oder über Kontext)
+    allocator := context.allocator // oder obj.allocator, falls vorhanden
+    obj.properties[name] = Value{
+        type = .Function,
+        data = {function = make_function(allocator, nil, nil, proc_ptr)}
+    }
+}
+
+
 // ============================================================
 // 1. METHODEN-REGISTRIERUNG (DER BOILERPLATE-KILLER)
 // ============================================================
