@@ -330,3 +330,114 @@ Name | ...
 
 [`audio`](#audio) [`db`](#db) [`fs`](#fs) [`img`](#img) [`io`](#io) [`md`](#md) [`url`](#url) [`video`](#video)
 
+
+
+
+
+
+
+
+
+#### `loop`
+
+```scala
+def animals  = ['bird', 'cat', 'dog' ];
+def helloPet = (pet) => print "I love my $pet.";
+
+for (animals as @animal) {
+  helloPet @animal;
+};
+
+// oneliner
+do for animals as animal helloPet(animal);
+```
+
+
+### Number
+
+```c
+pp num = 60;
+pp dec = 10.5;
+pp abc = 10_000_000; // 10000000
+```
+
+### String
+
+```c
+str name = 'Udo':
+str text = 'Coding sucks.';
+```
+
+### Arrays
+
+...
+
+```c
+pp sth = new Array ();
+pp sth = ['abc', 123, true];
+```
+
+### List
+
+A **List** is a special form of an array with:
+- identical typed values
+
+```c
+obj pets = new List ();
+obj pets = #['bird', 'cat', 'dog', 'fish'];
+obj nums = #[1, 2, 3];
+```
+
+A **List** has all the builtin methods of **Array** *(outer type)* and depending on the type of it's values *(inner type)* one could use all those methods in combination.
+
+```c
+pp pets = #['bird', 'cat', 'dog', 'fish'];
+
+// #['BIRD', 'CAT', 'DOG', 'FISH']
+do pets.map (toUpperCase);
+
+// #['DRIB', 'TAC', 'DOG', 'GOD', 'HSIF']
+do pets.map (toUpperCase, reverse);
+
+// #[HSIF, 'GOD', 'TAC', 'DRIB']
+do pets.map (toUpperCase, reverse).reverse();
+```
+
+## Operators
+
+#### Math / Calculation
+
+Operator | Name      | ...
+---------|-----------|----
+`+`      | Add       |
+`-`      | Substract |
+`*`      | Multiply  |
+`/`      | Divide    |
+
+####
+
+Operator | Name    | ...
+---------|---------|----
+`??`     | Nullish |
+`\|>`    | Pipe    |
+`?>`     |         | 
+
+#### Comparison
+
+Operator | Name    | ...
+---------|---------|----
+`\|\|`   | Or      |
+`&&`     | And     |
+`~=`     | Pattern | Pattern Matching
+
+#### Assignment
+
+Operator | Name    | ...
+---------|---------|----
+`=`      |         |
+`#=`     | Seal    | seal an value or object
+`+=`     |         |
+`-=`     |         |
+`*=`     |         |
+`/=`     |         |
+
