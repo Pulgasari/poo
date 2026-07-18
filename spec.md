@@ -57,6 +57,8 @@ fn whileLoop = cond => decorateCombinator (
 
 ## Declarations
 
+Declaration Statements are introduced by the keywords: `val` `fn` `obj`
+
 ### Declare a Value
 
 ```go
@@ -73,6 +75,8 @@ fn doSomething      => print "moin"!;
 
 // with arguments
 fn sum = (a, b) => print (a * b);
+fn sum =  a, b  => print (a * b); // parens are optional
+fn sum =  a  b  => print (a * b); // commas are optional
 ```
 
 Call a function
@@ -105,11 +109,6 @@ obj Cat = {
 ```
 
 For declaration of *key-value-pairs* see the [Data-Types](#data-types) section.
-
-
-// 
-```
-
 
 ---
 
