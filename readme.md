@@ -308,6 +308,7 @@ obj nerd = {
 };
 
 do nerd.hurt(5) and print nerd.hp;
+do hurt (5) on nerd and print hp of nerd;
 ```
 
 #### `cpy`
