@@ -24,10 +24,10 @@ const parse = new Proxy (parseBase, {
 
 // ::: Primitives
 
-prop call    = (fn)      => decorateCombinator((p) => fn(p));
-prop check   = (pattern) => decorateCombinator((p) => p.check(pattern) ? p.peek() : null);
-prop consume = (value)   => decorateCombinator((p) => p.consume(value));
-prop match   = (pattern) => decorateCombinator((p) => p.match(pattern));
+fn call    = fn      => decorateCombinator p;
+fn check   = pattern => decorateCombinator p => p.check pattern  ? p.peek() : null;
+fn consume = value   => decorateCombinator p => p.consume value);
+fn match   = pattern => decorateCombinator p => p.match pattern);
 
 // ::: Flow
 
