@@ -14,7 +14,7 @@
 
 ### Keywords
 
-[`break`](#break) [`kill`](#kill) [`loop`](#loop) [`new`](#new) [`pkg`](#pkg) [`return`](#return)
+[`and`](#and) [`as`](#as) [`break`](#break) [`catch`](#catch) [`continue`](#continue) [`fn`](#fn) [`if`](#if) [`kill`](#kill) [`loop`](#loop) [`new`](#new) [`or`](#or) [`pkg`](#pkg) [`return`](#return) [`switch`](#switch) [`use`](#use)
 
 ### Operators
 
