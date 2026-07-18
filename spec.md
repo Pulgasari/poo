@@ -1,8 +1,57 @@
 # poo
 
-[Data-Types](#data-types)
-[Keywords](#keywords)
-[Operators](#operators)
+Coding sucks.
+
+![Logo](./logo.jpg)
+
+## Table of Contents
+
+- [Let's code! (Introduction)](#lets-code)
+- [Declarations](#declarations)
+- [Control Flow](#control-flow)
+  - [Conditional](#cond)
+  - [Switch](#switch)
+  - [Loops](#loops)
+- [Keywords](#keywords)
+- [Operators](#operators)
+- [Types](#types)
+  - [Data-Types](#data-types)
+  - [Context-Aware Return Types](#context-aware-return-types)
+  - [Typecasting](#typecasting)
+- [Philosophy](#philosophy)
+
+---
+
+## Let's code!
+
+A lot of people do like **JavaScript** ...
+
+```javascript
+// javascript original
+const whileLoop = (cond) => decorateCombinator (p => {
+  const results = [];
+  if (typeof p === 'function' && !cond.many) {
+    while (cond(p)) results.push(p.next());
+    return results;
+  }
+  while (true) {
+    const result = runWithBacktrack(p, cond);
+    if (result === null) break;
+    results.push(result);
+  }
+  return results;
+});
+```
+
+... but some people do like **poo**. ^-^
+
+```php
+fn whileLoop = cond => decorateCombinator (
+  p => #[] |> (p ~= fn && !cond.many)
+    ? loop (cond p) do @ += p.next()
+    : loop          do @ += runWithBacktrack(p, cond) or break
+);
+```
 
 ## Data-Types
 
