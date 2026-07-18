@@ -1,5 +1,9 @@
 # poo
 
+[Data-Types](#data-types)
+[Keywords](#keywords)
+[Operators](#operators)
+
 ## Data-Types
 
 [`Array`](#array) 
@@ -37,12 +41,12 @@ Name | ...
 
 ## Keywords
 
-### Expression Level
+#### Expression Level
 
 [`as`](#as)
 [`new`](#new)
 
-### Statement Level
+#### Statement Level
 
 [`and`](#and) 
 [`break`](#break)
@@ -59,8 +63,8 @@ Name | ...
 #### Declaration Statement Introducers
 
 [`fn`](#fn)
-[`pkg`](#pkg)
 [`obj`](#obj)
+[`pkg`](#pkg)
 [`use`](#use)
 [`val`](#val)
 
