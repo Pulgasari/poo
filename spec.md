@@ -55,6 +55,75 @@ fn whileLoop = cond => decorateCombinator (
 
 ---
 
+## Operators
+
+### ​Expression Operators vs. Statement Operators
+
+​
+
+
+
+```javascript
+// Valid expression-level logical evaluation
+if (isBroken || isCrying) { ... };
+
+// Invalid: logical word operators cannot live in expressions
+if (isBroken or isCrying) { ... }; // Compile-time error
+```
+
+---
+
+## Operators
+
+Logical operations on the expression level use traditional **symbolic operators**. 
+
+#### Assignment
+
+[`=`](#) [`=#`](#) [`+=`](#) [`-=`](#) [`*=`](#)
+
+#### Comparison
+
+[`~=`](#) [`==`](#) [`===`](#) [`!=`](#) [`!==`](#) [`<`](#) [`>`](#) [`>=`](#) [`=<`](#) [`||`](#) [`&&`](#)
+
+#### Pipe
+
+[`|>`](#) [`!>`](#) [`?!>`](#) [`??>`](#)
+
+### Keywords
+
+Flow control and boundary-breaking logic use **keyword operators**.
+
+#### Expression Level
+
+[`as`](#as)
+[`new`](#new)
+
+#### Statement Level
+
+[`and`](#and) 
+[`break`](#break)
+[`catch`](#catch)
+[`continue`](#continue)
+[`do`](#do)
+[`if`](#if) 
+[`kill`](#kill) 
+[`loop`](#loop) 
+[`or`](#or) 
+[`return`](#return) 
+[`switch`](#switch) 
+
+#### Declaration Statement Introducers
+
+[`cpy`](#cpy)
+[`fn`](#fn)
+[`obj`](#obj)
+[`pkg`](#pkg)
+[`ref`](#ref)
+[`use`](#use)
+[`val`](#val)
+
+---
+
 ## Declarations
 
 Declaration Statements are introduced by the keywords: `val` `fn` `obj`
@@ -79,7 +148,7 @@ fn sum =  a, b  => print (a * b); // parens are optional
 fn sum =  a  b  => print (a * b); // commas are optional
 ```
 
-Call a function
+#### Call a function
 
 ```c#
 // no arguments = enforced parens
@@ -187,50 +256,10 @@ switch {
 
 ---
 
-## Keywords
-
-#### Expression Level
-
-[`as`](#as)
-[`new`](#new)
-
-#### Statement Level
-
-[`and`](#and) 
-[`break`](#break)
-[`catch`](#catch)
-[`continue`](#continue)
-[`do`](#do)
-[`if`](#if) 
-[`kill`](#kill) 
-[`loop`](#loop) 
-[`or`](#or) 
-[`return`](#return) 
-[`switch`](#switch) 
-
-#### Declaration Statement Introducers
-
-[`fn`](#fn)
-[`obj`](#obj)
-[`pkg`](#pkg)
-[`use`](#use)
-[`val`](#val)
-
-### ​Expression Operators vs. Statement Operators
-
-​Logical operations on the expression level use traditional **symbolic operators**. Flow control and boundary-breaking logic use **keyword operators**.
-
-```javascript
-// Valid expression-level logical evaluation
-if (isBroken || isCrying) { ... };
-
-// Invalid: logical word operators cannot live in expressions
-if (isBroken or isCrying) { ... }; // Compile-time error
-```
 
 ---
 
-## Operators
+
 
 ---
 
@@ -290,19 +319,7 @@ Name | ...
 ##### `toTitleCase`
 
 
-## Operators
 
-#### Assignment
-
-[`=`](#) [`=#`](#) [`+=`](#) [`-=`](#) [`*=`](#)
-
-#### Comparison
-
-[`~=`](#) [`==`](#) [`===`](#) [`!=`](#) [`!==`](#) [`<`](#) [`>`](#) [`>=`](#) [`=<`](#) [`||`](#) [`&&`](#)
-
-#### Pipe
-
-[`|>`](#) [`!>`](#) [`?!>`](#) [`??>`](#)
 
 ## Packages
 
