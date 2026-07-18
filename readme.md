@@ -60,13 +60,13 @@ fn whileLoop = cond => decorateCombinator (
 
 ---
 
-## Operators
+## Operators & Keywords
 
 ### ​Expression Operators vs. Statement Operators
 
-​
+​Logical operations on the expression level use traditional **symbolic operators**.
 
-
+Flow control and boundary-breaking logic use **keyword operators**.
 
 ```javascript
 // Valid expression-level logical evaluation
@@ -78,9 +78,7 @@ if (isBroken or isCrying) { ... }; // Compile-time error
 
 ---
 
-## Operators
-
-Logical operations on the expression level use traditional **symbolic operators**. 
+### Operators
 
 #### Assignment
 
@@ -95,8 +93,6 @@ Logical operations on the expression level use traditional **symbolic operators*
 [`|>`](#) [`!>`](#) [`?!>`](#) [`??>`](#)
 
 ### Keywords
-
-Flow control and boundary-breaking logic use **keyword operators**.
 
 #### Expression Level
 
@@ -133,14 +129,14 @@ Flow control and boundary-breaking logic use **keyword operators**.
 
 Declaration Statements are introduced by the keywords: `val` `fn` `obj`
 
-### Declare a Value
+### Value Declaration
 
 ```go
 val num  = 123; // mutable
 val str #= "moin!"; // immutable
 ```
 
-### Declare a Function
+### Function Declaration
 
 ```java
 // functions with no arguments
@@ -169,7 +165,7 @@ callSth (100 "moin!"); // positional call = optional commas
 callSth (b: "moin!", a: 100); // lexical call ("named arguments")
 ```
 
-### Declare an Object
+### Object Declaration
 
 The `obj` keyword is used to declare a **new type of object**.
 
@@ -259,12 +255,20 @@ switch {
 };
 ```
 
----
+### `loop`
 
+```scala
+val animals  = ['bird', 'cat', 'dog' ];
+val helloPet = (pet) => print "I love my $pet.";
 
----
+loop (animals as @animal) {
+  helloPet @animal;
+};
 
-
+// oneliner
+loop animals as animal helloPet (animal);
+loop animals as animal helloPet (animal);
+```
 
 ---
 
@@ -323,7 +327,31 @@ Name | ...
 
 ##### `toTitleCase`
 
+### List
 
+A **List** is a special form of an array with:
+- identical typed values
+
+```c
+obj pets = new List ();
+obj pets = #['bird', 'cat', 'dog', 'fish'];
+obj nums = #[1, 2, 3];
+```
+
+A **List** has all the builtin methods of **Array** *(outer type)* and depending on the type of it's values *(inner type)* one could use all those methods in combination.
+
+```c
+pp pets = #['bird', 'cat', 'dog', 'fish'];
+
+// #['BIRD', 'CAT', 'DOG', 'FISH']
+do pets.map (toUpperCase);
+
+// #['DRIB', 'TAC', 'DOG', 'GOD', 'HSIF']
+do pets.map (toUpperCase, reverse);
+
+// #[HSIF, 'GOD', 'TAC', 'DRIB']
+do pets.map (toUpperCase, reverse).reverse();
+```
 
 
 ## Packages
@@ -338,19 +366,7 @@ Name | ...
 
 
 
-#### `loop`
 
-```scala
-def animals  = ['bird', 'cat', 'dog' ];
-def helloPet = (pet) => print "I love my $pet.";
-
-for (animals as @animal) {
-  helloPet @animal;
-};
-
-// oneliner
-do for animals as animal helloPet(animal);
-```
 
 
 ### Number
@@ -377,31 +393,7 @@ pp sth = new Array ();
 pp sth = ['abc', 123, true];
 ```
 
-### List
 
-A **List** is a special form of an array with:
-- identical typed values
-
-```c
-obj pets = new List ();
-obj pets = #['bird', 'cat', 'dog', 'fish'];
-obj nums = #[1, 2, 3];
-```
-
-A **List** has all the builtin methods of **Array** *(outer type)* and depending on the type of it's values *(inner type)* one could use all those methods in combination.
-
-```c
-pp pets = #['bird', 'cat', 'dog', 'fish'];
-
-// #['BIRD', 'CAT', 'DOG', 'FISH']
-do pets.map (toUpperCase);
-
-// #['DRIB', 'TAC', 'DOG', 'GOD', 'HSIF']
-do pets.map (toUpperCase, reverse);
-
-// #[HSIF, 'GOD', 'TAC', 'DRIB']
-do pets.map (toUpperCase, reverse).reverse();
-```
 
 ### Boundary Control (The Three-Tier Scope Model)
 
@@ -556,9 +548,7 @@ prop parseToken = token => switch (token.type) {
 };
 ```
 
-## Philosophy
 
-### About POO
 
 ...
 
@@ -764,3 +754,6 @@ Operator | Name    | ...
 `*=`     |         |
 `/=`     |         |
 
+## Philosophy
+
+### About POO
