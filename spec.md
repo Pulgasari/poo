@@ -7,7 +7,11 @@ Coding sucks.
 ## Table of Contents
 
 - [Let's code! (Introduction)](#lets-code)
+- [Operators & Keywords](#operators-keywords)
 - [Declarations](#declarations)
+  - [Declare a Value](#declare-a-value)
+  - [Declare a Function](#declare-a-function)
+  - [Declare an Object](#declare-an-object)
 - [Control Flow](#control-flow)
   - [Conditional](#cond)
   - [Switch](#switch)
@@ -18,6 +22,7 @@ Coding sucks.
   - [Data-Types](#data-types)
   - [Context-Aware Return Types](#context-aware-return-types)
   - [Typecasting](#typecasting)
+- [Packages](#packages) 
 - [Philosophy](#philosophy)
 
 ---
