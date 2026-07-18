@@ -61,13 +61,20 @@ Name | ...
 [`fn`](#fn)
 [`pkg`](#pkg)
 [`use`](#use)
+[`type`](#type)
 [`val`](#val)
 
 ## Operators
 
+#### Assignment
+
 [`=`](#) [`=#`](#) [`+=`](#) [`-=`](#) [`*=`](#)
 
+#### Comparison
+
 [`~=`](#) [`==`](#) [`===`](#) [`!=`](#) [`!==`](#) [`<`](#) [`>`](#) [`>=`](#) [`=<`](#) [`||`](#) [`&&`](#)
+
+#### Pipe
 
 [`|>`](#) [`!>`](#) [`?!>`](#) [`??>`](#)
 
@@ -75,32 +82,3 @@ Name | ...
 
 [`audio`](#audio) [`db`](#db) [`fs`](#fs) [`img`](#img) [`io`](#io) [`md`](#md) [`url`](#url) [`video`](#video)
 
-```txt
-exit
-for
-obj
-pnt
-prop (fn val obj def)
-ref
-until
-val
-while
-```
-
-#### statement introducers
-
-```txt
-break
-continue
-do
-for
-if
-pnt
-prop
-ref
-return
-switch
-until
-use
-while
-```
