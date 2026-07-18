@@ -604,6 +604,56 @@ prop processPayload = filePath => {
 
 ```
 
+- [Context-Aware Return Types](#context-aware-return-types)
+- [Typecasting](#typecasting)
+
+
+## Declarations & Memory Management
+
+Variable States
+
+​The keyword `prop` introduces a declaration statement to define a named *value* or *block of code*.
+
+​The `#` prefix defines a ***compile-time constant***. Casing rules are not enforced; the prefix is the sole indicator of immutability.
+
+​The `#=` operator makes it possible to seal a variable on runtime so it becomes immutable. They assign a value and freeze the variable recursively (deep-freeze).
+
+```javascript
+prop #compilerState = "broken"; // compile-time constant
+
+prop cat = 'miau';
+cat += '!!!'; // allowed
+
+cat #= 'wuff'; // assigned and sealed permanently
+cat = 'meow';  // compile-time error: variable is sealed.
+```
+
+
+## Types & Structures
+
+​The `#` symbol acts as the universal indicator for structural rigidity.
+
+```javascript
+prop dynamicList = [1, "garbage", true]; // Standard dynamic array
+prop strictList = #[1, 2, 3];            // Homogeneous strict list (frozen type)
+prop userTuple = #("Udo", 60);           // Strict heterogenous tuple (fixed size/types)
+```
+
+* Lists (#[...]): Elements must share the exact same type. Under the hood, this compiles to contiguous, unboxed memory blocks for cache friendliness.
+* ​Tuples (#(...)): Fixed size and fixed type per index. Values can be updated as long as they respect the declared type at that position.
+* ​Ranges: Defined using ... (inclusive) or ..< (exclusive). Useful for loops, slicing, and pattern matching.
+
+```javascript
+// Inclusive Loop
+do for 1...5 as @i {
+  print("Line @i: This is garbage.");
+}
+
+// Exclusive Slicing
+prop list = ['a', 'b', 'c', 'd'];
+prop slice = list[1..<3]; // ['b', 'c']
+```
+
 ## Operators
 
 #### Math / Calculation
