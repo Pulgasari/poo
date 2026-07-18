@@ -114,6 +114,77 @@ For declaration of *key-value-pairs* see the [Data-Types](#data-types) section.
 
 ## Control Flow
 
+### `if` | `or`
+
+```c
+if <condExpr> {...};
+
+// oneliner
+if <condExpr> do <statment>;
+```
+
+```c
+//
+if <condExpr> {...}
+or <condExpr> {...}  // like 'else if'
+or            {...}; // like `else'
+
+// oneliners
+if <condExpr> or <condExpr> do <statment>;
+if <condExpr> or <condExpr> or do <statment>;
+```
+
+```zig
+//
+if <condExpr>
+&& <condExpr> {...}
+or <condExpr> {...}  // like 'else if'
+or            {...}; // like `else'
+```
+
+### `switch`
+
+...        | ...
+-----------|--------
+`switch`   | `true`
+`?switch`  | *nullish*
+`!switch`  | `false`
+`?!switch` | *falsy*
+
+```cpp
+// implicit comparing against 'true'
+switch {
+  a  do bark();
+  b  do meow();
+  c  do woof();
+  or do cry();
+};
+
+// implicit comparing against 'false'
+!switch {
+  a  do bark();
+  b  do meow();
+  c  do woof();
+  or do cry();
+};
+
+// implicit comparing against nullish values
+?switch {
+  a  do bark();
+  b  do meow();
+  c  do woof();
+  or do cry();
+};
+
+// implicit comparing against falsy values
+?!switch {
+  a  do bark();
+  b  do meow();
+  c  do woof();
+  or do cry();
+};
+```
+
 ---
 
 ## Keywords
