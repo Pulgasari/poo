@@ -718,6 +718,13 @@ prop getErrors = () => {
 prop alert = getErrors() as string;
 ```
 
+```
+first class function
+higher order function
+pattern matching
+list comprehension
+generator expression
+```
 
 ## Operators
 
