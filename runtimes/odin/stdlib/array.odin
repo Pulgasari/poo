@@ -12,11 +12,6 @@ unwrap_array :: proc (v: Value) -> (^Array, bool) {
   return v.data.(^Array), true
 }
 
-unwrap_list :: proc (v: Value) -> (^List, bool) {
-  if v.type != .List { return nil, false }
-  return v.data.(^List), true
-}
-
 // ---------- ARRAY-METHODEN ----------
 
 // push: Fügt ein Element am Ende hinzu
