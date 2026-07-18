@@ -44,7 +44,7 @@ const whileLoop = (cond) => decorateCombinator (p => {
 
 ... but some people do like **poo**. ^-^
 
-```py
+```php
 fn whileLoop = cond => decorateCombinator (
   p => #[] |> (p ~= fn && !cond.many)
     ? loop (cond p) do @ += p.next()
