@@ -118,6 +118,45 @@ For declaration of *key-value-pairs* see the [Data-Types](#data-types) section.
 
 ## Keywords
 
+#### Expression Level
+
+[`as`](#as)
+[`new`](#new)
+
+#### Statement Level
+
+[`and`](#and) 
+[`break`](#break)
+[`catch`](#catch)
+[`continue`](#continue)
+[`do`](#do)
+[`if`](#if) 
+[`kill`](#kill) 
+[`loop`](#loop) 
+[`or`](#or) 
+[`return`](#return) 
+[`switch`](#switch) 
+
+#### Declaration Statement Introducers
+
+[`fn`](#fn)
+[`obj`](#obj)
+[`pkg`](#pkg)
+[`use`](#use)
+[`val`](#val)
+
+### ​Expression Operators vs. Statement Operators
+
+​Logical operations on the expression level use traditional **symbolic operators**. Flow control and boundary-breaking logic use **keyword operators**.
+
+```javascript
+// Valid expression-level logical evaluation
+if (isBroken || isCrying) { ... };
+
+// Invalid: logical word operators cannot live in expressions
+if (isBroken or isCrying) { ... }; // Compile-time error
+```
+
 ---
 
 ## Operators
@@ -179,34 +218,6 @@ Name | ...
 
 ##### `toTitleCase`
 
-## Keywords
-
-#### Expression Level
-
-[`as`](#as)
-[`new`](#new)
-
-#### Statement Level
-
-[`and`](#and) 
-[`break`](#break)
-[`catch`](#catch)
-[`continue`](#continue)
-[`do`](#do)
-[`if`](#if) 
-[`kill`](#kill) 
-[`loop`](#loop) 
-[`or`](#or) 
-[`return`](#return) 
-[`switch`](#switch) 
-
-#### Declaration Statement Introducers
-
-[`fn`](#fn)
-[`obj`](#obj)
-[`pkg`](#pkg)
-[`use`](#use)
-[`val`](#val)
 
 ## Operators
 
