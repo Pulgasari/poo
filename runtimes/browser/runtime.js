@@ -135,3 +135,39 @@ export const fromFloat  = Value.float;
 export const fromString = Value.string;
 export const fromNull   = Value.null;
 
+
+
+
+// runtime.js (Erweiterung)
+
+// String-Prototyp (kein JS-Prototyp, sondern dein eigenes System)
+const stringPrototype = new PooObject (GLOBAL_PROTOTYPE);
+
+// Methoden definieren
+stringPrototype.set ('length', new PooFunction((env, args) => {
+  const str = args[0]?.data || '';
+  return fromInt(str.length);
+}));
+
+stringPrototype.set('trim', new PooFunction ((env, args) => {
+  const str = args[0]?.data || '';
+  return fromString(str.trim());
+}));
+
+// Autoboxing für Strings
+function boxString (str) {
+  const obj = new MyObject(stringPrototype);
+  obj.set('__value', fromString(str));
+  return obj;
+}
+
+// Methodenaufruf auf geboxtem Wert
+function callMethod(obj, methodName, args) {
+    const method = obj.get(methodName);
+    if (!method || method.type !== ValueType.Function) {
+        throw new Error(`Method ${methodName} not found`);
+    }
+    const raw = obj.get('__value');
+    return method.call([raw, ...args]);
+}
+
