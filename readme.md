@@ -18,8 +18,7 @@ Coding sucks.
   - [Conditional](#cond)
   - [Switch](#switch)
   - [Loops](#loops)
-
-
+- [Do](#do)
 - [Types](#types)
   - [Data-Types](#data-types)
   - [Context-Aware Return Types](#context-aware-return-types)
