@@ -6,10 +6,11 @@ import "core:slice"
 import "core:strings"
 
 // ---------- BUFFER (IN-MEMORY STREAM) ----------
+
 IoBuffer :: struct {
-    data: []u8,
-    pos: int,
-    allocator: mem.Allocator,
+  data: []u8,
+  pos: int,
+  allocator: mem.Allocator,
 }
 
 // ---------- IO-FUNKTIONEN ----------
@@ -31,31 +32,19 @@ io_new_buffer :: proc(env: ^Object, args: []Value) -> Value {
         buf.data = make([]u8, 0, allocator)
     }
 
-    // Buffer als Objekt verpacken
-    obj := make_object(allocator, env)
-    obj.properties["__ptr"] = from_int(i64(uintptr(buf)))
-    obj.properties["length"] = from_int(i64(len(buf.data)))
-    obj.properties["position"] = from_int(i64(buf.pos))
+  // Buffer als Objekt verpacken
+  obj := make_object(allocator, env)
+  obj.properties["__ptr"]    = from_int(i64(uintptr(buf)))
+  obj.properties["length"]   = from_int(i64(len(buf.data)))
+  obj.properties["position"] = from_int(i64(buf.pos))
 
-    // Methoden direkt im Objekt (oder im Prototyp)
-    obj.properties["read"] = Value{
-        type = .Function,
-        data = {function = make_function(allocator, nil, nil, io_buffer_read)}
-    }
-    obj.properties["write"] = Value{
-        type = .Function,
-        data = {function = make_function(allocator, nil, nil, io_buffer_write)}
-    }
-    obj.properties["toString"] = Value{
-        type = .Function,
-        data = {function = make_function(allocator, nil, nil, io_buffer_to_string)}
-    }
-    obj.properties["reset"] = Value{
-        type = .Function,
-        data = {function = make_function(allocator, nil, nil, io_buffer_reset)}
-    }
+  // Methoden direkt im Objekt (oder im Prototyp)
+  set_method (obj, "read",     io_buffer_read,      allocator)
+  set_method (obj, "write",    io_buffer_write,     allocator)
+  set_method (obj, "reset",    io_buffer_reset,     allocator)
+  set_method (obj, "toString", io_buffer_to_string, allocator)
 
-    return Value{type = .Object, data = {object = obj}}
+  return Value{type = .Object, data = {object = obj}}
 }
 
 io_buffer_read :: proc(env: ^Object, args: []Value) -> Value {
@@ -113,17 +102,17 @@ io_buffer_write :: proc(env: ^Object, args: []Value) -> Value {
     ptr := uintptr(ptr_raw.data.(i64))
     buf := cast(^IoBuffer)ptr
 
-    // Schreiben (append)
-    data := transmute([]u8)data_str
-    new_data := slice.append(buf.data, data, buf.allocator)
-    buf.data = new_data
-    buf.pos = len(buf.data) // Am Ende positionieren
+  // Schreiben (append)
+  data     := transmute([]u8)data_str
+  new_data := slice.append(buf.data, data, buf.allocator)
+  buf.data  = new_data
+  buf.pos   = len(buf.data) // Am Ende positionieren
 
-    // Länge im Objekt aktualisieren
-    buffer_obj.properties["length"] = from_int(i64(len(buf.data)))
-    buffer_obj.properties["position"] = from_int(i64(buf.pos))
+  // Länge im Objekt aktualisieren
+  buffer_obj.properties["length"]   = from_int(i64(len(buf.data)))
+  buffer_obj.properties["position"] = from_int(i64(buf.pos))
 
-    return wrap_int(i64(len(data)))
+  return wrap_int(i64(len(data)))
 }
 
 io_buffer_to_string :: proc(env: ^Object, args: []Value) -> Value {
