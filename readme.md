@@ -61,9 +61,9 @@ fn whileLoop = cond => decorateCombinator (
 
 ---
 
-## Operators & Keywords
+# Operators & Keywords
 
-### Operators
+## Operators
 
 #### Assignment
 
@@ -77,7 +77,7 @@ fn whileLoop = cond => decorateCombinator (
 
 [`|>`](#) [`!>`](#) [`?!>`](#) [`??>`](#)
 
-### Keywords
+## Keywords
 
 #### Expression Level
 
@@ -110,11 +110,11 @@ fn whileLoop = cond => decorateCombinator (
 
 ---
 
-## Declarations
+# Declarations
 
 Declaration Statements are introduced by the keywords: `val` `fn` `obj`
 
-### Value Declaration
+## Value Declaration
 
 ```go
 val num   = 123; // mutable
@@ -148,7 +148,7 @@ cat #= 'wuff'; // assigned and sealed permanently
 cat  = 'meow';  // compile-time error: variable is sealed.
 ```
 
-### Function Declaration
+## Function Declaration
 
 ```java
 // functions with no arguments
@@ -177,7 +177,7 @@ callSth (100 "moin!"); // positional call = optional commas
 callSth (b: "moin!", a: 100); // lexical call ("named arguments")
 ```
 
-### Object Declaration
+## Object Declaration
 
 The `obj` keyword is used to declare a **new type of object**.
 
@@ -194,9 +194,9 @@ For declaration of *key-value-pairs* see the [Data-Types](#data-types) section.
 
 ---
 
-## Control Flow
+# Control Flow
 
-### `if` | `or`
+## `if` | `or`
 
 ```c
 if <condExpr> {...};
