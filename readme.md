@@ -19,6 +19,7 @@ Coding sucks.
   - [Switch](#switch)
   - [Loops](#loops)
 - [Do](#do)
+- [Pipe](#pipe)
 - [Types](#types)
   - [Data-Types](#data-types)
   - [Context-Aware Return Types](#context-aware-return-types)
@@ -69,13 +70,17 @@ fn whileLoop = cond => decorateCombinator (
 
 [`=`](#) [`=#`](#) [`+=`](#) [`-=`](#) [`*=`](#)
 
+### Calculation
+
+[`+`](#) [`-`](#) [`*`](#) [`/`](#) [`%`](#)
+
 #### Comparison
 
 [`~=`](#) [`~==`](#) [`==`](#) [`===`](#) [`!=`](#) [`!==`](#) [`>`](#) [`<`](#) [`>=`](#) [`=<`](#) [`<=>`](#) [`||`](#) [`&&`](#)
 
 #### Pipe
 
-[`|>`](#) [`!>`](#) [`?!>`](#) [`??>`](#)
+[`>>`](#) [`>>>`](#) [`!>>`](#) [`?!>`](#) [`??>`](#)
 
 ## Keywords
 
@@ -96,7 +101,8 @@ fn whileLoop = cond => decorateCombinator (
 [`loop`](#loop) 
 [`or`](#or) 
 [`return`](#return) 
-[`switch`](#switch) 
+[`switch`](#switch)
+[`yield`](#yield)
 
 #### Declaration Statement Introducers
 
@@ -337,14 +343,14 @@ Keyword | Dependency Type | Prefix in Code | Write Behavior
 
 #### `use`
 
-The `use` keyword introduces a statement to declare an object to be absorbed in its current state (*static snapshot*).
+The `use` keyword introduces a statement to declare an object or value to be absorbed in its current state (*static snapshot*).
 
 ```javascript
-prop mood = 'grumpy'; 
+val mood = 'grumpy'; 
 
-prop nerd = {
+obj nerd = {
   use mood;
-  prop printMood = () => print("The nerd is $mood.");
+  val printMood = () => print("The nerd is $mood.");
 };
 
 nerd.printMood();
@@ -375,10 +381,10 @@ Assigning a new value to does not change the origin's value.
 ```javascript
 val fishsticks = 'yummy';
 
-val nerd = {
+obj nerd = {
   ref fishsticks;
-  prop doYouLikeFishsticks = (b) => @fishsticks = b ? 'yummy' : 'disgusting';
-  prop print = () => print("Fishsticks are $@fishsticks.");
+  fn doYouLikeFishsticks = (b) => @fishsticks = b ? 'yummy' : 'disgusting';
+  fn print = () => print("Fishsticks are $@fishsticks.");
 };
 
 nerd.print(); // "Fishsticks are yummy."
@@ -425,6 +431,43 @@ The `ref` keyword introduces a statement to ... (*direct pointer*).
 
 ### Blob
 
+### Bool
+
+```js
+val maybe = true;
+val never = false;
+```
+
+### Char
+
+```js
+
+```
+
+### Color
+
+```js
+
+```
+
+### Date
+
+```js
+
+```
+
+### Enum
+
+```js
+
+```
+
+### Generator
+
+```js
+
+```
+
 ### List
 
 A **List** is a special form of an array with:
@@ -454,6 +497,12 @@ pets.map (toUpperCase, reverse).reverse();
 pets.map (toUpperCase reverse).reverse();
 pets.map (toUpperCase reverse) |> @.reverse();
 pets.map >> toUpperCase reverse |> @.reverse();
+```
+
+### Map
+
+```js
+
 ```
 
 ### Number
