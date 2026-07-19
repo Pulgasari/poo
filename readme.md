@@ -117,19 +117,30 @@ Declaration Statements are introduced by the keywords: `val` `fn` `obj`
 ### Value Declaration
 
 ```go
-val num  = 123; // mutable
-val str #= "moin!"; // immutable
+val num   = 123; // mutable
+val str  #= "moin!"; // immutable (runtime)
+val #fix  = "constant!"; // real constant (compiletime)
 ```
 
-​The `#` prefix on a name of a variable (*identifier*) defines a ***compile-time constant***. Casing rules are not enforced; the prefix is the sole indicator of immutability.
+#### Declare a Constant
 
-​The `#=` operator makes it possible to seal a variable on runtime so it becomes immutable. They assign a value and freeze the variable recursively (deep-freeze).
+​The `#` prefix on the name (*identifier*) of a value defines a ***compile-time constant***.
+
+```javascript
+val #compilerState = "broken"; // compile-time constant
+```
+
+#### Seal a Value
+
+​The `#=` operator makes it possible to seal (*freeze*) a value on runtime so it becomes immutable recursively (*deep-freeze*).
+
+```javascript
+val exbf #= 'you can't change me!';
+```
 
 This operator could also be used to make an value immutable at any later point.
 
 ```javascript
-val #compilerState = "broken"; // compile-time constant
-
 val cat = 'miau';
 cat += '!!!'; // allowed
 
