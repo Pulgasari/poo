@@ -64,11 +64,52 @@ fn whileLoop = cond => decorateCombinator (
 
 ---
 
+## Data-Types
+
+[`Array`](#array) 
+[`Blob`](#blob) 
+[`Bool`](#bool)
+[`Char`](#char)
+[`Color`](#color)
+[`Date`](#date)
+[`Enum`](#enum)
+[`Generator`](#generator)
+[`List`](#list)
+[`Map`](#map)
+[`Number`](#number)
+[`Queue`](#queue) 
+[`Pattern`](#pattern)
+[`Record`](#record)
+[`RegExp`](#regexp)
+[`Set`](#set)
+[`Stack`](#stack)
+[`String`](#string)
+[`Store`](#store)
+[`Symbol`](#symbol)
+[`Tree`](#tree) 
+[`Tuple`](#tuple) 
+[`Union`](#union)
+
+---
+
+## Packages
+
+[`audio`](#audio)
+[`db`](#db)
+[`fs`](#fs)
+[`img`](#img)
+[`io`](#io)
+[`md`](#md)
+[`url`](#url)
+[`video`](#video)
+
+---
+
 # Operators & Keywords
 
 ## Operators
 
-#### Assignment
+### Assignment
 
 [`=`](#) [`=#`](#) [`+=`](#) [`-=`](#) [`*=`](#)
 
@@ -76,17 +117,22 @@ fn whileLoop = cond => decorateCombinator (
 
 [`+`](#) [`-`](#) [`*`](#) [`/`](#) [`%`](#)
 
-#### Comparison
+### Comparison
 
 [`~=`](#) [`~==`](#) [`==`](#) [`===`](#) [`!=`](#) [`!==`](#) [`>`](#) [`<`](#) [`>=`](#) [`=<`](#) [`<=>`](#) [`||`](#) [`&&`](#)
 
-#### Pipe
+### Pipe
 
 [`>>`](#) [`>>>`](#) [`!>>`](#) [`?!>`](#) [`??>`](#)
 
-#### ...
+### ...
 
-`=+` `<+` `+>` `~>` `==>` `<>` `>=<` `|~` `|?` `|>` `|=` `|.` `|#` `..`
+[`|?`](#filter-operator)
+[`|>`](#map-operator)
+[`| `](#reduce-operator)
+[`|.`](#pluck-operator)
+
+`=+` `<+` `+>` `~>` `==>` `<>` `>=<` `|~` `|=` `|#` `..`
 
 ## Keywords
 
@@ -102,6 +148,7 @@ fn whileLoop = cond => decorateCombinator (
 [`catch`](#catch)
 [`continue`](#continue)
 [`do`](#do)
+[`fail`](#fail)
 [`if`](#if) 
 [`kill`](#kill) 
 [`loop`](#loop) 
@@ -119,10 +166,6 @@ fn whileLoop = cond => decorateCombinator (
 [`ref`](#ref)
 [`use`](#use)
 [`val`](#val)
-
-# ...
-
-`fail`
 
 ---
 
@@ -498,47 +541,6 @@ Hans(country: 'Austria').whoAmI();
 ```
 </details>
 
----
-
-## Data-Types
-
-[`Array`](#array) 
-[`Blob`](#blob) 
-[`Bool`](#bool)
-[`Char`](#char)
-[`Color`](#color)
-[`Date`](#date)
-[`Enum`](#enum)
-[`Generator`](#generator)
-[`List`](#list)
-[`Map`](#map)
-[`Number`](#number)
-[`Queue`](#queue) 
-[`Pattern`](#pattern)
-[`Record`](#record)
-[`RegExp`](#regexp)
-[`Set`](#set)
-[`Stack`](#stack)
-[`String`](#string)
-[`Store`](#store)
-[`Symbol`](#symbol)
-[`Tree`](#tree) 
-[`Tuple`](#tuple) 
-[`Union`](#union)
-
----
-
-## Packages
-
-[`audio`](#audio)
-[`db`](#db)
-[`fs`](#fs)
-[`img`](#img)
-[`io`](#io)
-[`md`](#md)
-[`url`](#url)
-[`video`](#video)
-
 
 
 
@@ -585,30 +587,7 @@ Variable States
 
 
 
-## Types & Structures
 
-​The `#` symbol acts as the universal indicator for structural rigidity.
-
-```javascript
-val dynamicList = [1, "garbage", true]; // Standard dynamic array
-val strictList = #[1, 2, 3];            // Homogeneous strict list (frozen type)
-val userTuple = #("Udo", 60);           // Strict heterogenous tuple (fixed size/types)
-```
-
-* Lists (#[...]): Elements must share the exact same type. Under the hood, this compiles to contiguous, unboxed memory blocks for cache friendliness.
-* ​Tuples (#(...)): Fixed size and fixed type per index. Values can be updated as long as they respect the declared type at that position.
-* ​Ranges: Defined using ... (inclusive) or ..< (exclusive). Useful for loops, slicing, and pattern matching.
-
-```javascript
-// Inclusive Loop
-loop 1...5 as @i {
-  print("Line @i: This is garbage.");
-}
-
-// Exclusive Slicing
-val list = ['a', 'b', 'c', 'd'];
-val slice = list[1..<3]; // ['b', 'c']
-```
 
 ## Typecasting & Context-Aware Return Types
 
