@@ -1,10 +1,22 @@
----
+# devnotes
+
+## GitHub Syntax
 
 > [!NOTE]
 > Useful information that users should know, even when skimming content.
 
+```md
+> [!NOTE]
+> 
+```
+
 > [!TIP]
 > Helpful advice for doing things better or more easily.
+
+```markdown
+> [!TIP]
+> 
+```
 
 > [!IMPORTANT]
 > Key information users need to know to achieve their goal.
@@ -15,6 +27,18 @@
 > [!CAUTION]
 > Advises about risks or negative outcomes of certain actions.
 
+
+
+
+```
+first class function
+higher order function
+pattern matching
+list comprehension
+generator expression
+```
+
+...
 
 ## Examples
 
@@ -34,12 +58,29 @@ fn processPayload = filePath => {
 
 ```
 
-```
-first class function
-higher order function
-pattern matching
-list comprehension
-generator expression
+###
+
+```javascript
+prop globalCounter = 0;
+prop configName    = 'dev';
+prop baseStats     = { hp: 100 };
+
+prop player = {
+  use baseStats;      // Statische Kopie
+  ref configName;     // Live-Ansicht (Copy-on-Write)
+  pnt globalCounter;  // Aktiver Pointer
+
+  prop tick = () => {
+    // 1. Lokaler Zugriff (Kein Präfix)
+    print baseStats.hp; 
+
+    // 2. Live-Read-Zugriff (Präfix @)
+    print @configName; 
+
+    // 3. Durchschreibender Zugriff (Präfix &)
+    &globalCounter += 1; 
+  };
+};
 ```
 
 
