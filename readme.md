@@ -4,39 +4,6 @@ Coding sucks.
 
 ![Logo](./logo.jpg)
 
-
-
-## Let's code!
-
-A lot of people do like **JavaScript** ...
-
-```javascript
-// javascript original
-const whileLoop = (cond) => decorateCombinator (p => {
-  const results = [];
-  if (typeof p === 'function' && !cond.many) {
-    while (cond(p)) results.push(p.next());
-    return results;
-  }
-  while (true) {
-    const result = runWithBacktrack(p, cond);
-    if (result === null) break;
-    results.push(result);
-  }
-  return results;
-});
-```
-
-... but some people do like **poo**. ^-^
-
-```php
-fn whileLoop = cond => decorateCombinator (
-  p => #[] |> (p ~= fn && !cond.many)
-    ? loop (cond p) do @ += p.next()
-    : loop          do @ += runWithBacktrack(p, cond) or break
-);
-```
-
 ---
 
 ## Data-Types
@@ -133,6 +100,39 @@ fn whileLoop = cond => decorateCombinator (
 [`md`](#md)
 [`url`](#url)
 [`video`](#video)
+
+---
+
+## Let's code!
+
+A lot of people do like **JavaScript** ...
+
+```javascript
+// javascript original
+const whileLoop = (cond) => decorateCombinator (p => {
+  const results = [];
+  if (typeof p === 'function' && !cond.many) {
+    while (cond(p)) results.push(p.next());
+    return results;
+  }
+  while (true) {
+    const result = runWithBacktrack(p, cond);
+    if (result === null) break;
+    results.push(result);
+  }
+  return results;
+});
+```
+
+... but some people do like **poo**. ^-^
+
+```php
+fn whileLoop = cond => decorateCombinator (
+  p => #[] |> (p ~= fn && !cond.many)
+    ? loop (cond p) do @ += p.next()
+    : loop          do @ += runWithBacktrack(p, cond) or break
+);
+```
 
 ---
 
