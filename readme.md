@@ -475,11 +475,21 @@ The `ref` keyword introduces a statement to ... (*direct pointer*).
 [`Symbol`](#symbol)
 [`Tree`](#tree) 
 [`Tuple`](#tuple) 
-[`Type`](#type)
+[`Union`](#union)
 
 ### Array
 
+```js
+val pets = new Array;
+val pets = ['bird', 'cat', 'dog', 'fish'];
+val nums = [1, 2, 3];
+```
+
 ### Blob
+
+```js
+
+```
 
 ### Bool
 
@@ -515,12 +525,12 @@ val never = false;
 ### Generator
 
 ```js
-
+fn*
 ```
 
 ### List
 
-A **List** is a special form of an array with:
+A **List** is a special form of an [Array](#array) with:
 - identical typed values
 
 ```c
@@ -627,10 +637,10 @@ val text = "Coding sucks.";
 ### Tuple
 
 ```js
-
+val sth = #(123, 'dog', true);
 ```
 
-### Type
+### Union
 
 ```js
 
