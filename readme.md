@@ -84,6 +84,10 @@ fn whileLoop = cond => decorateCombinator (
 
 [`>>`](#) [`>>>`](#) [`!>>`](#) [`?!>`](#) [`??>`](#)
 
+#### ...
+
+`=+` `<+` `+>`
+
 ## Keywords
 
 #### Expression Level
