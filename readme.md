@@ -503,6 +503,8 @@ val nums = [1, 2, 3];
 
 ### Bool
 
+A logical boolean value that can only inhabit one of two states: `true` or `false`.
+
 <details>
 <summary><b>Example Code</b></summary>
 
@@ -514,11 +516,13 @@ val never = false;
 
 ### Char
 
+Represents a single, isolated textual character token.
+
 <details>
 <summary><b>Example Code</b></summary>
 
-```js
-
+```js scala
+val letter = 'c';
 ```
 </details>
 
@@ -609,13 +613,18 @@ pets.map >> toUpperCase reverse |> @.reverse();
 
 ### Number
 
+Represents all numerical data, including both integers ([`Int`]{#int)) and floating-point decimals ([(`Float`](#float)). 
+
+To improve readability when working with massive numbers, digit separating underscores (`_`) can be placed freely within the literal representation.
+
+```js
 <details>
 <summary><b>Example Code</b></summary>
 
 ```c
 val num = 60;
 val dec = 10.5;
-val abc = 10_000_000; // 10000000
+val big = 10_000_000; // 10000000
 ```
 </details>
 
@@ -641,11 +650,13 @@ val abc = 10_000_000; // 10000000
 
 ### Record
 
+A structurally rigid set of key-value assignments (`key: value`), initialized by utilizing the object rigidity descriptor `#{...}`. It provides optimized compile-time static maps.
+
 <details>
 <summary><b>Example Code</b></summary>
 
 ```js
-
+val userRecord = #{name: "Udo", age: 60};
 ```
 </details>
 
@@ -691,12 +702,15 @@ val abc = 10_000_000; // 10000000
 
 ### String
 
+A sequential array of text characters. Poo natively supports single quotes (`'...'`), double quotes (`"..."`) featuring runtime variable expansion via the `$` token, and backticks (`` `...` ``) for complex template string injection using `${expression}` syntax.
+
 <details>
 <summary><b>Example Code</b></summary>
 
-```c
-val name = "Udo":
+```scala
+val name = "Udo";
 val text = "Coding sucks.";
+val greeting = `Hello ${name}!`;
 ```
 </details>
 
@@ -722,9 +736,15 @@ val text = "Coding sucks.";
 
 ### Tuple
 
+A fixed-size, heterogeneous collection containing predefined value sequences wrapped inside `#(...)`. Each index is rigidly locked to a specific type footprint upon declaration. Index elements can be updated, but only if the incoming modification strictly conforms to the expected type signature of that slot.
+
+<details>
+<summary><b>Example Code</b></summary>
+
 ```js
-val sth = #(123, 'dog', true);
+val userTuple = #("Udo", 60, true); // Strict schema slot layout: (String, Number, Bool)
 ```
+</details>
 
 ### Union
 
