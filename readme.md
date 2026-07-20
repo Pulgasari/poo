@@ -170,7 +170,7 @@ cat  = 'meow';  // compile-time error: variable is sealed.
 
 ## Function Declaration
 
-```java
+```scala
 // functions with no arguments
 fn doSomething = () => print "moin!";
 fn doSomething      => print "moin"!;
@@ -179,6 +179,9 @@ fn doSomething      => print "moin"!;
 fn sum = (a, b) => print (a * b);
 fn sum =  a, b  => print (a * b); // parens are optional
 fn sum =  a  b  => print (a * b); // commas are optional
+
+// classic notation
+fn oldieStyle (a, b) { ... }
 ```
 
 <details>
@@ -527,41 +530,14 @@ Hans(country: 'Austria').whoAmI();
 
 ## Packages
 
-[`audio`](#audio) [`db`](#db) [`fs`](#fs) [`img`](#img) [`io`](#io) [`md`](#md) [`url`](#url) [`video`](#video)
-
-
-
-
-
-...
-
-###
-
-```javascript
-prop globalCounter = 0;
-prop configName    = 'dev';
-prop baseStats     = { hp: 100 };
-
-prop player = {
-  use baseStats;      // Statische Kopie
-  ref configName;     // Live-Ansicht (Copy-on-Write)
-  pnt globalCounter;  // Aktiver Pointer
-
-  prop tick = () => {
-    // 1. Lokaler Zugriff (Kein Präfix)
-    print baseStats.hp; 
-
-    // 2. Live-Read-Zugriff (Präfix @)
-    print @configName; 
-
-    // 3. Durchschreibender Zugriff (Präfix &)
-    &globalCounter += 1; 
-  };
-};
-```
-
-
-
+[`audio`](#audio)
+[`db`](#db)
+[`fs`](#fs)
+[`img`](#img)
+[`io`](#io)
+[`md`](#md)
+[`url`](#url)
+[`video`](#video)
 
 
 
