@@ -1,21 +1,44 @@
-(* EBNF für einen Ausschnitt von Poo *)
+(* EBNF für Poo (Inklusive flexibler Funktionen & Aufrufe) *)
 
 Program             ::= { Statement } ;
-Statement           ::= PackageImport | VarDecl | ExpressionStatement ;
+Statement           ::= PackageImport | VarDecl | FunctionDecl | ExpressionStatement ;
 
 PackageImport       ::= "pkg" Identifier "::" Identifier ";" ;
 VarDecl             ::= "val" Identifier "=" Expression ";" ;
 ExpressionStatement ::= Expression ";" ;
 
-Expression          ::= Literal | Identifier | MethodCall ;
-MethodCall          ::= Identifier "::" Identifier "(" [ ExpressionList ] ")" ;
-ExpressionList      ::= Expression { "," Expression } ;
+(* Funktionsdeklarationen *)
+FunctionDecl        ::= ArrowFunctionDecl | ClassicFunctionDecl ;
+ClassicFunctionDecl ::= "fn" Identifier "(" [ IdentList ] ")" Block ;
+ArrowFunctionDecl   ::= "fn" Identifier [ "=" [ FunctionParams ] ] "=>" Statement ;
+
+FunctionParams      ::= "(" [ IdentList ] ")" | IdentList ;
+IdentList           ::= Identifier { [","] Identifier } ;
+Block               ::= "{" { Statement } "}" ;
+
+(* Ausdrücke & Aufrufe *)
+Expression          ::= FunctionCall | MethodCall | Literal | Identifier ;
+
+(* Erlaubt 'call()' oder 'call "arg"' oder 'call(1, 2)' *)
+FunctionCall        ::= Identifier ( ParenCallArgs | SingleBareArg ) ;
+ParenCallArgs       ::= "(" [ CallArgsList ] ")" ;
+SingleBareArg       ::= Literal | Identifier ;
+
+(* Argumenten-Listen (Positionell vs. Benannt/Lexikalisch) *)
+CallArgsList        ::= NamedArgsList | ExpressionList ;
+NamedArgsList       ::= NamedArg { [","] NamedArg } ;
+NamedArg            ::= Identifier ":" Expression ;
+
+(* Kommas sind hier komplett optional durch [","] *)
+ExpressionList      ::= Expression { [","] Expression } ;
+
+(* Gekapselter Methodenaufruf via :: *)
+MethodCall          ::= Identifier "::" Identifier "(" [ CallArgsList ] ")" ;
 
 (* Literale & Datenstrukturen aus Poo *)
 Literal             ::= BoolLiteral | StringLiteral | NumberLiteral | ArrayLiteral | ListLiteral | TupleLiteral | "null" | "undefined" ;
-
 BoolLiteral         ::= "true" | "false" ;
-ArrayLiteral        ::=  "[" [ ExpressionList ] "]" ;
+ArrayLiteral        ::= "[" [ ExpressionList ] "]" ;
 ListLiteral         ::= "#[" [ ExpressionList ] "]" ;
 TupleLiteral        ::= "#(" [ ExpressionList ] ")" ;
 
