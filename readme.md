@@ -481,16 +481,21 @@ The `ref` keyword introduces a statement to ... (*direct pointer*).
 
 ### Array
 
+<details>
+<summary>**Example Code**</summary>
+
 ```js
 val pets = new Array;
 val pets = ['bird', 'cat', 'dog', 'fish'];
 val nums = [1, 2, 3];
 ```
+</details>
 
 ### Blob
 
 <details>
 <summary><strong>Example Code</strong></summary>
+
 ```js
 
 ```
