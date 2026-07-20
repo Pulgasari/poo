@@ -2,6 +2,33 @@
 
 ---
 
+## Table of Contents
+
+- [Let's code! (Introduction)](#lets-code)
+- [Operators & Keywords](#operators-keywords)
+  - [Keywords](#keywords)
+  - [Operators](#operators)
+- [Declarations](#declarations)
+  - [Value Declaration](#value-declaration)
+  - [Function Declaration](#function-declaration)
+  - [Object Declaration](#object-declaration)
+- [Control Flow](#control-flow)
+  - [Conditional](#cond)
+  - [Switch](#switch)
+  - [Loops](#loops)
+- [Do](#do)
+- [Pipe](#pipe)
+- [Types](#types)
+  - [Data-Types](#data-types)
+  - [Context-Aware Return Types](#context-aware-return-types)
+  - [Typecasting](#typecasting)
+- [Packages](#packages)
+- [Advanced](#advanced)
+  - [Operator Overloading](#operator-overloading)
+- [Philosophy](#philosophy)
+
+---
+
 ## Types & Structures
 
 ​The `#` symbol acts as the universal indicator for structural rigidity.
