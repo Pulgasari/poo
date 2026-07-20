@@ -1,0 +1,28 @@
+# PEG für denselben Ausschnitt von Poo
+
+Program           <- Spacing Statement*
+Statement         <- PackageImport / VarDecl / ExpressionStatement
+
+PackageImport     <- "pkg" Spacing Identifier "::" Identifier ";" Spacing
+VarDecl           <- "val" Spacing Identifier "=" Spacing Expression ";" Spacing
+ExpressionStatement <- Expression ";" Spacing
+
+Expression        <- Literal / MethodCall / Identifier
+MethodCall        <- Identifier "::" Identifier "(" Spacing ExpressionList? ")" Spacing
+ExpressionList    <- Expression ("," Spacing Expression)*
+
+# Literale aus Poo
+       Literal    <- BoolLiteral / ListLiteral / TupleLiteral / ArrayLiteral / NumberLiteral / StringLiteral / NullishLiteral
+   BoolLiteral    <- ("true" / "false") Spacing
+  ArrayLiteral    <-  "[" Spacing ExpressionList? "]" Spacing
+   ListLiteral    <- "#[" Spacing ExpressionList? "]" Spacing
+  TupleLiteral    <- "#(" Spacing ExpressionList? ")" Spacing
+NullishLiteral    <- ("null" / "undefined") Spacing
+
+# Lexikalische Definitionen (inklusive Whitespace-Fresser)
+Identifier        <- < [a-zA-Z_] [a-zA-Z0-9_]* > Spacing
+NumberLiteral     <- < [0-9]+ ("." [0-9]+)? > Spacing
+StringLiteral     <- ( "'" [^']* "'" / '"' [^"]* '"' / "`" [^`]* "`" ) Spacing
+
+Spacing           <- ( [ \t\n\r] / Comment )*
+Comment           <- "//" [^\n]* "\n"
