@@ -1,4 +1,4 @@
-/ runtimes/odin/poo.odin
+// runtimes/odin/_internal.odin
 package runtime
 
 import "core:mem"
@@ -6,10 +6,7 @@ import "core:fmt"
 import "core:strings"
 import "core:slice"
 
-
-// ============================================================
-// 1. METHODEN-REGISTRIERUNG (DER BOILERPLATE-KILLER)
-// ============================================================
+// Helpers to reduce Odin Boilerplate
 
 make_method :: proc(
   p: proc(env:^Object, args:[]Value)->Value,
