@@ -1,4 +1,4 @@
-## Operators
+# Operators
 
 ## Assignment
 
@@ -43,10 +43,10 @@ Operator | Name    | ...
 
 Operator | Name    | ...
 ---------|---------|----
-`|?`     | [filter](#value)
+`\|?`    | [filter](#value)
 `\|>`    | [map](#map-operator)
-`| `     | [reduce](#reduce-operator)
-`|.`     | [pluck](#pluck-operator)
+`\| `    | [reduce](#reduce-operator)
+`\|.`    | [pluck](#pluck-operator)
 
 ## Misc
 
