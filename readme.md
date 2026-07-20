@@ -617,11 +617,10 @@ Represents all numerical data, including both integers ([`Int`](#int)) and float
 
 To improve readability when working with massive numbers, digit separating underscores (`_`) can be placed freely within the literal representation.
 
-```js
 <details>
 <summary><b>Example Code</b></summary>
 
-```c
+```scala
 val num = 60;
 val dec = 10.5;
 val big = 10_000_000; // 10000000
