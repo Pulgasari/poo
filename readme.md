@@ -51,7 +51,8 @@ Coding sucks.
 [`or`](#or)
 [`pkg`](#pkg)
 [`ref`](#ref)
-[`return`](#return) 
+[`return`](#return)
+[`skip`](#skip)
 [`static`](#static)
 [`switch`](#switch)
 [`use`](#use)
@@ -129,7 +130,7 @@ const whileLoop = (cond) => decorateCombinator (p => {
 
 ```php
 fn whileLoop = cond => decorateCombinator (
-  p => #[] |> (p ~= fn && !cond.many)
+  p => #[] >>> (p ~= fn && !cond.many)
     ? loop (cond p) do @ += p.next()
     : loop          do @ += runWithBacktrack(p, cond) or break
 );
