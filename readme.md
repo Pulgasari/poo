@@ -494,7 +494,7 @@ val nums = [1, 2, 3];
 ### Blob
 
 <details>
-<summary><strong>Example Code</strong></summary>
+<summary><b>Example Code</b></summary>
 
 ```js
 
@@ -503,15 +503,20 @@ val nums = [1, 2, 3];
 
 ### Bool
 
+<details>
+<summary><b>Example Code</b></summary>
+
 ```js
 val maybe = true;
 val never = false;
 ```
+</detail>
 
 ### Char
 
 <details>
-<summary><strong>Example Code</strong></summary>
+<summary><b>Example Code</b></summary>
+
 ```js
 
 ```
@@ -520,7 +525,8 @@ val never = false;
 ### Color
 
 <details>
-<summary><strong>Example Code</strong></summary>
+<summary><b>Example Code</b></summary>
+  
 ```js
 
 ```
@@ -529,7 +535,8 @@ val never = false;
 ### Date
 
 <details>
-<summary><strong>Example Code</strong></summary>
+<summary><b>Example Code</b></summary>
+  
 ```js
 
 ```
@@ -538,7 +545,8 @@ val never = false;
 ### Enum
 
 <details>
-<summary><strong>Example Code</strong></summary>
+<summary><b>Example Code</b></summary>
+
 ```js
 
 ```
@@ -547,7 +555,8 @@ val never = false;
 ### Generator
 
 <details>
-<summary><strong>Example Code</strong></summary>
+<summary><b>Example Code</b></summary>
+
 ```js
 fn*
 ```
@@ -567,7 +576,8 @@ val nums = #[1, 2, 3];
 A **List** has all the builtin methods of **Array** *(outer type)* and depending on the type of it's values *(inner type)* one could use all those methods in combination.
 
 <details>
-<summary><strong>Example Code</strong></summary>
+<summary><b>Example Code</b></summary>
+
 ```c
 val pets = #['bird', 'cat', 'dog', 'fish'];
 
@@ -590,7 +600,8 @@ pets.map >> toUpperCase reverse |> @.reverse();
 ### Map
 
 <details>
-<summary><strong>Example Code</strong></summary>
+<summary><b>Example Code</b></summary>
+
 ```js
 
 ```
@@ -598,16 +609,21 @@ pets.map >> toUpperCase reverse |> @.reverse();
 
 ### Number
 
+<details>
+<summary><b>Example Code</b></summary>
+
 ```c
 val num = 60;
 val dec = 10.5;
 val abc = 10_000_000; // 10000000
 ```
+</details>
 
 ### Pattern
 
 <details>
-<summary><strong>Example Code</strong></summary>
+<summary><b>Example Code</b></summary>
+
 ```js
 
 ```
@@ -616,7 +632,8 @@ val abc = 10_000_000; // 10000000
 ### Queue
 
 <details>
-<summary><strong>Example Code</strong></summary>
+<summary><b>Example Code</b></summary>
+
 ```js
 
 ```
@@ -625,7 +642,8 @@ val abc = 10_000_000; // 10000000
 ### Record
 
 <details>
-<summary><strong>Example Code</strong></summary>
+<summary><b>Example Code</b></summary>
+
 ```js
 
 ```
@@ -634,7 +652,8 @@ val abc = 10_000_000; // 10000000
 ### RegExp
 
 <details>
-<summary><strong>Example Code</strong></summary>
+<summary><b>Example Code</b></summary>
+
 ```js
 
 ```
@@ -643,7 +662,8 @@ val abc = 10_000_000; // 10000000
 ### Set
 
 <details>
-<summary><strong>Example Code</strong></summary>
+<summary><b>Example Code</b></summary>
+
 ```js
 
 ```
@@ -652,7 +672,8 @@ val abc = 10_000_000; // 10000000
 ### Stack
 
 <details>
-<summary><strong>Example Code</strong></summary>
+<summary><b>Example Code</b></summary>
+
 ```js
 
 ```
@@ -661,7 +682,8 @@ val abc = 10_000_000; // 10000000
 ### Store
 
 <details>
-<summary><strong>Example Code</strong></summary>
+<summary><b>Example Code</b></summary>
+
 ```js
 
 ```
@@ -669,15 +691,20 @@ val abc = 10_000_000; // 10000000
 
 ### String
 
+<details>
+<summary><b>Example Code</b></summary>
+
 ```c
 val name = "Udo":
 val text = "Coding sucks.";
 ```
+</details>
 
 ### Symbol
 
 <details>
-<summary><strong>Example Code</strong></summary>
+<summary><b>Example Code</b></summary>
+
 ```js
 
 ```
@@ -686,7 +713,8 @@ val text = "Coding sucks.";
 ### Tree
 
 <details>
-<summary><strong>Example Code</strong></summary>
+<summary><b>Example Code</b></summary>
+
 ```js
 
 ```
@@ -701,7 +729,8 @@ val sth = #(123, 'dog', true);
 ### Union
 
 <details>
-<summary><strong>Example Code</strong></summary>
+<summary><b>Example Code</b></summary>
+
 ```js
 
 ```
