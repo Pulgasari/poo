@@ -138,15 +138,18 @@ val str  #= "moin!"; // immutable (runtime)
 val #fix  = "constant!"; // real constant (compiletime)
 ```
 
-#### Declare a Constant
+<details>
+<summary><b>Declare a Constant</b></summary>
 
 ​The `#` prefix on the name (*identifier*) of a value defines a ***compile-time constant***.
 
 ```javascript
 val #compilerState = "broken"; // compile-time constant
 ```
+</detail>
 
-#### Seal a Value
+<details>
+<summary><b>Seal a Value</b></summary>
 
 ​The `#=` operator makes it possible to seal (*freeze*) a value on runtime so it becomes immutable recursively (*deep-freeze*).
 
@@ -163,6 +166,7 @@ cat += '!!!'; // allowed
 cat #= 'wuff'; // assigned and sealed permanently
 cat  = 'meow';  // compile-time error: variable is sealed.
 ```
+</details>
 
 ## Function Declaration
 
@@ -178,7 +182,7 @@ fn sum =  a  b  => print (a * b); // commas are optional
 ```
 
 <details>
-<summary><strong>Call a function</strong></summary>
+<summary><b>Call a function</b></summary>
 
 ```scala
 // no arguments = enforced parens
@@ -258,23 +262,7 @@ switch {
 };
 
 // implicit comparing against 'false'
-!switch {
-  a  do bark();
-  b  do meow();
-  c  do woof();
-  or do cry();
-};
-
-// implicit comparing against nullish values
-?switch {
-  a  do bark();
-  b  do meow();
-  c  do woof();
-  or do cry();
-};
-
-// implicit comparing against falsy values
-?!switch {
+switch! {
   a  do bark();
   b  do meow();
   c  do woof();
