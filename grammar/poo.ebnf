@@ -1,0 +1,25 @@
+(* EBNF für einen Ausschnitt von Poo *)
+
+Program             ::= { Statement } ;
+Statement           ::= PackageImport | VarDecl | ExpressionStatement ;
+
+PackageImport       ::= "pkg" Identifier "::" Identifier ";" ;
+VarDecl             ::= "val" Identifier "=" Expression ";" ;
+ExpressionStatement ::= Expression ";" ;
+
+Expression          ::= Literal | Identifier | MethodCall ;
+MethodCall          ::= Identifier "::" Identifier "(" [ ExpressionList ] ")" ;
+ExpressionList      ::= Expression { "," Expression } ;
+
+(* Literale & Datenstrukturen aus Poo *)
+Literal             ::= BoolLiteral | StringLiteral | NumberLiteral | ArrayLiteral | ListLiteral | TupleLiteral | "null" | "undefined" ;
+
+BoolLiteral         ::= "true" | "false" ;
+ArrayLiteral        ::=  "[" [ ExpressionList ] "]" ;
+ListLiteral         ::= "#[" [ ExpressionList ] "]" ;
+TupleLiteral        ::= "#(" [ ExpressionList ] ")" ;
+
+(* Lexikalische Basis-Regeln *)
+Identifier          ::= Letter { Letter | Digit | "_" } ;
+NumberLiteral       ::= Digit { Digit } [ "." Digit { Digit } ] ;
+StringLiteral       ::= "'" { AnyChar } "'" | '"' { AnyChar } '"' | "`" { AnyChar } "`" ;
