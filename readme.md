@@ -250,16 +250,8 @@ or <condExpr> {...}  // like 'else if'
 or            {...}; // like `else'
 
 // oneliners
-if <condExpr> or <condExpr> do <statment>;
-if <condExpr> or <condExpr> or do <statment>;
-```
-
-```zig
-//
-if <condExpr>
-&& <condExpr> {...}
-or <condExpr> {...}  // like 'else if'
-or            {...}; // like `else'
+if <condExpr> do <expr> or do <statment>;
+if <condExpr> do <expr> or <condExpr> do <statment>;
 ```
 
 ### `switch`
