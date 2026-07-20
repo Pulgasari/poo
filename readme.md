@@ -411,6 +411,46 @@ The `ref` keyword introduces a statement to ... (*direct pointer*).
 
 ---
 
+## Operators
+
+#### Calc
+
+... | ...
+----|----
+`+` | add
+`-` | 
+`*` | multiply
+`/` | divide
+`%` | 
+
+#### Assignment
+
+...  | ...
+-----|----
+`=`  | 
+`#=` | 
+`+=` | 
+`-=` | 
+
+#### ...
+
+...  | ...
+-----|----
+`|?` | filter
+`|>` | map
+`| ` | reduce
+
+#### pipe
+
+...   | ...
+------|----
+`>>`  | pipe
+`>>>` | deep pipe
+
+
+
+---
+
 ## Data-Types
 
 [`Array`](#array) 
@@ -523,11 +563,77 @@ val dec = 10.5;
 val abc = 10_000_000; // 10000000
 ```
 
+### Pattern
+
+```js
+
+```
+
+### Queue
+
+```js
+
+```
+
+### Record
+
+```js
+
+```
+
+### RegExp
+
+```js
+
+```
+
+### Set
+
+```js
+
+```
+
+### Stack
+
+```js
+
+```
+
+### Store
+
+```js
+
+```
+
 ### String
 
 ```c
 val name = "Udo":
 val text = "Coding sucks.";
+```
+
+### Symbol
+
+```js
+
+```
+
+### Tree
+
+```js
+
+```
+
+### Tuple
+
+```js
+
+```
+
+### Type
+
+```js
+
 ```
 
 ---
