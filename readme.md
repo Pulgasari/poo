@@ -120,6 +120,10 @@ fn whileLoop = cond => decorateCombinator (
 [`use`](#use)
 [`val`](#val)
 
+# ...
+
+`fail`
+
 ---
 
 # Declarations
