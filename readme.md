@@ -177,9 +177,9 @@ fn sum =  a, b  => print (a * b); // parens are optional
 fn sum =  a  b  => print (a * b); // commas are optional
 ```
 
-#### Call a function
-
-```c#
+<details>
+<summary><strong>Call a function</strong></summary>
+```scala
 // no arguments = enforced parens
 callSth ();
 
@@ -192,6 +192,7 @@ callSth (100, "moin!"); // positional call
 callSth (100 "moin!"); // positional call = optional commas
 callSth (b: "moin!", a: 100); // lexical call ("named arguments")
 ```
+</details>
 
 ## Object Declaration
 
@@ -477,9 +478,7 @@ The `ref` keyword introduces a statement to ... (*direct pointer*).
 [`Tuple`](#tuple) 
 [`Union`](#union)
 
-
-<details>
-<summary>### Array</summary>
+### Array
 
 ```js
 val pets = new Array;
@@ -487,13 +486,14 @@ val pets = ['bird', 'cat', 'dog', 'fish'];
 val nums = [1, 2, 3];
 ```
 
-</details>
-
 ### Blob
 
+<details>
+<summary><strong>Example Code</strong></summary>
 ```js
 
 ```
+</details>
 
 ### Bool
 
@@ -504,33 +504,48 @@ val never = false;
 
 ### Char
 
+<details>
+<summary><strong>Example Code</strong></summary>
 ```js
 
 ```
+</details>
 
 ### Color
 
+<details>
+<summary><strong>Example Code</strong></summary>
 ```js
 
 ```
+</details>
 
 ### Date
 
+<details>
+<summary><strong>Example Code</strong></summary>
 ```js
 
 ```
+</details>
 
 ### Enum
 
+<details>
+<summary><strong>Example Code</strong></summary>
 ```js
 
 ```
+</details>
 
 ### Generator
 
+<details>
+<summary><strong>Example Code</strong></summary>
 ```js
 fn*
 ```
+</details>
 
 ### List
 
@@ -545,6 +560,8 @@ val nums = #[1, 2, 3];
 
 A **List** has all the builtin methods of **Array** *(outer type)* and depending on the type of it's values *(inner type)* one could use all those methods in combination.
 
+<details>
+<summary><strong>Example Code</strong></summary>
 ```c
 val pets = #['bird', 'cat', 'dog', 'fish'];
 
@@ -562,12 +579,16 @@ pets.map (toUpperCase reverse).reverse();
 pets.map (toUpperCase reverse) |> @.reverse();
 pets.map >> toUpperCase reverse |> @.reverse();
 ```
+</details>
 
 ### Map
 
+<details>
+<summary><strong>Example Code</strong></summary>
 ```js
 
 ```
+</details>
 
 ### Number
 
@@ -579,45 +600,66 @@ val abc = 10_000_000; // 10000000
 
 ### Pattern
 
+<details>
+<summary><strong>Example Code</strong></summary>
 ```js
 
 ```
+</details>
 
 ### Queue
 
+<details>
+<summary><strong>Example Code</strong></summary>
 ```js
 
 ```
+</details>
 
 ### Record
 
+<details>
+<summary><strong>Example Code</strong></summary>
 ```js
 
 ```
+</details>
 
 ### RegExp
 
+<details>
+<summary><strong>Example Code</strong></summary>
 ```js
 
 ```
+</details>
 
 ### Set
 
+<details>
+<summary><strong>Example Code</strong></summary>
 ```js
 
 ```
+</details>
 
 ### Stack
 
+<details>
+<summary><strong>Example Code</strong></summary>
 ```js
 
 ```
+</details>
 
 ### Store
 
+<details>
+<summary><strong>Example Code</strong></summary>
 ```js
 
 ```
+</details>
 
 ### String
 
@@ -628,15 +670,21 @@ val text = "Coding sucks.";
 
 ### Symbol
 
+<details>
+<summary><strong>Example Code</strong></summary>
 ```js
 
 ```
+</details>
 
 ### Tree
 
+<details>
+<summary><strong>Example Code</strong></summary>
 ```js
 
 ```
+</details>
 
 ### Tuple
 
@@ -646,9 +694,12 @@ val sth = #(123, 'dog', true);
 
 ### Union
 
+<details>
+<summary><strong>Example Code</strong></summary>
 ```js
 
 ```
+</details>
 
 ---
 
