@@ -109,23 +109,21 @@ fn whileLoop = cond => decorateCombinator (
 
 ## Operators
 
-### Assignment
+[`=`](#)
+[`=#`](#)
+[`+=`](#)
+[`-=`](#)
+[`*=`](#)
 
-[`=`](#) [`=#`](#) [`+=`](#) [`-=`](#) [`*=`](#)
-
-### Calculation
-
-[`+`](#) [`-`](#) [`*`](#) [`/`](#) [`%`](#)
-
-### Comparison
+[`+`](#)
+[`-`](#)
+[`*`](#)
+[`/`](#)
+[`%`](#)
 
 [`~=`](#) [`~==`](#) [`==`](#) [`===`](#) [`!=`](#) [`!==`](#) [`>`](#) [`<`](#) [`>=`](#) [`=<`](#) [`<=>`](#) [`||`](#) [`&&`](#)
 
-### Pipe
-
 [`>>`](#) [`>>>`](#) [`!>>`](#) [`?!>`](#) [`??>`](#)
-
-### ...
 
 [`|?`](#filter-operator)
 [`|>`](#map-operator)
@@ -134,36 +132,28 @@ fn whileLoop = cond => decorateCombinator (
 
 ## Keywords
 
-#### Expression Level
-
 [`as`](#as)
-[`new`](#new)
-
-#### Statement Level
-
 [`and`](#and) 
 [`break`](#break)
 [`catch`](#catch)
 [`continue`](#continue)
+[`cpy`](#cpy)
 [`do`](#do)
 [`fail`](#fail)
+[`fn`](#fn)
 [`if`](#if) 
 [`kill`](#kill) 
-[`loop`](#loop) 
-[`or`](#or) 
-[`return`](#return) 
-[`switch`](#switch)
-[`yield`](#yield)
-
-#### Declaration Statement Introducers
-
-[`cpy`](#cpy)
-[`fn`](#fn)
+[`loop`](#loop)
+[`new`](#new)
 [`obj`](#obj)
+[`or`](#or)
 [`pkg`](#pkg)
 [`ref`](#ref)
+[`return`](#return) 
+[`switch`](#switch)
 [`use`](#use)
 [`val`](#val)
+[`yield`](#yield)
 
 ---
 
