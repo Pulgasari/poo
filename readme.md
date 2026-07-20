@@ -415,6 +415,15 @@ The `ref` keyword introduces a statement to ... (*direct pointer*).
 
 ## Operators
 
+#### Assignment
+
+...  | ...
+-----|----
+`=`  | 
+`#=` | 
+`+=` | 
+`-=` | 
+
 #### Calc
 
 ... | ...
@@ -425,31 +434,40 @@ The `ref` keyword introduces a statement to ... (*direct pointer*).
 `/` | divide
 `%` | 
 
-#### Assignment
+#### Comparison
 
-...  | ...
------|----
-`=`  | 
-`#=` | 
-`+=` | 
-`-=` | 
+...   | ...
+------|----
+`==`  | 
+`===` | 
+`!=`  | 
+`!==` | 
+`&&`  | and
+`||`  | or
+`<`   | 
+`>`   | 
+`=<`  | 
+`>=`  | 
+`<=>` | 
+`~=`  | pattern matching
+`~==` | 
 
 #### ...
 
 ...  | ...
 -----|----
-`|?` | filter
-`|>` | map
-`| ` | reduce
+`|?` | [filter](#value)
+`|>` | [map](#map-operator)
+`| ` | [reduce](#reduce-operator)
+`|.` | [pluck](#pluck-operator)
 
-#### pipe
+#### misc
 
 ...   | ...
 ------|----
 `>>`  | pipe
 `>>>` | deep pipe
-
-
+`>=<` | swap
 
 ---
 
