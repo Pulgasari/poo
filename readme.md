@@ -132,8 +132,6 @@ fn whileLoop = cond => decorateCombinator (
 [`| `](#reduce-operator)
 [`|.`](#pluck-operator)
 
-`=+` `<+` `+>` `~>` `==>` `<>` `>=<` `|~` `|=` `|#` `..`
-
 ## Keywords
 
 #### Expression Level
