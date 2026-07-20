@@ -86,7 +86,7 @@ fn whileLoop = cond => decorateCombinator (
 
 #### ...
 
-`=+` `<+` `+>` `~>` `==>` `<>` `>=<`
+`=+` `<+` `+>` `~>` `==>` `<>` `>=<` `|~`
 
 ## Keywords
 
