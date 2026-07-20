@@ -52,7 +52,7 @@ Coding sucks.
 [`pkg`](#pkg)
 [`ref`](#ref)
 [`return`](#return) 
-['static`](#static)
+[`static`](#static)
 [`switch`](#switch)
 [`use`](#use)
 [`val`](#val)
