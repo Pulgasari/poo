@@ -613,7 +613,7 @@ pets.map >> toUpperCase reverse |> @.reverse();
 
 ### Number
 
-Represents all numerical data, including both integers ([`Int`]{#int)) and floating-point decimals ([(`Float`](#float)). 
+Represents all numerical data, including both integers ([`Int`](#int)) and floating-point decimals ([`Float`](#float)). 
 
 To improve readability when working with massive numbers, digit separating underscores (`_`) can be placed freely within the literal representation.
 
