@@ -90,47 +90,7 @@ fn whileLoop = cond => decorateCombinator (
 [`Tuple`](#tuple) 
 [`Union`](#union)
 
----
-
-## Packages
-
-[`audio`](#audio)
-[`db`](#db)
-[`fs`](#fs)
-[`img`](#img)
-[`io`](#io)
-[`md`](#md)
-[`url`](#url)
-[`video`](#video)
-
----
-
-# Operators & Keywords
-
-## Operators
-
-[`=`](#)
-[`=#`](#)
-[`+=`](#)
-[`-=`](#)
-[`*=`](#)
-
-[`+`](#)
-[`-`](#)
-[`*`](#)
-[`/`](#)
-[`%`](#)
-
-[`~=`](#) [`~==`](#) [`==`](#) [`===`](#) [`!=`](#) [`!==`](#) [`>`](#) [`<`](#) [`>=`](#) [`=<`](#) [`<=>`](#) [`||`](#) [`&&`](#)
-
-[`>>`](#) [`>>>`](#) [`!>>`](#) [`?!>`](#) [`??>`](#)
-
-[`|?`](#filter-operator)
-[`|>`](#map-operator)
-[`| `](#reduce-operator)
-[`|.`](#pluck-operator)
-
-## Keywords
+## Keywords && Operators
 
 [`as`](#as)
 [`and`](#and) 
@@ -154,6 +114,50 @@ fn whileLoop = cond => decorateCombinator (
 [`use`](#use)
 [`val`](#val)
 [`yield`](#yield)
+
+[`=`](#)
+[`=#`](#)
+[`+=`](#)
+[`-=`](#)
+[`*=`](#)
+[`+`](#)
+[`-`](#)
+[`*`](#)
+[`/`](#)
+[`%`](#)
+[`~=`](#)
+[`~==`](#)
+[`==`](#)
+[`===`](#)
+[`!=`](#)
+[`!==`](#)
+[`>`](#)
+[`<`](#)
+[`>=`](#)
+[`=<`](#) 
+[`<=>`](#)
+[`||`](#)
+[`&&`](#)
+[`>>`](#)
+[`>>>`](#)
+[`!>>`](#)
+[`?!>`](#)
+[`??>`](#)
+[`|?`](#filter-operator)
+[`|>`](#map-operator)
+[`| `](#reduce-operator)
+[`|.`](#pluck-operator)
+
+## Packages
+
+[`audio`](#audio)
+[`db`](#db)
+[`fs`](#fs)
+[`img`](#img)
+[`io`](#io)
+[`md`](#md)
+[`url`](#url)
+[`video`](#video)
 
 ---
 
