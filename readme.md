@@ -510,7 +510,7 @@ val nums = [1, 2, 3];
 val maybe = true;
 val never = false;
 ```
-</detail>
+</details>
 
 ### Char
 
