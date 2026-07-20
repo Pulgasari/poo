@@ -158,7 +158,7 @@ pets.map >> toUpperCase reverse |> @.reverse();
 ```
 </details>
 
-### Map
+## Map
 
 <details>
 <summary><b>Example Code</b></summary>
@@ -168,7 +168,7 @@ pets.map >> toUpperCase reverse |> @.reverse();
 ```
 </details>
 
-### Number
+## Number
 
 Represents all numerical data, including both integers ([`Int`](#int)) and floating-point decimals ([`Float`](#float)). 
 
@@ -184,7 +184,7 @@ val big = 10_000_000; // 10000000
 ```
 </details>
 
-### Pattern
+## Pattern
 
 Formal structural layouts utilized directly during conditional type assertions and robust pattern matching rules (`~=`).
 
@@ -196,7 +196,7 @@ Formal structural layouts utilized directly during conditional type assertions a
 ```
 </details>
 
-### Queue
+## Queue
 
 High-performance, built-in structural options providing out-of-the-box FIFO and LIFO mechanics.
 
@@ -208,7 +208,7 @@ High-performance, built-in structural options providing out-of-the-box FIFO and 
 ```
 </details>
 
-### Record
+## Record
 
 A structurally rigid set of key-value assignments (`key: value`), initialized by utilizing the object rigidity descriptor `#{...}`. It provides optimized compile-time static maps.
 
@@ -220,7 +220,7 @@ val userRecord = #{name: "Udo", age: 60};
 ```
 </details>
 
-### RegExp
+## RegExp
 
 Pattern sequences built for fast text extraction and character matching evaluations.
 
@@ -232,7 +232,7 @@ Pattern sequences built for fast text extraction and character matching evaluati
 ```
 </details>
 
-### Set
+## Set
 
 Highly performant collections storing entirely unique values, safely ignoring duplication events.
 
@@ -244,7 +244,7 @@ Highly performant collections storing entirely unique values, safely ignoring du
 ```
 </details>
 
-### Stack
+## Stack
 
 High-performance, built-in structural options providing out-of-the-box FIFO and LIFO mechanics.
 
@@ -256,7 +256,7 @@ High-performance, built-in structural options providing out-of-the-box FIFO and 
 ```
 </details>
 
-### Store
+## Store
 
 Containers built for handling observable, reactive global state changes or event listeners seamlessly.
 
@@ -268,7 +268,7 @@ Containers built for handling observable, reactive global state changes or event
 ```
 </details>
 
-### String
+## String
 
 A sequential array of text characters. Poo natively supports single quotes (`'...'`), double quotes (`"..."`) featuring runtime variable expansion via the `$` token, and backticks (`` `...` ``) for complex template string injection using `${expression}` syntax.
 
@@ -282,7 +282,7 @@ val greeting = `Hello ${name}!`;
 ```
 </details>
 
-### Symbol
+## Symbol
 
 Fully unique and completely unalterable internal tokens, ideal for isolating internal object metadata keys.
 
@@ -294,7 +294,7 @@ Fully unique and completely unalterable internal tokens, ideal for isolating int
 ```
 </details>
 
-### Tree
+## Tree
 
 Native branch layouts built to construct and maneuver hierarchical nested branch data models.
 
@@ -306,7 +306,7 @@ Native branch layouts built to construct and maneuver hierarchical nested branch
 ```
 </details>
 
-### Tuple
+## Tuple
 
 A fixed-size, heterogeneous collection containing predefined value sequences wrapped inside `#(...)`. Each index is rigidly locked to a specific type footprint upon declaration. Index elements can be updated, but only if the incoming modification strictly conforms to the expected type signature of that slot.
 
@@ -318,7 +318,7 @@ val userTuple = #("Udo", 60, true); // Strict schema slot layout: (String, Numbe
 ```
 </details>
 
-### Union
+## Union
 
 Multi-faceted type definitions that allow a variable footprint to seamlessly accept values matching multiple distinct structural footprints.
 
