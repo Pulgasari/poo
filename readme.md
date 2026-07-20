@@ -477,13 +477,17 @@ The `ref` keyword introduces a statement to ... (*direct pointer*).
 [`Tuple`](#tuple) 
 [`Union`](#union)
 
-### Array
+
+<details>
+<summary>### Array</summary>
 
 ```js
 val pets = new Array;
 val pets = ['bird', 'cat', 'dog', 'fish'];
 val nums = [1, 2, 3];
 ```
+
+</details>
 
 ### Blob
 
