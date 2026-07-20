@@ -179,6 +179,7 @@ fn sum =  a  b  => print (a * b); // commas are optional
 
 <details>
 <summary><strong>Call a function</strong></summary>
+
 ```scala
 // no arguments = enforced parens
 callSth ();
