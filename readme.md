@@ -146,7 +146,7 @@ val #fix  = "constant!"; // real constant (compiletime)
 ```javascript
 val #compilerState = "broken"; // compile-time constant
 ```
-</detail>
+</details>
 
 <details>
 <summary><b>Seal a Value</b></summary>
