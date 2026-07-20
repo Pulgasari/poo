@@ -306,11 +306,20 @@ The `do` keyword is most likely the awkward operator of the language because it'
 
 On an statement introduced by `do` more the keywords `and`, `of`, `on` and `or` became also avaible which (except `or`) could only be used in this context.
 
-### 1. `do` as a line guard
+<details>
+<summary><b>as a line guard</b></summary>
 
-### 2. `do` as an expression guard
+...
+</details>
 
-### 3. `do` as an human-readable code
+<details>
+<summary><b>as an expression guard</b></summary>
+
+...
+</details>
+
+<details>
+<summary><b>as an human-readable code</b></summary>
 
 Let's assume we have sth. like this:
 
@@ -340,6 +349,7 @@ However the `do` keyword enables `on` (to reference a function call on an object
 do hurt (5) on nerd and print hp of nerd;
 do hurt 5 on nerd and print hp of nerd;
 ```
+</details>
 
 ## Boundary Control (The Three-Tier Scope Model)
 
@@ -356,6 +366,9 @@ Keyword | Dependency Type | Prefix in Code | Write Behavior
 #### `use`
 
 The `use` keyword introduces a statement to declare an object or value to be absorbed in its current state (*static snapshot*).
+
+<details>
+<summary><b>Example Code</b></summary>
 
 ```javascript
 val mood = 'grumpy'; 
@@ -381,6 +394,7 @@ obj nerd = {
 do nerd.hurt(5) and print nerd.hp;
 do hurt (5) on nerd and print hp of nerd;
 ```
+</details>
 
 #### `cpy`
 
@@ -389,6 +403,9 @@ The `cpy` keyword introduces a statement to ... (*dynamic view*).
 The name will be prefixed with an `@`-symbol.
 
 Assigning a new value to does not change the origin's value.
+
+<details>
+<summary><b>Example Code</b></summary>
 
 ```javascript
 val fishsticks = 'yummy';
@@ -406,6 +423,7 @@ nerd.doYouLikeFishsticks(false);
 nerd.print(); // "Fishsticks are disgusting."
 print(fishsticks); // origin is still 'true'
 ```
+</details>
 
 #### `ref`
 
@@ -457,7 +475,7 @@ The `ref` keyword introduces a statement to ... (*direct pointer*).
 ...  | ...
 -----|----
 `|?` | [filter](#value)
-`|>` | [map](#map-operator)
+`\|>`| [map](#map-operator)
 `| ` | [reduce](#reduce-operator)
 `|.` | [pluck](#pluck-operator)
 
