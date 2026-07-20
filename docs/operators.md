@@ -1,6 +1,17 @@
 ## Operators
 
-#### Math / Calculation
+## Assignment
+
+Operator | Name    | ...
+---------|---------|----
+`=`      |         |
+`#=`     | seal    | seal an value or object
+`+=`     |         |
+`-=`     |         |
+`*=`     |         |
+`/=`     |         |
+
+## Calculation / Math
 
 Operator | Name      | ...
 ---------|-----------|----
@@ -8,32 +19,46 @@ Operator | Name      | ...
 `-`      | Substract |
 `*`      | Multiply  |
 `/`      | Divide    |
+`%`      |           |
 
-####
-
-Operator | Name    | ...
----------|---------|----
-`??`     | Nullish |
-`\|>`    | Pipe    |
-`?>`     |         | 
-
-#### Comparison
+## Comparison
 
 Operator | Name    | ...
 ---------|---------|----
-`\|\|`   | Or      |
-`&&`     | And     |
-`~=`     | Pattern | Pattern Matching
+`==`     | 
+`===`    | 
+`!=`     | 
+`!==`    | 
+`&&`     | and
+`||`     | or
+`<`      | 
+`>`      | 
+`=<`     | 
+`>=`     | 
+`<=>`    | 
+`~=`     | pattern matching
+`~==`    | 
 
-#### Assignment
+## ....
 
 Operator | Name    | ...
 ---------|---------|----
-`=`      |         |
-`#=`     | Seal    | seal an value or object
-`+=`     |         |
-`-=`     |         |
-`*=`     |         |
-`/=`     |         |
+`|?`     | [filter](#value)
+`\|>`    | [map](#map-operator)
+`| `     | [reduce](#reduce-operator)
+`|.`     | [pluck](#pluck-operator)
 
----
+## Misc
+
+Operator | Name    | ...
+---------|---------|----
+`>>`     | pipe
+`>>>`    | deep pipe
+`>=<`    | swap
+
+
+
+
+
+
+
