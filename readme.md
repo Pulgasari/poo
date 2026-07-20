@@ -418,6 +418,7 @@ The `ref` keyword introduces a statement to ... (*direct pointer*).
 
 <details>
 <summary><b>Example Code</b></summary>
+
 ```scala
 obj person = {
   val name = 'Udo';
@@ -465,6 +466,7 @@ By the `use` keyword one could apply the value of a ding when defining another o
 
 <details>
 <summary><b>Example Code</b></summary>
+
 ```python
 obj Person = () => {
   val name;
@@ -593,6 +595,8 @@ val nums = [1, 2, 3];
 
 ### Blob
 
+Manages raw binary chunks, bytearrays, and data stream payloads.
+
 <details>
 <summary><b>Example Code</b></summary>
 
@@ -628,6 +632,8 @@ val letter = 'c';
 
 ### Color
 
+Standardized type to represent system colors, HEX formats, or alpha color values natively.
+
 <details>
 <summary><b>Example Code</b></summary>
   
@@ -637,6 +643,8 @@ val letter = 'c';
 </details>
 
 ### Date
+
+Manages time-series data, high-resolution calendars, and system timestamps.
 
 <details>
 <summary><b>Example Code</b></summary>
@@ -648,6 +656,8 @@ val letter = 'c';
 
 ### Enum
 
+Used to define closed collections of named, immutable state constants.
+
 <details>
 <summary><b>Example Code</b></summary>
 
@@ -657,6 +667,8 @@ val letter = 'c';
 </details>
 
 ### Generator
+
+Stateful, lazy-evaluated iterable streams created using the generator syntax identifier `fn*`.
 
 <details>
 <summary><b>Example Code</b></summary>
@@ -729,6 +741,8 @@ val big = 10_000_000; // 10000000
 
 ### Pattern
 
+Formal structural layouts utilized directly during conditional type assertions and robust pattern matching rules (`~=`).
+
 <details>
 <summary><b>Example Code</b></summary>
 
@@ -738,6 +752,8 @@ val big = 10_000_000; // 10000000
 </details>
 
 ### Queue
+
+High-performance, built-in structural options providing out-of-the-box FIFO and LIFO mechanics.
 
 <details>
 <summary><b>Example Code</b></summary>
@@ -761,6 +777,8 @@ val userRecord = #{name: "Udo", age: 60};
 
 ### RegExp
 
+Pattern sequences built for fast text extraction and character matching evaluations.
+
 <details>
 <summary><b>Example Code</b></summary>
 
@@ -770,6 +788,8 @@ val userRecord = #{name: "Udo", age: 60};
 </details>
 
 ### Set
+
+Highly performant collections storing entirely unique values, safely ignoring duplication events.
 
 <details>
 <summary><b>Example Code</b></summary>
@@ -781,6 +801,8 @@ val userRecord = #{name: "Udo", age: 60};
 
 ### Stack
 
+High-performance, built-in structural options providing out-of-the-box FIFO and LIFO mechanics.
+
 <details>
 <summary><b>Example Code</b></summary>
 
@@ -790,6 +812,8 @@ val userRecord = #{name: "Udo", age: 60};
 </details>
 
 ### Store
+
+Containers built for handling observable, reactive global state changes or event listeners seamlessly.
 
 <details>
 <summary><b>Example Code</b></summary>
@@ -815,6 +839,8 @@ val greeting = `Hello ${name}!`;
 
 ### Symbol
 
+Fully unique and completely unalterable internal tokens, ideal for isolating internal object metadata keys.
+
 <details>
 <summary><b>Example Code</b></summary>
 
@@ -824,6 +850,8 @@ val greeting = `Hello ${name}!`;
 </details>
 
 ### Tree
+
+Native branch layouts built to construct and maneuver hierarchical nested branch data models.
 
 <details>
 <summary><b>Example Code</b></summary>
@@ -846,6 +874,8 @@ val userTuple = #("Udo", 60, true); // Strict schema slot layout: (String, Numbe
 </details>
 
 ### Union
+
+Multi-faceted type definitions that allow a variable footprint to seamlessly accept values matching multiple distinct structural footprints.
 
 <details>
 <summary><b>Example Code</b></summary>
