@@ -1,48 +1,50 @@
-(* EBNF für Poo (Inklusive flexibler Funktionen & Aufrufe) *)
+# PEG für Poo (Inklusive flexibler Funktionen & Aufrufe)
 
-Program             ::= { Statement } ;
-Statement           ::= PackageImport | VarDecl | FunctionDecl | ExpressionStatement ;
+Program             <- Spacing Statement*
+Statement           <- PackageImport / VarDecl / FunctionDecl / ExpressionStatement
 
-PackageImport       ::= "pkg" Identifier "::" Identifier ";" ;
-VarDecl             ::= "val" Identifier "=" Expression ";" ;
-ExpressionStatement ::= Expression ";" ;
+PackageImport       <- "pkg" Spacing Identifier "::" Identifier ";" Spacing
+VarDecl             <- "val" Spacing Identifier "=" Spacing Expression ";" Spacing
+ExpressionStatement <- Expression ";" Spacing
 
-(* Funktionsdeklarationen *)
-FunctionDecl        ::= ArrowFunctionDecl | ClassicFunctionDecl ;
-ClassicFunctionDecl ::= "fn" Identifier "(" [ IdentList ] ")" Block ;
-ArrowFunctionDecl   ::= "fn" Identifier [ "=" [ FunctionParams ] ] "=>" Statement ;
+# Funktionsdeklarationen
+FunctionDecl        <- ClassicFunctionDecl / ArrowFunctionDecl
+ClassicFunctionDecl <- "fn" Spacing Identifier "(" Spacing IdentList? ")" Spacing Block
+Block               <- "{" Spacing Statement* "}" Spacing
 
-FunctionParams      ::= "(" [ IdentList ] ")" | IdentList ;
-IdentList           ::= Identifier { [","] Identifier } ;
-Block               ::= "{" { Statement } "}" ;
+ArrowFunctionDecl   <- "fn" Spacing Identifier ( "=" Spacing FunctionParams? )? "=>" Spacing Statement
+FunctionParams      <- "(" Spacing IdentList? ")" Spacing / IdentList
+IdentList           <- Identifier ( ","? Spacing Identifier )*
 
-(* Ausdrücke & Aufrufe *)
-Expression          ::= FunctionCall | MethodCall | Literal | Identifier ;
+# Ausdrücke & Aufrufe
+# Wichtig: FunctionCall und MethodCall MÜSSEN vor Identifier stehen!
+Expression          <- FunctionCall / MethodCall / Literal / Identifier
 
-(* Erlaubt 'call()' oder 'call "arg"' oder 'call(1, 2)' *)
-FunctionCall        ::= Identifier ( ParenCallArgs | SingleBareArg ) ;
-ParenCallArgs       ::= "(" [ CallArgsList ] ")" ;
-SingleBareArg       ::= Literal | Identifier ;
+FunctionCall        <- Identifier ( ParenCallArgs / SingleBareArg )
+ParenCallArgs       <- "(" Spacing CallArgsList? ")" Spacing
+SingleBareArg       <- (Literal / Identifier) Spacing
 
-(* Argumenten-Listen (Positionell vs. Benannt/Lexikalisch) *)
-CallArgsList        ::= NamedArgsList | ExpressionList ;
-NamedArgsList       ::= NamedArg { [","] NamedArg } ;
-NamedArg            ::= Identifier ":" Expression ;
+CallArgsList        <- NamedArgsList / ExpressionList
+NamedArgsList       <- NamedArg ( ","? Spacing NamedArg )*
+NamedArg            <- Identifier ":" Spacing Expression
 
-(* Kommas sind hier komplett optional durch [","] *)
-ExpressionList      ::= Expression { [","] Expression } ;
+# Erlaubt optionale Kommas dank ","?
+ExpressionList      <- Expression ( ","? Spacing Expression )*
 
-(* Gekapselter Methodenaufruf via :: *)
-MethodCall          ::= Identifier "::" Identifier "(" [ CallArgsList ] ")" ;
+MethodCall          <- Identifier "::" Identifier "(" Spacing CallArgsList? ")" Spacing
 
-(* Literale & Datenstrukturen aus Poo *)
-Literal             ::= BoolLiteral | StringLiteral | NumberLiteral | ArrayLiteral | ListLiteral | TupleLiteral | "null" | "undefined" ;
-BoolLiteral         ::= "true" | "false" ;
-ArrayLiteral        ::= "[" [ ExpressionList ] "]" ;
-ListLiteral         ::= "#[" [ ExpressionList ] "]" ;
-TupleLiteral        ::= "#(" [ ExpressionList ] ")" ;
+# Literale & Datenstrukturen aus Poo
+Literal             <- BoolLiteral / ListLiteral / TupleLiteral / ArrayLiteral / NumberLiteral / StringLiteral / NullishLiteral
+BoolLiteral         <- ("true" / "false") Spacing
+ArrayLiteral        <- "[" Spacing ExpressionList? "]" Spacing
+ListLiteral         <- "#[" Spacing ExpressionList? "]" Spacing
+TupleLiteral        <- "#(" Spacing ExpressionList? ")" Spacing
+NullishLiteral      <- ("null" / "undefined") Spacing
 
-(* Lexikalische Basis-Regeln *)
-Identifier          ::= Letter { Letter | Digit | "_" } ;
-NumberLiteral       ::= Digit { Digit } [ "." Digit { Digit } ] ;
-StringLiteral       ::= "'" { AnyChar } "'" | '"' { AnyChar } '"' | "`" { AnyChar } "`" ;
+# Lexikalische Definitionen
+Identifier          <- < [a-zA-Z_] [a-zA-Z0-9_]* > Spacing
+NumberLiteral       <- < [0-9]+ ("." [0-9]+)? > Spacing
+StringLiteral       <- ( "'" [^']* "'" / '"' [^"]* '"' / "`" [^`]* "`" ) Spacing
+
+Spacing             <- ( [ \t\n\r] / Comment )*
+Comment             <- "//" [^\n]* "\n"
