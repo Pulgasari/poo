@@ -3,7 +3,7 @@
 An `Array` is a heterogeneous, dynamically-sized, and mutable ordered collection of elements.
 
 ```poo
-val items = [1, "hello", true]
+val items = [1, "hello", true];
 ```
 
 ---
@@ -34,8 +34,9 @@ val items = [1, "hello", true]
 Appends a new element to the end of the array in-place.
 
 ```poo
-val list = [1, 2]
-list.add(3) # [1, 2, 3]
+val nums = [1, 2];
+nums.add(3); // [1, 2, 3]
+nums += 5 // [1, 2, 3, 5]
 ```
 
 ## bytesize
@@ -43,7 +44,7 @@ list.add(3) # [1, 2, 3]
 Returns the total memory size occupied by the array in bytes.
 
 ```poo
-[1, 2, 3].bytesize()
+[1, 2, 3].bytesize();
 ```
 
 ## clear
@@ -51,8 +52,8 @@ Returns the total memory size occupied by the array in bytes.
 Removes all elements from the array in-place.
 
 ```poo
-val list = [1, 2, 3]
-list.clear() # []
+val nums = [1, 2, 3];
+nums.clear(); // []
 ```
 
 ## filter
@@ -60,8 +61,8 @@ list.clear() # []
 Filters the array in-place, keeping only elements that satisfy the predicate function.
 
 ```poo
-val numbers = [1, 2, 3, 4]
-numbers.filter(x => x % 2 == 0) # [2, 4]
+val nums = [1, 2, 3, 4];
+nums.filter(x => x % 2 == 0); // [2, 4]
 ```
 
 ## fold
