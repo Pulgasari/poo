@@ -19,6 +19,7 @@ val greeting = "Hello Poo!";
 [`morph`](#morph) ·
 [`size`](#size) ·
 [`slice`](#slice) ·
+[`slugify`](#slugify) ·
 [`split`](#split) ·
 [`to_camel_case`](#to_camel_case) ·
 [`to_constant_case`](#to_constant_case) ·
@@ -29,6 +30,7 @@ val greeting = "Hello Poo!";
 [`to_morph`](#to_morph) ·
 [`to_number`](#to_number) ·
 [`to_pascal_case`](#to_pascal_case) ·
+[`to_slug_case`](#to_slug_case) ·
 [`to_snake_case`](#to_snake_case) ·
 [`to_title_case`](#to_title_case) ·
 [`to_upper_case`](#to_upper_case) ·
@@ -114,6 +116,17 @@ Extracts a section of the string between start and end indices.
 "Poo Language".slice(0, 3); // "Poo"
 ```
 
+## slugify
+
+Converts the string into a URL-friendly slug with customizable parameters (such as separator, case preservation, or accent stripping options).
+
+Defaults to standard [`to_slug_case`](#to_slug_case) behavior if no options are passed.
+
+```poo
+"Hello World!".slugify(); // "hello-world"
+"Hello World!".slugify(#{ separator: "_" }); // "hello_world"
+```
+
 ## split
 
 Splits the string into an array/list of substrings using a specified delimiter.
@@ -193,6 +206,16 @@ Converts string to `PascalCase`.
 
 ```poo
 "hello world".to_pascal_case(); // "HelloWorld"
+```
+
+## to_slug_case
+
+Converts string into a standard URL-friendly `slug-case` (lowercased, accents normalized, non-alphanumeric characters replaced with hyphens).
+
+If configuration is needed the [`slugify`](#slugify) method could be used.
+
+```poo
+"Hello World & Poo!".to_slug_case(); // "hello-world-and-poo"
 ```
 
 ## to_snake_case
