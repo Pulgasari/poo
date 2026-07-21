@@ -3,6 +3,10 @@
 ## TO DO
 
 - evtl. datatypes mit `to_fingerprint` ausstatten
+- *named capture groups* für `RegExp`
+- *scan iteration* für `RegExp`
+- *escape* in `RegExp`
+- matching `RegExp` in `switch`
 
 ## Datatype Names
 
