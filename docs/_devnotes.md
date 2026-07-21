@@ -1,5 +1,9 @@
 # devnotes
 
+## TO DO
+
+- evtl. datatypes mit `to_fingerprint` ausstatten
+
 ## Datatype Names
 
 ```md
