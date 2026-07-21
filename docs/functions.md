@@ -1,6 +1,11 @@
 # Functions
 
-Functions are first-class citizens in Poo. Poo provides three specialized function types depending on your needs: Standard (`fn`), Generator (`fn*`), and Pure Curried (`fn^`).
+Functions are first-class citizens in Poo. 
+
+Poo provides three specialized function types:
+- `fn` – [Regular Functions](#)
+- `fn*` – [Generator Functions](#)
+- `fn^` – [Pure Curried Functions](#)
 
 ---
 
@@ -35,13 +40,13 @@ addFive 10;                                // Evaluates to 15
 
 ---
 
-## `fn` – Standard Functions
+# `fn` – Regular Functions
 
 Standard functions are general-purpose functions that support side effects, flexible argument syntax, block bodies, and named arguments.
 
-### 1.1 Declarations
+## Declarations
 
-#### Arrow Functions
+### Arrow Functions
 When declaring functions with arrow expressions, parentheses around parameter lists are optional. For zero-argument functions, empty parentheses `()` can also be omitted entirely.
 
 ```poo
@@ -55,7 +60,8 @@ fn sum =  a, b  => print(a * b);
 fn sum =  a  b  => print(a * b);
 ```
 
-#### Classic Block Notation
+### Classic Block Notation
+
 For multi-statement logic or imperative blocks, use traditional function signature syntax with curly braces:
 
 ```poo
@@ -66,20 +72,18 @@ fn oldieStyle(a, b) {
 }
 ```
 
----
-
-### 1.2 Function Calling in Detail
+## Function Calling in Detail
 
 Invocation syntax for standard functions scales from ultrashort single-argument calls to explicit lexical calls.
 
-#### Zero Arguments (Parens Enforced)
+### Zero Arguments (Parens Enforced)
 Calling a function with no arguments **requires** explicit parentheses to distinguish execution from referencing the function object.
 
 ```poo
 callSth(); // Executes callSth
 ```
 
-#### Single Argument (Optional Parens)
+### Single Argument (Optional Parens)
 When passing exactly one argument, parentheses are optional:
 
 ```poo
@@ -87,7 +91,7 @@ callSth("i hate compilers"); // Standard call
 callSth "i hate compilers";   // Omitted parentheses
 ```
 
-#### Multiple Arguments (Positional)
+### Multiple Arguments (Positional)
 When passing multiple arguments positionally, commas between arguments are optional:
 
 ```poo
@@ -95,7 +99,7 @@ callSth(100, "moin!"); // Standard positional call
 callSth(100 "moin!");  // Positional call with omitted commas
 ```
 
-#### Named / Lexical Arguments
+### Named / Lexical Arguments
 Arguments can be passed by parameter name using `name: value`. Named argument calls allow passing values in any order:
 
 ```poo
@@ -104,11 +108,11 @@ callSth(b: "moin!", a: 100); // Lexical call
 
 ---
 
-## `fn*` – Generator Functions
+# `fn*` – Generator Functions
 
 Generator functions are marked with `fn*` and allow execution to be paused and resumed, producing a stream of values lazily using `yield`.
 
-### Declarations & `yield`
+## Declarations & `yield`
 
 Generators use the `fn*` keyword and can contain one or more `yield` statements:
 
@@ -122,7 +126,7 @@ fn* count_up = (limit) => {
 };
 ```
 
-### Generator Calling & Iteration
+## Generator Calling & Iteration
 
 Calling a generator function does not immediately execute its body. Instead, it returns a **Generator Iterator** object.
 
@@ -141,11 +145,11 @@ count_up(5).loop(num => print(num));
 
 ---
 
-## `fn^` – Pure Curried Functions
+# `fn^` – Pure Curried Functions
 
 The `fn^` keyword declares a **pure, curried function**. Every parameter is treated as a distinct sequential argument step, side effects are strictly forbidden by the compiler, and named arguments are disabled.
 
-### Declarations & Syntax Rules
+## Declarations & Syntax Rules
 
 ```poo
 // Syntax Grammar
@@ -157,16 +161,16 @@ fn^ <identifier> = <param_list> => <expression>;
 
 ```poo
 // Valid Pure Curried Declarations
-fn^ add = a, b => a + b;
+fn^ add   = a, b => a + b;
 fn^ greet = first, last => "Hello " + first + " " + last;
-fn^ map = callback, list => ...;
+fn^ map   = callback, list => ...;
 
 // Invalid Syntax
 fn^ add = (a, b) => a + b;   // ERROR: Parentheses not allowed
 fn^ bad = (a: 5) => a + 1;   // ERROR: Default/named params not allowed
 ```
 
-### Curried Calling & Partial Application
+## Curried Calling & Partial Application
 
 `fn^` functions are automatically curried. Calling an `fn^` function with fewer arguments than declared returns a partially applied function expecting the remaining arguments.
 
@@ -184,19 +188,17 @@ multiply 3 4;            // Evaluates to 12
 > [!NOTE]
 > Passing arguments via tuples `(a, b)` or using named arguments `(a: 1)` is forbidden for `fn^` calls to preserve strict positional currying order.
 
----
-
-### Enforced Purity & Compiler Optimizations
+## Enforced Purity & Compiler Optimizations
 
 The compiler statically verifies the body of any `fn^` function.
 
-#### Forbidden Operations
+### Forbidden Operations
 * Input/Output calls (e.g. `print()`, file access).
 * Impure built-in functions (e.g. `Math.random()`, `Date.now()`).
 * Mutation of external state.
 * Invoking standard (impure) `fn` functions.
 
-#### Compiler Authorizations
+### Compiler Authorizations
 Because purity guarantees zero side effects, the Poo compiler performs:
 1. **Constant Folding:** Compile-time pre-evaluation of constant parameters.
 2. **Subexpression Elimination:** Caching identical deterministic calls.
@@ -204,9 +206,9 @@ Because purity guarantees zero side effects, the Poo compiler performs:
 
 ---
 
-## Function Comparison
+# Function Comparison
 
-| Feature | Standard `fn` | Generator `fn*` | Pure Curried `fn^` |
+| Feature | `fn` | `fn*` | `fn^` |
 | :--- | :--- | :--- | :--- |
 | **Primary Use Case** | Imperative logic & UI | Lazy sequences & streams | Functional pipelines & math |
 | **Argument Style** | Positional or Named | Positional or Named | Curried Chain (Sequential) |
