@@ -1,5 +1,7 @@
 # Data-Types
 
+This document provides an overview about all built-in datatypes.
+
 [`Array`](#array) 
 [`Blob`](#blob) 
 [`Bool`](#bool)
@@ -23,6 +25,9 @@
 [`Tree`](#tree) 
 [`Tuple`](#tuple) 
 [`Union`](#union)
+
+> [!IMPORTANT]
+> For extended infos about each datatype, its methods etc. move to [/types](/docs/types) directory.
 
 ---
 
