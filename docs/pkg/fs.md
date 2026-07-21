@@ -1,4 +1,4 @@
-# pkg db
+# pkg fs
 
 source-code: [odin](/runtimes/odin/packages/fs.odin)
 
