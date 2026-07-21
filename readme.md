@@ -32,7 +32,7 @@ Coding sucks.
 [`Tuple`](/docs/types.md#tuple) 
 [`Union`](/docs/types.md#union)
 
-## Keywords && Operators
+## Keywords & Operators
 
 [`as`](#as)
 [`and`](#and) 
@@ -94,14 +94,14 @@ Coding sucks.
 
 ## Packages
 
-[`audio`](#audio)
-[`db`](#db)
-[`fs`](#fs)
-[`img`](#img)
-[`io`](#io)
-[`md`](#md)
-[`url`](#url)
-[`video`](#video)
+[`audio`](/docs/pkg/.md)
+[`db`](/docs/pkg/db.md)
+[`fs`](/docs/pkg/fs.md)
+[`img`](/docs/pkg/.md)
+[`io`](/docs/pkg/io.md)
+[`md`](/docs/pkg/md.md)
+[`url`](/docs/pkg/url.md)
+[`video`](/docs/pkg/video.md)
 
 ---
 
@@ -111,7 +111,7 @@ A lot of people do like **JavaScript** ...
 
 ```javascript
 // javascript original
-const whileLoop = (cond) => decorateCombinator (p => {
+const whileLoop = cond => decorate (p => {
   const results = [];
   if (typeof p === 'function' && !cond.many) {
     while (cond(p)) results.push(p.next());
@@ -129,7 +129,7 @@ const whileLoop = (cond) => decorateCombinator (p => {
 ... but some people do like **poo**. ^-^
 
 ```php
-fn whileLoop = cond => decorateCombinator (
+fn whileLoop = cond => decorate (
   p => #[] >>> (p ~= fn && !cond.many)
     ? loop (cond p) do @ += p.next()
     : loop          do @ += runWithBacktrack(p, cond) or break
@@ -145,9 +145,9 @@ Declaration Statements are introduced by the keywords: `val` `fn` `obj`
 ## Value Declaration
 
 ```go
-val num   = 123; // mutable
-val str  #= "moin!"; // immutable (runtime)
-val #fix  = "constant!"; // real constant (compiletime)
+val num   = 123; // value (mutable)
+val str  #= "moin!"; // sealed value (immutable)
+val #fix  = "constant!"; // real constant (compile-time)
 ```
 
 <details>
