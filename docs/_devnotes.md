@@ -3,13 +3,15 @@
 ## Datatype Names
 
 ```md
-Catalog Cluster
+Catalog Cluster Cohort
 Ensemble
 Group
-Pool Pure
+Hub
+Pack Pool Pure
 Register Registry
 Sequence Singles
 Uniq Unique
+Vault
 ```
 
 ## GitHub Syntax
