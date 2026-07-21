@@ -3,7 +3,7 @@
 A `List` is a homogeneous, typed, dynamically-sized, and mutable collection. All elements must share the exact same type.
 
 ```poo
-val numbers = #[1, 2, 3]
+val numbers = #[1, 2, 3];
 ```
 
 ---
@@ -34,8 +34,10 @@ val numbers = #[1, 2, 3]
 Appends a new element in-place. Throws a type error if the element's type does not match the list schema.
 
 ```poo
-val list = #[1, 2]
-list.add(3) # OK
+val list = #[1, 2];
+
+list.add(3);
+list += 3;
 ```
 
 ## bytesize
@@ -43,7 +45,7 @@ list.add(3) # OK
 Returns the contiguous memory size of the list in bytes.
 
 ```poo
-#[1, 2, 3].bytesize()
+#[1, 2, 3].bytesize();
 ```
 
 ## clear
@@ -51,8 +53,8 @@ Returns the contiguous memory size of the list in bytes.
 Removes all items from the list in-place.
 
 ```poo
-val list = #[1, 2, 3]
-list.clear() # #[]
+val list = #[1, 2, 3];
+list.clear();
 ```
 
 ## filter
@@ -60,8 +62,8 @@ list.clear() # #[]
 Filters elements in-place based on a predicate function.
 
 ```poo
-val list = #[10, 15, 20]
-list.filter(x => x > 12)
+val list = #[10, 15, 20];
+list.filter(x => x > 12); // #[15, 20]
 ```
 
 ## fold
@@ -69,7 +71,7 @@ list.filter(x => x > 12)
 Combines elements into a single value starting with an initial accumulator value.
 
 ```poo
-val total = #[10, 20, 30].fold((acc, x) => acc + x, 0) # 60
+val total = #[10, 20, 30].fold((acc, x) => acc + x, 0); // 60
 ```
 
 ## has
@@ -77,7 +79,7 @@ val total = #[10, 20, 30].fold((acc, x) => acc + x, 0) # 60
 Checks whether the value exists in the list.
 
 ```poo
-#[1, 2, 3].has(2) # true
+#[1, 2, 3].has(2); // true
 ```
 
 ## is_empty
@@ -85,7 +87,7 @@ Checks whether the value exists in the list.
 Returns `true` if the list has zero elements.
 
 ```poo
-#[].is_empty() # true
+#[].is_empty(); true
 ```
 
 ## loop
@@ -93,7 +95,7 @@ Returns `true` if the list has zero elements.
 Iterates through elements for side-effects.
 
 ```poo
-#[1, 2, 3].loop(x => print(x))
+#[1, 2, 3].loop(x => print(x)):
 ```
 
 ## morph
@@ -101,8 +103,8 @@ Iterates through elements for side-effects.
 Transforms elements in-place using the transformation callback.
 
 ```poo
-val list = #[1, 2, 3]
-list.morph(x => x * 10) # #[10, 20, 30]
+val list = #[1, 2, 3]|
+list.morph(x => x * 10); #[10, 20, 30]
 ```
 
 ## remove
@@ -110,8 +112,8 @@ list.morph(x => x * 10) # #[10, 20, 30]
 Removes the specified value from the list in-place *(Tentative)*.
 
 ```poo
-val list = #[10, 20, 30]
-list.remove(20)
+val list = #[10, 20, 30];
+list.remove(20);
 ```
 
 ## size
@@ -119,7 +121,7 @@ list.remove(20)
 Returns the element count of the list.
 
 ```poo
-#[1, 2, 3].size() # 3
+#[1, 2, 3].size(); // 3
 ```
 
 ## to_filter
@@ -127,8 +129,8 @@ Returns the element count of the list.
 Returns a new filtered list leaving the original unmodified.
 
 ```poo
-val list = #[10, 15, 20]
-val big = list.to_filter(x => x > 12)
+val list = #[10, 15, 20];
+val big = list.to_filter(x => x > 12);
 ```
 
 ## to_morph
@@ -136,6 +138,6 @@ val big = list.to_filter(x => x > 12)
 Returns a new transformed list leaving the original unmodified.
 
 ```poo
-val list = #[1, 2, 3]
-val scaled = list.to_morph(x => x * 10)
+val list = #[1, 2, 3];
+val scaled = list.to_morph(x => x * 10);
 ```
