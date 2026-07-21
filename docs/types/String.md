@@ -53,6 +53,23 @@ val greeting = "Hello Poo!";
 
 ---
 
+## Extend it?
+
+```md
+center count
+escape_html
+index_of is_alpha is_alphanumeric is_email is_numeric is_url is_uuid
+mask
+pad_start
+repeat reverse
+starts_with
+trim_end trim_start to_reverse truncate
+unescape_html
+word_wrap
+```
+
+---
+
 ## append
 
 Appends a substring to the end of the current string in-place.
