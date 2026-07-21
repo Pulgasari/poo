@@ -1,3 +1,19 @@
+val date_pattern = #/(?<year>\d{4})-(?<month>\d{2})/;
+val result       = date_pattern.match("2026-07");
+val year         = result.groups.year; // "2026"
+
+
+val result = RegExp.match('(?<year>\d{4})-(?<month>\d{2})');
+val year   = result.groups.year; // "2026"
+
+
+val { year } = RegExp.match('(?<year>\d{4})-(?<month>\d{2})').groups; // "2026"
+
+
+
+
+///
+
 pkg cosmonaut::parser::blocks // flow
 
 fn decorate = c => c;
