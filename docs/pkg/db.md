@@ -1,6 +1,6 @@
 # pkg db
 
-source-code: [/runtimes/odin/packages/db.odin](/runtimes/odin/pkg/db.odin)
+source-code: [/runtimes/odin/packages/db.odin](/runtimes/odin/packages/db.odin)
 
 ---
 
