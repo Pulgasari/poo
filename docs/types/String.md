@@ -10,18 +10,26 @@ val greeting = "Hello Poo!";
 
 ## Methods
 
+[`append`](#append) ·
 [`bytesize`](#bytesize) ·
 [`has`](#has) ·
 [`invert_case`](#invert_case) ·
+[`is_case`](#is_case) ·
 [`is_empty`](#is_empty) ·
 [`join`](#join) ·
 [`loop`](#loop) ·
 [`morph`](#morph) ·
+[`prefix`](#prefix) ·
+[`prepend`](#prepend) ·
+[`replace`](#replace) ·
 [`size`](#size) ·
 [`slice`](#slice) ·
 [`slugify`](#slugify) ·
 [`split`](#split) ·
+[`suffix`](#suffix) ·
+[`switch_case`](#switch_case) ·
 [`to_camel_case`](#to_camel_case) ·
+[`to_case`](#to_case) ·
 [`to_constant_case`](#to_constant_case) ·
 [`to_flat_case`](#to_flat_case) ·
 [`to_kebab_case`](#to_kebab_case) ·
@@ -36,12 +44,23 @@ val greeting = "Hello Poo!";
 [`to_upper_case`](#to_upper_case) ·
 [`to_upper_kebab_case`](#to_upper_kebab_case) ·
 [`to_words`](#to_words) ·
-[`trim`](#trim)
+[`trim`](#trim) ·
+[`unprefix`](#unprefix) ·
+[`unsuffix`](#unsuffix)
 
 > [!NOTE]
 > All methods could be used with both snake-case and pascal-case.
 
 ---
+
+## append
+
+Appends a substring to the end of the current string in-place.
+
+```poo
+val text = "Hello";
+text.append(" World"); // "Hello World"
+```
 
 ## bytesize
 
@@ -65,6 +84,15 @@ Inverts the case of every letter in the string (lowercase becomes uppercase, upp
 
 ```poo
 "Hello World".invert_case(); // "hELLO wORLD"
+```
+
+## is_case
+
+Checks whether the string matches a specific casing style (e.g. `:camel`, `:pascal`, `:snake`, `:kebab`, `:upper`, `:lower`).
+
+```poo
+"helloWorld".is_case(:camel); // true
+"hello_world".is_case(:pascal); // false
 ```
 
 ## is_empty
@@ -98,6 +126,34 @@ Transforms each character in the string in-place using a callback function.
 ```poo
 val text = "abc";
 text.morph(c => c.to_upper_case()); // "ABC"
+```
+
+## prefix
+
+Ensures the string starts with the given prefix. Adds the prefix (with an optional separator) only if it is not already present.
+
+```poo
+"user".prefix("api", "/");     // "api/user"
+"api/user".prefix("api", "/"); // "api/user"
+"file".prefix("lib");          // "libfile"
+```
+
+## prepend
+
+Prepends a substring to the beginning of the current string in-place.
+
+```poo
+val text = "World";
+text.prepend("Hello "); // "Hello World"
+```
+
+## replace
+
+Replaces occurrences of a target substring with a new replacement string.
+
+```poo
+val text = "Hello World";
+text.replace("World", "Poo"); // "Hello Poo"
 ```
 
 ## size
@@ -135,12 +191,41 @@ Splits the string into an array/list of substrings using a specified delimiter.
 "a,b,c".split(","); // ["a", "b", "c"]
 ```
 
+## suffix
+
+Ensures the string ends with the given suffix. Adds the suffix (with an optional separator) only if it is not already present.
+
+```poo
+"document".suffix("pdf", ".");     // "document.pdf"
+"document.pdf".suffix("pdf", "."); // "document.pdf"
+"index".suffix("html");           // "indexhtml"
+```
+
+## switch_case
+
+Cycles the string's casing to the next case variant in a provided sequence of case names/symbols. If the string matches one case in the list, it transforms to the next case in order.
+
+```poo
+val text = "hello_world";
+text.switch_case(:camel, :pascal, :snake); // Converts to "helloWorld"
+text.switch_case(:camel, :pascal, :snake); // Converts to "HelloWorld"
+```
+
 ## to_camel_case
 
 Converts string to `camelCase`.
 
 ```poo
 "hello world".to_camel_case(); // "helloWorld"
+```
+
+## to_case
+
+Converts string to a target casing style specified dynamically via parameter (e.g. `:lower`, `:upper`, `:pascal`, `:camel`, `:snake`, `:kebab`, `:title`).
+
+```poo
+"hello world".to_case(:pascal); // "HelloWorld"
+"hello world".to_case(:snake);  // "hello_world"
 ```
 
 ## to_constant_case
@@ -265,4 +350,22 @@ Removes leading and trailing whitespace characters in-place.
 ```poo
 val raw = "  hello  ";
 raw.trim(); // "hello"
+```
+
+## unprefix
+
+Removes a specified prefix from the beginning of the string if it is present.
+
+```poo
+"api/user".unprefix("api/"); // "user"
+"user".unprefix("api/");     // "user"
+```
+
+## unsuffix
+
+Removes a specified suffix from the end of the string if it is present.
+
+```poo
+"file.txt".unsuffix(".txt"); // "file"
+"file".unsuffix(".txt");     // "file"
 ```
