@@ -2,6 +2,11 @@
 
 This document provides an overview about all built-in datatypes.
 
+> [!IMPORTANT]
+> For extended infos about each datatype, its methods etc. move to [/types](/docs/types) directory.
+
+---
+
 [`Array`](#array) 
 [`Blob`](#blob) 
 [`Bool`](#bool)
@@ -25,9 +30,6 @@ This document provides an overview about all built-in datatypes.
 [`Tree`](#tree) 
 [`Tuple`](#tuple) 
 [`Union`](#union)
-
-> [!IMPORTANT]
-> For extended infos about each datatype, its methods etc. move to [/types](/docs/types) directory.
 
 ---
 
@@ -361,6 +363,11 @@ Multi-faceted type definitions that allow a variable footprint to seamlessly acc
 
 ```
 </details>
+
+---
+
+> [!IMPORTANT]
+> For extended infos about each datatype, its methods etc. move to [/types](/docs/types) directory.
 
 
 
