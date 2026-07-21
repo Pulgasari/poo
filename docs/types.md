@@ -38,6 +38,33 @@ val nums = [1, 2, 3];
 ```
 </details>
 
+<details>
+<summary><b>Methods</b></summary>
+
+  <details>
+  <summary><b>checks</b></summary>
+    
+    ...
+  </details>
+  <details>
+  <summary><b>mutating</b></summary>
+
+    ...
+  </details>
+  <details>
+  <summary><b>die andern</b></summary>
+
+    ...
+  </details>
+  <details>
+  <summary><b>static</b></summary>
+
+    ...
+  </details>
+
+</details>
+
+
 ## Blob
 
 Manages raw binary chunks, bytearrays, and data stream payloads.
