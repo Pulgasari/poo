@@ -3,7 +3,13 @@
 ## Datatype Names
 
 ```md
-Catalog Cluster Ensemble Group Pool Pure Register Registry Sequence Singles Uniq Unique
+Catalog Cluster
+Ensemble
+Group
+Pool Pure
+Register Registry
+Sequence Singles
+Uniq Unique
 ```
 
 ## GitHub Syntax
