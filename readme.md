@@ -8,7 +8,7 @@ Coding sucks.
 
 ## [Data-Types](/docs/types.md)
 
-[`Array`](#array) 
+[`Array`](/docs/types#array) 
 [`Blob`](#blob) 
 [`Bool`](#bool)
 [`Char`](#char)
