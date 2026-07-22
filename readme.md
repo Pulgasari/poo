@@ -144,7 +144,7 @@ Declaration Statements are introduced by the keywords: `val` `fn` `obj`
 
 ## Value Declaration
 
-```go
+```poo
 val num   = 123; // value (mutable)
 val str  #= "moin!"; // sealed value (immutable)
 val #fix  = "constant!"; // real constant (compile-time)
@@ -155,7 +155,7 @@ val #fix  = "constant!"; // real constant (compile-time)
 
 ​The `#` prefix on the name (*identifier*) of a value defines a ***compile-time constant***.
 
-```javascript
+```poo
 val #compilerState = "broken"; // compile-time constant
 ```
 </details>
@@ -165,7 +165,7 @@ val #compilerState = "broken"; // compile-time constant
 
 ​The `#=` operator makes it possible to seal (*freeze*) a value on runtime so it becomes immutable recursively (*deep-freeze*).
 
-```javascript
+```poo
 val exbf #= 'you can't change me!';
 ```
 
