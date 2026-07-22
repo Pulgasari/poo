@@ -34,8 +34,8 @@ hljs.registerLanguage('poo', function (hljs) {
 });
 
 const headerItems = signal([
-  { label: 'Docs'    , href: app.url + 'docs/'  },
-  { label: '@GitHub' , href: app.url_repo       },
+  { label: 'Docs'    , href: app.url_repo + 'docs/' },
+  { label: '@GitHub' , href: app.url_repo           },
 ]);
 function Header () {
   return html`
@@ -51,6 +51,7 @@ function Header () {
 }
 
 const menuItems = signal([
+  { label: 'Start' ,     href: app.url               },
   { label: 'Operators' , href: app.url + 'operators' },
   { label: 'Types'     , href: app.url + 'types'     },
 ]);
