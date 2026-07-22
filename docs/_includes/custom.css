@@ -108,6 +108,28 @@ body { overflow: auto; }
 /*
 .hljs- { color: inherit; font-style: normal; font-weight: normal; }
 .hljs- { color: inherit; font-style: normal; font-weight:   bold; }
+
+@table {
+  // the head of the table with names of props and default values
+  @table-head { color: #50fa7b; font-style: italic; font-weight: normal; }
+  @table-body {
+    .hljs        { #f8f8f2; }
+    .hljs-attr   { #50fa7b; italic; normal; }
+    .hljs-bullet { #f1fa8c; }
+    .hljs-doctag { inherit; normal; bold; }
+  }
+}
+
+@table {
+  @table-head    { color; font-style; font-weight; }
+  @table-default { #50fa7b; italic; normal; }
+  @body {
+    .hljs        { #f8f8f2; }
+    .hljs-attr   { #50fa7b; italic; normal; }
+    .hljs-bullet { #f1fa8c; }
+    .hljs-doctag { inherit; normal; bold; }
+  }
+}
 */
 
 .hljs              { color: #f8f8f2; }
