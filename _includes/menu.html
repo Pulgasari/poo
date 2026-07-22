@@ -11,7 +11,7 @@ import { getMetaPropsFromLSD, createHighlightJsObjectFromLSD } from '@cosmonaut/
 const { keywords, literals, builtins, operators, symbols } = getMetaPropsFromLSD(source);
 hljs.registerLanguage('poo', function (hljs) { return createHighlightJsObjectFromLSD(source, { name: 'Poo', hljs }); });  
 */
-alert('moin from menu.html!');
+//alert('moin from menu.html!');
 const app = {};
 app.name = 'POO';
 
@@ -63,7 +63,7 @@ function Menu() {
   return html`
     <nav class="sticky-top">
       <div class="menu-container">
-        <div class="menu-brand">${app.name}</div>
+        <div class="menu-brand">${app.name} (preact)</div>
         <div class="menu-items">
           ${menuItems.value.map(item => 
             html`<a href="${item.href}">${item.label}</a>`
