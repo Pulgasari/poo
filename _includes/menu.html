@@ -4,7 +4,7 @@
 import { h, render } from 'https://cdn.jsdelivr.net/npm/preact@10.19.3/+esm';
 import { signal }    from 'https://cdn.jsdelivr.net/npm/@preact/signals-core@1.5.0/+esm';
 import htm           from 'https://cdn.jsdelivr.net/npm/htm@3.1.1/+esm'; const html = htm.bind(h);
-import { marked } from 'https://cdn.jsdelivr.net/npm/marked@11.0.0/+esm';
+//import { marked } from 'https://cdn.jsdelivr.net/npm/marked@11.0.0/+esm';
 import hljs from 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/+esm';
 /*
 import { getMetaPropsFromLSD, createHighlightJsObjectFromLSD } from '@cosmonaut/lsd';
@@ -20,9 +20,9 @@ hljs.registerLanguage('poo', function (hljs) {
     name: "Poo",
     case_insensitive: false,
     keywords: {
-      keyword: "as|and|break|catch|continue|cpy|do|fail|fn|if|kill|loop|in|new|obj|or|pkg|ref|return|skip|static|switch|use|val|yield",
-      literal: "false|null|true|undefined",
-      built_in: "Array|Blob|Bool|Char|Color|Date|Enum|Generator|List|Map|Number|Queue|Pattern|Record|RegExp|Set|Stack|String|Store|Symbol|Tree|Tuple|Union"
+      keyword  : "as|and|break|catch|continue|cpy|do|fail|fn|fn\*|fn\^|if|kill|loop|in|new|obj|or|pkg|ref|return|skip|static|switch|use|val|yield",
+      literal  : "false|null|true|undefined",
+      built_in : "Array|Blob|Bool|Char|Color|Date|Enum|Generator|List|Map|Number|Queue|Pattern|Record|RegExp|Set|Stack|String|Store|Symbol|Tree|Tuple|Union"
     },
     contains: [
       hljs.COMMENT('//', '$'),
