@@ -1,0 +1,11 @@
+@import "{{ site.theme }}";
+
+/* Dein eigenes CSS kommt hier hin */
+body {
+  background-color: #ff0000;
+  font-family: 'Arial', sans-serif;
+}
+
+h1 {
+  color: #ffff00;
+}
