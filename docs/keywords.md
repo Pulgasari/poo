@@ -1,8 +1,10 @@
 # Keywords
 
-## Overview
+A keyword is a ...
 
-### Declarations & Imports
+This document provides an overview about the keywords used in Poo and links to the corresponding documents for more informations.
+
+## Declarations & Imports
 [`cpy`](#cpy) ·
 [`fn`](#fn) ·
 [`fn*`](#fn) ·
@@ -13,16 +15,16 @@
 [`use`](#use) ·
 [`val`](#val)
 
-### Error Control
+## Error Control
 [`catch`](#catch) ·
 [`fail`](#fail) ·
 [`kill`](#kill)
 
-### Execution
+## Execution
 [`return`](#return) ·
 [`yield`](#yield)
 
-### Flow Control
+## Flow Control
 [`and`](#and) ·
 [`break`](#break) ·
 [`continue`](#continue) ·
@@ -33,12 +35,34 @@
 [`skip`](#skip) ·
 [`switch`](#switch)
 
-### Expression Operators
+## Expression Operators
 [`as`](#as) ·
 [`new`](#new)
 
-### Builtins
-Array Blob Bool Char Color Date Enum Generator List Map Number Pattern Queue Record RegExp Set Stack String Store Symbol Tree Tuple Union
+## Built-in Types
+[`Array`](#array) ·
+[`Blob`](#blob) ·
+[`Bool`](#bool) ·
+[`Char`](#char) ·
+[`Color`](#color) ·
+[`Date`](#date) ·
+[`Enum`](#enum) ·
+[`Generator`](#generator) ·
+[`List`](#list) ·
+[`Map`](#map) ·
+[`Number`](#number) ·
+[`Pattern`](#pattern) ·
+[`Queue`](#queue) ·
+[`Record`](#record) ·
+[`RegExp`](#regexp) ·
+[`Set`](#set) ·
+[`Stack`](#stack) ·
+[`String`](#string) ·
+[`Store`](#store) ·
+[`Symbol`](#symbol) ·
+[`Tree`](#tree) ·
+[`Tuple`](#tuple) ·
+[`Union`](#union)
 
 ---
 
