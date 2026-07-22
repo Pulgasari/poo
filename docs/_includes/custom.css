@@ -19,6 +19,7 @@
   --zebra    : color-mix(in oklch, var(--bg), black 5%);
   --active   : var(--accent);
 
+  /*
   &[data-theme="dark"] {
     --bg      : #151515;
     --fg      : white;
@@ -41,6 +42,7 @@
     --zebra    : color-mix(in oklch, var(--bg), black 5%);
     --active   : var(--accent);
   }
+  */
 }
 
 :root {
