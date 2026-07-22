@@ -229,16 +229,18 @@ button.primary,
   color: #f8f8f2;
 }
 
-.hljs-title,
+
 .hljs-attr,
-.hljs-meta-keyword {
+.hljs-meta-keyword,
+.hljs-title {
   font-style : italic;
   color      : #50fa7b;
 }
 
-.hljs-string,
+
 .hljs-meta,
 .hljs-name,
+.hljs-string,
 .hljs-type,
 .hljs-symbol,
 .hljs-bullet,
@@ -250,17 +252,18 @@ button.primary,
 }
 
 .hljs-comment,
-.hljs-quote,
-.hljs-deletion {
+.hljs-deletion,
+.hljs-quote {
   color: #6272a4;
 }
 
+.hljs-doctag,
 .hljs-keyword,
 .hljs-selector-tag,
 .hljs-literal,
-.hljs-title,
+
 .hljs-section,
-.hljs-doctag,
+.hljs-title,
 .hljs-type,
 .hljs-name,
 .hljs-strong {
@@ -276,7 +279,10 @@ button.primary,
   font-style: italic;
 }
 
-
+/*
+.hljs-literal { color: #bd93f9; font-style: normal; font-weight: 500; }  
+.hljs-number  { color: #bd93f9; font-style: normal; font-weight: 500; }  
+*/
 
 pre {
   max-width: 100%;
@@ -294,8 +300,11 @@ code:not(pre code) {
   overflow-wrap: break-word;
 }
 
+code     { background-color: var(--bg-darker-20); }
+pre code { background-color: var(--bg-darker-20); }
 
 
+/*
 #errorlog {
   position: fixed;
   bottom: 0;
@@ -335,4 +344,4 @@ code:not(pre code) {
   text-align: right;
   cursor: pointer;
 }
-  
+*/
