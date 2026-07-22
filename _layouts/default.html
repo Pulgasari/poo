@@ -11,8 +11,6 @@
     {% include menu.html %}
     <!-- Der Inhalt der Seite -->
     {{ content }}
-    <script type="module">
-      import '/assets/js/menu.js';
-    </script>
+    <script type="module" src="{{ "/assets/js/menu.js" | relative_url }}></script>
 </body>
 </html>
