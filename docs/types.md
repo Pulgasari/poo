@@ -35,79 +35,36 @@ This document provides an overview about all built-in datatypes.
 
 ## Array
 
-<details>
-<summary><b>Example Code</b></summary>
-
-```js
+```poo
 val pets = new Array;
 val pets = ['bird', 'cat', 'dog', 'fish'];
 val nums = [1, 2, 3];
 ```
-</details>
-
-<details>
-<summary><b>Methods</b></summary>
-
-  <details>
-  <summary><b>checks</b></summary>
-    
-    ...
-  </details>
-  <details>
-  <summary><b>mutating</b></summary>
-
-    ...
-  </details>
-  <details>
-  <summary><b>die andern</b></summary>
-
-    ...
-  </details>
-  <details>
-  <summary><b>static</b></summary>
-
-    ...
-  </details>
-
-</details>
-
 
 ## Blob
 
 Manages raw binary chunks, bytearrays, and data stream payloads.
 
-<details>
-<summary><b>Example Code</b></summary>
-
-```js
+```poo
 
 ```
-</details>
 
 ## Bool
 
 A logical boolean value that can only inhabit one of two states: `true` or `false`.
 
-<details>
-<summary><b>Example Code</b></summary>
-
-```js
-val maybe = true;
-val never = false;
+```poo
+val karl_marx   = true;
+val moonlanding = false;
 ```
-</details>
 
 ## Char
 
 Represents a single, isolated textual character token.
 
-<details>
-<summary><b>Example Code</b></summary>
-
-```js scala
+```poo
 val letter = 'c';
 ```
-</details>
 
 ## Color
 
