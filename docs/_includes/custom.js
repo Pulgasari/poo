@@ -52,6 +52,10 @@ function Menu() {
   `;
 }
 
+// Set Theme
+const $root = document.documentElement;
+$root.dataset.theme = 'dracula';
+
 // Render Preact
 const appBody   = document.getElementById('app-body');
 const container = document.createElement('div');
