@@ -66,6 +66,11 @@ html { background: black; }
 body { background: var(--bg); color: var(--fg); }
 body { overflow: auto; }
 
+body { display:flex; flex-flow: column; }
+body > #app-header    { flex: 0 0 50px; }
+body > #app-footer    { flex: 0 0 50px; }
+body > .markdown-body { flex: 1 0 auto; }
+
 .shadow { box-shadow: var(--shadow); }
 
 
