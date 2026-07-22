@@ -302,8 +302,8 @@ code:not(pre code) {
   overflow-wrap: break-word;
 }
 
-code     { background-color: var(--bg-darker-20); }
-pre code { background-color: var(--bg-darker-20); }
+code     { background-color: var(--bg-darker-20)!important; }
+pre code { background-color: var(--bg-darker-20)!important; }
 
 
 /*
