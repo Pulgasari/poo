@@ -34,3 +34,4 @@ render(html`<${Menu} />`, container);
 const style = document.createElement('style');
 style.textContent = `body { background: yellow;} `;
 document.head.appendChild(style);
+alert('moin');
