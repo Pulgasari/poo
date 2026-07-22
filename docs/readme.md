@@ -111,6 +111,13 @@ Coding sucks.
 [`url`](/docs/pkg/url.md)
 [`video`](/docs/pkg/video.md)
 
+## Concepts
+
+- [Control Flow](specs/control-flow.md)
+- [Destructuring](specs/destructuring.md)
+- [Pattern Matching](specs/pattern-matching.md)
+- [Typecasting](specs/typecasting.md)
+
 ---
 
 ## Let's code!
