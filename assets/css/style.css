@@ -1,6 +1,7 @@
-/* global.css */
+/*
 @import url('https://cdn.ratcode.dev/css/reset.css');
-/*@import url('https://cdn.ratcode.dev/css/default.css');*/
+@import url('https://cdn.ratcode.dev/css/default.css');
+*/
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -152,66 +153,11 @@ body { overflow: auto; }
   strong { color: var(--accent); }
 }
 
-/* INDEX */
-
-#app.global #apps {
-  font-size   : 20px;
-  line-height : 1;
-  list-style  : none;
-  width       : 100%;
-  max-width   : 540px;
-  
-  li {
-    border-radius: 0.25rem;
-    &:nth-child(2n+1) { background: var(--zebra); }
-    
-    a {
-      border-radius   : 0.25rem;
-      display         : flex;
-      gap             : 0.5rem;
-      padding         : 0.75rem;
-      align-items     : center;
-      justify-content : space-between;
-      
-      .title { order: 1; flex: 1 1 auto; }
-      .logo  { order: 2; }
-      
-      .logo {
-        color   : var(--fg);
-        opacity : 0.25; 
-        /*height  : 24px;*/
-        height  : 20px;
-        width   : 16px;
-        display : inline-block;
-      }
-    }
-  }
-  
-}
-
 
 
 .zebra > * {
   border-radius: 0.25rem;
   &:nth-child(2n+1) { background: var(--zebra); }
-}
-
-
-
-
-
-/* placeholder via CSS, da kein textarea mehr */
-code[contenteditable]:empty::before {
-  content: attr(data-placeholder);
-  opacity: .3;
-  pointer-events: none;
-}
-
-/* cursor sichtbar machen */
-code[contenteditable] {
-  outline: none;
-  caret-color: var(--accent);
-  display: block;
 }
 
 /* BUTTONS */
