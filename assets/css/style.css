@@ -1,3 +1,6 @@
+---
+---
+@import "{{ site.theme }}";
 @import url('https://cdn.ratcode.dev/css/reset.css');
 /*
 @import url('https://cdn.ratcode.dev/css/default.css');
