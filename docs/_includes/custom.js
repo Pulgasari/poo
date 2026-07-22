@@ -32,7 +32,6 @@ hljs.registerLanguage('poo', function (hljs) {
     ]
   };
 });
-hljs.highlightAll();
 
 const headerItems = signal([
   { label: 'Docs'    , href: app.url + 'docs/'  },
