@@ -40,6 +40,7 @@
 </style>
 
 <script type="module">
+   
    import { h, render } from 'https://cdn.jsdelivr.net/npm/preact@10.19.3/+esm';
    import { signal }    from 'https://cdn.jsdelivr.net/npm/@preact/signals-core@1.5.0/+esm';
    import htm           from 'https://cdn.jsdelivr.net/npm/htm@3.1.1/+esm';
@@ -47,6 +48,46 @@
 
    const app = {};
    app.name = 'POO';
+
+import { marked } from 'https://cdn.jsdelivr.net/npm/marked@11.0.0/+esm';
+import hljs from 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/+esm';
+
+// 1. Eigene Sprache definieren
+hljs.registerLanguage('meineSprache', function(hljs) {
+    return {
+        // Name der Sprache
+        name: 'Meine Sprache',
+        // Regex für Schlüsselwörter (case-insensitive)
+        keywords: {
+            keyword: 'break|loop|val|if|else|while|for|return|func|var|const',
+            literal: 'true|false|null|undefined',
+            built_in: 'print|len|typeof'
+        },
+        // Regex für Kommentare
+        contains: [
+            hljs.COMMENT('//', '$'),                      // einzeilig
+            hljs.COMMENT('/\\*', '\\*/'),                // mehrzeilig
+            {
+                className: 'string',
+                begin: '"', end: '"',
+                contains: [hljs.BACKSLASH_ESCAPE]
+            },
+            {
+                className: 'string',
+                begin: "'", end: "'",
+                contains: [hljs.BACKSLASH_ESCAPE]
+            },
+            {
+                className: 'number',
+                begin: '\\b\\d+(\\.\\d+)?\\b'
+            },
+            {
+                className: 'operator',
+                begin: '\\+\\+|--|\\+|-|\\*|/|%|==|!=|<=|>=|<|>|&&|\\|\\||!'
+            }
+        ]
+    };
+});
 
 const menuItems = signal([
   { label: 'Home'    , href: '/'      },
