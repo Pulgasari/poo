@@ -182,7 +182,7 @@ cat  = 'meow';  // compile-time error: variable is sealed.
 
 ## Function Declaration
 
-```scala
+```poo
 // functions with no arguments
 fn doSomething = () => print "moin!";
 fn doSomething      => print "moin"!;
@@ -196,10 +196,7 @@ fn sum =  a  b  => print (a * b); // commas are optional
 fn oldieStyle (a, b) { ... }
 ```
 
-<details>
-<summary><b>Call a function</b></summary>
-
-```scala
+```poo
 // no arguments = enforced parens
 callSth ();
 
@@ -212,7 +209,6 @@ callSth (100, "moin!"); // positional call
 callSth (100 "moin!"); // positional call = optional commas
 callSth (b: "moin!", a: 100); // lexical call ("named arguments")
 ```
-</details>
 
 ## Object Declaration
 
