@@ -1,17 +1,15 @@
-<!--<div id="app"></div>-->
 <script type="module">
    
 import { h, render } from 'https://cdn.jsdelivr.net/npm/preact@10.19.3/+esm';
 import { signal }    from 'https://cdn.jsdelivr.net/npm/@preact/signals-core@1.5.0/+esm';
 import htm           from 'https://cdn.jsdelivr.net/npm/htm@3.1.1/+esm'; const html = htm.bind(h);
-//import { marked } from 'https://cdn.jsdelivr.net/npm/marked@11.0.0/+esm';
-import hljs from 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/+esm';
+import hljs          from 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/+esm';
 /*
 import { getMetaPropsFromLSD, createHighlightJsObjectFromLSD } from '@cosmonaut/lsd';
 const { keywords, literals, builtins, operators, symbols } = getMetaPropsFromLSD(source);
 hljs.registerLanguage('poo', function (hljs) { return createHighlightJsObjectFromLSD(source, { name: 'Poo', hljs }); });  
 */
-//alert('moin from menu.html!');
+
 const app = {};
 app.name = 'POO';
 
@@ -26,29 +24,11 @@ hljs.registerLanguage('poo', function (hljs) {
     },
     contains: [
       hljs.COMMENT('//', '$'),
-      {
-        className: 'string',
-        begin: '"', end: '"',
-        contains: [hljs.BACKSLASH_ESCAPE]
-      },
-      {
-        className: 'string',
-        begin: "'", end: "'",
-        contains: [hljs.BACKSLASH_ESCAPE]
-      },
-      {
-        className: 'string',
-        begin: '`', end: '`',
-        contains: [hljs.BACKSLASH_ESCAPE]
-      },
-      {
-        className: 'number',
-        begin: '0[xX][0-9a-fA-F_]+|0[bB][01_]+|\\d[\\d_]*\\.\\d[\\d_]*(?:[eE][+-]?\\d+)?|\\d[\\d_]*'
-      },
-      {
-        className: 'operator',
-        begin: '\\?\\?=|~==|===|!==|<=>|>>>|>=<|\\+=|-=|\\*=|/=|#=|~=|==|!=|=<|>=|\\|\\||&&|\\?\\?|>>|\\|\\?|\\|>|\\|\\.|=|<|>|\\+|-|\\*|/|%'
-      }
+      { className: 'string', begin: '"', end: '"', contains: [hljs.BACKSLASH_ESCAPE] },
+      { className: 'string', begin: "'", end: "'", contains: [hljs.BACKSLASH_ESCAPE] },
+      { className: 'string', begin: '`', end: '`', contains: [hljs.BACKSLASH_ESCAPE] },
+      { className: 'number', begin: '0[xX][0-9a-fA-F_]+|0[bB][01_]+|\\d[\\d_]*\\.\\d[\\d_]*(?:[eE][+-]?\\d+)?|\\d[\\d_]*' },
+      { className: 'operator', begin: '\\?\\?=|~==|===|!==|<=>|>>>|>=<|\\+=|-=|\\*=|/=|#=|~=|==|!=|=<|>=|\\|\\||&&|\\?\\?|>>|\\|\\?|\\|>|\\|\\.|=|<|>|\\+|-|\\*|/|%' }
     ]
   };
 });
@@ -74,22 +54,12 @@ function Menu() {
   `;
 }
 
-/*
+// Render Preact
+const appBody   = document.getElementById('app-body');
 const container = document.createElement('div');
-document.body.prepend(container);
-render(html`<${Menu} />`, container);
-*/
-const container = document.createElement('div');
-const appBody = document.getElementById('app-body');
 appBody.prepend(container);
 render(html`<${Menu} />`, container);
 
-/*
-const style = document.createElement('style');
-style.textContent = `body { background: yellow;} `;
-document.head.appendChild(style);
-*/
-//alert('moin from preact!');
 </script>
 
 
