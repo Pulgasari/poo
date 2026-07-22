@@ -34,8 +34,9 @@
 }
 
 :root {
-  --font     : "JetBrains Mono", monospace;
-  --fontSize : 12px;
+  --font      : sans-serif;
+  --font-code : "JetBrains Mono", monospace;
+  --fontSize  : 12px;
   
   --accent-5  : hsl(from var(--accent) h s l / 0.05);
   --accent-10 : hsl(from var(--accent) h s l / 0.10);
