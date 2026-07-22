@@ -17,9 +17,9 @@ Coding sucks.
 
 ## [Data-Types](types.md)
 
-[`Array`](types/array) 
-[`Blob`](types/blob) 
-[`Bool`](types/bool)
+[`Array`](types/Array)
+[`Blob`](types/Blob) 
+[`Bool`](types/Bool)
 [`Char`](types.md#char)
 [`Color`](types.md#color)
 [`Date`](types.md#date)
