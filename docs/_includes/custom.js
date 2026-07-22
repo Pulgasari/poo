@@ -8,10 +8,11 @@ const { keywords, literals, builtins, operators, symbols } = getMetaPropsFromLSD
 hljs.registerLanguage('poo', function (hljs) { return createHighlightJsObjectFromLSD(source, { name: 'Poo', hljs }); });  
 */
 
-const app = {};
+let app = {}, poo = {};
 app.name     = 'POO';
 app.url      = 'https://pulgasari.github.io/poo/';
 app.url_repo = 'https://github.com/pulgasari/poo/';
+poo.punctuations = `{}[]();:,.`;
 
 hljs.registerLanguage('poo', function (hljs) {
   return {
