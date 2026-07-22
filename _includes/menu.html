@@ -50,23 +50,19 @@ import hljs from 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/+esm';
 const app = {};
 app.name = 'POO';
 
-
-
-// 1. Eigene Sprache definieren
 hljs.registerLanguage('meineSprache', function(hljs) {
-    return {
-        // Name der Sprache
-        name: 'Meine Sprache',
-        // Regex für Schlüsselwörter (case-insensitive)
-        keywords: {
-            keyword: 'break|loop|val|if|else|while|for|return|func|var|const',
-            literal: 'true|false|null|undefined',
-            built_in: 'print|len|typeof'
+   return {
+      name: 'Poo',
+      // Regex für Schlüsselwörter (case-insensitive)
+      keywords: {
+         keyword  : 'break|loop|val|if|else|while|for|return|func|var|const',
+         literal  : 'true|false|null|undefined',
+         built_in : 'print|len|typeof'
         },
         // Regex für Kommentare
         contains: [
-            hljs.COMMENT('//', '$'),                      // einzeilig
-            hljs.COMMENT('/\\*', '\\*/'),                // mehrzeilig
+            hljs.COMMENT('//', '$'),
+            hljs.COMMENT('/\\*', '\\*/'),
             {
                 className: 'string',
                 begin: '"', end: '"',
@@ -119,11 +115,14 @@ const style = document.createElement('style');
 style.textContent = `body { background: yellow;} `;
 document.head.appendChild(style);
 */
-alert('moin from preact!');
+//alert('moin from preact!');
 </script>
-<script>
-  alert('moin from menu.html 2!');
-</script>
+
+
+
+
+
+
 
 
 
