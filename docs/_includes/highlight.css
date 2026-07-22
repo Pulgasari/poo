@@ -39,6 +39,7 @@
 .hljs-meta-keyword { color: #50fa7b; font-style: italic; font-weight: normal; }
 .hljs-name         { color: #f1fa8c; font-style: normal; font-weight:   bold; }
 .hljs-number       { color: #bd93f9; font-style: normal; font-weight: normal; }  
+.hljs-operator     { color: #ffb86c; font-weight: bold; }
 .hljs-section      { color: inherit; font-style: normal; font-weight:   bold; }
 .hljs-selector-tag { color: inherit; font-style: normal; font-weight:   bold; }
 .hljs-string       { color: #f1fa8c; }
