@@ -119,7 +119,7 @@ document.querySelectorAll('blockquote').forEach(bq => {
   }
 });
 
-
+  /*
   // Render Preact
   const $body      = document.body;
   const container1 = document.createElement('div');
@@ -130,5 +130,20 @@ document.querySelectorAll('blockquote').forEach(bq => {
   
   render(html`<${Header} />` , container1);
   render(html`<${Menu} />`   , container2);
+
+  const $body = document.body;
+  */
+
+  const $body     = document.body;
+  const tmpHeader = document.createElement('div');
+  $body.prepend(tmpHeader);
+  render(html`<${Header} />`, tmpHeader);
+  tmpHeader.replaceWith(tmpHeader.firstElementChild);
+  
+  const tmpFooter = document.createElement('div');
+  $body.append(tmpFooter);
+  render(html`<${Menu} />`, tmpFooter);
+  tmpFooter.replaceWith(tmpFooter.firstElementChild);
+
   
 });
