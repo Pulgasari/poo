@@ -8,8 +8,8 @@ Coding sucks.
 
 ## [Data-Types](types.md)
 
-[`Array`](/docs/types.md#array) 
-[`Blob`](/docs/types.md#blob) 
+[`Array`](types.md#array) 
+[`Blob`](types#blob) 
 [`Bool`](/docs/types.md#bool)
 [`Char`](/docs/types.md#char)
 [`Color`](/docs/types.md#color)
