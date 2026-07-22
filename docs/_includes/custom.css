@@ -281,7 +281,7 @@ pre {
   overflow-x: auto;
   white-space: pre;
   padding: 0.5rem;
-  background: var(--bg-darker-20, #1e1e1e);
+  background: var(--bg-darker-20, #1e1e1e)!important;
   border-radius: 0.25rem;
 }
 code {
