@@ -52,11 +52,13 @@
 </nav>
 
 <script type="module">
-  import { h, render } from 'https://cdn.jsdelivr.net/npm/preact@10.19.3/+esm';
-import { signal } from 'https://cdn.jsdelivr.net/npm/@preact/signals-core@1.5.0/+esm';
-import htm from 'https://cdn.jsdelivr.net/npm/htm@3.1.1/+esm';
+   import { h, render } from 'https://cdn.jsdelivr.net/npm/preact@10.19.3/+esm';
+   import { signal } from 'https://cdn.jsdelivr.net/npm/@preact/signals-core@1.5.0/+esm';
+   import htm from 'https://cdn.jsdelivr.net/npm/htm@3.1.1/+esm';
+   const html = htm.bind(h);
 
-const html = htm.bind(h);
+   const app = {};
+   app.name = 'POO';
 
 const menuItems = signal([
   { label: 'Home', href: '/' },
@@ -68,7 +70,7 @@ function Menu() {
   return html`
     <nav class="sticky-top">
       <div class="menu-container">
-        <div class="menu-brand">📘 Mein Projekt</div>
+        <div class="menu-brand">${app.name}</div>
         <div class="menu-items">
           ${menuItems.value.map(item => 
             html`<a href="${item.href}">${item.label}</a>`
