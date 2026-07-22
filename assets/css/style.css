@@ -52,6 +52,7 @@
   --fg-75 : hsl(from var(--fg) h s l / 0.75);
   
   --bg-darker-10  : hsl(from var(--bg) h s calc(l - 10%));
+  --bg-darker-20  : hsl(from var(--bg) h s calc(l - 20%));
   --bg-lighter-10 : hsl(from var(--bg) h s calc(l + 10%));
   
   --shadow : 0 0 5px color-mix(in srgb, var(--bg) 90%, black);
@@ -192,9 +193,11 @@ button.primary,
    --zombie-yellow : #f1fa8c;
  }
 
+
+  
 .hljs {
   background : #282a36;
-  background : none;
+  background : --bg-darker-20;
   display    : block;
   overflow-x : auto;
   padding    : 0.5em;
