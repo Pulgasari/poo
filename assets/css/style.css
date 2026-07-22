@@ -63,7 +63,7 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 
-html, body { font-family: var(--font); font-size: var(--fontSize); }
+html, body { font-family: var(--font);      font-size: var(--fontSize); }
 pre, code  { font-family: var(--font-code); }
 
 .icon { display: inline; }
@@ -275,11 +275,14 @@ pre {
   background: var(--bg-darker-20, #1e1e1e);
   border-radius: 0.25rem;
 }
-
+code {
+  font-size: 0.8em;
+}
 code:not(pre code) {
   white-space: nowrap;
   overflow-wrap: break-word;
 }
+
 
 
 #errorlog {
