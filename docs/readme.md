@@ -6,6 +6,12 @@ Coding sucks.
 
 ---
 
+## Basics & Overviews
+
+[`Functions`](functions.md)
+[`Types`](types.md)
+[`Values`](values.md)
+
 ## [Data-Types](types.md)
 
 [`Array`](types.md#array) 
