@@ -2,5 +2,6 @@
 @import "https://cdn.ratcode.dev/css/default.css";
 
 body {
-  background-color: #880088;
+  background: black;
+  color: white;
 }
