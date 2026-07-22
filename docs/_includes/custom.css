@@ -201,6 +201,14 @@ code:not(pre code) {
 code     { background-color: var(--bg-darker-20)!important; }
 pre code { background-color: var(--bg-darker-20)!important; }
 
+#app-header,
+#app-footer {
+  align-items      : center;
+  background-color : var(--bg-darker-20)!important;
+  display          : flex;
+  padding          : 0.75rem;
+}
+
 
 /*
 #errorlog {
