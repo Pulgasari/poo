@@ -9,7 +9,9 @@ hljs.registerLanguage('poo', function (hljs) { return createHighlightJsObjectFro
 */
 
 const app = {};
-app.name = 'POO';
+app.name     = 'POO';
+app.url      = 'https://pulgasari.github.io/poo/';
+app.url_repo = 'https://github.com/pulgasari/poo/';
 
 hljs.registerLanguage('poo', function (hljs) {
   return {
@@ -32,9 +34,9 @@ hljs.registerLanguage('poo', function (hljs) {
 });
 hljs.highlightAll();
 const menuItems = signal([
-  { label: 'Home'    , href: '/'      },
-  { label: 'Docs'    , href: '/docs/' },
-  { label: '@GitHub' , href: 'https://github.com/pulgasari/poo/' },
+  { label: 'Home'    , href: app.url           },
+  { label: 'Docs'    , href: app.url + 'docs/' },
+  { label: '@GitHub' , href: app.url_repo      },
 ]);
 
 function Menu() {
