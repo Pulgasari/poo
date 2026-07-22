@@ -200,6 +200,14 @@ pre code { background-color: var(--bg-darker-20)!important; }
   p { margin: 0; }
 }
 
+
+:root {
+  --color-gh-note      : #8be9fd;
+  --color-gh-tip       : #50fa7b;
+  --color-gh-important : #bd93f9;
+  --color-gh-warning   : #f1fa8c;
+  --color-gh-caution   : #ff79c6;
+}
 .gh-alert-title {
   font-weight: bold;
   font-size: 0.9em;
