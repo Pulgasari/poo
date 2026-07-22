@@ -1,6 +1,5 @@
 @import url('https://cdn.ratcode.dev/css/reset.css');
 /*
-@import "{{ site.theme }}";
 @import url('https://cdn.ratcode.dev/css/default.css');
 */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
@@ -76,7 +75,7 @@ body { overflow: auto; }
 }
 
 /* BUTTONS */
-
+/*
 button, .btn {
   display       : flex; 
   align-items   : center; 
@@ -94,7 +93,7 @@ button.primary,
   background : var(--button-primary-bg);
   color      : var(--bg);
 }
-
+*/
  /*
  :root {
    --zombie-bg     : #282a36;
@@ -209,45 +208,3 @@ pre code { background-color: var(--bg-darker-20)!important; }
   padding          : 0.75rem;
 }
 
-
-/*
-#errorlog {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  max-height: 40vh;
-  overflow-y: auto;
-  background: #111;
-  color: #f55;
-  font: 11px/1.4 monospace;
-  z-index: 99999;
-  border-top: 2px solid #f55;
-  overscroll-behavior: contain;
-}
-#errorlog:empty { display: none; }
-#errorlog .err-entry {
-  padding: 6px 10px;
-  border-bottom: 1px solid #2a2a2a;
-}
-#errorlog .err-entry:last-child { border-bottom: none; }
-#errorlog .err-meta {
-  color: #888;
-  font-size: 10px;
-  margin-top: 2px;
-}
-#errorlog .err-clear {
-  position: sticky;
-  top: 0;
-  display: block;
-  width: 100%;
-  padding: 4px 10px;
-  background: #1e1e1e;
-  color: #888;
-  border: none;
-  border-bottom: 1px solid #333;
-  font: 10px monospace;
-  text-align: right;
-  cursor: pointer;
-}
-*/
