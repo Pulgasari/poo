@@ -18,6 +18,30 @@ hljs.registerLanguage('poo', function (hljs) {
     name: "Poo",
     case_insensitive: false,
     keywords: {
+      keyword  : "as and break catch continue cpy do fail fn if kill loop in new obj or pkg ref return skip static switch use val yield",
+      literal  : "false null true undefined",
+      built_in : "Array Blob Bool Char Color Date Enum Generator List Map Number Queue Pattern Record RegExp Set Stack String Store Symbol Tree Tuple Union"
+    },
+    contains: [
+      hljs.COMMENT('//', '$'),
+      
+      // Spezielle Keywords mit Sonderzeichen (fn* und fn^)
+      { className: 'keyword', begin: /fn[*^]/ },
+      { className: 'string', begin: '"', end: '"', contains: [hljs.BACKSLASH_ESCAPE] },
+      { className: 'string', begin: "'", end: "'", contains: [hljs.BACKSLASH_ESCAPE] },
+      { className: 'string', begin: '`', end: '`', contains: [hljs.BACKSLASH_ESCAPE] },
+      { className: 'number', begin: '0[xX][0-9a-fA-F_]+|0[bB][01_]+|\\d[\\d_]*\\.\\d[\\d_]*(?:[eE][+-]?\\d+)?|\\d[\\d_]*' },
+      { className: 'operator', begin: '\\?\\?=|~==|===|!==|<=>|>>>|>=<|\\+=|-=|\\*=|/=|#=|~=|==|!=|=<|>=|\\|\\||&&|\\?\\?|>>|\\|\\?|\\|>|\\|\\.|=|<|>|\\+|-|\\*|/|%' }
+    ]
+  };
+});
+
+/*
+hljs.registerLanguage('poo', function (hljs) {
+  return {
+    name: "Poo",
+    case_insensitive: false,
+    keywords: {
       keyword  : "as|and|break|catch|continue|cpy|do|fail|fn|fn\*|fn\^|if|kill|loop|in|new|obj|or|pkg|ref|return|skip|static|switch|use|val|yield",
       literal  : "false|null|true|undefined",
       built_in : "Array|Blob|Bool|Char|Color|Date|Enum|Generator|List|Map|Number|Queue|Pattern|Record|RegExp|Set|Stack|String|Store|Symbol|Tree|Tuple|Union"
@@ -32,6 +56,7 @@ hljs.registerLanguage('poo', function (hljs) {
     ]
   };
 });
+*/
 
 const headerItems = signal([
   { label: 'Docs'    , href: app.url_repo + 'docs/' },
