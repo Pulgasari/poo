@@ -84,6 +84,7 @@ body { overflow: auto; }
 
 .shadow { box-shadow: var(--shadow); }
 
+/*
 #app {
   display         : flex;
   flex-flow       : column nowrap;
@@ -161,7 +162,7 @@ body { overflow: auto; }
   
   strong { color: var(--accent); }
 }
-
+*/
 
 
 .zebra > * {
@@ -189,7 +190,7 @@ button.primary,
   color      : var(--bg);
 }
 
- 
+ /*
  :root {
    --zombie-bg     : #282a36;
    --zombie-fg     : #f8f8f2;
@@ -199,6 +200,7 @@ button.primary,
    --zombie-purple : #bd93f9;
    --zombie-yellow : #f1fa8c;
  }
+  */
 
 
   
