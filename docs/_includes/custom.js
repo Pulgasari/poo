@@ -18,7 +18,7 @@ poo.operators = `
   >> |> |? |! |* || && ?? =>
   == != =< >= += -= *= /= #= ~= :=
   + - * / % = < > ! & | ^ ~ #
-`);
+`;
 
 hljs.registerLanguage('poo', function (hljs) {
   return {
