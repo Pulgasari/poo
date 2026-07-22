@@ -74,8 +74,8 @@ html, body {
 body { height: 100dvh; }
 
 body { display:flex; flex-flow: column; }
-body > #app-header    { flex: 0 0 50px; }
-body > #app-footer    { flex: 0 0 50px; }
+body > #app-header    { flex: 0 0 auto; }
+body > #app-footer    { flex: 0 0 auto; }
 body > .markdown-body {
   flex: 1;
   min-height: 0;
@@ -93,84 +93,6 @@ body > .markdown-body {
   &:nth-child(2n+1) { background: var(--zebra); }
 }
   
-.hljs {
-  background : #282a36;
-  background : var(--bg-darker-20);
-  display    : block;
-  overflow-x : auto;
-  padding    : 0.5em;
-  min-height : 100%;
-}
-
-.hljs-built_in,
-.hljs-selector-tag,
-.hljs-section,
-.hljs-link {
-  color: #8be9fd;
-}
-
-.hljs-addition,
-.hljs-variable,
-.hljs-template-tag,
-.hljs-template-variable {
-  color: #f1fa8c;
-}
-
-.hljs-comment,
-.hljs-deletion,
-.hljs-quote {
-  color: #6272a4;
-}
-
-
-
-/*
-.hljs- { color: inherit; font-style: normal; font-weight: normal; }
-.hljs- { color: inherit; font-style: normal; font-weight:   bold; }
-
-@table {
-  // the head of the table with names of props and default values
-  @table-head { color: #50fa7b; font-style: italic; font-weight: normal; }
-  @table-body {
-    .hljs        { #f8f8f2; }
-    .hljs-attr   { #50fa7b; italic; normal; }
-    .hljs-bullet { #f1fa8c; }
-    .hljs-doctag { inherit; normal; bold; }
-  }
-}
-
-@table {
-  @table-head    { color; font-style; font-weight; }
-  @table-default { #50fa7b; italic; normal; }
-  @body {
-    .hljs        { #f8f8f2; }
-    .hljs-attr   { #50fa7b; italic; normal; }
-    .hljs-bullet { #f1fa8c; }
-    .hljs-doctag { inherit; normal; bold; }
-  }
-}
-*/
-
-.hljs              { color: #f8f8f2; }
-.hljs-attr         { color: #50fa7b; font-style: italic; font-weight: normal; }
-.hljs-bullet       { color: #f1fa8c; }
-.hljs-doctag       { color: inherit; font-style: normal; font-weight:   bold; }
-.hljs-emphasis     { color: inherit; font-style: italic; font-weight: normal; }
-.hljs-keyword      { color: #ff79c6; font-style: normal; font-weight:   bold; }
-.hljs-literal      { color: #bd93f9; font-style: normal; font-weight:   bold; }  
-.hljs-meta         { color: #f1fa8c; }
-.hljs-meta-keyword { color: #50fa7b; font-style: italic; font-weight: normal; }
-.hljs-name         { color: #f1fa8c; font-style: normal; font-weight:   bold; }
-.hljs-number       { color: #bd93f9; font-style: normal; font-weight: normal; }  
-.hljs-section      { color: inherit; font-style: normal; font-weight:   bold; }
-.hljs-selector-tag { color: inherit; font-style: normal; font-weight:   bold; }
-.hljs-string       { color: #f1fa8c; }
-.hljs-strong       { color: inherit; font-style: normal; font-weight:   bold; }
-.hljs-subst        { color: #f8f8f2; }
-.hljs-symbol       { color: #f1fa8c; }
-.hljs-title        { color: #50fa7b; font-style: italic; font-weight:   bold; }
-.hljs-type         { color: #f1fa8c; font-style: normal; font-weight:   bold; }
-
 
 pre {
   max-width: 100%;
