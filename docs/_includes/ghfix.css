@@ -1,0 +1,45 @@
+/* GITHUB ALERTS (CALLOUTS) */
+
+.gh-alert {
+  padding: 0.75rem 1rem;
+  margin: 1.25rem 0;
+  border-left: 4px solid var(--fg-50);
+  background: color-mix(in srgb, var(--bg) 85%, black);
+  border-radius: 0.25rem;
+  
+  p { margin: 0; }
+}
+
+
+:root {
+  --color-gh-note      : #8be9fd;
+  --color-gh-tip       : #50fa7b;
+  --color-gh-important : #bd93f9;
+  --color-gh-warning   : #f1fa8c;
+  --color-gh-caution   : #ff79c6;
+}
+.gh-alert-title {
+  font-weight: bold;
+  font-size: 0.9em;
+  margin-bottom: 0.35rem;
+  text-transform: capitalize;
+}
+.gh-alert-note      { border-color: #8be9fd; }
+.gh-alert-note      .gh-alert-title { color: #8be9fd; }
+
+.gh-alert-tip       { border-color: #50fa7b; }
+.gh-alert-tip       .gh-alert-title { color: #50fa7b; }
+
+.gh-alert-important { border-color: #bd93f9; }
+.gh-alert-important .gh-alert-title { color: #bd93f9; }
+
+.gh-alert-warning   { border-color: #f1fa8c; }
+.gh-alert-warning   .gh-alert-title { color: #f1fa8c; }
+
+.gh-alert-caution   { border-color: #ff79c6; }
+.gh-alert-caution   .gh-alert-title { color: #ff79c6; }
+
+
+
+
+
