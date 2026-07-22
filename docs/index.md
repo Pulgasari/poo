@@ -2,7 +2,7 @@
 
 Coding sucks.
 
-![Logo](./logo.jpg)
+![Logo](/logo.jpg)
 
 ---
 
