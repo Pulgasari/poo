@@ -267,21 +267,18 @@ button.primary,
 
 
 
-
-/* Code-Blöcke scrollbar machen und Container nicht sprengen */
 pre {
-  max-width: 100%;            /* nicht breiter als Elterncontainer */
-  overflow-x: auto;           /* horizontal scrollen, wenn nötig */
-  white-space: pre;           /* Zeilenumbrüche beibehalten, aber nicht umbrechen */
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre;
   padding: 0.5rem;
-  background: var(--bg-darker-10, #1e1e1e); /* optional: etwas Kontrast */
+  background: var(--bg-darker-20, #1e1e1e);
   border-radius: 0.25rem;
 }
 
-/* Inline-Code (innerhalb von Text) nicht umbrechen */
 code:not(pre code) {
   white-space: nowrap;
-  overflow-wrap: break-word;  /* falls es doch mal zu lang ist */
+  overflow-wrap: break-word;
 }
 
 
