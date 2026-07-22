@@ -34,10 +34,18 @@
   --fg-25 : hsl(from var(--fg) h s l / 0.25);
   --fg-50 : hsl(from var(--fg) h s l / 0.50);
   --fg-75 : hsl(from var(--fg) h s l / 0.75);
-  
+
+  /*
   --bg-darker-10  : hsl(from var(--bg) h s calc(l - 10%));
   --bg-darker-20  : hsl(from var(--bg) h s calc(l - 20%));
   --bg-lighter-10 : hsl(from var(--bg) h s calc(l + 10%));
+  */
+  
+  /* Mischt 80% deiner Grundfarbe mit 20% Schwarz */
+  --bg-darker-10  : color-mix(in srgb, var(--bg) 90%, black);
+  --bg-darker-20  : color-mix(in srgb, var(--bg) 80%, black);
+  --bg-lighter-10 : color-mix(in srgb, var(--bg) 90%, white);
+
   
   --shadow : 0 0 5px color-mix(in srgb, var(--bg) 90%, black);
   
