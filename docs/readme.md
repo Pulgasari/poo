@@ -6,7 +6,7 @@ Coding sucks.
 
 ---
 
-## [Data-Types](/docs/types.md)
+## [Data-Types](types.md)
 
 [`Array`](/docs/types.md#array) 
 [`Blob`](/docs/types.md#blob) 
