@@ -92,12 +92,12 @@ body { overflow: auto; }
   flex-flow       : column nowrap;
   align-items     : center;
   justify-content : space-between;
-  /*height          : 100dvh;*/
+  // height          : 100dvh;
   min-height      : 100dvh;
   gap             : 0rem;
   
   #app-head { order: 1; }
-  #app-body { order: 2; flex: 1 1 auto; min-height: 0; /*overflow: auto;*/ }
+  #app-body { order: 2; flex: 1 1 auto; min-height: 0;  }
   #app-foot { order: 3; }
 }
 
@@ -131,9 +131,6 @@ body { overflow: auto; }
   display         : flex;
   flex-direction  : column;
   justify-content : safe center;
-  /*
-  align-items     : center;
-  */
   margin          : 0 auto;
   gap             : 1rem;
   padding         : 1rem;
