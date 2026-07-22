@@ -64,21 +64,15 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 
-body      { font-family: var(--font); }
-pre, code { font-family: var(--font-code); }
-html, body { font-size: var(--fontSize); }
+html, body { font-family: var(--font); font-size: var(--fontSize); }
+pre, code  { font-family: var(--font-code); }
+
 .icon { display: inline; }
 a { color: var(--accent); }
 
 html { background: black; }
 body { background: var(--bg); color: var(--fg); }
-
-
 body { overflow: auto; }
-/*
-#app { overflow: auto; }
-#app { overflow: auto; }
-*/
 
 .shadow { box-shadow: var(--shadow); }
 
