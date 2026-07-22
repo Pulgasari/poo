@@ -41,7 +41,7 @@ function Menu() {
   return html`
     <nav class="sticky-top">
       <div class="menu-container">
-        <div class="menu-brand">${app.name} (preact)</div>
+        <div class="menu-brand">${app.name} (preact in docs)</div>
         <div class="menu-items">
           ${menuItems.value.map(item => 
             html`<a href="${item.href}">${item.label}</a>`
