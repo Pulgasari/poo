@@ -11,6 +11,7 @@ import { getMetaPropsFromLSD, createHighlightJsObjectFromLSD } from '@cosmonaut/
 const { keywords, literals, builtins, operators, symbols } = getMetaPropsFromLSD(source);
 hljs.registerLanguage('poo', function (hljs) { return createHighlightJsObjectFromLSD(source, { name: 'Poo', hljs }); });  
 */
+alert('moin from menu.html!');
 const app = {};
 app.name = 'POO';
 
@@ -52,42 +53,6 @@ hljs.registerLanguage('poo', function (hljs) {
   };
 });
 hljs.highlightAll();
-/*
-hljs.registerLanguage('poo', function(hljs) {
-   return {
-      name: 'Poo',
-      // Regex für Schlüsselwörter (case-insensitive)
-      keywords: {
-         keyword  : 'break|loop|val|if|else|while|for|return|func|var|const',
-         literal  : 'true|false|null|undefined',
-         built_in : 'print|len|typeof'
-        },
-        // Regex für Kommentare
-        contains: [
-            hljs.COMMENT('//', '$'),
-            hljs.COMMENT('/\\*', '\\*/'),
-            {
-                className: 'string',
-                begin: '"', end: '"',
-                contains: [hljs.BACKSLASH_ESCAPE]
-            },
-            {
-                className: 'string',
-                begin: "'", end: "'",
-                contains: [hljs.BACKSLASH_ESCAPE]
-            },
-            {
-                className: 'number',
-                begin: '\\b\\d+(\\.\\d+)?\\b'
-            },
-            {
-                className: 'operator',
-                begin: '\\+\\+|--|\\+|-|\\*|/|%|==|!=|<=|>=|<|>|&&|\\|\\||!'
-            }
-        ]
-    };
-});
-*/
 const menuItems = signal([
   { label: 'Home'    , href: '/'      },
   { label: 'Docs'    , href: '/docs/' },
@@ -109,9 +74,15 @@ function Menu() {
   `;
 }
 
-//const container = document.createElement('div');
-//document.body.prepend(container);
-//render(html`<${Menu} />`, container);
+/*
+const container = document.createElement('div');
+document.body.prepend(container);
+render(html`<${Menu} />`, container);
+*/
+const container = document.createElement('div');
+const appBody = document.getElementById('app-body');
+appBody.prepend(container);
+render(html`<${Menu} />`, container);
 
 /*
 const style = document.createElement('style');
