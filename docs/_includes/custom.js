@@ -33,13 +33,30 @@ hljs.registerLanguage('poo', function (hljs) {
   };
 });
 hljs.highlightAll();
-const menuItems = signal([
-  { label: 'Home'    , href: app.url           },
-  { label: 'Docs'    , href: app.url + 'docs/' },
-  { label: '@GitHub' , href: app.url_repo      },
-]);
 
-function Menu() {
+
+function Header () {
+  return html`
+    <nav class="sticky-top">
+      <div class="menu-container">
+        <div class="menu-brand">${app.name} (preact in docs)</div>
+        <div class="menu-items">
+          ${menuItems.value.map(item => 
+            html`<a href="${item.href}">${item.label}</a>`
+          )}
+        </div>
+      </div>
+    </nav>
+  `;
+}
+
+const menuItems = signal([
+    { label: 'Home'    , href: app.url            },
+    { label: 'Docs'    , href: app.url + 'docs/'  },
+    { label: 'Types'   , href: app.url + 'types/' },
+    { label: '@GitHub' , href: app.url_repo       },
+  ]);
+function Menu () {
   return html`
     <nav class="sticky-top">
       <div class="menu-container">
@@ -109,11 +126,15 @@ document.querySelectorAll('blockquote').forEach(bq => {
 });
 
 
-  // 3. Preact Menu oben in die Seite einfügen (Fallback auf document.body)
-  const targetElement = document.getElementById('app-body') || document.body;
-  const container     = document.createElement('div');
+  // Render Preact
+  const $body      = document.body;
+  const container1 = document.createElement('div');
+  const container2 = document.createElement('div');
+
+  $body.prepend (container1);
+  $body.append  (container2);
   
-  targetElement.prepend(container);
-  render(html`<${Menu} />`, container);
+  render(html`<${Header} />` , container1);
+  render(html`<${Menu} />`   , container2);
   
 });
