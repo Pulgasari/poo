@@ -62,6 +62,7 @@ function Header () {
 const menuItems = signal([
   { label: 'Start' ,     href: app.url               },
   { label: 'Functions' , href: app.url + 'functions' },
+  { label: 'Keywords'  , href: app.url + 'keywords'  },
   { label: 'Operators' , href: app.url + 'operators' },
   { label: 'Types'     , href: app.url + 'types'     },
   { label: 'Values'    , href: app.url + 'values'    },
