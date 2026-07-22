@@ -441,5 +441,8 @@ It's compiling to ODIN.
 But it could compile to Vanilla JavaScript live in the Browser as well.
 
 
+<script type="module">
+  import './assets/js/menu.js';
+</script>
 
 
