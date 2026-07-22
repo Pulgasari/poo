@@ -128,7 +128,7 @@ const whileLoop = cond => decorate (p => {
 
 ... but some people do like **poo**. ^-^
 
-```php
+```poo
 fn whileLoop = cond => decorate (
   p => #[] >>> (p ~= fn && !cond.many)
     ? loop (cond p) do @ += p.next()
