@@ -10,6 +10,15 @@
 :root {
   --accent  : red;
 
+  --accent   : #ff79c6;
+  --accent-2 : #f1fa8c;
+  --accent-3 : #50fa7b;
+  --success  : #50fa7b;
+  --bg       : #282a36;
+  --fg       : #f8f8f2;
+  --zebra    : color-mix(in oklch, var(--bg), black 5%);
+  --active   : var(--accent);
+
   &[data-theme="dark"] {
     --bg      : #151515;
     --fg      : white;
