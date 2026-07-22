@@ -8,9 +8,11 @@
 </head>
 <body>
     <!-- Include bindet das Menü automatisch ein -->
-    {% include menu.html %}
+    <div id="app>
+        <div id="app-header>{% include menu.html %}</div>
     <!-- Der Inhalt der Seite -->
-    {{ content }}
+    <div id="app-body>{{ content }}</div>
+    </div>
     <script type="module" src="{{ "/assets/js/menu.js" | relative_url }}></script>
 </body>
 </html>
