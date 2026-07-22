@@ -1,40 +1,5 @@
 <!-- Das Menü als HTML + JS -->
 <div id="app"></div>
-
-<style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
-
-    .sticky-top {
-        position: sticky;
-        top: 0;
-        background: #24292e;
-        color: white;
-        padding: 12px 20px;
-        z-index: 1000;
-    }
-    .menu-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .menu-items a {
-        color: white;
-        text-decoration: none;
-        padding: 6px 12px;
-        border-radius: 6px;
-    }
-    .menu-items a:hover {
-        background: rgba(255,255,255,0.1);
-    }
-    .menu-items a.active {
-        background: rgba(255,255,255,0.2);
-        font-weight: bold;
-    }
-</style>
-
 <script type="module">
    
 import { h, render } from 'https://cdn.jsdelivr.net/npm/preact@10.19.3/+esm';
