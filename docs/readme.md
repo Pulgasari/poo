@@ -9,6 +9,8 @@ Coding sucks.
 ## Basics & Overviews
 
 [`Functions`](functions.md)
+[`Literals`](literals.md)
+[`Operators`](operators.md)
 [`Types`](types.md)
 [`Values`](values.md)
 
