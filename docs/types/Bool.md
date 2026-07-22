@@ -3,8 +3,8 @@
 A `Bool` represents a logical boolean value: `true` or `false`.
 
 ```poo
-val active = true;
-val disabled = false;
+val karl_marx   = true;
+val moonlanding = false;
 ```
 
 ---
@@ -34,7 +34,7 @@ true.bytesize(); // 1
 Returns the inverted logical boolean value (pure/copy).
 
 ```poo
-val active = true;
+val active   = true;
 val inactive = active.not(); // false
 ```
 
