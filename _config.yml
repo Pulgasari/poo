@@ -1,3 +1,15 @@
 title: Poo
 description: Coding sucks.
 theme: jekyll-theme-primer
+
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "default"
