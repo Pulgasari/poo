@@ -31,9 +31,7 @@ hljs.registerLanguage('poo', function (hljs) {
     },
     contains: [
       hljs.COMMENT('//', '$'),
-      
-      // Spezielle Keywords mit Sonderzeichen (fn* und fn^)
-      { className: 'keyword', begin: /fn[*^]/ },
+      { className: 'keyword', begin: /fn[*^]/ }, // special keywords
       { className: 'string', begin: '"', end: '"', contains: [hljs.BACKSLASH_ESCAPE] },
       { className: 'string', begin: "'", end: "'", contains: [hljs.BACKSLASH_ESCAPE] },
       { className: 'string', begin: '`', end: '`', contains: [hljs.BACKSLASH_ESCAPE] },
@@ -43,28 +41,6 @@ hljs.registerLanguage('poo', function (hljs) {
     ]
   };
 });
-
-/*
-hljs.registerLanguage('poo', function (hljs) {
-  return {
-    name: "Poo",
-    case_insensitive: false,
-    keywords: {
-      keyword  : "as|and|break|catch|continue|cpy|do|fail|fn|fn\*|fn\^|if|kill|loop|in|new|obj|or|pkg|ref|return|skip|static|switch|use|val|yield",
-      literal  : "false|null|true|undefined",
-      built_in : "Array|Blob|Bool|Char|Color|Date|Enum|Generator|List|Map|Number|Queue|Pattern|Record|RegExp|Set|Stack|String|Store|Symbol|Tree|Tuple|Union"
-    },
-    contains: [
-      hljs.COMMENT('//', '$'),
-      { className: 'string', begin: '"', end: '"', contains: [hljs.BACKSLASH_ESCAPE] },
-      { className: 'string', begin: "'", end: "'", contains: [hljs.BACKSLASH_ESCAPE] },
-      { className: 'string', begin: '`', end: '`', contains: [hljs.BACKSLASH_ESCAPE] },
-      { className: 'number', begin: '0[xX][0-9a-fA-F_]+|0[bB][01_]+|\\d[\\d_]*\\.\\d[\\d_]*(?:[eE][+-]?\\d+)?|\\d[\\d_]*' },
-      { className: 'operator', begin: '\\?\\?=|~==|===|!==|<=>|>>>|>=<|\\+=|-=|\\*=|/=|#=|~=|==|!=|=<|>=|\\|\\||&&|\\?\\?|>>|\\|\\?|\\|>|\\|\\.|=|<|>|\\+|-|\\*|/|%' }
-    ]
-  };
-});
-*/
 
 const headerItems = signal([
   { label: 'Docs'    , href: app.url_repo + 'docs/' },
@@ -85,8 +61,10 @@ function Header () {
 
 const menuItems = signal([
   { label: 'Start' ,     href: app.url               },
+  { label: 'Functions' , href: app.url + 'functions' },
   { label: 'Operators' , href: app.url + 'operators' },
   { label: 'Types'     , href: app.url + 'types'     },
+  { label: 'Values'    , href: app.url + 'values'    },
 ]);
 function Menu () {
   return html`
@@ -98,23 +76,11 @@ function Menu () {
   `;
 }
 
-/*
-// Set Theme
-const $root = document.documentElement;
-$root.dataset.theme = 'dracula';
-
-// Render Preact
-const appBody   = document.getElementById('app-body');
-const container = document.createElement('div');
-appBody.prepend(container);
-render(html`<${Menu} />`, container);
-*/
-
 // Ausführung erst, wenn die Seite komplett geladen ist:
 window.addEventListener('DOMContentLoaded', () => {
   
   // 1. Theme setzen
-  document.documentElement.dataset.theme = 'dracula';
+  //document.documentElement.dataset.theme = 'dracula';
   
   // 2. Code-Highlighting anwenden
   hljs.highlightAll();
@@ -152,21 +118,6 @@ document.querySelectorAll('blockquote').forEach(bq => {
   }
 });
 
-  /*
-  // Render Preact
-  const $body      = document.body;
-  const container1 = document.createElement('div');
-  const container2 = document.createElement('div');
-
-  $body.prepend (container1);
-  $body.append  (container2);
-  
-  render(html`<${Header} />` , container1);
-  render(html`<${Menu} />`   , container2);
-
-  const $body = document.body;
-  */
-
   const $body     = document.body;
   const tmpHeader = document.createElement('div');
   $body.prepend(tmpHeader);
@@ -178,7 +129,6 @@ document.querySelectorAll('blockquote').forEach(bq => {
   render(html`<${Menu} />`, tmpFooter);
   tmpFooter.replaceWith(tmpFooter.firstElementChild);
 
-  
 });
 
 // :::::: HELPERS
