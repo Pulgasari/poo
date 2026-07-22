@@ -34,40 +34,34 @@ hljs.registerLanguage('poo', function (hljs) {
 });
 hljs.highlightAll();
 
-
+const headerItems = signal([
+  { label: 'Docs'    , href: app.url + 'docs/'  },
+  { label: '@GitHub' , href: app.url_repo       },
+]);
 function Header () {
   return html`
-    <nav class="sticky-top">
-      <div class="menu-container">
-        <div class="menu-brand">${app.name} (preact in docs)</div>
-        <div class="menu-items">
-          ${menuItems.value.map(item => 
-            html`<a href="${item.href}">${item.label}</a>`
-          )}
-        </div>
+    <div id='app-header'>
+      <div class="menu-brand">${app.name}</div>
+      <div class="menu-items">
+        ${headerItems.value.map(item => 
+          html`<a href="${item.href}">${item.label}</a>`
+        )}
       </div>
-    </nav>
+    </div>
   `;
 }
 
 const menuItems = signal([
-    { label: 'Home'    , href: app.url            },
-    { label: 'Docs'    , href: app.url + 'docs/'  },
-    { label: 'Types'   , href: app.url + 'types/' },
-    { label: '@GitHub' , href: app.url_repo       },
-  ]);
+  { label: 'Operators' , href: app.url + 'operators/' },
+  { label: 'Types'     , href: app.url + 'types/'     },
+]);
 function Menu () {
   return html`
-    <nav class="sticky-top">
-      <div class="menu-container">
-        <div class="menu-brand">${app.name} (preact in docs)</div>
-        <div class="menu-items">
-          ${menuItems.value.map(item => 
-            html`<a href="${item.href}">${item.label}</a>`
-          )}
-        </div>
-      </div>
-    </nav>
+    <div id='app-footer'>
+      ${menuItems.value.map(item => 
+        html`<a href="${item.href}">${item.label}</a>`
+      )}
+    </div>
   `;
 }
 
