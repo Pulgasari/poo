@@ -52,6 +52,7 @@ function Menu() {
   `;
 }
 
+/*
 // Set Theme
 const $root = document.documentElement;
 $root.dataset.theme = 'dracula';
@@ -61,3 +62,19 @@ const appBody   = document.getElementById('app-body');
 const container = document.createElement('div');
 appBody.prepend(container);
 render(html`<${Menu} />`, container);
+*/
+
+// Ausführung erst, wenn die Seite komplett geladen ist:
+window.addEventListener('DOMContentLoaded', () => {
+  // 1. Theme setzen
+  document.documentElement.dataset.theme = 'dracula';
+  // 2. Code-Highlighting anwenden
+  hljs.highlightAll();
+
+  // 3. Preact Menu oben in die Seite einfügen (Fallback auf document.body)
+  const targetElement = document.getElementById('app-body') || document.body;
+  const container     = document.createElement('div');
+  
+  targetElement.prepend(container);
+  render(html`<${Menu} />`, container);
+});
