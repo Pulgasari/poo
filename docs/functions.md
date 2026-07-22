@@ -118,25 +118,25 @@ Generators use the `fn*` keyword and can contain one or more `yield` statements:
 
 ```poo
 fn* count_up = (limit) => {
-  val current = 0;
-  loop (current < limit) {
-    yield current;
-    current = current +1;
+  val n = 0;
+  loop (n < limit) {
+    yield n;
+    n = n +1;
   }
 };
 ```
 
 ```poo
 fn* count_up = (limit) => {
-  val current = 0;
-  loop (current < limit) do yield current and current++;
+  val n = 0;
+  loop (n < limit) do yield n and n++;
 };
 ```
 
 ```poo
 fn* count_up = (limit) => {
-  val current = 0;
-  loop (current < limit) do yield current++;
+  val n = 0;
+  loop (n < limit) do yield n++;
 };
 ```
 
