@@ -191,7 +191,7 @@ cat  = 'meow';  // compile-time error: variable is sealed.
 ```poo
 // functions with no arguments
 fn doSomething = () => print "moin!";
-fn doSomething      => print "moin"!;
+fn doSomething      => print "moin!";
 
 // with arguments
 fn sum = (a, b) => print (a * b);
