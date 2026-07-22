@@ -111,7 +111,7 @@ button.primary,
   
 .hljs {
   background : #282a36;
-  background : --bg-darker-20;
+  background : var(--bg-darker-20);
   display    : block;
   overflow-x : auto;
   padding    : 0.5em;
