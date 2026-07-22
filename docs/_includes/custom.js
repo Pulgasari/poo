@@ -13,6 +13,12 @@ app.name     = 'POO';
 app.url      = 'https://pulgasari.github.io/poo/';
 app.url_repo = 'https://github.com/pulgasari/poo/';
 poo.punctuations = `{}[]();:,.`;
+poo.operators = `
+  >>> <=> === ~== !==
+  >> |> |? |! |* || && ?? =>
+  == != =< >= += -= *= /= #= ~= :=
+  + - * / % = < > ! & | ^ ~ #
+`);
 
 hljs.registerLanguage('poo', function (hljs) {
   return {
@@ -32,7 +38,7 @@ hljs.registerLanguage('poo', function (hljs) {
       { className: 'string', begin: "'", end: "'", contains: [hljs.BACKSLASH_ESCAPE] },
       { className: 'string', begin: '`', end: '`', contains: [hljs.BACKSLASH_ESCAPE] },
       { className: 'number',      begin: '0[xX][0-9a-fA-F_]+|0[bB][01_]+|\\d[\\d_]*\\.\\d[\\d_]*(?:[eE][+-]?\\d+)?|\\d[\\d_]*' },
-      { className: 'operator',    begin: '\\?\\?=|~==|===|!==|<=>|>>>|>=<|\\+=|-=|\\*=|/=|#=|~=|==|!=|=<|>=|\\|\\||&&|\\?\\?|>>|\\|\\?|\\|>|\\|\\.|=|<|>|\\+|-|\\*|/|%' },  
+      { className: 'operator',    begin: buildOperatorRegex(poo.operators) },  
       { className: 'punctuation', begin: /[{}[\]();:,.]/ }
     ]
   };
@@ -174,3 +180,17 @@ document.querySelectorAll('blockquote').forEach(bq => {
 
   
 });
+
+// :::::: HELPERS
+
+function buildOperatorRegex(opsInput) {
+  const ops = typeof opsInput === 'string' ? opsInput.trim().split(/\s+/) : opsInput;
+  
+  // Längste Operatoren zuerst sortieren (z. B. '===' vor '==')
+  const sorted = ops.sort((a, b) => b.length - a.length);
+  
+  // Regex-Sonderzeichen automatisch escapen
+  const escaped = sorted.map(op => op.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&'));
+  
+  return new RegExp(escaped.join('|'));
+}
