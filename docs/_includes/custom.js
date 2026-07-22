@@ -30,8 +30,9 @@ hljs.registerLanguage('poo', function (hljs) {
       { className: 'string', begin: '"', end: '"', contains: [hljs.BACKSLASH_ESCAPE] },
       { className: 'string', begin: "'", end: "'", contains: [hljs.BACKSLASH_ESCAPE] },
       { className: 'string', begin: '`', end: '`', contains: [hljs.BACKSLASH_ESCAPE] },
-      { className: 'number', begin: '0[xX][0-9a-fA-F_]+|0[bB][01_]+|\\d[\\d_]*\\.\\d[\\d_]*(?:[eE][+-]?\\d+)?|\\d[\\d_]*' },
-      { className: 'operator', begin: '\\?\\?=|~==|===|!==|<=>|>>>|>=<|\\+=|-=|\\*=|/=|#=|~=|==|!=|=<|>=|\\|\\||&&|\\?\\?|>>|\\|\\?|\\|>|\\|\\.|=|<|>|\\+|-|\\*|/|%' }
+      { className: 'number',      begin: '0[xX][0-9a-fA-F_]+|0[bB][01_]+|\\d[\\d_]*\\.\\d[\\d_]*(?:[eE][+-]?\\d+)?|\\d[\\d_]*' },
+      { className: 'operator',    begin: '\\?\\?=|~==|===|!==|<=>|>>>|>=<|\\+=|-=|\\*=|/=|#=|~=|==|!=|=<|>=|\\|\\||&&|\\?\\?|>>|\\|\\?|\\|>|\\|\\.|=|<|>|\\+|-|\\*|/|%' },  
+      { className: 'punctuation', begin: /[{}[\]();:,.]/ }
     ]
   };
 });
