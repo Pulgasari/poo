@@ -110,16 +110,6 @@ body { overflow: auto; }
  animation-fill-mode: forwards;
 }
 
-@keyframes bg-change {
-  0% { 
-    background-color : #282a36;
-    box-shadow       : none;
-   }
- 100% { 
-    background-color :          color-mix(in oklch, var(--bg) 90%, black);
-    box-shadow       : 0 0 10px color-mix(in oklch, var(--bg) 90%, black);
- }
-}
 #app-logo {
   display     : flex;
   flex-flow   : row nowrap;
@@ -199,160 +189,16 @@ body { overflow: auto; }
   
 }
 
-.badge {
-  font-size: .65rem; font-weight: 600; padding: .15rem .45rem; border-radius: 2rem;
-  background: var(--accent-25); color: var(--accent);
-  letter-spacing: .05em; text-transform: uppercase; vertical-align: middle;
-}
 
-.dropzone {
-  border: 2px dashed color-mix(in srgb, var(--fg) 25%, transparent);
-  border-radius: .75rem; padding: 2.5rem;
-  display: flex; flex-direction: column; align-items: center; gap: .6rem;
-  cursor: pointer; transition: border-color .15s, background .15s; font-size: .9rem; opacity: .75;
-  
-  &:hover, &.drag-over {
-    border-color: var(--accent); background: var(--accent-10); opacity: 1;
-  }
-  
-  u { color: var(--accent); text-underline-offset: 2px; }
-}
-
-.picker {
-  --radius : 0.25rem;
-  
-  display    : flex;
-  gap        : 1px;
-  
-  button {
-    background : color-mix(in srgb, var(--bg) 95%, var(--fg));
-    color      : var(--fg);
-  }
-  button.active {
-    background : var(--accent);
-    color      : var(--bg);
-  }
-  
-  button             { border-radius: 0; }
-  button:first-child { border-radius: var(--radius) 0 0 var(--radius); }
-  button:last-child  { border-radius: 0 var(--radius) var(--radius) 0; }
-}
-
-.prompt-overlay {
-  position: fixed; inset: 0; z-index: 100;
-  background: color-mix(in srgb, var(--bg) 60%, transparent);
-  backdrop-filter: blur(4px);
-  display: flex; align-items: center; justify-content: center;
-  padding: 1rem;
-}
-.prompt-dialog {
-  background: var(--bg);
-  border: 1px solid color-mix(in srgb, var(--fg) 15%, transparent);
-  border-radius: .7rem;
-  padding: 1rem;
-  width: 100%; max-width: 420px;
-  display: flex; flex-direction: column; gap: .75rem;
-  box-shadow: 0 8px 32px color-mix(in srgb, #000 30%, transparent);
-}
-.prompt-header {
-  display: flex; align-items: center; justify-content: space-between;
-  font-size: .9rem; font-weight: 600;
-}
-.prompt-title { opacity: .8; }
-.prompt-input {
-  width: 100%; padding: .5rem .65rem; border-radius: .45rem;
-  border: 1px solid color-mix(in srgb, var(--fg) 20%, transparent);
-  background: color-mix(in srgb, var(--fg) 5%, transparent);
-  color: var(--fg); font-size: .9rem;
-}
-.prompt-input:focus { outline: none; border-color: var(--accent); }
-.prompt-actions { display: flex; justify-content: flex-end; gap: .5rem; }
-
-.toggle {
-  display     : flex;
-  flex-flow   : row nowrap;
-  align-items : center;
-  gap         : 0.25rem;
-}
 
 .zebra > * {
   border-radius: 0.25rem;
   &:nth-child(2n+1) { background: var(--zebra); }
 }
 
-/* â”€â”€ panes â”€â”€ */
-.panes {
-  display: grid;
-  grid-template-columns : 1fr 1fr;
-  grid-template-rows    : 1fr; 
-  gap: 1rem;
-  flex: 1;
-  min-height: 0;
-  width : 100%;
-}
-@media (max-width: 640px) {
-  .panes { 
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-  }
-}
 
-.pane {
-  --pane-border : 1px solid color-mix(in srgb, var(--fg) 15%, var(--bg));
-  
-  display        : flex;
-  flex-direction : column;
-  border-radius  : 0.5rem;
-  border         : var(--pane-border);
-  box-shadow     : var(--shadow);
-  overflow       : hidden;
-  min-height     : 0;
-  background     : var(--zebra);
-}
 
-.pane header,
-.pane footer,
-.pane-header,
-.pane-footer {
-  display         : flex;
-  font-size       : 0.75rem;
-  align-items     : center;
-  justify-content : space-between;
-  padding         : 0.50rem 0.50rem;
-  gap             : 0.50rem;
-  background      : color-mix(in srgb, var(--fg) 5%, var(--bg));
-  min-height      : 2rem;
-  flex-shrink     : 0;
-}
 
-.pane-header > span:first-child { opacity: 0.75; }
-.pane-header  { border-bottom: var(--pane-border); }
-.pane-footer  { border-top: var(--pane-border); }
-.pane-title   { font-weight: bold; }
-.pane-actions { align-items: center; display: flex; gap: 0.25rem; }
-
-.pane > header > span:first-child { opacity: 0.75; }
-.pane > header { border-bottom: var(--pane-border); }
-.pane > footer { border-top: var(--pane-border); }
-.pane > header > .title   { font-weight: bold; display: flex; align-items: center; gap: 0.25rem; }
-.pane > header > .actions { align-items: center; display: flex; gap: 0.25rem; }
-
-.input-wrap {
-  flex: 1;
-  overflow: auto;
-  min-height: 0;
-}
-
-.input-pre {
-  margin: 0;
-  padding: .75rem;
-  font-family: 'Fira Code', 'Cascadia Code', monospace;
-  font-size: .82rem;
-  line-height: 1.6;
-  white-space: pre-wrap;
-  word-break: break-all;
-  min-height: 100%;
-}
 
 /* placeholder via CSS, da kein textarea mehr */
 code[contenteditable]:empty::before {
@@ -367,12 +213,6 @@ code[contenteditable] {
   caret-color: var(--accent);
   display: block;
 }
-
-/* ANIMATIONS */
-
-@keyframes spin { to { transform: rotate(360deg); } }
-
-.spin { display: inline-block; animation: spin .8s linear infinite; }
 
 /* BUTTONS */
 
@@ -394,156 +234,6 @@ button.primary,
   color      : var(--bg);
 }
 
-button.secondary,
-.btn-secondary,
-.btn.secondary { 
-  background : var(--button-secondary-bg);
-  color      : var(--bg);
-}
-
-button:disabled,
-  .btn:disabled { opacity: 0.25; cursor: not-allowed; }
-
-button:hover:not(:disabled),
-  .btn:hover:not(:disabled) { opacity: 1; }
-
-/* chips */
-.chip {
-  display     : flex; 
-  align-items : center; 
-  /*gap         : .3rem;*/
-  padding       : 0.25rem 0.50rem; 
-  border-radius : 0.25rem; 
-  font-size     : 0.75rem;
-  border        : 1px solid color-mix(in oklch, var(--fg) 25%, transparent);
-  background    : transparent; 
-  color         : var(--fg);
-}
-.chip:hover  { border-color: var(--accent); color: var(--accent); }
-.chip.active { background: var(--accent); border-color: var(--accent); color: var(--bg); font-weight: 600; }
-
-
-/* ==================== CODE TRANSFORMER APP ==================== */
-
-.stats {
-  display: flex;
-  align-items: center;
-  gap: .5rem;
-  margin-left: auto;
-  font-size: .78rem;
-  opacity: .6;
-  font-variant-numeric: tabular-nums;
-}
-
-.stat-badge {
-  background: color-mix(in srgb, var(--accent) 20%, transparent);
-  color: var(--accent);
-  padding: .1rem .4rem;
-  border-radius: 2rem;
-  font-size: .72rem;
-  font-weight: 600;
-}
-
-.char-count { font-size: .75rem; opacity: .4; font-variant-numeric: tabular-nums; }
-
-/* â”€â”€ input textarea â”€â”€ */
-.code-input {
-  flex: 1;
-  resize: none;
-  border: none;
-  outline: none;
-  background: transparent;
-  color: var(--fg);
-  font-size: .82rem;
-  line-height: 1.6;
-  padding: .75rem;
-  width: 100%;
-  min-height: 0;
-}
-.code-input::placeholder { opacity: .3; }
-
-/* â”€â”€ output â”€â”€ */
-.output-wrap {
-  flex: 1;
-  overflow: auto;
-  position: relative;
-  min-height: 0;
-}
-
-.output-wrap.empty {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.placeholder { opacity: .25; font-size: .875rem; }
-
-.output-pre {
-  margin: 0;
-  padding: .75rem;
-  font-size: .82rem;
-  line-height: 1.6;
-  white-space: pre-wrap;
-  word-break: break-all;
-}
-
-.err-block {
-  display: flex;
-  gap: .5rem;
-  padding: .75rem;
-  color: #f66;
-  font-size: .8rem;
-  align-items: flex-start;
-}
-.err-block pre { white-space: pre-wrap; word-break: break-all; opacity: .85; }
-
-/* â”€â”€ actions â”€â”€ */
-#app-actions { 
-  display: flex;
-  gap: .75rem; 
-  flex-shrink: 0; 
-  
-  button { box-shadow: var(--shadow); }
-}
-
-.ghost-btn {
-  display: flex; align-items: center; gap: .3rem;
-  background: transparent; border: none; color: var(--fg);
-  cursor: pointer; font-size: .75rem; opacity: .45;
-  padding: .15rem .3rem; border-radius: .3rem;
-  transition: opacity .15s;
-  margin-left: auto;
-}
-.ghost-btn:hover { opacity: 1; }
-
-/* stats pushes copy btn away from stat text */
-.pane-header .stats + .ghost-btn { margin-left: 0; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Dracula Theme v1.2.5
- *
- * https://github.com/dracula/highlightjs
- *
- * Copyright 2016-present, All rights reserved
- *
- * Code licensed under the MIT license
- *
- * @author Denis Ciccale <dciccale@gmail.com>
- * @author Zeno Rocha <hi@zenorocha.com>
- */
  
  :root {
    --zombie-bg     : #282a36;
