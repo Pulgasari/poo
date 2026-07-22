@@ -73,40 +73,6 @@ body { overflow: auto; }
   border-radius: 0.25rem;
   &:nth-child(2n+1) { background: var(--zebra); }
 }
-
-/* BUTTONS */
-/*
-button, .btn {
-  display       : flex; 
-  align-items   : center; 
-  gap           : 0.25rem;
-  padding       : 0.25rem 0.50rem; 
-  border-radius : 0.25rem; 
-  border        : none;
-  cursor        : pointer;
-  transition    : opacity 0.25s;
-}
-
-button.primary,
-.btn-primary,
-.btn.primary {
-  background : var(--button-primary-bg);
-  color      : var(--bg);
-}
-*/
- /*
- :root {
-   --zombie-bg     : #282a36;
-   --zombie-fg     : #f8f8f2;
-   --zombie-blue   : #8be9fd;
-   --zombie-green  : #50fa7b;
-   --zombie-red    : #ff79c6;
-   --zombie-purple : #bd93f9;
-   --zombie-yellow : #f1fa8c;
- }
-  */
-
-
   
 .hljs {
   background : #282a36;
@@ -124,30 +90,6 @@ button.primary,
   color: #8be9fd;
 }
 
-.hljs-keyword {
-  color: #ff79c6;
-}
-
-.hljs,
-.hljs-subst {
-  color: #f8f8f2;
-}
-
-
-.hljs-attr,
-.hljs-meta-keyword,
-.hljs-title {
-  font-style : italic;
-  color      : #50fa7b;
-}
-
-
-.hljs-meta,
-.hljs-name,
-.hljs-string,
-.hljs-type,
-.hljs-symbol,
-.hljs-bullet,
 .hljs-addition,
 .hljs-variable,
 .hljs-template-tag,
@@ -168,17 +110,25 @@ button.primary,
 .hljs- { color: inherit; font-style: normal; font-weight:   bold; }
 */
 
+.hljs              { color: #f8f8f2; }
+.hljs-attr         { color: #50fa7b; font-style: italic; font-weight: normal; }
+.hljs-bullet       { color: #f1fa8c; }
 .hljs-doctag       { color: inherit; font-style: normal; font-weight:   bold; }
 .hljs-emphasis     { color: inherit; font-style: italic; font-weight: normal; }
-.hljs-keyword      { color: inherit; font-style: normal; font-weight:   bold; }
+.hljs-keyword      { color: #ff79c6; font-style: normal; font-weight:   bold; }
 .hljs-literal      { color: #bd93f9; font-style: normal; font-weight:   bold; }  
-.hljs-name         { color: inherit; font-style: normal; font-weight:   bold; }
+.hljs-meta         { color: #f1fa8c; }
+.hljs-meta-keyword { color: #50fa7b; font-style: italic; font-weight: normal; }
+.hljs-name         { color: #f1fa8c; font-style: normal; font-weight:   bold; }
 .hljs-number       { color: #bd93f9; font-style: normal; font-weight: normal; }  
 .hljs-section      { color: inherit; font-style: normal; font-weight:   bold; }
 .hljs-selector-tag { color: inherit; font-style: normal; font-weight:   bold; }
+.hljs-string       { color: #f1fa8c; }
 .hljs-strong       { color: inherit; font-style: normal; font-weight:   bold; }
-.hljs-title        { color: inherit; font-style: normal; font-weight:   bold; }
-.hljs-type         { color: inherit; font-style: normal; font-weight:   bold; }
+.hljs-subst        { color: #f8f8f2; }
+.hljs-symbol       { color: #f1fa8c; }
+.hljs-title        { color: #50fa7b; font-style: italic; font-weight:   bold; }
+.hljs-type         { color: #f1fa8c; font-style: normal; font-weight:   bold; }
 
 
 pre {
