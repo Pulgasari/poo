@@ -4,6 +4,7 @@ A `Char` represents a single UTF-8 encoded character value.
 
 ```poo
 val letter = 'A';
+val letter = new Char('A');
 ```
 
 ---
