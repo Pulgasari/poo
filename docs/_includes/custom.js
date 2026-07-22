@@ -51,8 +51,8 @@ function Header () {
 }
 
 const menuItems = signal([
-  { label: 'Operators' , href: app.url + 'operators/' },
-  { label: 'Types'     , href: app.url + 'types/'     },
+  { label: 'Operators' , href: app.url + 'operators' },
+  { label: 'Types'     , href: app.url + 'types'     },
 ]);
 function Menu () {
   return html`
