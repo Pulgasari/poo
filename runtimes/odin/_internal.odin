@@ -8,11 +8,6 @@ import "core:slice"
 
 // Helpers to reduce Odin Boilerplate
 
-package runtime
-
-import "core:mem"
-import "core:fmt"
-
 // Angenommene Strukturen basierend auf deinem Code
 Value :: struct {
     type: Type_Enum,
