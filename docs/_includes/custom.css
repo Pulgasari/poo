@@ -75,7 +75,7 @@ body { height: 100dvh; }
 
 body { display:flex; flex-flow: column; }
 body > #app-header    { flex: 0 0 auto; }
-body > #app-footer    { flex: 0 0 auto; }
+body > #app-footer    { flex: 0 0 auto; justify-content: evenly; text-transform: uppercase; }
 body > .markdown-body {
   flex: 1;
   min-height: 0;
