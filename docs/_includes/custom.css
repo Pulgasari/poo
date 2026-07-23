@@ -68,7 +68,7 @@ body { height: 100dvh; }
 
 body { display:flex; flex-flow: column; }
 body > #app-header    { flex: 0 0 auto; }
-body > #app-footer    { flex: 0 0 auto; justify-content: evenly; text-transform: uppercase; }
+body > #app-footer    { flex: 0 0 auto; }
 body > .markdown-body {
   flex: 1;
   min-height: 0;
@@ -113,6 +113,7 @@ pre code { background-color: var(--bg-darker-20)!important; }
 }
 
 #app-header { gap: 0.5rem; justify-content: space-between; }
-#app-footer { gap: 0.5rem; justify-content: center; }
+#app-footer { gap: 0.5rem; justify-content: space-evenly;  }
+#app-footer { text-transform: uppercase; }
 
 
