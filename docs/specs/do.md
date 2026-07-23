@@ -40,5 +40,5 @@ However the `do` keyword enables `on` (to reference a function call on an object
 
 ```java
 do hurt (5) on nerd and print hp of nerd;
-do hurt 5 on nerd and print hp of nerd;
+do hurt  5  on nerd and print hp of nerd;
 ```
