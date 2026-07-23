@@ -34,13 +34,6 @@
   --fg-50 : hsl(from var(--fg) h s l / 0.50);
   --fg-75 : hsl(from var(--fg) h s l / 0.75);
 
-  /*
-  --bg-darker-10  : hsl(from var(--bg) h s calc(l - 10%));
-  --bg-darker-20  : hsl(from var(--bg) h s calc(l - 20%));
-  --bg-lighter-10 : hsl(from var(--bg) h s calc(l + 10%));
-  */
-  
-  /* Mischt 80% deiner Grundfarbe mit 20% Schwarz */
   --bg-darker-10  : color-mix(in srgb, var(--bg) 90%, black);
   --bg-darker-20  : color-mix(in srgb, var(--bg) 80%, black);
   --bg-lighter-10 : color-mix(in srgb, var(--bg) 90%, white);
@@ -95,21 +88,19 @@ body > .markdown-body {
   
 
 pre {
-  max-width: 100%;
-  overflow-x: auto;
-  white-space: pre;
-  padding: 0.5rem;
-  background: var(--bg-darker-20, #1e1e1e)!important;
-  border-radius: 0.25rem;
-}
-code {
-  font-size: 0.8em;
+  max-width     : 100%;
+  overflow-x    : auto;
+  white-space   : pre;
+  padding       : 0.5rem;
+  background    : var(--bg-darker-20)!important;
+  border-radius : 0.25rem;
 }
 code:not(pre code) {
-  white-space: nowrap;
-  overflow-wrap: break-word;
+  white-space   : nowrap;
+  overflow-wrap : break-word;
 }
 
+code     { font-size: 0.8em; }
 code     { background-color: var(--bg-darker-20)!important; }
 pre code { background-color: var(--bg-darker-20)!important; }
 
