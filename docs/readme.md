@@ -4,9 +4,6 @@ Coding sucks.
 
 ![Logo](logo.svg)
 
-| ![Logo](logo.svg) |
-|:----------------------:|
-
 ---
 
 ## Basics & Overviews
