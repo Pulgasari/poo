@@ -14,7 +14,7 @@ val sth = [] >>> @ += animals |> to_lowercase;
 val sth = animals.to_lowercase();
 ```
 
-- ohne klammern kommt `or`for `and` bzw ist höherstufiger
+- ohne klammern kommt `or`vor `and` bzw ist höherstufiger
 
 
 
