@@ -1,8 +1,17 @@
 // only written as js for syntax highlighting
 // stdlib/string.poo
 
+fn prefix = (str, prefix) => str.has(prefix) ? str : prefix + str;
+fn suffix = (str, suffix) => str.has(suffix) ? str : str + suffix;
+
+fn unprefix = (str, prefix) => str.has(prefix) ? str.slice(prefix.size, str.size) : str;  
+
 fn string_prefix (str, prefix, separator = "") {
   return str.has(prefix) ? str : prefix + separator + str;
+}
+
+fn string_suffix (str, suffix) {
+  return str.has(suffix) ? str : str + suffix;
 }
 
 fn string_unprefix (str, prefix) {
