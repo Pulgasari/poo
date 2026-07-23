@@ -16,7 +16,7 @@ as an expression guard
 
 Let's assume we have sth. like this:
 
-```javascript
+```poo
 obj Hurtable #= {
   val hp = 100;
   val hurt = (n) => hp -= n ?? 1;
@@ -31,14 +31,14 @@ val nerd = new Nerd;
 
 Now we could obviously do sth. like this:
 
-```scala
+```poo
 nerd.hurt(5); print(nerd.hp); //
 nerd.hurt 5; print nerd.hp; // alternative
 ```
 
 However the `do` keyword enables `on` (to reference a function call on an object) and `of` (to reference a property of an object) in combination with alternative syntax this results in the ability have this semantics:
 
-```java
+```poo
 do hurt (5) on nerd and print hp of nerd;
 do hurt  5  on nerd and print hp of nerd;
 ```
