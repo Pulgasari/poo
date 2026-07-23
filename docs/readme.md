@@ -2,9 +2,7 @@
 
 Coding sucks.
 
-<div id="logo" style="text-align:center;">
-	![Logo](logo.svg)
-</div>
+![Logo](logo.svg)
 
 ---
 
