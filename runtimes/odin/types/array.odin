@@ -1,8 +1,8 @@
 package types
 
 Array :: struct {
-  prototype: ^Object,
-  items:     [dynamic]Value, // Sieht die Value-Union aus value.odin!
+  prototype : ^Object,
+  items     : [dynamic]Value, // Sieht die Value-Union aus value.odin!
 }
 
 make_array :: proc(allocator := context.allocator) -> ^Array {
