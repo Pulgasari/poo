@@ -2,7 +2,10 @@
 
 Coding sucks.
 
-![Logo](logo.svg)
+<p align="center">
+  <img src="logo.svg" width="512" alt="poo logo" />
+</p>
+
 
 ---
 
