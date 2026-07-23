@@ -2,7 +2,7 @@
 
 Coding sucks.
 
-![Logo](docs/logo.svg)
+![Logo](logo.jpg)
 
 ---
 
