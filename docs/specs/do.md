@@ -10,6 +10,8 @@ loop (animals as animal) do sth += animal or break;
 loop (animals as animal) do sth += animal or break and doSthElse();
 
 val sth = [] >>> @ += animals |> to_lowercase;
+
+val sth = animals.to_lowercase();
 ```
 
 - ohne klammern kommt `or`for `and` bzw ist höherstufiger
