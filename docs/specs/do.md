@@ -4,11 +4,23 @@ The `do` keyword is most likely the awkward operator of the language because it'
 
 On an statement introduced by `do` the keywords `and`, `of`, `on` and `or` became also avaible which could only be used in this context (except `or`).
 
+```po
+val sth = [];
+loop (animals as animal) do sth += animal or break;
+loop (animals as animal) do sth += animal or break and doSthElse();
+
+val sth = [] >>> @ += animals |> to_lowercase;
+```
+
+- ohne klammern kommt `or`for `and` bzw ist höherstufiger
+
+
+
 ## as a line guard
 
 ...
 
-as an expression guard
+## as an expression guard
 
 ...
 
