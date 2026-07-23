@@ -8,6 +8,10 @@ Coding sucks.
 </svg>
 </div>
 
+<svg width="24" height="24">
+  <path fill="currentColor" d="M12 2L2 22h20z"/>
+</svg>
+
 ![Logo](logo.jpg)
 
 ---
