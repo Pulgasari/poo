@@ -11,6 +11,7 @@ Coding sucks.
 [`Functions`](functions.md)
 [`Keywords`](keywords.md)
 [`Literals`](literals.md)
+[`Objects`](objects.md)
 [`Operators`](operators.md)
 [`Types`](types.md)
 [`Values`](values.md)
