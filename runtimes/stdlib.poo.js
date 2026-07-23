@@ -19,10 +19,181 @@ fn invert_case (str) {
   return result;
 }
 
-fn to_kebab_case (str) {
+
+
+
+
+// === 1. inspection & metrics ===
+
+fn bytesize = str => str.bytesize; // gets inlined by compiler
+fn is_empty = str => str.size === 0;
+fn size     = str => str.size; // gets inlined by compiler
+fn trim     = str => str.trim_space();
+
+fn slice = (str, start, end) => str.substring(start, end);
+
+fn to_morph (str, callback) => morph(str, callback);
+
+fn has (str, needle) => str.contains(needle);
+
+fn string_is_case (str, case_symbol) {
+  switch (case_symbol) {
+    case :camel   => return str == str.to_camel_case();
+    case :kebab   => return str == str.to_kebab_case();
+    case :lower   => return str == str.to_lower_case();
+    case :pascal  => return str == str.to_pascal_case();
+    case :snake   => return str == str.to_snake_case();
+    case :upper   => return str == str.to_upper_case();
+  }
+  return false;
+}
+
+
+
+// === 2. iteration & transformation ===
+
+fn string_invert_case (str) {
+  val result = "";
+  str.loop(fn (char) => {
+    val append_char = char.is_upper_case() ? char.to_lower_case() : char.to_upper_case();
+    result.append(append_char);
+  });
+  return result;
+}
+
+fn string_loop (str, callback) {
+  val len = str.size;
+  loop (val i = 0; i < len; i += 1) {
+    callback(str[i], i);
+  }
+  return str;
+}
+
+fn string_morph (str, callback) {
+  val result = "";
+  str.loop(fn (char, i) => {
+    result.append(callback(char, i));
+  });
+  return result;
+}
+
+
+
+// === 3. prefix, suffix & trimming ===
+
+
+
+fn string_unprefix (str, prefix) {
+  return str.has(prefix) ? str.slice(prefix.size, str.size) : str;
+}
+
+fn string_unsuffix (str, suffix) {
+  return str.has(suffix) ? str.slice(0, str.size - suffix.size) : str;
+}
+
+// === 4. casing & formatting ===
+
+fn string_to_camel_case (str) {
+  val words = str.to_words();
+  val result = "";
+  words.loop(fn (word, i) => {
+    val formatted = i == 0 ? word.to_lower_case() : word.to_pascal_case();
+    result.append(formatted);
+  });
+  return result;
+}
+
+fn string_to_case (str, target_case) {
+  switch (target_case) {
+    case :camel    => str.to_camel_case();
+    case :constant => str.to_constant_case();
+    case :kebab    => str.to_kebab_case();
+    case :lower    => str.to_lower_case();
+    case :pascal   => str.to_pascal_case();
+    case :snake    => str.to_snake_case();
+    case :title    => str.to_title_case();
+    case :upper    => str.to_upper_case();
+  }
+  return str;
+}
+
+fn to_constant_case = str => '_'.join( words |> @.to_words ).to_upper_case();
+fn     to_flat_case = str =>  ''.join( words |> @.to_words ).to_lower_case();
+fn    to_kebab_case = str => '-'.join( words |> @.to_words ).to_lower_case();
+
+fn string_to_mocking_case (str) {
+  val result = "";
+  str.loop(fn (char, i) => {
+    val formatted = i % 2 == 0 ? char.to_lower_case() : char.to_upper_case();
+    result.append(formatted);
+  });
+  return result;
+}
+
+fn string_to_pascal_case (str) {
+  val words = str.to_words();
+  val result = "";
+  words.loop(fn (word) => {
+    if (word.size > 0) {
+      val first = word.slice(0, 1).to_upper_case();
+      val rest  = word.slice(1, word.size).to_lower_case();
+      result.append(first + rest);
+    }
+  });
+  return result;
+}
+
+fn string_to_slug_case (str) {
   val words = str.to_words();
   return "-".join(words).to_lower_case();
 }
+
+fn string_to_snake_case (str) {
+  val words = str.to_words();
+  return "_".join(words).to_lower_case();
+}
+
+fn string_to_title_case (str) {
+  val words = str.to_words();
+  val capitalized = words.map(fn (w) => w.slice(0, 1).to_upper_case() + w.slice(1, w.size).to_lower_case());
+  return " ".join(capitalized);
+}
+
+fn string_to_upper_kebab_case (str) {
+  val words = str.to_words();
+  return "-".join(words).to_upper_case();
+}
+
+// === 5. splitting, joining & helpers ===
+
+fn string_join (delimiter, collection) {
+  return collection.join(delimiter);
+}
+
+fn string_replace (str, target, replacement) {
+  return str.replace_all(target, replacement);
+}
+
+fn string_slugify (str, options = #{ separator: "-" }) {
+  val sep = options.separator ? options.separator : "-";
+  val words = str.to_words();
+  return sep.join(words).to_lower_case();
+}
+
+fn string_switch_case (str, ...cases) {
+  val current_idx = -1;
+  cases.loop(fn (c, i) => {
+    if (str.is_case(c)) { current_idx = i; }
+  });
+  val next_idx = (current_idx + 1) % cases.size;
+  return str.to_case(cases[next_idx]);
+}
+
+
+
+
+
+
 
 // === 1. inspection & basic getters ===
 
