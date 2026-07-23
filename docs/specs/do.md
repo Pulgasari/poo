@@ -4,7 +4,7 @@ The `do` keyword is most likely the awkward operator of the language because it'
 
 On an statement introduced by `do` the keywords `and`, `of`, `on` and `or` became also avaible which could only be used in this context (except `or`).
 
-```po
+```poo
 val sth = [];
 loop (animals as animal) do sth += animal or break;
 loop (animals as animal) do sth += animal or break and doSthElse();
