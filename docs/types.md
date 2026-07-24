@@ -134,7 +134,7 @@ Stateful, lazy-evaluated iterable streams created using the generator syntax ide
 
 ```poo
 fn* count_up = limit => {
-  loop (limit > 0 as i) yield i++;
+  loop (limit > 0 as i) do yield i++;
 };
 
 val gen = count_up(3);
