@@ -29,14 +29,6 @@
   color: #8be9fd;
 }
 
-.hljs-addition,
-.hljs-variable,
-.hljs-template-tag,
-.hljs-template-variable {
-  color: #f1fa8c;
-}
-
-
 
 .hljs              { color: var(--zombie-fg); }
 .hljs-attr         { color: var(--zombie-green);  font-style: italic; font-weight: normal; }
@@ -50,6 +42,7 @@
 .hljs-name         { color: var(--zombie-yellow); font-style: normal; font-weight:   bold; }
 .hljs-number       { color: var(--zombie-purple); font-style: normal; font-weight: normal; }  
 .hljs-operator     { color: var(--zombie-orange); font-weight: bold; }
+.hljs-punctuation  { color: var(--zombie-fg); opacity: 0.50; }
 .hljs-section      { color: var(--zombie-fg);     font-style: normal; font-weight:   bold; }
 .hljs-selector-tag { color: var(--zombie-fg);     font-style: normal; font-weight:   bold; }
 .hljs-string       { color: var(--zombie-yellow); }
@@ -57,8 +50,13 @@
 .hljs-subst        { color: var(--zombie-fg); }
 .hljs-symbol       { color: var(--zombie-yellow); }
 .hljs-title        { color: var(--zombie-green);  font-style: italic; font-weight:   bold; }
-.hljs-type         { color: var(--zombie-yellow); font-style: normal; font-weight:   bold; }
-.hljs-punctuation  { color: var(--zombie-fg); opacity: 0.50; }
+.hljs-type         { color: var(--zombie-yellow); font-style: normal; font-weight:   bold; }   
+
+/* in template strings */
+.hljs-addition          { color: var(--zombie-blue); }
+.hljs-variable          { color: var(--zombie-blue); }
+.hljs-template-tag      { color: var(--zombie-purple); }
+.hljs-template-variable { color: var(--zombie-green); }
 
 /* secondary stuff */
 .hljs-comment  { color: var(--zombie-gray); }
