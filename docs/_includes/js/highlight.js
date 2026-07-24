@@ -275,7 +275,7 @@ hljs.registerLanguage('poo', function (hljs) {
 */
 
 // :::::: HELPERS
-
+/*
 function buildOperatorRegex (opsInput) {
   const ops = typeof opsInput === 'string' ? opsInput.trim().split(/\s+/) : opsInput;
   
@@ -287,4 +287,20 @@ function buildOperatorRegex (opsInput) {
   
   return new RegExp(escaped.join('|'));
 }
+*/
+function buildOperatorRegex (opsInput) {
+  const ops = typeof opsInput === 'string' ? opsInput.trim().split(/\s+/) : [...opsInput];
+
+  const escaped = ops
+    .sort((a, b) => b.length - a.length)
+    .map(escapeRegex);
+
+  return new RegExp(escaped.join('|'));
+}
+
+function escapeRegex (value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+
 
