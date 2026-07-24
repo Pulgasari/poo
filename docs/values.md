@@ -30,7 +30,7 @@ The `val` keyword is the sole declaration keyword in Poo. By **default**, a stan
 ```poo
 val cat = "miau";
 cat += "!!!"; // allowed: modifies or reassigns value
-cat = "purr"; // allowed: reassigns binding
+cat =  "purr"; // allowed: reassigns binding
 ```
 
 ---
@@ -80,7 +80,7 @@ val cat = "miau";
 
 cat += "!!!";  // allowed: 'cat' is currently "miau!!!"
 cat #= "wuff"; // allowed: assigned "wuff" and sealed permanently
-cat = "meow";  // error: variable is sealed
+cat =  "meow";  // error: variable is sealed
 ```
 
 ---
