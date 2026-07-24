@@ -162,7 +162,7 @@ balance /= 4; // 25
 Calculates the arithmetic sum of two numbers.
 
 ```poo
-val sum = 10 + 20; // 30
+val sum   = 10 + 20; // 30
 val total = 1.5 + 2.25; // 3.75
 ```
 
@@ -172,7 +172,7 @@ Calculates the difference between two numbers or negates a value.
 
 ```poo
 val diff = 100 - 45; // 55
-val inverted = -10;
+val neg  = -10;
 ```
 
 ### `*` – Multiplication Operator
@@ -197,7 +197,7 @@ Returns the remainder of integer division.
 
 ```poo
 val remainder = 10 % 3; // 1
-val is_even = (num % 2) == 0;
+val is_even   = (num % 2) == 0;
 ```
 
 ---
@@ -227,9 +227,9 @@ val is_even = (num % 2) == 0;
 Evaluates structural or value equality.
 
 ```poo
-10 == 10; // true
+   10 == 10;    // true
 "abc" == "abc"; // true
-[1, 2] == [1, 2]; // true (Structural equality)
+[1,2] == [1,2]; // true (Structural equality)
 ```
 
 ### `===` – Strict Equal Operator
@@ -257,8 +257,8 @@ Evaluates value inequality.
 Evaluates strict reference or type inequality.
 
 ```poo
-val a = [1, 2];
-val b = [1, 2];
+val a = [1,2];
+val b = [1,2];
 
 a !== b; // true (Different references)
 ```
