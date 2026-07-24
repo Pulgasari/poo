@@ -53,23 +53,19 @@ fn string_is_case (str, case) {
 fn is_case = (str, case) => str === str.to_case(case);
 
 
-fn string_to_case (str, target_case) {
-  switch (target_case) {
-    case :camel    => str.to_camel_case();
-    case :constant => str.to_constant_case();
-    case :kebab    => str.to_kebab_case();
-    case :lower    => str.to_lower_case();
-    case :pascal   => str.to_pascal_case();
-    case :snake    => str.to_snake_case();
-    case :title    => str.to_title_case();
-    case :upper    => str.to_upper_case();
-    or str;
+fn string_to_case (str, case) {
+  switch (case) {
+    'camel'    => str.to_camel_case();
+    'constant' => str.to_constant_case();
+    'kebab'    => str.to_kebab_case();
+    'lower'    => str.to_lower_case();
+    'pascal'   => str.to_pascal_case();
+    'snake'    => str.to_snake_case();
+    'title'    => str.to_title_case();
+    'upper'    => str.to_upper_case();
+    or         => str;
   }
 }
-
-
-
-// === 2. iteration & transformation ===
 
 fn string_invert_case (str) {
   val result = "";
@@ -89,13 +85,6 @@ fn string_loop (str, callback) {
 }
 
 fn morph = (str, callback) => '' >>> loop (str as char, i) do @ += callback(char, i);
-
-
-
-
-
-
-// === 4. casing & formatting ===
 
 fn string_to_camel_case (str) {
   val words = str.to_words();
