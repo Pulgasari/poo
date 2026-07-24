@@ -111,6 +111,7 @@ pre      { border: 1px solid var(--separator)!important; box-shadow: var(--shado
   align-items      : center;
   box-shadow       : var(--shadow);
   background-color : var(--bg-darker-20)!important;
+  opacity          : 0.95;
   display          : flex;
   padding          : 0.75rem;
 }
