@@ -97,6 +97,25 @@ val today = new Date '1917-10-25';
 
 Read more: [`Date`](types/Date.md)
 
+## Duration
+
+...
+
+```poo
+val second = 1000ms;
+val minute = 60s;
+val hour   = 60min;
+
+// create Duration from String
+val dur = Duration('1000');   // 1000ms
+val dur = Duration('1000ms'); // 1000ms
+
+// create Duration from Number
+val dur = Duration(1000);   // 1000ms
+```
+
+Read more: [`Duration`](types/Duration.md)
+
 ## Enum
 
 Used to define closed collections of named, immutable state constants.
