@@ -72,7 +72,7 @@ hljs.registerLanguage('poo', function (hljs) {
    *        -> verschachtelte { BRACED_CODE }
    *        -> verschachtelter `TEMPLATE_STRING`
    */
-  const EXPRESSION_INTERPOLATION: any = {
+  const EXPRESSION_INTERPOLATION = {
     scope: 'subst',
     begin: /\$\{/,
     end: /\}/,
@@ -80,7 +80,7 @@ hljs.registerLanguage('poo', function (hljs) {
     contains: [],
   };
 
-  const TEMPLATE_STRING: any = {
+  const TEMPLATE_STRING = {
     scope: 'string',
     begin: /`/,
     end: /`/,
@@ -110,7 +110,7 @@ hljs.registerLanguage('poo', function (hljs) {
    * Die verschachtelten Blöcke werden vollständig konsumiert, sodass deren
    * schließende } nicht EXPRESSION_INTERPOLATION beendet.
    */
-  const BRACED_CODE: any = {
+  const BRACED_CODE = {
     begin: /\{/,
     end: /\}/,
     keywords: KEYWORDS,
