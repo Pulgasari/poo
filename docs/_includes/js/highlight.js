@@ -1,6 +1,9 @@
 // poo/docs/_includes/js/highlight.js
 
 let poo = {};
+poo.builtins    = 'Array Blob Bool Char Color Date Enum Generator List Map Number Queue Pattern Record RegExp Set Stack String Store Symbol Tree Tuple Union';
+poo.keywords     = 'as and break catch continue cpy do fail fn if kill loop in new obj of on or pkg ref return skip static switch use val yield',
+poo.literals     = 'false null true undefined',
 poo.punctuations = `{}[]();:,.`;
 poo.operators = `
   >>> <=> === ~== !==
@@ -22,9 +25,9 @@ hljs.registerLanguage('poo', function (hljs) {
     begin     : /\\$\{/,
     end       : /\}/,
     keywords  : {
-      keyword  :  "as and break catch continue cpy do fail fn if kill loop in new obj of on or pkg ref return skip static switch use val yield",
-      literal  :  "false null true undefined",
-      built_in : "Array Blob Bool Char Color Date Enum Generator List Map Number Queue Pattern Record RegExp Set Stack String Store Symbol Tree Tuple Union"
+      built_in : poo.builtins,
+      keyword  : poo.keywords,
+      literal  : poo.literals,
     },
     contains: [] // Wird gleich unten dynamisch befüllt, um Rekursion zu erlauben
   };
@@ -48,9 +51,9 @@ hljs.registerLanguage('poo', function (hljs) {
     name: "Poo",
     case_insensitive: false,
     keywords: {
-      keyword:  "as and break catch continue cpy do fail fn if kill loop in new obj of on or pkg ref return skip static switch use val yield",
-      literal:  "false null true undefined",
-      built_in: "Array Blob Bool Char Color Date Enum Generator List Map Number Queue Pattern Record RegExp Set Stack String Store Symbol Tree Tuple Union"
+      built_in : poo.builtins,
+      keyword  : poo.keywords,
+      literal  : poo.literals,
     },
     contains: [
       hljs.COMMENT('//', '$'),
