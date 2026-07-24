@@ -1,11 +1,11 @@
 /* GITHUB ALERTS (CALLOUTS) */
 
 .gh-alert {
-  background    : color-mix(in oklch, var(--bg) 90%, var(--color));
-  border-left   : 0.25rem solid var(--color);
+  background    : color-mix(in oklch, var(--bg) 85%, var(--color));
+  border-left   : 0.25rem solid var(--color)!important;
   border-radius : 0.25rem;
   margin        : 1.25rem 0;
-  padding       : 1.00rem;
+  padding       : 1.00rem!important;
   
   p { margin: 0; }
 }
@@ -15,7 +15,7 @@
   font-size      : 1em;
   font-weight    : bold;
   margin-bottom  : 0.35rem;
-  text-transform : capitalize;
+  text-transform : uppercase;
 }
 
 :root {
