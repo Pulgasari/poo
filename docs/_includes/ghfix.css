@@ -1,7 +1,7 @@
 /* GITHUB ALERTS (CALLOUTS) */
 
 .gh-alert {
-  background    : color-mix(in srgb, var(--bg) 85%, var(--color));
+  background    : color-mix(in oklch, var(--bg) 90%, var(--color));
   border-left   : 0.25rem solid var(--color);
   border-radius : 0.25rem;
   margin        : 1.25rem 0;
@@ -12,7 +12,7 @@
 
 .gh-alert-title {
   color          : var(--color); 
-  font-size      : 0.9em;
+  font-size      : 1em;
   font-weight    : bold;
   margin-bottom  : 0.35rem;
   text-transform : capitalize;
