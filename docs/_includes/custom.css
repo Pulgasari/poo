@@ -100,7 +100,7 @@ code:not(pre code) {
 code      { background-color: var(--bg-darker-20)!important; }
 pre code  { background-color: var(--bg-darker-20)!important; }
 pre code  { max-width: 100%; overflow-x: auto; }
-pre code  { border: 1px solid var(--separator); border-radius: 0.25em; }
+pre code  { border: 1px solid var(--separator)!important; border-radius: 0.25em; }
 
 /* HEADER & FOOTER */
 
