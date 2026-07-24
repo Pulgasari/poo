@@ -27,8 +27,8 @@ enum Status {
 Checks whether a value/symbol is a valid variant of the enum.
 
 ```poo
-Status.has(Status.Active) # true
-Status.has("Unknown")    # false
+Status.has(Status.Active); // true
+Status.has("Unknown");     // false
 ```
 
 ## values
@@ -36,5 +36,5 @@ Status.has("Unknown")    # false
 Returns a list/array of all defined enum variants.
 
 ```poo
-Status.values() # [Status.Active, Status.Inactive, Status.Pending]
+Status.values(); // #[Status.Active, Status.Inactive, Status.Pending]
 ```
