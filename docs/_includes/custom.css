@@ -91,7 +91,7 @@ pre {
   white-space   : pre;
   padding       : 0.5rem;
   background    : var(--bg-darker-20)!important;
-  border-radius : 0.5em;
+  border-radius : 0.5em!important;
 }
 code:not(pre code) {
   white-space   : nowrap;
