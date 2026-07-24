@@ -12,6 +12,10 @@ fn to_morph (str, callback) => morph(str, callback);
 
 fn has (str, needle) => str.contains(needle);
 
+fn join = (delimiter, collection) => collection.join(delimiter);
+
+fn replace = (str, target, replacement) => str.replace_all(target, replacement);
+
 // prefix + suffix
 
 fn prefix = (str, prefix) => str.has(prefix) ? str : prefix + str;
@@ -36,14 +40,28 @@ fn invert_case (str) {
 
 fn string_is_case (str, case_symbol) {
   switch (case_symbol) {
-    case :camel   => return str == str.to_camel_case();
-    case :kebab   => return str == str.to_kebab_case();
-    case :lower   => return str == str.to_lower_case();
-    case :pascal  => return str == str.to_pascal_case();
-    case :snake   => return str == str.to_snake_case();
-    case :upper   => return str == str.to_upper_case();
+    :camel   => return str == str.to_camel_case();
+    :kebab   => return str == str.to_kebab_case();
+    :lower   => return str == str.to_lower_case();
+    :pascal  => return str == str.to_pascal_case();
+    :snake   => return str == str.to_snake_case();
+    :upper   => return str == str.to_upper_case();
+    or => false
   }
-  return false;
+}
+
+fn string_to_case (str, target_case) {
+  switch (target_case) {
+    case :camel    => str.to_camel_case();
+    case :constant => str.to_constant_case();
+    case :kebab    => str.to_kebab_case();
+    case :lower    => str.to_lower_case();
+    case :pascal   => str.to_pascal_case();
+    case :snake    => str.to_snake_case();
+    case :title    => str.to_title_case();
+    case :upper    => str.to_upper_case();
+    or str;
+  }
 }
 
 
@@ -86,19 +104,7 @@ fn string_to_camel_case (str) {
   return result;
 }
 
-fn string_to_case (str, target_case) {
-  switch (target_case) {
-    case :camel    => str.to_camel_case();
-    case :constant => str.to_constant_case();
-    case :kebab    => str.to_kebab_case();
-    case :lower    => str.to_lower_case();
-    case :pascal   => str.to_pascal_case();
-    case :snake    => str.to_snake_case();
-    case :title    => str.to_title_case();
-    case :upper    => str.to_upper_case();
-  }
-  return str;
-}
+
 
 fn    to_constant_case = str => '_'.join( words |> @.to_words ).to_upper_case();
 fn        to_flat_case = str =>  ''.join( words |> @.to_words ).to_lower_case();
@@ -145,13 +151,7 @@ fn string_to_title_case (str) {
 
 // === 5. splitting, joining & helpers ===
 
-fn string_join (delimiter, collection) {
-  return collection.join(delimiter);
-}
 
-fn string_replace (str, target, replacement) {
-  return str.replace_all(target, replacement);
-}
 
 fn string_slugify (str, options = #{ separator: "-" }) {
   val sep = options.separator ? options.separator : "-";
