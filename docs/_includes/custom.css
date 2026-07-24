@@ -59,12 +59,8 @@ html { background: black; }
 body { background: var(--bg); color: var(--fg); }
 body { overflow: auto; }
 
-html, body {
-  margin: 0;
-  height: 100%;
-  overflow: hidden;
-}
-body { height: 100dvh; }
+html, body { height: 100%; overflow: hidden; }
+body       { height: 100dvh; }
 
 body { display:flex; flex-flow: column; }
 body > #app-header    { flex: 0 0 auto; }
@@ -115,6 +111,13 @@ pre code { background-color: var(--bg-darker-20)!important; }
 #app-header { gap: 0.5rem; justify-content: space-between; }
 #app-footer { gap: 0.5rem; justify-content: space-evenly;  }
 #app-footer { text-transform: uppercase; }
+
+/* HEADLINES */
+
+h3:not(h1 + h3):not(h2 + h3) {
+  border-top  : 1px dashed var(--bg-darker-20);
+  padding-top : 1rem;
+}
 
 /* FIXES */
 
