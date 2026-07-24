@@ -6,21 +6,16 @@ fn is_empty = str => str.size === 0;
 fn size     = str => str.size; // gets inlined by compiler
 fn trim     = str => str.trim_space();
 
-fn slice = (str, start, end) => str.substring(start, end);
-
-fn to_morph (str, callback) => morph(str, callback);
-
-fn has (str, needle) => str.contains(needle);
-
-fn join = (delimiter, collection) => collection.join(delimiter);
-
-fn replace = (str, target, replacement) => str.replace_all(target, replacement);
+fn slice    = (str, start, end) => str.substring(start, end);
+fn to_morph = (str, callback) => morph(str, callback);
+fn has      = (str, needle) => str.contains(needle);
+fn join     = (delimiter, collection) => collection.join(delimiter);
+fn replace  = (str, target, replacement) => str.replace_all(target, replacement);
 
 // prefix + suffix
 
-fn prefix = (str, prefix) => str.has(prefix) ? str : prefix + str;
-fn suffix = (str, suffix) => str.has(suffix) ? str : str + suffix;
-
+fn prefix   = (str, prefix) => str.has(prefix) ? str : prefix + str;
+fn suffix   = (str, suffix) => str.has(suffix) ? str : str + suffix;
 fn unprefix = (str, prefix) => str.has(prefix) ? str.slice(    prefix.size, str.size) : str;  
 fn unsuffix = (str, suffix) => str.has(suffix) ? str.slice(0, str.size - suffix.size) : str;        
 
@@ -77,10 +72,7 @@ fn string_invert_case (str) {
 }
 
 fn string_loop (str, callback) {
-  val len = str.size;
-  loop (val i = 0; i < len; i += 1) {
-    callback(str[i], i);
-  }
+  loop (0..str.size as i) do callback(str[i], i);
   return str;
 }
 
@@ -161,17 +153,9 @@ fn string_switch_case (str, ...cases) {
 
 // ////// ARRAY
 
-// === 1. inspection & basic getters ===
-
 fn array_first    = list => list.size > 0 ? list[0] : null;
+fn array_last     = list => list.size >>> @ > 0 ? list[@-1] : null;
 fn array_is_empty = list => list.size == 0;
-
-fn array_last (list) {
-  val size = list.size;
-  return size > 0 ? list[size - 1] : null;
-}
-
-// === 2. iteration & functional transformations ===
 
 fn array_every (list, predicate) {
   val len = list.size;
@@ -234,7 +218,7 @@ fn array_has (list, target) {
   return false;
 }
 
-fn arry_loop (list, callback) {
+fn array_loop (list, callback) {
   loop (0 as i < list.size) do callback(list[i], i) or return list ?? [];
 }
 
@@ -285,13 +269,6 @@ fn array_join (list, delimiter = ", ") {
   return result;
 }
 
-fn array_reverse (list) {
-  val result = [];
-  val len = list.size;
-  loop (val i = len - 1; i >= 0; i -= 1) {
-    result.append(list[i]);
-  }
-  return result;
-}
+fn reverse = list = [] >>> loop (list.size..0 as i) do --i and @ += list[i];
 
     
