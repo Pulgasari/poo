@@ -113,11 +113,6 @@ fn        to_slug_case = str => '-'.join( words |> @.to_words ).to_lower_case();
 fn       to_snake_case = str => '_'.join( words |> @.to_words ).to_lower_case();
 fn to_upper_kebab_case = str => '-'.join( words |> @.to_words ).to_lower_case();
 
-fn string_to_upper_kebab_case (str) {
-  val words = str.to_words();
-  return "-".join(words).to_upper_case();
-}
-
 fn string_to_mocking_case (str) {
   val result = "";
   str.loop(fn (char, i) => {
@@ -172,17 +167,12 @@ fn string_switch_case (str, ...cases) {
 
 
 
-
+// ////// ARRAY
 
 // === 1. inspection & basic getters ===
 
-fn array_first (list) {
-  return list.size > 0 ? list[0] : null;
-}
-
-fn array_is_empty (list) {
-  return list.size == 0;
-}
+fn array_first    = list => list.size > 0 ? list[0] : null;
+fn array_is_empty = list => list.size == 0;
 
 fn array_last (list) {
   val size = list.size;
