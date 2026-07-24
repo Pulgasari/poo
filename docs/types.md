@@ -227,7 +227,7 @@ Read more: [`Record`](types/Record.md)
 Pattern sequences built for fast text extraction and character matching evaluations.
 
 ```poo
-val digits = #/[0-9]+/i;
+val digits   = #/[0-9]+/i;
 val is_match = digits.has("User 42");
 ```
 
