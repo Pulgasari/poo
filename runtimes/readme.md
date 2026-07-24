@@ -1,4 +1,4 @@
-# Runtimes & Target Environments
+# poo/runtimes
 
 **Poo** is designed with a multi-target execution model. High-level standard library features are written directly in Poo (`stdlib/*.poo`), while low-level execution primitives, memory allocation, and OS interfaces are handled by platform-specific runtimes.
 
