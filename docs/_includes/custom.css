@@ -65,7 +65,7 @@ a { color: var(--accent); }
 html { background: black; }
 body { background: var(--bg); color: var(--fg); }
 
-p { color-mix(in oklch, var(--bg) 25%, var(--fg)); }
+p { color: color-mix(in oklch, var(--bg) 25%, var(--fg)); }
 
 /* LAYOUT */
 
