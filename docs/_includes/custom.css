@@ -116,6 +116,10 @@ pre code  { max-width: 100%; overflow-x: auto; }
 #app-footer { gap: 0.5rem; justify-content: space-evenly;  }
 #app-footer { text-transform: uppercase; }
 
+#app-footer a            { opacity: 0.50; }
+#app-footer a.is-parent  { opacity: 1.00; }
+#app-footer a.is-current { opacity: 1.00; }
+
 /* HEADLINES */
 
 h3:not(h1 + h3):not(h2 + h3) {
