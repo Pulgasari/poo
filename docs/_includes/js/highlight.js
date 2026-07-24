@@ -95,7 +95,7 @@ hljs.registerLanguage('poo', function (hljs) {
    *        -> nested { BRACED_CODE }
    *        -> nested `TEMPLATE_STRING`
    */
-  const EXPRESSION_INTERPOLATION: any = {
+  const EXPRESSION_INTERPOLATION = {
     scope: 'subst',
     begin: /\$\{/,
     end: /\}/,
@@ -103,16 +103,13 @@ hljs.registerLanguage('poo', function (hljs) {
     contains: [],
   };
 
-  const TEMPLATE_STRING: any = {
+  const TEMPLATE_STRING = {
     scope: 'string',
     begin: /`/,
     end: /`/,
     contains: [
       hljs.BACKSLASH_ESCAPE,
-
-      // Must be checked before ordinary $variable interpolation.
-      EXPRESSION_INTERPOLATION,
-
+      EXPRESSION_INTERPOLATION, // Must be checked before ordinary $variable interpolation.
       VARIABLE_INTERPOLATION,
     ],
   };
@@ -122,7 +119,7 @@ hljs.registerLanguage('poo', function (hljs) {
    *
    * "self" handles arbitrarily nested brace blocks.
    */
-  const BRACED_CODE: any = {
+  const BRACED_CODE = {
     begin: /\{/,
     end: /\}/,
     keywords: KEYWORDS,
