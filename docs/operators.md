@@ -385,7 +385,7 @@ val evens = nums |? (x => x % 2 == 0); // [2, 4, 6]
 
 ### `|*` – Reduce Operator
 
-Reduces / folds a collection into a single aggregated value.
+Reduces/folds a collection into a single aggregated value.
 
 ```poo
 val nums = [1, 2, 3, 4];
