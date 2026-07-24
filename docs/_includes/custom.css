@@ -120,8 +120,8 @@ pre code  { border: 1px solid var(--separator); border-radius: 0.25em; }
 #app-footer { text-transform: uppercase; }
 
 #app-footer a            { color: var(--fg);     opacity: 0.50; }
-#app-footer a.is-parent  { color: var(--access); opacity: 1.00; }
-#app-footer a.is-current { color: var(--access); opacity: 1.00; }
+#app-footer a.is-parent  { color: var(--accent); opacity: 1.00; }
+#app-footer a.is-current { color: var(--accent); opacity: 1.00; }
 
 /* HEADLINES */
 
