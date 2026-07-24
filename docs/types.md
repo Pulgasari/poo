@@ -13,6 +13,7 @@ This document provides an **overview** about all built-in datatypes.
 [`Char`](#char)
 [`Color`](#color)
 [`Date`](#date)
+[`Duration`](#duration)
 [`Enum`](#enum)
 [`Generator`](#generator)
 [`List`](#list)
@@ -111,7 +112,7 @@ val dur = Duration('1000');   // 1000ms
 val dur = Duration('1000ms'); // 1000ms
 
 // create Duration from Number
-val dur = Duration(1000);   // 1000ms
+val dur = Duration(1000); // 1000ms
 ```
 
 Read more: [`Duration`](types/Duration.md)
