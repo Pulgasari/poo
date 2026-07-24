@@ -51,8 +51,10 @@ html, body  { font-family: var(--font);      }
 #app-footer { font-family: var(--font-code); }
 pre, code   { font-family: var(--font-code); }
 
-html, body { font-size: var(--fontSize); }
-code       { font-size: 0.8em; }
+html, body  { font-size: var(--fontSize); }
+code        { font-size: 0.8em; }
+#app-header { font-size: 0.8em; }
+#app-footer { font-size: 0.8em; }
 
 /* COLORS & STYLING */
 
