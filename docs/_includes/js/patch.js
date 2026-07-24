@@ -1,5 +1,4 @@
 // poo/docs/_includes/js/patch.js
-// GitHub Alerts ([!NOTE], [!TIP], etc.) automatisch parsen
 
 const alertTypes = {
   note:      { label: 'Note',      color: '#8be9fd' },
@@ -10,7 +9,8 @@ const alertTypes = {
 };
 
 function patch_md () {
-  
+
+  // 1. GitHub Alerts ([!NOTE], [!TIP], etc.) automatisch parsen
   document.querySelectorAll('blockquote').forEach(bq => {
     const firstP = bq.querySelector('p');
     if (!firstP) return;
@@ -33,6 +33,11 @@ function patch_md () {
       
       bq.prepend(titleEl);
     }
+  });
+
+  // 2. Escapte Pipes (\|) in Inline-Code innerhalb von Tabellen reparieren
+  document.querySelectorAll('table code').forEach(code => {
+    code.innerHTML = code.innerHTML.replace(/\\\|/g, '|');
   });
   
 }
