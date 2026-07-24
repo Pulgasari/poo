@@ -284,7 +284,7 @@ Backtickted template-strings support interpolation of names by `$` prefix and in
 
 ```poo
 val name = 'Udo';
-val info = `The user $name is ${ 6 * 10} years old.`;
+val info = `The user $name is ${ 6 * 10 } years old.`;
 ```
 
 Read more: [`String`](types/String.md)
