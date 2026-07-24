@@ -258,12 +258,35 @@ Read more: [`Store`](types/Store.md)
 
 ## String
 
-A sequential array of text characters. Poo natively supports single quotes (`'...'`), double quotes (`"..."`) featuring runtime variable expansion via the `$` token, and backticks (`` `...` ``) for complex template string injection using `${expression}` syntax.
+A sequential array of text characters. 
+
+Poo natively supports single quotes (`'...'`), double quotes (`"..."`) featuring runtime variable expansion via the `$` token, and backticks (`` `...` ``) for complex template string injection using `${expression}` syntax.
 
 ```poo
-val name = "Udo";
-val text = "Coding sucks.";
-val greeting = `Hello ${name}!`;
+val what  = 'Coding';
+val text  = "$what sucks.";
+val greet = `Hello ${what}!`;
+```
+
+Single-quoted strings don't supportany interpolation and become a [`Char`](#char) if they have size of 1.
+
+```poo
+val char = 'u'; // = Char
+val name = 'Udo';
+```
+
+Double-quoted strings support interpolation of names by `$` prefix.
+
+```poo
+val name  = 'Udo';
+val greet = "Hello $name!";
+```
+
+Backtickted strings support interpolation of names by `$` prefix and injection by `${...}` wrapper.
+
+```poo
+val name = 'Udo';
+val info = `The user $name is ${ 6 * 10} years old.`;
 ```
 
 Read more: [`String`](types/String.md)
