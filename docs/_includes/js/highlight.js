@@ -18,66 +18,177 @@ rgx.numbers   = '0[xX][0-9a-fA-F_]+|0[bB][01_]+|\\d[\\d_]*\\.\\d[\\d_]*(?:[eE][+
 rgx.operators = buildOperatorRegex(poo.operators);
 
 hljs.registerLanguage('poo', function (hljs) {
+  const KEYWORDS = {
+    built_in: poo.builtins,
+    keyword: poo.keywords,
+    literal: poo.literals,
+  };
 
-  // 1. Einfache Variablen-Interpolation ($varname)
+  const COMMENT = hljs.COMMENT(/\/\//, /$/);
+
+  const NUMBER = {
+    scope: 'number',
+    match: new RegExp(rgx.numbers),
+    relevance: 0,
+  };
+
+  const OPERATOR = {
+    scope: 'operator',
+    match: rgx.operators,
+    relevance: 0,
+  };
+
+  const PUNCTUATION = {
+    scope: 'punctuation',
+    match: /[{}[\]();:,.]/,
+    relevance: 0,
+  };
+
+  const SPECIAL_KEYWORD = {
+    scope: 'keyword',
+    match: /\bfn[*^]/,
+  };
+
   const VARIABLE_INTERPOLATION = {
-    className : 'variable',
-    begin     : /\$[a-zA-Z_][a-zA-Z0-9_]*/
+    scope: 'variable',
+    match: /\$[A-Za-z_][A-Za-z0-9_]*/,
+    relevance: 0,
   };
 
-  // 2. Vorab-Deklaration für innere Klammer-Blöcke { ... }
-  const BRACED_CODE = {
-    begin    : /\{/,
-    end      : /\}/,
-    contains : [] // wird unten rekursiv befüllt
+  const STRING_SINGLE = {
+    scope: 'string',
+    begin: /'/,
+    end: /'/,
+    contains: [
+      hljs.BACKSLASH_ESCAPE,
+    ],
   };
 
-  // 3. Vorab-Deklaration für Template-String-Interpolation ${ ... }
-  const EXPRESSION_INTERPOLATION = {
-    className : 'subst',
-    begin     : /\$\{/,
-    end       : /\}/,
-    keywords  : {
-      built_in : poo.builtins,
-      keyword  : poo.keywords,
-      literal  : poo.literals,
-    },
-    contains  : [] // wird unten rekursiv befüllt
+  /*
+   * Diese Modes werden weiter unten gegenseitig verbunden:
+   *
+   * TEMPLATE_STRING
+   *   -> ${ EXPRESSION_INTERPOLATION }
+   *        -> verschachtelte { BRACED_CODE }
+   *        -> verschachtelter `TEMPLATE_STRING`
+   */
+  const EXPRESSION_INTERPOLATION: any = {
+    scope: 'subst',
+    begin: /\$\{/,
+    end: /\}/,
+    keywords: KEYWORDS,
+    contains: [],
   };
 
-  // 4. String-Typen
-  const STRING_SINGLE   = { className: 'string', begin: "'", end: "'", contains: [hljs.BACKSLASH_ESCAPE] };
-  const STRING_DOUBLE   = { className: 'string', begin: '"', end: '"', contains: [hljs.BACKSLASH_ESCAPE, VARIABLE_INTERPOLATION] };
-  const STRING_BACKTICK = { className: 'string', begin: '`', end: '`', contains: [hljs.BACKSLASH_ESCAPE, VARIABLE_INTERPOLATION, EXPRESSION_INTERPOLATION] };     
+  const TEMPLATE_STRING: any = {
+    scope: 'string',
+    begin: /`/,
+    end: /`/,
+    contains: [
+      hljs.BACKSLASH_ESCAPE,
 
-  // 5. Alle Ausdrücke, die sowohl im Hauptcode, in ${...} als auch in inneren {...} gelten
-  const EXPRESSION_CONTAINS = [
-    hljs.COMMENT('//', '$'),
+      // Muss vor normaler $variable-Erkennung stehen.
+      EXPRESSION_INTERPOLATION,
+
+      VARIABLE_INTERPOLATION,
+    ],
+  };
+
+  /*
+   * Ein normaler {...}-Block innerhalb einer Interpolation.
+   *
+   * 'self' bedeutet:
+   *
+   *   {
+   *     foo: {
+   *       bar: {
+   *         ...
+   *       }
+   *     }
+   *   }
+   *
+   * Die verschachtelten Blöcke werden vollständig konsumiert, sodass deren
+   * schließende } nicht EXPRESSION_INTERPOLATION beendet.
+   */
+  const BRACED_CODE: any = {
+    begin: /\{/,
+    end: /\}/,
+    keywords: KEYWORDS,
+    contains: [],
+  };
+
+  const EXPRESSION_ATOMS = [
+    COMMENT,
+
     STRING_SINGLE,
-    STRING_DOUBLE,
-    STRING_BACKTICK,
-    BRACED_CODE, // <- Fängt verschachtelte { ... } ab!
-    { className: 'keyword'     , begin: /fn[*^]/        },
-    { className: 'number'      , begin: rgx.numbers     },
-    { className: 'operator'    , begin: rgx.operators   },
-    { className: 'punctuation' , begin: /[{}[\]();:,.]/ }
+    {
+      scope: 'string',
+      begin: /"/,
+      end: /"/,
+      contains: [
+        hljs.BACKSLASH_ESCAPE,
+        VARIABLE_INTERPOLATION,
+      ],
+    },
+
+    TEMPLATE_STRING,
+    SPECIAL_KEYWORD,
+    NUMBER,
+    OPERATOR,
+    PUNCTUATION,
   ];
 
-  // Rekursive Verknüpfungen befüllen
-  BRACED_CODE.contains              = EXPRESSION_CONTAINS;
-  EXPRESSION_INTERPOLATION.contains = EXPRESSION_CONTAINS;
+  /*
+   * Wichtig:
+   *
+   * Nicht BRACED_CODE selbst in BRACED_CODE.contains einsetzen.
+   * Dafür wird die highlight.js-Sonderreferenz 'self' verwendet.
+   */
+  BRACED_CODE.contains = [
+    'self',
+    ...EXPRESSION_ATOMS,
+  ];
+
+  /*
+   * Innerhalb von ${...} sind normale Ausdrücke und {...}-Blöcke erlaubt.
+   *
+   * BRACED_CODE muss vor PUNCTUATION geprüft werden, damit eine öffnende {
+   * einen rekursiven Block startet und nicht bloß als punctuation markiert
+   * wird.
+   */
+  EXPRESSION_INTERPOLATION.contains = [
+    BRACED_CODE,
+    ...EXPRESSION_ATOMS,
+  ];
 
   return {
-    name: "Poo",
+    name: 'Poo',
+    aliases: ['poo'],
     case_insensitive: false,
-    keywords: {
-      built_in : poo.builtins,
-      keyword  : poo.keywords,
-      literal  : poo.literals,
-    },
-    contains: EXPRESSION_CONTAINS
-  };
+    keywords: KEYWORDS,
 
+    contains: [
+      COMMENT,
+      STRING_SINGLE,
+
+      {
+        scope: 'string',
+        begin: /"/,
+        end: /"/,
+        contains: [
+          hljs.BACKSLASH_ESCAPE,
+          VARIABLE_INTERPOLATION,
+        ],
+      },
+
+      TEMPLATE_STRING,
+
+      SPECIAL_KEYWORD,
+      NUMBER,
+      OPERATOR,
+      PUNCTUATION,
+    ],
+  };
 });
 
 /*
