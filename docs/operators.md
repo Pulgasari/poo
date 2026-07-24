@@ -99,7 +99,7 @@ Appends or adds the right operand to the target variable in-place.
 
 ```poo
 // Numerical addition
-var score = 100;
+val score = 100;
 score += 50; // 150
 
 // Collection appending
@@ -117,7 +117,7 @@ Subtracts the right operand or removes matching elements from a collection.
 
 ```poo
 // Numerical subtraction
-var hp = 100;
+val hp = 100;
 hp -= 20; // 80
 
 // Item removal from collection
@@ -130,7 +130,7 @@ pets -= 'cat'; // #['bird', 'dog']
 Multiplies the variable by the right operand.
 
 ```poo
-var factor = 5;
+val factor = 5;
 factor *= 3; // 15
 ```
 
@@ -139,7 +139,7 @@ factor *= 3; // 15
 Divides the variable by the right operand.
 
 ```poo
-var balance = 100;
+val balance = 100;
 balance /= 4; // 25
 ```
 
