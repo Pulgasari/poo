@@ -3,9 +3,13 @@
 @import url('https://cdn.ratcode.dev/css/default.css');
 */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
-/*
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-*/
+
+/* RESET */
+html  { -webkit-tap-highlight-color: transparent; }
+.icon { display: inline; }
+
+
+
 :root {
   --accent  : red;
 
@@ -40,22 +44,27 @@
   --shadow    : 0 0 5px color-mix(in srgb, var(--bg) 90%, black);
 }
 
-html {
-  -webkit-tap-highlight-color: transparent;
-}
+/* FONT */
 
-html, body { font-family: var(--font);      font-size: var(--fontSize); }
+html, body  { font-family: var(--font);      }
+#app-header { font-family: var(--font-code); }
+#app-footer { font-family: var(--font-code); }
+pre, code   { font-family: var(--font-code); }
 
+html, body { font-size: var(--fontSize); }
+code       { font-size: 0.8em; }
 
-.icon { display: inline; }
+/* COLORS & STYLING */
+
 a { color: var(--accent); }
 
 html { background: black; }
 body { background: var(--bg); color: var(--fg); }
-body { overflow: auto; }
 
 html, body { height: 100%; overflow: hidden; }
 body       { height: 100dvh; }
+
+/* LAYOUT */
 
 body { display:flex; flex-flow: column; }
 body > #app-header    { flex: 0 0 auto; }
@@ -71,6 +80,8 @@ body > .markdown-body {
 .shadow { box-shadow: var(--shadow); }
 .zebra > *:nth-child(2n+1) { background: var(--zebra); }
 
+/* CODE-BLOCKS */
+
 pre {
   max-width     : 100%;
   overflow-x    : auto;
@@ -84,11 +95,11 @@ code:not(pre code) {
   overflow-wrap : break-word;
 }
 
-code      { font-size: 0.8em; }
 code      { background-color: var(--bg-darker-20)!important; }
 pre code  { background-color: var(--bg-darker-20)!important; }
 pre code  { max-width: 100%; overflow-x: auto; }
-pre, code { font-family: var(--font-code); }
+
+/* HEADER & FOOTER */
 
 #app-header,
 #app-footer {
