@@ -472,8 +472,8 @@ val contacts = load_profile() !>> validate_active !>> fetch_contacts;
 Swaps the values bound to two variables in-place.
 
 ```poo
-var a = "first";
-var b = "second";
+val a = "first";
+val b = "second";
 
 a >=< b;
 
