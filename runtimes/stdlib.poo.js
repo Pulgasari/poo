@@ -1,12 +1,25 @@
 // only written as js for syntax highlighting
 // stdlib/string.poo
 
+fn bytesize = str => str.bytesize; // gets inlined by compiler
+fn is_empty = str => str.size === 0;
+fn size     = str => str.size; // gets inlined by compiler
+fn trim     = str => str.trim_space();
+
+fn slice = (str, start, end) => str.substring(start, end);
+
+fn to_morph (str, callback) => morph(str, callback);
+
+fn has (str, needle) => str.contains(needle);
+
 // prefix + suffix
 
 fn prefix = (str, prefix) => str.has(prefix) ? str : prefix + str;
 fn suffix = (str, suffix) => str.has(suffix) ? str : str + suffix;
 
-fn unprefix = (str, prefix) => str.has(prefix) ? str.slice(prefix.size, str.size) : str;  
+fn unprefix = (str, prefix) => str.has(prefix) ? str.slice(    prefix.size, str.size) : str;  
+fn unsuffix = (str, suffix) => str.has(suffix) ? str.slice(0, str.size - suffix.size) : str;        
+
 
 // case
 
@@ -20,21 +33,6 @@ fn invert_case (str) {
 }
 
 
-
-
-
-// === 1. inspection & metrics ===
-
-fn bytesize = str => str.bytesize; // gets inlined by compiler
-fn is_empty = str => str.size === 0;
-fn size     = str => str.size; // gets inlined by compiler
-fn trim     = str => str.trim_space();
-
-fn slice = (str, start, end) => str.substring(start, end);
-
-fn to_morph (str, callback) => morph(str, callback);
-
-fn has (str, needle) => str.contains(needle);
 
 fn string_is_case (str, case_symbol) {
   switch (case_symbol) {
@@ -69,27 +67,12 @@ fn string_loop (str, callback) {
   return str;
 }
 
-fn string_morph (str, callback) {
-  val result = "";
-  str.loop(fn (char, i) => {
-    result.append(callback(char, i));
-  });
-  return result;
-}
+fn morph = (str, callback) => '' >>> loop (str as char, i) do @ += callback(char, i);
 
 
 
-// === 3. prefix, suffix & trimming ===
 
 
-
-fn string_unprefix (str, prefix) {
-  return str.has(prefix) ? str.slice(prefix.size, str.size) : str;
-}
-
-fn string_unsuffix (str, suffix) {
-  return str.has(suffix) ? str.slice(0, str.size - suffix.size) : str;
-}
 
 // === 4. casing & formatting ===
 
@@ -117,9 +100,17 @@ fn string_to_case (str, target_case) {
   return str;
 }
 
-fn to_constant_case = str => '_'.join( words |> @.to_words ).to_upper_case();
-fn     to_flat_case = str =>  ''.join( words |> @.to_words ).to_lower_case();
-fn    to_kebab_case = str => '-'.join( words |> @.to_words ).to_lower_case();
+fn    to_constant_case = str => '_'.join( words |> @.to_words ).to_upper_case();
+fn        to_flat_case = str =>  ''.join( words |> @.to_words ).to_lower_case();
+fn       to_kebab_case = str => '-'.join( words |> @.to_words ).to_lower_case();
+fn        to_slug_case = str => '-'.join( words |> @.to_words ).to_lower_case();
+fn       to_snake_case = str => '_'.join( words |> @.to_words ).to_lower_case();
+fn to_upper_kebab_case = str => '-'.join( words |> @.to_words ).to_lower_case();
+
+fn string_to_upper_kebab_case (str) {
+  val words = str.to_words();
+  return "-".join(words).to_upper_case();
+}
 
 fn string_to_mocking_case (str) {
   val result = "";
@@ -143,15 +134,7 @@ fn string_to_pascal_case (str) {
   return result;
 }
 
-fn string_to_slug_case (str) {
-  val words = str.to_words();
-  return "-".join(words).to_lower_case();
-}
 
-fn string_to_snake_case (str) {
-  val words = str.to_words();
-  return "_".join(words).to_lower_case();
-}
 
 fn string_to_title_case (str) {
   val words = str.to_words();
@@ -159,10 +142,6 @@ fn string_to_title_case (str) {
   return " ".join(capitalized);
 }
 
-fn string_to_upper_kebab_case (str) {
-  val words = str.to_words();
-  return "-".join(words).to_upper_case();
-}
 
 // === 5. splitting, joining & helpers ===
 
