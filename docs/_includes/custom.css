@@ -58,7 +58,7 @@ html, body { height: 100%; overflow: hidden; }
 body       { height: 100dvh; }
 
 body { display:flex; flex-flow: column; }
-body > #app-header    { flex: 0 0 auto; }
+body > #app-header    { flex: 0 0 0px; }
 body > #app-footer    { flex: 0 0 auto; }
 body > .markdown-body {
   flex: 1;
@@ -67,16 +67,8 @@ body > .markdown-body {
   padding: 1rem;
 }
 
-
-
 .shadow { box-shadow: var(--shadow); }
-
-
-.zebra > * {
-  border-radius: 0.25rem;
-  &:nth-child(2n+1) { background: var(--zebra); }
-}
-  
+.zebra > *:nth-child(2n+1) { background: var(--zebra); }
 
 pre {
   max-width     : 100%;
