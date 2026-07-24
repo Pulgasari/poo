@@ -40,8 +40,9 @@ html  { -webkit-tap-highlight-color: transparent; }
   --bg-darker-20  : color-mix(in srgb, var(--bg) 80%, black);
   --bg-lighter-10 : color-mix(in srgb, var(--bg) 90%, white);
 
-  --separator : var(--bg-lighter-10);;
-  --shadow    : 0 0 5px color-mix(in srgb, var(--bg) 90%, black);
+  --separator    : var(--bg-lighter-10);;
+  --shadow       : 0 0 5px color-mix(in srgb, var(--bg) 90%, black);
+  --shadow-inset : 0 0 5px color-mix(in srgb, var(--bg) 90%, black);
 }
 
 /* FONT */
@@ -100,7 +101,7 @@ code:not(pre code) {
 code     { background-color: var(--bg-darker-20)!important; }
 pre code { background-color: var(--bg-darker-20)!important; }
 pre code { max-width: 100%; overflow-x: auto; }
-pre      { border: 1px solid var(--separator)!important; }
+pre      { border: 1px solid var(--separator)!important; box-shadow: var(--shadow-inset); }
 
 /* HEADER & FOOTER */
 
