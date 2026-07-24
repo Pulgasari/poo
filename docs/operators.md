@@ -413,7 +413,7 @@ val names = users |. "name"; // ["Alice", "Bob"]
 | :--- | :--- | :--- |
 | [`>>`](#--forward-pipe-operator) | Forward Pipe | Passes left result as input to right function |
 | [`>>>`](#--deep-pipe-operator) | Deep Pipe | Unwraps/resolves async values before passing |
-| [`?>>`](#--nullish-safe-pipe-operator) | Nullish-Safe Pipe | Short-circuits and returns `nil` if value is `nil` |
+| [`?>>`](#--nullish-safe-pipe-operator) | Nullish-Safe Pipe | Short-circuits and returns `null` if value is nullish |
 | [`!>>`](#--falsy-safe-pipe-operator) | Falsy-Safe Pipe | Short-circuits if value evaluates to falsy |
 
 ---
@@ -442,7 +442,7 @@ val result = fetch_user_async(id) >>> parse_json >>> save_db;
 
 ### `?>>` – Nullish-Safe Pipe Operator
 
-Nullish-safe pipeline operator. Short-circuits the pipeline and returns `nil` if the left-hand evaluation yields `nil`.
+Nullish-safe pipeline operator. Short-circuits the pipeline and returns `nil` if the left-hand evaluation yields `null`.
 
 ```poo
 val user_city = fetch_user(id) ?>> get_address ?>> get_city;
@@ -450,7 +450,7 @@ val user_city = fetch_user(id) ?>> get_address ?>> get_city;
 
 ### `!>>` – Falsy-Safe Pipe Operator
 
-Falsy-safe pipeline operator. Short-circuits the pipeline if the left-hand evaluation yields a falsy value (`false`, `nil`, `0`, `""`).
+Falsy-safe pipeline operator. Short-circuits the pipeline if the left-hand evaluation yields a falsy value (`false`, `null`, `0`, `""`).
 
 ```poo
 val contacts = load_profile() !>> validate_active !>> fetch_contacts;
