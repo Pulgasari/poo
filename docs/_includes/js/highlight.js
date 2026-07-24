@@ -37,8 +37,8 @@ hljs.registerLanguage('poo', function (hljs) {
     contains: []
   };
 
-  const STRING_DOUBLE   = { className: 'string', begin: '"', end: '"', contains: [hljs.BACKSLASH_ESCAPE] };
-  const STRING_SINGLE   = { className: 'string', begin: "'", end: "'", contains: [hljs.BACKSLASH_ESCAPE, VARIABLE_INTERPOLATION] };
+  const STRING_SINGLE   = { className: 'string', begin: "'", end: "'", contains: [hljs.BACKSLASH_ESCAPE] };
+  const STRING_DOUBLE   = { className: 'string', begin: '"', end: '"', contains: [hljs.BACKSLASH_ESCAPE, VARIABLE_INTERPOLATION] };
   const STRING_BACKTICK = { className: 'string', begin: '`', end: '`', contains: [hljs.BACKSLASH_ESCAPE, VARIABLE_INTERPOLATION, EXPRESSION_INTERPOLATION] };   
 
   EXPRESSION_INTERPOLATION.contains = [ // defined here to make recursion possible
