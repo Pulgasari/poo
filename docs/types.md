@@ -20,9 +20,9 @@ This document provides an overview about all built-in datatypes.
 [`Number`](#number)
 [`Queue`](#queue) 
 [`Pattern`](#pattern)
+[`Pool`](#pool)
 [`Record`](#record)
 [`RegExp`](#regexp)
-[`Set`](#set)
 [`Stack`](#stack)
 [`String`](#string)
 [`Store`](#store)
@@ -70,7 +70,7 @@ val letter = 'c';
 
 Standardized type to represent system colors, HEX formats, or alpha color values natively.
   
-```js
+```poo
 val red = Color("#ff0000");
 ```
 
@@ -80,44 +80,33 @@ Read more: [`Color`](Color.md) [`Color`](types/Color.md)
 
 Manages time-series data, high-resolution calendars, and system timestamps.
 
-<details>
-<summary><b>Example Code</b></summary>
-  
-```js
-
+```poo
+val today = 1917-10-25;
+val today = new Date('1917-10-25');
+val today = new Date '1917-10-25';
 ```
-</details>
 
 ## Enum
 
 Used to define closed collections of named, immutable state constants.
 
-<details>
-<summary><b>Example Code</b></summary>
-
-```js
+```poo
 
 ```
-</details>
 
 ## Generator
 
 Stateful, lazy-evaluated iterable streams created using the generator syntax identifier `fn*`.
 
-<details>
-<summary><b>Example Code</b></summary>
-
-```js
+```poo
 fn*
 ```
-</details>
 
 ## List
 
-A **List** is a special form of an [Array](#array) with:
-- identical typed values
+A **List** is a special form of an [Array](#array) with identical typed values and a flat structure.
 
-```c
+```poo
 val pets = new List;
 val pets = #['bird', 'cat', 'dog', 'fish'];
 val nums = #[1, 2, 3];
@@ -125,10 +114,7 @@ val nums = #[1, 2, 3];
 
 A **List** has all the builtin methods of **Array** *(outer type)* and depending on the type of it's values *(inner type)* one could use all those methods in combination.
 
-<details>
-<summary><b>Example Code</b></summary>
-
-```c
+```poo
 val pets = #['bird', 'cat', 'dog', 'fish'];
 
 // #['BIRD', 'CAT', 'DOG', 'FISH']
@@ -145,17 +131,12 @@ pets.map (toUpperCase reverse).reverse();
 pets.map (toUpperCase reverse) |> @.reverse();
 pets.map >> toUpperCase reverse |> @.reverse();
 ```
-</details>
 
 ## Map
 
-<details>
-<summary><b>Example Code</b></summary>
-
-```js
+```poo
 
 ```
-</details>
 
 ## Number
 
@@ -163,75 +144,51 @@ Represents all numerical data, including both integers ([`Int`](#int)) and float
 
 To improve readability when working with massive numbers, digit separating underscores (`_`) can be placed freely within the literal representation.
 
-<details>
-<summary><b>Example Code</b></summary>
-
-```scala
+```poo
 val num = 60;
 val dec = 10.5;
 val big = 10_000_000; // 10000000
 ```
-</details>
 
 ## Pattern
 
 Formal structural layouts utilized directly during conditional type assertions and robust pattern matching rules (`~=`).
 
-<details>
-<summary><b>Example Code</b></summary>
-
-```js
+```poo
 
 ```
-</details>
+
+## Pool
+
+Highly performant collections storing entirely unique values, safely ignoring duplication events.
+
+```poo
+
+```
 
 ## Queue
 
 High-performance, built-in structural options providing out-of-the-box FIFO and LIFO mechanics.
 
-<details>
-<summary><b>Example Code</b></summary>
-
-```js
+```poo
 
 ```
-</details>
 
 ## Record
 
 A structurally rigid set of key-value assignments (`key: value`), initialized by utilizing the object rigidity descriptor `#{...}`. It provides optimized compile-time static maps.
 
-<details>
-<summary><b>Example Code</b></summary>
-
-```js
+```poo
 val userRecord = #{name: "Udo", age: 60};
 ```
-</details>
 
 ## RegExp
 
 Pattern sequences built for fast text extraction and character matching evaluations.
 
-<details>
-<summary><b>Example Code</b></summary>
-
-```js
+```poo
 
 ```
-</details>
-
-## Set
-
-Highly performant collections storing entirely unique values, safely ignoring duplication events.
-
-<details>
-<summary><b>Example Code</b></summary>
-
-```js
-
-```
-</details>
 
 ## Stack
 
@@ -249,75 +206,51 @@ High-performance, built-in structural options providing out-of-the-box FIFO and 
 
 Containers built for handling observable, reactive global state changes or event listeners seamlessly.
 
-<details>
-<summary><b>Example Code</b></summary>
-
-```js
+```poo
 
 ```
-</details>
 
 ## String
 
 A sequential array of text characters. Poo natively supports single quotes (`'...'`), double quotes (`"..."`) featuring runtime variable expansion via the `$` token, and backticks (`` `...` ``) for complex template string injection using `${expression}` syntax.
 
-<details>
-<summary><b>Example Code</b></summary>
-
-```scala
+```poo
 val name = "Udo";
 val text = "Coding sucks.";
 val greeting = `Hello ${name}!`;
 ```
-</details>
 
 ## Symbol
 
 Fully unique and completely unalterable internal tokens, ideal for isolating internal object metadata keys.
 
-<details>
-<summary><b>Example Code</b></summary>
-
-```js
+```poo
 
 ```
-</details>
 
 ## Tree
 
 Native branch layouts built to construct and maneuver hierarchical nested branch data models.
 
-<details>
-<summary><b>Example Code</b></summary>
-
-```js
+```poo
 
 ```
-</details>
 
 ## Tuple
 
 A fixed-size, heterogeneous collection containing predefined value sequences wrapped inside `#(...)`. Each index is rigidly locked to a specific type footprint upon declaration. Index elements can be updated, but only if the incoming modification strictly conforms to the expected type signature of that slot.
 
-<details>
-<summary><b>Example Code</b></summary>
-
-```js
+```poo
 val userTuple = #("Udo", 60, true); // Strict schema slot layout: (String, Number, Bool)
 ```
-</details>
 
 ## Union
 
 Multi-faceted type definitions that allow a variable footprint to seamlessly accept values matching multiple distinct structural footprints.
 
-<details>
-<summary><b>Example Code</b></summary>
-
-```js
+```poo
 
 ```
-</details>
 
 ---
 
