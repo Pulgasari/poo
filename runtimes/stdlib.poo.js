@@ -269,6 +269,6 @@ fn array_join (list, delimiter = ", ") {
   return result;
 }
 
-fn reverse = list = [] >>> loop (list.size..0 as i) do --i and @ += list[i];
+fn reverse = list => [] >>> loop (list.size..0 as i) do --i and @ += list[i];
 
     
