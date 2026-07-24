@@ -18,21 +18,22 @@ hljs.registerLanguage('poo', function (hljs) {
 
   // 2. Vorab-Deklaration für die komplexe Interpolation ${ ... }
   const EXPRESSION_INTERPOLATION = {
-    className: 'subst',
-    begin: /\\$\{/,
-    end: /\}/,
-    keywords: {
-      keyword:  "as and break catch continue cpy do fail fn if kill loop in new obj of on or pkg ref return skip static switch use val yield",
-      literal:  "false null true undefined",
-      built_in: "Array Blob Bool Char Color Date Enum Generator List Map Number Queue Pattern Record RegExp Set Stack String Store Symbol Tree Tuple Union"
+    className : 'subst',
+    begin     : /\\$\{/,
+    end       : /\}/,
+    keywords  : {
+      keyword  :  "as and break catch continue cpy do fail fn if kill loop in new obj of on or pkg ref return skip static switch use val yield",
+      literal  :  "false null true undefined",
+      built_in : "Array Blob Bool Char Color Date Enum Generator List Map Number Queue Pattern Record RegExp Set Stack String Store Symbol Tree Tuple Union"
     },
     contains: [] // Wird gleich unten dynamisch befüllt, um Rekursion zu erlauben
   };
 
   const STRING_DOUBLE = {
-    className: 'string',
-    begin: '"', end: '"',
-    contains: [hljs.BACKSLASH_ESCAPE, VARIABLE_INTERPOLATION, EXPRESSION_INTERPOLATION]
+    className : 'string',
+    begin     : '"', 
+    end       : '"',
+    contains  : [hljs.BACKSLASH_ESCAPE, VARIABLE_INTERPOLATION, EXPRESSION_INTERPOLATION]
   };
 
   const STRING_SINGLE = {
@@ -80,6 +81,7 @@ hljs.registerLanguage('poo', function (hljs) {
   
 });
 
+/*
 hljs.registerLanguage('poo', function (hljs) {
   return {
     name: "Poo",
@@ -101,3 +103,4 @@ hljs.registerLanguage('poo', function (hljs) {
     ]
   };
 });
+*/
