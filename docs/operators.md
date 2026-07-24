@@ -240,7 +240,7 @@ Evaluates strict reference identity and exact type match.
 val a = [1, 2];
 val b = [1, 2];
 
-a == b;  // true  (Same values)
+a ==  b;  // true  (Same values)
 a === b; // false (Different object references in memory)
 ```
 
@@ -293,7 +293,7 @@ Returns `true` if the left operand is smaller than or equal to the right operand
 Returns `true` if the left operand is larger than or equal to the right operand.
 
 ```poo
-5 >= 5; // true
+5  >= 5; // true
 10 >= 5; // true
 ```
 
@@ -302,12 +302,12 @@ Returns `true` if the left operand is larger than or equal to the right operand.
 Comparison operator. Returns `-1` if left is smaller, `0` if equal, and `1` if left is larger.
 
 ```poo
-5 <=> 10; // -1
-5 <=> 5;  // 0
-10 <=> 5; // 1
+ 5 <=> 10; // -1
+ 5 <=>  5; //  0
+10 <=>  5; //  1
 
 // Custom sorting comparator
-items.sort((a, b) => a.score <=> b.score);
+items.sort( (a,b) => a.score <=> b.score );
 ```
 
 ### `~=` – Soft Match Operator
@@ -329,7 +329,7 @@ Deep / Strict Pattern Match operator. Requires exact structural match, including
 ```poo
 val list = [1, 2, 3];
 
-list ~= [1, 2];  // true  (Soft match)
+list ~=  [1, 2]; // true  (Soft match)
 list ~== [1, 2]; // false (Deep match: length mismatch)
 ```
 
@@ -367,7 +367,7 @@ val access = is_admin || is_owner;
 Maps every element in a collection through a transformation callback.
 
 ```poo
-val nums = [1, 2, 3];
+val nums    = [1, 2, 3];
 val doubled = nums |> (x => x * 2); // [2, 4, 6]
 
 // Chaining method references
@@ -379,7 +379,7 @@ val tags = #['bird', 'cat'] |> toUpperCase; // #['BIRD', 'CAT']
 Filters elements in a collection based on a predicate condition.
 
 ```poo
-val nums = [1, 2, 3, 4, 5, 6];
+val nums  = [1, 2, 3, 4, 5, 6];
 val evens = nums |? (x => x % 2 == 0); // [2, 4, 6]
 ```
 
@@ -389,7 +389,7 @@ Reduces / folds a collection into a single aggregated value.
 
 ```poo
 val nums = [1, 2, 3, 4];
-val sum = nums |* ((acc, x) => acc + x); // 10
+val sum  = nums |* ((acc, x) => acc + x); // 10
 ```
 
 ### `|.` – Pluck Operator
