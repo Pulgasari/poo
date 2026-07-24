@@ -25,12 +25,12 @@ val #compilerState = "broken"; // Compile-time constant
 
 ## 1. Value Declaration (`val`)
 
-The `val` keyword is the sole declaration keyword in Poo. By default, a standard `val` declaration creates a binding that can be reassigned or mutated later in code execution.
+The `val` keyword is the sole declaration keyword in Poo. By **default**, a standard `val` declaration creates a binding that can be reassigned or mutated later in code execution.
 
 ```poo
 val cat = "miau";
-cat += "!!!";                  // Allowed: Modifies or reassigns value
-cat = "purr";                  // Allowed: Reassigns binding
+cat += "!!!"; // allowed: modifies or reassigns value
+cat = "purr"; // allowed: reassigns binding
 ```
 
 ---
