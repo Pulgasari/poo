@@ -266,7 +266,7 @@ val text  = "$what sucks.";
 val greet = `Hello ${what}!`; // template-string
 ```
 
-Single-quoted strings don't supportany interpolation and become a [`Char`](#char) if they have size of 1.
+Single-quoted strings don't support any interpolation and become a [`Char`](#char) if they have size of 1.
 
 ```poo
 val char = 'u'; // = Char
