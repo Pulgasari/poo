@@ -87,13 +87,14 @@ cat = "meow";                  // Error: Variable is sealed
 
 ## 4. Reassignment & Sealing Error Behavior
 
-| Declaration / State | Reassignment (`=`) | Mutation (`+=`, `.add()`, etc.) | Sealing (`#=`) |
+| Declaration / State | Reassignment | Mutation | Sealing |
 | :--- | :--- | :--- | :--- |
-| **Standard Value (`val x = ...`)** | ✅ Allowed | ✅ Allowed | ✅ Allowed (locks variable) |
-| **Sealed Value (`val x #= ...`)** | ❌ Error | ❌ Error | ❌ Error (already sealed) |
-| **Constant (`val #x = ...`)** | ❌ Error | ❌ Error | ❌ Error |
+| **Standard Value** | ✅ Allowed | ✅ Allowed | ✅ Allowed (locks variable) |
+| **Sealed Value** | ❌ Error | ❌ Error | ❌ Error (already sealed) |
+| **Constant** | ❌ Error | ❌ Error | ❌ Error |
 
 Attempting to assign or mutate a sealed variable or compile-time constant throws a **Compiler/Runtime Error**:
+
 ```text
 Error: Cannot reassign or mutate sealed value 'cat'.
 ```
@@ -108,9 +109,9 @@ Bindings declared with `val` are **lexically scoped** to the block (`{ ... }`) i
 ```poo
 {
   val temp = "inside block";
-  print(temp);                 // "inside block"
+  print(temp); // "inside block"
 }
-// print(temp);                // Error: 'temp' is not defined in this scope
+print(temp); // Error: 'temp' is not defined in this scope
 ```
 
 ### 5.2 Variable Shadowing
@@ -120,11 +121,11 @@ Declaring a new `val` with the same name inside an inner block shadows the outer
 val score = 10;
 
 {
-  val score = 99;              // Shadows outer 'score' within this block
-  print(score);                // 99
+  val score = 99; // Shadows outer 'score' within this block
+  print(score);   // 99
 }
 
-print(score);                  // 10 (Outer score remains unchanged)
+print(score); // 10 (Outer score remains unchanged)
 ```
 
 ---
@@ -137,7 +138,7 @@ print(score);                  // 10 (Outer score remains unchanged)
 
 ```poo
 // Example concept (To be detailed in Control Flow spec):
-for (item in list) {           // 'item' is a contextual binding
+for (item in list) { // 'item' is a contextual binding
   print(item);
 }
 ```
