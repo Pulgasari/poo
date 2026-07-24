@@ -19,6 +19,172 @@ rgx.operators = buildOperatorRegex(poo.operators);
 
 hljs.registerLanguage('poo', function (hljs) {
   const KEYWORDS = {
+    built_in: poo.builtins,
+    keyword: poo.keywords,
+    literal: poo.literals,
+  };
+
+  const COMMENT = hljs.COMMENT(/\/\//, /$/);
+
+  const NUMBER = {
+    scope: 'number',
+    match: new RegExp(rgx.numbers),
+    relevance: 0,
+  };
+
+  const OPERATOR = {
+    scope: 'operator',
+    match: rgx.operators,
+    relevance: 0,
+  };
+
+  // Used at the top level, where both braces are ordinary punctuation.
+  const PUNCTUATION = {
+    scope: 'punctuation',
+    match: /[{}[\]();:,.]/,
+    relevance: 0,
+  };
+
+  /*
+   * Used inside ${...} and nested {...} blocks.
+   *
+   * It must not match "}", because that character closes either
+   * EXPRESSION_INTERPOLATION or BRACED_CODE.
+   */
+  const EXPRESSION_PUNCTUATION = {
+    scope: 'punctuation',
+    match: /[{\[\]();:,.]/,
+    relevance: 0,
+  };
+
+  const SPECIAL_KEYWORD = {
+    scope: 'keyword',
+    match: /\bfn[*^]/,
+  };
+
+  const VARIABLE_INTERPOLATION = {
+    scope: 'variable',
+    match: /\$[A-Za-z_][A-Za-z0-9_]*/,
+    relevance: 0,
+  };
+
+  const STRING_SINGLE = {
+    scope: 'string',
+    begin: /'/,
+    end: /'/,
+    contains: [
+      hljs.BACKSLASH_ESCAPE,
+    ],
+  };
+
+  const STRING_DOUBLE = {
+    scope: 'string',
+    begin: /"/,
+    end: /"/,
+    contains: [
+      hljs.BACKSLASH_ESCAPE,
+      VARIABLE_INTERPOLATION,
+    ],
+  };
+
+  /*
+   * These modes are connected below:
+   *
+   * TEMPLATE_STRING
+   *   -> ${ EXPRESSION_INTERPOLATION }
+   *        -> nested { BRACED_CODE }
+   *        -> nested `TEMPLATE_STRING`
+   */
+  const EXPRESSION_INTERPOLATION: any = {
+    scope: 'subst',
+    begin: /\$\{/,
+    end: /\}/,
+    keywords: KEYWORDS,
+    contains: [],
+  };
+
+  const TEMPLATE_STRING: any = {
+    scope: 'string',
+    begin: /`/,
+    end: /`/,
+    contains: [
+      hljs.BACKSLASH_ESCAPE,
+
+      // Must be checked before ordinary $variable interpolation.
+      EXPRESSION_INTERPOLATION,
+
+      VARIABLE_INTERPOLATION,
+    ],
+  };
+
+  /*
+   * A normal {...} block inside an expression interpolation.
+   *
+   * "self" handles arbitrarily nested brace blocks.
+   */
+  const BRACED_CODE: any = {
+    begin: /\{/,
+    end: /\}/,
+    keywords: KEYWORDS,
+    contains: [],
+  };
+
+  /*
+   * Do not put a matcher for "}" in this list. A closing brace must remain
+   * available to the enclosing BRACED_CODE or EXPRESSION_INTERPOLATION mode.
+   */
+  const EXPRESSION_ATOMS = [
+    COMMENT,
+    STRING_SINGLE,
+    STRING_DOUBLE,
+    TEMPLATE_STRING,
+    SPECIAL_KEYWORD,
+    NUMBER,
+    OPERATOR,
+    EXPRESSION_PUNCTUATION,
+  ];
+
+  /*
+   * "self" recursively handles nested brace blocks.
+   *
+   * Do not put BRACED_CODE itself in BRACED_CODE.contains.
+   */
+  BRACED_CODE.contains = [
+    'self',
+    ...EXPRESSION_ATOMS,
+  ];
+
+  /*
+   * BRACED_CODE must come before EXPRESSION_PUNCTUATION so that an opening
+   * brace starts a nested block instead of being consumed as punctuation.
+   */
+  EXPRESSION_INTERPOLATION.contains = [
+    BRACED_CODE,
+    ...EXPRESSION_ATOMS,
+  ];
+
+  return {
+    name: 'Poo',
+    aliases: ['poo'],
+    case_insensitive: false,
+    keywords: KEYWORDS,
+
+    contains: [
+      COMMENT,
+      STRING_SINGLE,
+      STRING_DOUBLE,
+      TEMPLATE_STRING,
+      SPECIAL_KEYWORD,
+      NUMBER,
+      OPERATOR,
+      PUNCTUATION,
+    ],
+  };
+});
+
+/* // T1
+hljs.registerLanguage('poo', function (hljs) {
+  const KEYWORDS = {
     built_in : poo.builtins,
     keyword  : poo.keywords,
     literal  : poo.literals,
@@ -51,7 +217,7 @@ hljs.registerLanguage('poo', function (hljs) {
 
   const VARIABLE_INTERPOLATION = {
     scope: 'variable',
-    match: /\$[A-Za-z_][A-Za-z0-9_]*/,
+    match: /\$[A-Za-z_][A-Za-z0-9_]* /, // !!!
     relevance: 0,
   };
 
@@ -63,15 +229,7 @@ hljs.registerLanguage('poo', function (hljs) {
       hljs.BACKSLASH_ESCAPE,
     ],
   };
-
-  /*
-   * Diese Modes werden weiter unten gegenseitig verbunden:
-   *
-   * TEMPLATE_STRING
-   *   -> ${ EXPRESSION_INTERPOLATION }
-   *        -> verschachtelte { BRACED_CODE }
-   *        -> verschachtelter `TEMPLATE_STRING`
-   */
+  
   const EXPRESSION_INTERPOLATION = {
     scope: 'subst',
     begin: /\$\{/,
@@ -90,23 +248,7 @@ hljs.registerLanguage('poo', function (hljs) {
       VARIABLE_INTERPOLATION,
     ],
   };
-
-  /*
-   * Ein normaler {...}-Block innerhalb einer Interpolation.
-   *
-   * 'self' bedeutet:
-   *
-   *   {
-   *     foo: {
-   *       bar: {
-   *         ...
-   *       }
-   *     }
-   *   }
-   *
-   * Die verschachtelten Blöcke werden vollständig konsumiert, sodass deren
-   * schließende } nicht EXPRESSION_INTERPOLATION beendet.
-   */
+  
   const BRACED_CODE = {
     begin: /\{/,
     end: /\}/,
@@ -134,25 +276,13 @@ hljs.registerLanguage('poo', function (hljs) {
     OPERATOR,
     PUNCTUATION,
   ];
-
-  /*
-   * Wichtig:
-   *
-   * Nicht BRACED_CODE selbst in BRACED_CODE.contains einsetzen.
-   * Dafür wird die highlight.js-Sonderreferenz 'self' verwendet.
-   */
+  
   BRACED_CODE.contains = [
     'self',
     ...EXPRESSION_ATOMS,
   ];
 
-  /*
-   * Innerhalb von ${...} sind normale Ausdrücke und {...}-Blöcke erlaubt.
-   *
-   * BRACED_CODE muss vor PUNCTUATION geprüft werden, damit eine öffnende {
-   * einen rekursiven Block startet und nicht bloß als punctuation markiert
-   * wird.
-   */
+  
   EXPRESSION_INTERPOLATION.contains = [
     BRACED_CODE,
     ...EXPRESSION_ATOMS,
@@ -187,6 +317,7 @@ hljs.registerLanguage('poo', function (hljs) {
     ],
   };
 });
+*/
 
 /*
 hljs.registerLanguage('poo', function (hljs) {
