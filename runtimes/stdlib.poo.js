@@ -38,17 +38,20 @@ fn invert_case (str) {
 
 
 
-fn string_is_case (str, case_symbol) {
-  switch (case_symbol) {
-    :camel   => return str == str.to_camel_case();
-    :kebab   => return str == str.to_kebab_case();
-    :lower   => return str == str.to_lower_case();
-    :pascal  => return str == str.to_pascal_case();
-    :snake   => return str == str.to_snake_case();
-    :upper   => return str == str.to_upper_case();
+fn string_is_case (str, case) {
+  switch (case) {
+    :camel   => str === str.to_camel_case();
+    :kebab   => str === str.to_kebab_case();
+    :lower   => str === str.to_lower_case();
+    :pascal  => str === str.to_pascal_case();
+    :snake   => str === str.to_snake_case();
+    :upper   => str === str.to_upper_case();
     or => false
   }
 }
+
+fn is_case = (str, case) => str === str.to_case(case);
+
 
 fn string_to_case (str, target_case) {
   switch (target_case) {
