@@ -159,17 +159,3 @@ fn whileLoop = cond => decorate (
     : loop          do @ += runWithBacktrack(p, cond) or break
 );
 ```
-
----
-
-## Philosophy
-
-The language sees itself as an *weird bastard like JavaScript* but with more time to intensionally become like that.
-
-It's compiling to ODIN.
-
-But it could compile to Vanilla JavaScript live in the Browser as well.
-
-
-
-
