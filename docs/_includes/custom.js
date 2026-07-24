@@ -42,44 +42,8 @@ function Menu () {
 // Ausführung erst, wenn die Seite komplett geladen ist:
 window.addEventListener('DOMContentLoaded', () => {
   
-  // 1. Theme setzen
-  //document.documentElement.dataset.theme = 'dracula';
-  
-  // 2. Code-Highlighting anwenden
-  hljs.highlightAll();
-
-  // GitHub Alerts ([!NOTE], [!TIP], etc.) automatisch parsen
-const alertTypes = {
-  note:      { label: 'Note',      color: '#8be9fd' },
-  tip:       { label: 'Tip',       color: '#50fa7b' },
-  important: { label: 'Important', color: '#bd93f9' },
-  warning:   { label: 'Warning',   color: '#f1fa8c' },
-  caution:   { label: 'Caution',   color: '#ff79c6' }
-};
-
-document.querySelectorAll('blockquote').forEach(bq => {
-  const firstP = bq.querySelector('p');
-  if (!firstP) return;
-
-  // Prüft, ob der Absatz mit [!NOTE], [!WARNING] etc. beginnt
-  const match = firstP.innerHTML.match(/^\[\!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/i);
-  if (match) {
-    const key = match[1].toLowerCase();
-    const alert = alertTypes[key];
-
-    bq.classList.add('gh-alert', `gh-alert-${key}`);
-    
-    // Tag [!NOTE] aus dem Text löschen
-    firstP.innerHTML = firstP.innerHTML.replace(/^\[\!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*(<br\s*\/?>)?/i, '').trim();
-
-    // Überschrift einfügen
-    const titleEl = document.createElement('div');
-    titleEl.className = 'gh-alert-title';
-    titleEl.textContent = alert.label;
-    
-    bq.prepend(titleEl);
-  }
-});
+  hljs.highlightAll(); // apply syntax highlighting
+  patch_md(); // fix the markdown rendering
 
   const $body     = document.body;
   const tmpHeader = document.createElement('div');
