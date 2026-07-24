@@ -110,6 +110,8 @@ h3:not(h1 + h3):not(h2 + h3) {
   padding-top : 1rem;
 }
 
+hr { background-color: var(--separator); }
+
 /* FIXES */
 
 /* hide template header */
