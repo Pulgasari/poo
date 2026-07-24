@@ -38,10 +38,10 @@ This document specifies all built-in operators in Poo, categorized by their exec
 [`||`](#--logical-or-operator)
 
 ### Collection Pipelines
-[`\|>`](#--map-operator) ·
-[`\|?`](#--filter-operator) ·
-[`\|*`](#--reduce-operator) ·
-[`\|.`](#--pluck-operator)
+[`|>`](#--map-operator) ·
+[`|?`](#--filter-operator) ·
+[`|*`](#--reduce-operator) ·
+[`|.`](#--pluck-operator)
 
 ### Execution Pipelines
 [`>>`](#--forward-pipe-operator) ·
