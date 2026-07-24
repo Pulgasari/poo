@@ -281,7 +281,7 @@ val name  = 'Udo';
 val greet = "Hello $name!";
 ```
 
-Backtickted template-strings support interpolation of names by `$` prefix and injection by `${...}` wrapper.
+Backticked template-strings support interpolation of names by `$` prefix and injection by `${...}` wrapper.
 
 ```poo
 val name = 'Udo';
