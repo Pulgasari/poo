@@ -125,6 +125,7 @@ h1:has(a[href="https://pulgasari.github.io/poo/"]) { display: none; }
 .markdown-body table {
   max-width : 100%;
 
+  td               { border: 1px solid var(--bg-lighter-10); }
   tr               { background-color: unset; }
   tr:nth-child(2n) { background-color: unset; }
 }
