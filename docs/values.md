@@ -53,7 +53,7 @@ val #<identifier> = <expression>;
 val #MAX_CONNECTIONS = 100;
 val #API_KEY = "poo_live_123456";
 
-// #MAX_CONNECTIONS = 200;     // Compile-time Error: Cannot reassign compile-time constant
+#MAX_CONNECTIONS = 200; // Compile-time Error: Cannot reassign compile-time constant
 ```
 
 ---
@@ -67,7 +67,7 @@ A value can be sealed directly when it is declared by substituting `=` with `#=`
 
 ```poo
 val exbf #= "you can't change me!";
-// exbf = "new value";         // Error: Variable is sealed
+exbf = "new value"; // error: variable is sealed
 ```
 
 When used on complex data structures (such as `Array`, `Map`, or `Tree`), `#=` performs a **deep-freeze**, making all nested properties, elements, and sub-structures recursively immutable as well.
@@ -77,10 +77,10 @@ The `#=` operator can also be used as an assignment operator at any later point 
 
 ```poo
 val cat = "miau";
-cat += "!!!";                  // Allowed: 'cat' is currently "miau!!!"
 
-cat #= "wuff";                 // Assigned "wuff" and sealed permanently
-cat = "meow";                  // Error: Variable is sealed
+cat += "!!!";  // allowed: 'cat' is currently "miau!!!"
+cat #= "wuff"; // allowed: assigned "wuff" and sealed permanently
+cat = "meow";  // error: variable is sealed
 ```
 
 ---
