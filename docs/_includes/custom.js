@@ -10,8 +10,8 @@ const headerItems = signal([
 function Header () {
   return html`
     <div id='app-header'>
-      <div class="menu-brand">${app.name}</div>
-      <div class="menu-items">
+      <div class="brand">${app.name}</div>
+      <div class="menu">
         ${headerItems.value.map(item => 
           html`<a href="${item.href}">${item.label}</a>`
         )}
