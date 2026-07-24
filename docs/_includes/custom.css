@@ -90,17 +90,17 @@ pre {
   white-space   : pre;
   padding       : 0.5rem;
   background    : var(--bg-darker-20)!important;
-  border-radius : 0.25rem;
+  border-radius : 0.5em;
 }
 code:not(pre code) {
   white-space   : nowrap;
   overflow-wrap : break-word;
 }
 
-code      { background-color: var(--bg-darker-20)!important; }
-pre code  { background-color: var(--bg-darker-20)!important; }
-pre code  { max-width: 100%; overflow-x: auto; }
-pre code  { border: 1px solid var(--separator)!important; border-radius: 0.25em; }
+code     { background-color: var(--bg-darker-20)!important; }
+pre code { background-color: var(--bg-darker-20)!important; }
+pre code { max-width: 100%; overflow-x: auto; }
+pre      { border: 1px solid var(--separator)!important; }
 
 /* HEADER & FOOTER */
 
