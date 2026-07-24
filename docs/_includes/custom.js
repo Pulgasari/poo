@@ -30,14 +30,22 @@ const menuItems = signal([
   { label: 'Values'    , href: app.url + 'values'    },
 ]);
 function Menu () {
+  const currentUrl = window.location.href.replace(/\/$/, '');
+  const    rootUrl = app.url.replace(/\/$/, '');
+
   return html`
     <div id='app-footer'>
-      ${menuItems.value.map(item => 
-        html`<a href="${item.href}">${item.label}</a>`
-      )}
+      ${menuItems.value.map(item => {
+        const itemUrl    = item.href.replace(/\/$/, '');
+        const isCurrent  = currentUrl === itemUrl;
+        const isParent   = !isCurrent && itemUrl !== rootUrl && currentUrl.startsWith(itemUrl + '/');
+        const classNames = [ isCurrent ? 'is-current' : '', isParent  ? 'is-parent'  : '' ].filter(Boolean).join(' ');
+        return html`<a href="${item.href}" class="${classNames}">${item.label}</a>`;
+      })}
     </div>
   `;
 }
+
 
 // Ausführung erst, wenn die Seite komplett geladen ist:
 window.addEventListener('DOMContentLoaded', () => {
