@@ -74,7 +74,7 @@ Operator | Name    | ...
 ---------|---------|----
 `\|?`    | [filter](#value)
 `\|>`    | [map](#map-operator)
-`\| `    | [reduce](#reduce-operator)
+`\|*`    | [reduce](#reduce-operator)
 `\|.`    | [pluck](#pluck-operator)
 
 ## Misc
