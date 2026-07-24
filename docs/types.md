@@ -41,6 +41,8 @@ val pets = ['bird', 'cat', 'dog', 'fish'];
 val nums = [1, 2, 3];
 ```
 
+Read more: [`Array`](types/Array.md)
+
 ## Blob
 
 Manages raw binary chunks, bytearrays, and data stream payloads.
@@ -48,6 +50,8 @@ Manages raw binary chunks, bytearrays, and data stream payloads.
 ```poo
 
 ```
+
+Read more: [`Blob`](types/Blob.md)
 
 ## Bool
 
@@ -58,6 +62,8 @@ val karl_marx   = true;
 val moonlanding = false;
 ```
 
+Read more: [`Bool`](types/Bool.md)
+
 ## Char
 
 Represents a single, isolated textual character token.
@@ -65,6 +71,8 @@ Represents a single, isolated textual character token.
 ```poo
 val letter = 'c';
 ```
+
+Read more: [`Char`](types/Char.md)
 
 ## Color
 
@@ -74,7 +82,7 @@ Standardized type to represent system colors, HEX formats, or alpha color values
 val red = Color("#ff0000");
 ```
 
-Read more: [`Color`](Color.md) [`Color`](types/Color.md)
+Read more: [`Color`](types/Color.md)
 
 ## Date
 
