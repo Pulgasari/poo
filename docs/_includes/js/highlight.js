@@ -19,9 +19,9 @@ rgx.operators = buildOperatorRegex(poo.operators);
 
 hljs.registerLanguage('poo', function (hljs) {
   const KEYWORDS = {
-    built_in: poo.builtins,
-    keyword: poo.keywords,
-    literal: poo.literals,
+    built_in : poo.builtins,
+    keyword  : poo.keywords,
+    literal  : poo.literals,
   };
 
   const COMMENT = hljs.COMMENT(/\/\//, /$/);
@@ -86,10 +86,7 @@ hljs.registerLanguage('poo', function (hljs) {
     end: /`/,
     contains: [
       hljs.BACKSLASH_ESCAPE,
-
-      // Muss vor normaler $variable-Erkennung stehen.
       EXPRESSION_INTERPOLATION,
-
       VARIABLE_INTERPOLATION,
     ],
   };
