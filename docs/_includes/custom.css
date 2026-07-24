@@ -129,8 +129,8 @@ h1:has(a[href="https://pulgasari.github.io/poo/"]) { display: none; }
   max-width : 100%;
 
   td               { border: 1px solid var(--bg-lighter-10); }
-  tr               { background-color: unset; }
-  tr:nth-child(2n) { background-color: unset; }
+  tr               { background-color: transparent; }
+  tr:nth-child(2n) { background-color: transparent; }
 }
 
 
