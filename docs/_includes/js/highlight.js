@@ -92,3 +92,18 @@ hljs.registerLanguage('poo', function (hljs) {
   };
 });
 */
+
+// :::::: HELPERS
+
+function buildOperatorRegex (opsInput) {
+  const ops = typeof opsInput === 'string' ? opsInput.trim().split(/\s+/) : opsInput;
+  
+  // Längste Operatoren zuerst sortieren (z. B. '===' vor '==')
+  const sorted = ops.sort((a, b) => b.length - a.length);
+  
+  // Regex-Sonderzeichen automatisch escapen
+  const escaped = sorted.map(op => op.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&'));
+  
+  return new RegExp(escaped.join('|'));
+}
+
