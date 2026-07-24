@@ -1,9 +1,9 @@
 # Data-Types
 
-This document provides an overview about all built-in datatypes.
+This document provides an **overview** about all built-in datatypes.
 
 > [!IMPORTANT]
-> For extended infos about each datatype, its methods etc. move to [/types](/docs/types) directory.
+> For extended infos about each datatype, follow the link at each entry.
 
 ---
 
@@ -311,7 +311,7 @@ Read more: [`Union`](types/Union.md)
 ---
 
 > [!IMPORTANT]
-> For extended infos about each datatype, its methods etc. move to [/types](/docs/types) directory.
+> For extended infos about each datatype, follow the link at each entry.
 
 
 
