@@ -282,5 +282,498 @@ x >=< y; // x is now 2, y is now 1
 ```
 
 
+# Operators
+
+This document specifies all built-in operators in Poo, categorized by their execution role.
+
+---
+
+## Overview
+
+### Assignment
+[`=`](#=) ·
+[`#=`](#=-1) ·
+[`+=`](#+=) ·
+[`-=`](#-=) ·
+[`*=`](#*=) ·
+[`/=`](#/=)
+
+### Calculation / Math
+[`+`](#+) ·
+[`-`](#-) ·
+[`*`](#*) ·
+[`/`](#/) ·
+[`%`](#%)
+
+### Comparison & Logic
+[`==`](#==) ·
+[`===`](#===) ·
+[`!=`](#!=) ·
+[`!==`](#!==) ·
+[`<`](#<) ·
+[`>`](#>) ·
+[`=<`](#=<) ·
+[`>=`](#>=) ·
+[`<=>`](#<=>) ·
+[`~=`](#~=) ·
+[`~==`](#~==) ·
+[`&&`](#&&) ·
+[`||`](#||)
+
+### Collection Pipelines
+[`|>`](#|>) ·
+[`|?`](#|?) ·
+[`|*`](#|*) ·
+[`|.`](#|.)
+
+### Execution Pipelines
+[`>>`](#>>) ·
+[`>>>`](#>>>) ·
+[`?>>`](#?>>) ·
+[`!>>`](#!>>)
+
+### Miscellaneous
+[`>=<`](#>=<) ·
+[`..`](#..)
+
+---
+
+## 1. Assignment Operators
+
+| Operator | Name |
+| :--- | :--- |
+| `=` | Assign |
+| `#=` | Seal |
+| `+=` | Add-Assign |
+| `-=` | Subtract-Assign |
+| `*=` | Multiply-Assign |
+| `/=` | Divide-Assign |
+
+---
+
+### `=`
+
+Binds a new value or reassigns an existing non-sealed identifier.
+
+```poo
+val name = "Alice";
+name = "Bob";
+```
+
+### `#=`
+
+Permanently seals (deep-freezes) a variable binding or complex data structure at runtime, rendering it recursively immutable.
+
+```poo
+// Seal on declaration
+val config #= { "host": "localhost", "port": 8080 };
+
+// Late sealing
+val animals = #['bird', 'cat', 'dog'];
+animals #= true; // Permanently locked
+
+// Attempting mutation throws a runtime error
+// animals += 'hamster'; // Error: Variable is sealed
+```
+
+### `+=`
+
+Appends or adds the right operand to the target variable in-place.
+
+```poo
+// Numerical addition
+var score = 100;
+score += 50; // 150
+
+// Collection appending
+val animals = #['bird', 'cat', 'dog'];
+animals += 'hamster'; // #['bird', 'cat', 'dog', 'hamster']
+
+// String concatenation
+val msg = "Hello";
+msg += " World!"; // "Hello World!"
+```
+
+### `-=`
+
+Subtracts the right operand or removes matching elements from a collection.
+
+```poo
+// Numerical subtraction
+var hp = 100;
+hp -= 20; // 80
+
+// Item removal from collection
+val pets = #['bird', 'cat', 'dog'];
+pets -= 'cat'; // #['bird', 'dog']
+```
+
+### `*=`
+
+Multiplies the variable by the right operand.
+
+```poo
+var factor = 5;
+factor *= 3; // 15
+```
+
+### `/=`
+
+Divides the variable by the right operand.
+
+```poo
+var balance = 100;
+balance /= 4; // 25
+```
+
+---
+
+## 2. Calculation / Math Operators
+
+| Operator | Name |
+| :--- | :--- |
+| `+` | Addition |
+| `-` | Subtraction |
+| `*` | Multiplication |
+| `/` | Division |
+| `%` | Modulo |
+
+---
+
+### `+`
+
+Calculates the arithmetic sum of two numbers.
+
+```poo
+val sum = 10 + 20; // 30
+val total = 1.5 + 2.25; // 3.75
+```
+
+### `-`
+
+Calculates the difference between two numbers or negates a value.
+
+```poo
+val diff = 100 - 45; // 55
+val inverted = -10;
+```
+
+### `*`
+
+Multiplies two numerical expressions.
+
+```poo
+val area = 10 * 5; // 50
+```
+
+### `/`
+
+Divides the dividend by the divisor.
+
+```poo
+val ratio = 10 / 4; // 2.5
+```
+
+### `%`
+
+Returns the remainder of integer division.
+
+```poo
+val remainder = 10 % 3; // 1
+val is_even = (num % 2) == 0;
+```
+
+---
+
+## 3. Comparison & Logic Operators
+
+| Operator | Name |
+| :--- | :--- |
+| `==` | Equal |
+| `===` | Strict Equal |
+| `!=` | Not Equal |
+| `!==` | Strict Not Equal |
+| `<` | Less Than |
+| `>` | Greater Than |
+| `=<` | Less or Equal |
+| `>=` | Greater or Equal |
+| `<=>` | Spaceship |
+| `~=` | Soft Match |
+| `~==` | Deep Match |
+| `&&` | Logical AND |
+| `||` | Logical OR |
+
+---
+
+### `==`
+
+Evaluates structural or value equality.
+
+```poo
+10 == 10; // true
+"abc" == "abc"; // true
+[1, 2] == [1, 2]; // true (Structural equality)
+```
+
+### `===`
+
+Evaluates strict reference identity and exact type match.
+
+```poo
+val a = [1, 2];
+val b = [1, 2];
+
+a == b;  // true  (Same values)
+a === b; // false (Different object references in memory)
+```
+
+### `!=`
+
+Evaluates value inequality.
+
+```poo
+10 != 20; // true
+```
+
+### `!==`
+
+Evaluates strict reference or type inequality.
+
+```poo
+val a = [1, 2];
+val b = [1, 2];
+
+a !== b; // true (Different references)
+```
+
+### `<`
+
+Returns `true` if the left operand is strictly smaller than the right operand.
+
+```poo
+5 < 10; // true
+```
+
+### `>`
+
+Returns `true` if the left operand is strictly larger than the right operand.
+
+```poo
+10 > 5; // true
+```
+
+### `=<`
+
+Returns `true` if the left operand is smaller than or equal to the right operand.
+
+```poo
+5 =< 5; // true
+3 =< 5; // true
+```
+
+### `>=`
+
+Returns `true` if the left operand is larger than or equal to the right operand.
+
+```poo
+5 >= 5; // true
+10 >= 5; // true
+```
+
+### `<=>`
+
+Comparison operator (Spaceship). Returns `-1` if left is smaller, `0` if equal, and `1` if left is larger.
+
+```poo
+5 <=> 10; // -1
+5 <=> 5;  // 0
+10 <=> 5; // 1
+
+// Custom sorting comparator
+items.sort((a, b) => a.score <=> b.score);
+```
+
+### `~=`
+
+Soft / Structural Pattern Match operator. Tests if a value conforms to a type, pattern, regex, or partial structure.
+
+```poo
+"user_123" ~= #/user_\d+/; // true (RegExp match)
+42 ~= Int;                 // true (Type match)
+
+val response = #{ status: 200, payload: "ok", latency: 12 };
+response ~= #{ status: 200 }; // true (Partial structure match)
+```
+
+### `~==`
+
+Deep / Strict Pattern Match operator. Requires exact structural match, including element count and type signatures.
+
+```poo
+val list = [1, 2, 3];
+
+list ~= [1, 2];  // true  (Soft match)
+list ~== [1, 2]; // false (Deep match: length mismatch)
+```
+
+### `&&`
+
+Evaluates logical AND between boolean expressions.
+
+```poo
+val valid = (age >= 18) && has_ticket;
+```
+
+### `||`
+
+Evaluates logical OR between boolean expressions.
+
+```poo
+val access = is_admin || is_owner;
+```
+
+---
+
+## 4. Collection Pipelines
+
+| Operator | Name |
+| :--- | :--- |
+| `\|>` | Map |
+| `\|?` | Filter |
+| `\|*` | Reduce / Fold |
+| `\|.` | Pluck |
+
+---
+
+### `|>`
+
+Maps every element in a collection through a transformation callback.
+
+```poo
+val nums = [1, 2, 3];
+val doubled = nums |> (x => x * 2); // [2, 4, 6]
+
+// Chaining method references
+val tags = #['bird', 'cat'] |> toUpperCase; // #['BIRD', 'CAT']
+```
+
+### `|?`
+
+Filters elements in a collection based on a predicate condition.
+
+```poo
+val nums = [1, 2, 3, 4, 5, 6];
+val evens = nums |? (x => x % 2 == 0); // [2, 4, 6]
+```
+
+### `|*`
+
+Reduces / folds a collection into a single aggregated value.
+
+```poo
+val nums = [1, 2, 3, 4];
+val sum = nums |* ((acc, x) => acc + x); // 10
+```
+
+### `|.`
+
+Plucks a specific key or property from all items in a structured collection.
+
+```poo
+val users = [
+  #{ id: 1, name: "Alice" },
+  #{ id: 2, name: "Bob" }
+];
+
+val names = users |. "name"; // ["Alice", "Bob"]
+```
+
+---
+
+## 5. Execution Pipelines
+
+| Operator | Name |
+| :--- | :--- |
+| `>>` | Forward Pipe |
+| `>>>` | Deep Pipe |
+| `?>>` | Nullish-Safe Pipe |
+| `!>>` | Falsy-Safe Pipe |
+
+---
+
+### `>>`
+
+Forwards the left-hand expression result as the input argument to the right-hand function call.
+
+```poo
+fn double = x => x * 2;
+fn addTen = x => x + 10;
+
+val result = 5 >> double >> addTen; // 20
+
+// Explicit placement via '@' placeholder
+val formatted = "hello" >> string.prefix(@, ">>> "); // ">>> hello"
+```
+
+### `>>>`
+
+Deep/Async pipe that unwraps or resolves pending asynchronous values before passing them to the next stage.
+
+```poo
+val result = fetch_user_async(id) >>> parse_json >>> save_db;
+```
+
+### `?>>`
+
+Nullish-safe pipeline operator. Short-circuits the pipeline and returns `nil` if the left-hand evaluation yields `nil`.
+
+```poo
+val user_city = fetch_user(id) ?>> get_address ?>> get_city;
+```
+
+### `!>>`
+
+Falsy-safe pipeline operator. Short-circuits the pipeline if the left-hand evaluation yields a falsy value (`false`, `nil`, `0`, `""`).
+
+```poo
+val contacts = load_profile() !>> validate_active !>> fetch_contacts;
+```
+
+---
+
+## 6. Miscellaneous Operators
+
+| Operator | Name |
+| :--- | :--- |
+| `>=<` | Swap |
+| `..` | Range / Rest |
+
+---
+
+### `>=<`
+
+Swaps the values bound to two variables in-place.
+
+```poo
+var a = "first";
+var b = "second";
+
+a >=< b;
+
+print(a); // "second"
+print(b); // "first"
+```
+
+### `..`
+
+Constructs a range sequence or represents ignored rest parameters in destructuring.
+
+```poo
+// Range generation
+val numbers = 1..5; // Range [1, 2, 3, 4, 5]
+
+// Destructuring ignore rest
+val #(head, ..) = #(10, 20, 30, 40); // head = 10
+```
 
 
