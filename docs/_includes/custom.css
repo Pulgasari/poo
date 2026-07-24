@@ -117,9 +117,9 @@ pre code  { border: 1px solid var(--separator); border-radius: 0.25em; }
 #app-footer { gap: 0.5rem; justify-content: space-evenly;  }
 #app-footer { text-transform: uppercase; }
 
-#app-footer a            { opacity: 0.50; }
-#app-footer a.is-parent  { opacity: 1.00; }
-#app-footer a.is-current { opacity: 1.00; }
+#app-footer a            { color: var(--fg);     opacity: 0.50; }
+#app-footer a.is-parent  { color: var(--access); opacity: 1.00; }
+#app-footer a.is-current { color: var(--access); opacity: 1.00; }
 
 /* HEADLINES */
 
