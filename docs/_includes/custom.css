@@ -113,6 +113,8 @@ pre code  { border: 1px solid var(--separator); border-radius: 0.25em; }
   padding          : 0.75rem;
 }
 
+#app-header .menu { gap: 0.5rem; }
+
 #app-header { gap: 0.5rem; justify-content: space-between; }
 #app-footer { gap: 0.5rem; justify-content: space-evenly;  }
 #app-footer { text-transform: uppercase; }
