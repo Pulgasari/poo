@@ -1,4 +1,4 @@
-// poo/runtimes/js/types/tuple.js
+// js-packages/runtime/types/tuple.js
 
 export default class Tuple {
   
