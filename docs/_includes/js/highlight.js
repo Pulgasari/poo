@@ -1,7 +1,7 @@
 // poo/docs/_includes/js/highlight.js
 
 let poo = {};
-poo.builtins    = 'Array Blob Bool Char Color Date Enum Generator List Map Number Queue Pattern Record RegExp Set Stack String Store Symbol Tree Tuple Union';
+poo.builtins     = 'Array Blob Bool Char Color Date Enum Generator List Map Number Queue Pattern Record RegExp Set Stack String Store Symbol Tree Tuple Union';
 poo.keywords     = 'as and break catch continue cpy do fail fn if kill loop in new obj of on or pkg ref return skip static switch use val yield',
 poo.literals     = 'false null true undefined',
 poo.punctuations = `{}[]();:,.`;
@@ -11,6 +11,11 @@ poo.operators = `
   == != =< >= += -= *= /= #= ~= :=
   + - * / % = < > ! & | ^ ~ #
 `;
+
+// RegExp
+const rgx = {};
+rgx.numbers   = '0[xX][0-9a-fA-F_]+|0[bB][01_]+|\\d[\\d_]*\\.\\d[\\d_]*(?:[eE][+-]?\\d+)?|\\d[\\d_]*';
+rgx.operators = buildOperatorRegex(poo.operators);
 
 hljs.registerLanguage('poo', function (hljs) {
 
@@ -29,22 +34,22 @@ hljs.registerLanguage('poo', function (hljs) {
       keyword  : poo.keywords,
       literal  : poo.literals,
     },
-    contains: [] // Wird gleich unten dynamisch befüllt, um Rekursion zu erlauben
+    contains: []
   };
 
   const STRING_DOUBLE   = { className: 'string', begin: '"', end: '"', contains: [hljs.BACKSLASH_ESCAPE] };
   const STRING_SINGLE   = { className: 'string', begin: "'", end: "'", contains: [hljs.BACKSLASH_ESCAPE, VARIABLE_INTERPOLATION] };
   const STRING_BACKTICK = { className: 'string', begin: '`', end: '`', contains: [hljs.BACKSLASH_ESCAPE, VARIABLE_INTERPOLATION, EXPRESSION_INTERPOLATION] };   
 
-  EXPRESSION_INTERPOLATION.contains = [
+  EXPRESSION_INTERPOLATION.contains = [ // defined here to make recursion possible
     hljs.COMMENT('//', '$'),
     STRING_DOUBLE,
     STRING_SINGLE,
     STRING_BACKTICK,
-    { className: 'keyword', begin: /fn[*^]/ },
-    { className: 'number', begin: '0[xX][0-9a-fA-F_]+|0[bB][01_]+|\\d[\\d_]*\\.\\d[\\d_]*(?:[eE][+-]?\\d+)?|\\d[\\d_]*' },
-    { className: 'operator', begin: buildOperatorRegex(poo.operators) },
-    { className: 'punctuation', begin: /[{}[\]();:,.]/ }
+    { className: 'keyword'     , begin: /fn[*^]/        },
+    { className: 'number'      , begin: rgx.numbers     },
+    { className: 'operator'    , begin: rgx.operators   },
+    { className: 'punctuation' , begin: /[{}[\]();:,.]/ },
   ];
 
   return {
@@ -61,9 +66,9 @@ hljs.registerLanguage('poo', function (hljs) {
       STRING_DOUBLE,
       STRING_SINGLE,
       STRING_BACKTICK,
-      { className: 'number', begin: '0[xX][0-9a-fA-F_]+|0[bB][01_]+|\\d[\\d_]*\\.\\d[\\d_]*(?:[eE][+-]?\\d+)?|\\d[\\d_]*' },
-      { className: 'operator', begin: buildOperatorRegex(poo.operators) },
-      { className: 'punctuation', begin: /[{}[\]();:,.]/ }
+      { className: 'number'      , begin: rgx.numbers     },
+      { className: 'operator'    , begin: rgx.operators   },
+      { className: 'punctuation' , begin: /[{}[\]();:,.]/ },
     ]
   };
   
@@ -75,7 +80,7 @@ hljs.registerLanguage('poo', function (hljs) {
     name: "Poo",
     case_insensitive: false,
     keywords: {
-      keyword  : "as and break catch continue cpy do fail fn if kill loop in new obj of on or pkg ref return skip static switch use val yield",
+      keyword  : "as and break catch continue cpy do fail fn if kill loop in new obj of on orrgx. pkg ref return skip static switch use val yield",
       literal  : "false null true undefined",
       built_in : "Array Blob Bool Char Color Date Enum Generator List Map Number Queue Pattern Record RegExp Set Stack String Store Symbol Tree Tuple Union"
     },
