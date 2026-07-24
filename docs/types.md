@@ -79,7 +79,8 @@ Read more: [`Char`](types/Char.md)
 Standardized type to represent system colors, HEX formats, or alpha color values natively.
   
 ```poo
-val red = Color("#ff0000");
+val red = Color('#ff0000');
+val red = Color '#ff0000';
 ```
 
 Read more: [`Color`](types/Color.md)
