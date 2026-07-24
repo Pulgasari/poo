@@ -69,14 +69,12 @@ val letter = 'c';
 ## Color
 
 Standardized type to represent system colors, HEX formats, or alpha color values natively.
-
-<details>
-<summary><b>Example Code</b></summary>
   
 ```js
-
+val red = Color("#ff0000");
 ```
-</details>
+
+Read more: [`Color`](Color.md) [`Color`](types/Color.md)
 
 ## Date
 
