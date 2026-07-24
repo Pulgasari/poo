@@ -19,9 +19,73 @@ rgx.operators = buildOperatorRegex(poo.operators);
 
 hljs.registerLanguage('poo', function (hljs) {
 
+  // 1. Einfache Variablen-Interpolation ($varname)
   const VARIABLE_INTERPOLATION = {
     className : 'variable',
     begin     : /\$[a-zA-Z_][a-zA-Z0-9_]*/
+  };
+
+  // 2. Vorab-Deklaration für innere Klammer-Blöcke { ... }
+  const BRACED_CODE = {
+    begin    : /\{/,
+    end      : /\}/,
+    contains : [] // wird unten rekursiv befüllt
+  };
+
+  // 3. Vorab-Deklaration für Template-String-Interpolation ${ ... }
+  const EXPRESSION_INTERPOLATION = {
+    className : 'subst',
+    begin     : /\$\{/,
+    end       : /\}/,
+    keywords  : {
+      built_in : poo.builtins,
+      keyword  : poo.keywords,
+      literal  : poo.literals,
+    },
+    contains  : [] // wird unten rekursiv befüllt
+  };
+
+  // 4. String-Typen
+  const STRING_SINGLE   = { className: 'string', begin: "'", end: "'", contains: [hljs.BACKSLASH_ESCAPE] };
+  const STRING_DOUBLE   = { className: 'string', begin: '"', end: '"', contains: [hljs.BACKSLASH_ESCAPE, VARIABLE_INTERPOLATION] };
+  const STRING_BACKTICK = { className: 'string', begin: '`', end: '`', contains: [hljs.BACKSLASH_ESCAPE, VARIABLE_INTERPOLATION, EXPRESSION_INTERPOLATION] };     
+
+  // 5. Alle Ausdrücke, die sowohl im Hauptcode, in ${...} als auch in inneren {...} gelten
+  const EXPRESSION_CONTAINS = [
+    hljs.COMMENT('//', '$'),
+    STRING_SINGLE,
+    STRING_DOUBLE,
+    STRING_BACKTICK,
+    BRACED_CODE, // <- Fängt verschachtelte { ... } ab!
+    { className: 'keyword'     , begin: /fn[*^]/        },
+    { className: 'number'      , begin: rgx.numbers     },
+    { className: 'operator'    , begin: rgx.operators   },
+    { className: 'punctuation' , begin: /[{}[\]();:,.]/ }
+  ];
+
+  // Rekursive Verknüpfungen befüllen
+  BRACED_CODE.contains              = EXPRESSION_CONTAINS;
+  EXPRESSION_INTERPOLATION.contains = EXPRESSION_CONTAINS;
+
+  return {
+    name: "Poo",
+    case_insensitive: false,
+    keywords: {
+      built_in : poo.builtins,
+      keyword  : poo.keywords,
+      literal  : poo.literals,
+    },
+    contains: EXPRESSION_CONTAINS
+  };
+
+});
+
+/*
+hljs.registerLanguage('poo', function (hljs) {
+
+  const VARIABLE_INTERPOLATION = {
+    className : 'variable',
+    begin     : /\$[a-zA-Z_][a-zA-Z0-9_]* /
   };
 
   // 2. Vorab-Deklaration für die komplexe Interpolation ${ ... }
@@ -73,6 +137,7 @@ hljs.registerLanguage('poo', function (hljs) {
   };
   
 });
+*/
 
 /*
 hljs.registerLanguage('poo', function (hljs) {
