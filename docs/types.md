@@ -194,13 +194,9 @@ Pattern sequences built for fast text extraction and character matching evaluati
 
 High-performance, built-in structural options providing out-of-the-box FIFO and LIFO mechanics.
 
-<details>
-<summary><b>Example Code</b></summary>
-
-```js
+```poo
 
 ```
-</details>
 
 ## Store
 
