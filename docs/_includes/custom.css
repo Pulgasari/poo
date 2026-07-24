@@ -65,10 +65,12 @@ a { color: var(--accent); }
 html { background: black; }
 body { background: var(--bg); color: var(--fg); }
 
-html, body { height: 100%; overflow: hidden; }
-body       { height: 100dvh; }
+p { color-mix(in oklch, var(--bg) 25%, var(--fg)); }
 
 /* LAYOUT */
+
+html, body { height: 100%; overflow: hidden; }
+body       { height: 100dvh; }
 
 body { display:flex; flex-flow: column; }
 body > #app-header    { flex: 0 0 auto; }
