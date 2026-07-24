@@ -17,9 +17,7 @@
   --fg       : #f8f8f2;
   --zebra    : color-mix(in oklch, var(--bg), black 5%);
   --active   : var(--accent);
-}
 
-:root {
   --font      : sans-serif;
   --font-code : "JetBrains Mono", monospace;
   --fontSize  : 16px;
@@ -38,11 +36,8 @@
   --bg-darker-20  : color-mix(in srgb, var(--bg) 80%, black);
   --bg-lighter-10 : color-mix(in srgb, var(--bg) 90%, white);
 
-  
-  --shadow : 0 0 5px color-mix(in srgb, var(--bg) 90%, black);
-  
-  --button-primary-bg   : var(--accent);
-  --button-secondary-bg : color-mix(in srgb, var(--fg) 50%, var(--bg));
+  --separator : var(--bg-lighter-10);;
+  --shadow    : 0 0 5px color-mix(in srgb, var(--bg) 90%, black);
 }
 
 html {
@@ -115,7 +110,7 @@ pre code { background-color: var(--bg-darker-20)!important; }
 /* HEADLINES */
 
 h3:not(h1 + h3):not(h2 + h3) {
-  border-top  : 1px dashed var(--bg-darker-20);
+  border-top  : 1px dashed var(--separator);
   padding-top : 1rem;
 }
 
@@ -128,7 +123,7 @@ h1:has(a[href="https://pulgasari.github.io/poo/"]) { display: none; }
 .markdown-body table {
   max-width : 100%;
 
-  td               { border: 1px solid var(--bg-lighter-10); }
+  td               { border: 1px solid var(--separator); }
   tr               { background-color: transparent; }
   tr:nth-child(2n) { background-color: transparent; }
 }
