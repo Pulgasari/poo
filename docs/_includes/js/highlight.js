@@ -27,7 +27,7 @@ hljs.registerLanguage('poo', function (hljs) {
   // 2. Vorab-Deklaration für die komplexe Interpolation ${ ... }
   const EXPRESSION_INTERPOLATION = {
     className : 'subst',
-    begin     : /\\$\{/,
+    begin     : /\$\{/,
     end       : /\}/,
     keywords  : {
       built_in : poo.builtins,
