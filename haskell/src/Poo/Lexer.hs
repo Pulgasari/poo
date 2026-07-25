@@ -46,7 +46,10 @@ pIdentOrKeyword = do
     "fn"        -> TFn
     "if"        -> TIf
     "or"        -> TOr
+    "loop!"     -> TLoopBang
     "loop"      -> TLoop
+    "break"     -> TBreak
+    "continue"  -> TContinue
     "do"        -> TDo
     "as"        -> TAs
     "return"    -> TReturn
