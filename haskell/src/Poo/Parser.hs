@@ -331,10 +331,18 @@ parseFnBody = choice
   , parseExpr
   ]
 
+parseReturn :: Parser Stmt
+parseReturn = do
+  tok TReturn
+  maybeExpr <- optional parseExpr
+  optional (tok TSemicolon)
+  pure (Return maybeExpr)
+
 parseStmt :: Parser Stmt
 parseStmt = choice
   [ parseVal
   , parseFn
+  , parseReturn
   , ExprStmt <$> parseExpr <* optional (tok TSemicolon)
   ]
 
