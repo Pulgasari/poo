@@ -98,14 +98,39 @@ pUnary = choice
   , pApp
   ]
 
--- Level 8: Function application
+-- Level 8: Function application (supports positional + named args)
 pApp :: Parser Expr
 pApp = do
   func <- pAtom
-  args <- many pAtom
-  pure $ case args of
-    [] -> func
-    _  -> App func args
+  choice
+    [ try (pCallArgs func)     -- f(...)  or  f(a: 1, b: 2)
+    , do args <- many pAtom    -- bare application: f a b
+         pure $ case args of
+           [] -> func
+           _  -> App func (map Positional args)
+    ]
+
+-- Parses the argument list inside parentheses
+pCallArgs :: Expr -> Parser Expr
+pCallArgs func = do
+  tok TLParen
+  args <- pArg `sepBy` tok TComma
+  tok TRParen
+  pure (App func args)
+
+-- A single argument: either named or positional
+pArg :: Parser Arg
+pArg = choice
+  [ try pNamedArg
+  , Positional <$> pExpr
+  ]
+
+pNamedArg :: Parser Arg
+pNamedArg = do
+  name <- pIdent
+  tok TColon
+  value <- pExpr
+  pure (Named name value)
 
 -- Atoms (literals, variables, parentheses, collections, if)
 pAtom :: Parser Expr
