@@ -9,7 +9,6 @@ This document specifies all built-in operators in Poo, categorized by their exec
 
 ### Assignment
 [`=`](#--assign-operator) ·
-[`#=`](#--seal-operator) ·
 [`+=`](#--add-assign-operator) ·
 [`-=`](#--subtract-assign-operator) ·
 [`*=`](#--multiply-assign-operator) ·
