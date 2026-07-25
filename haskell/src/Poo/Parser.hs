@@ -19,18 +19,18 @@ tok :: Token -> Parser Token
 tok t = token (\x -> if x == t then Just x else Nothing) mempty
 
 -- Basic atoms
-parseIdent :: Parser Name
-parseIdent = token (\case TIdent n -> Just n; _ -> Nothing) mempty
+parseIdentifier :: Parser Name
+parseIdentifier = token (\case TIdent n -> Just n; _ -> Nothing) mempty
 
 parseLiteral :: Parser Literal
 parseLiteral = token (\case
-  TInt    i   -> Just (LInt    i)
-  TFloat  f   -> Just (LFloat  f)
-  TString s   -> Just (LString s)
-  TBool   b   -> Just (LBool   b)
-  TNull       -> Just LNull
-  TUndefined  -> Just LUndefined
-  _           -> Nothing) mempty
+  TokenInt    i   -> Just (LInt    i)
+  TokenFloat  f   -> Just (LFloat  f)
+  TokenString s   -> Just (LString s)
+  TokenBool   b   -> Just (LBool   b)
+  TokenNull       -> Just LNull
+  TokenUndefined  -> Just LUndefined
+  _               -> Nothing) mempty
 
 -- ============ HELPERS
 
@@ -42,7 +42,7 @@ sepByTrail p sep = do
     Nothing -> pure []
     Just v  -> do
       rest <- many (sep *> p)
-      _    <- optional sep          -- the trailing one
+      _    <- optional sep  -- the trailing one
       pure (v : rest)
 
 -- ============================================================
@@ -65,47 +65,47 @@ parseExpr = parsePipe
 parsePipe :: Parser Expr
 parsePipe = do
   left <- pOr
-  rest <- many (tok TPipe *> parseOr)
+  rest <- many (tok TokenPipe *> parseOr)
   pure $ foldl Pipe left rest
 
 -- Level 2: Logical Or
 parseOr :: Parser Expr
-parseOr = parseBinaryOp parseAnd [(TOrOp, Or)]
+parseOr = parseBinaryOp parseAnd [(TokenOrOp, Or)]
 
 -- Level 3: Logical And
 parseAnd :: Parser Expr
-parseAnd = parseBinaryOp parseComparison [(TAnd, And)]
+parseAnd = parseBinaryOp parseComparison [(TokenAnd, And)]
 
 -- Level 4: Comparison
 parseComparison :: Parser Expr
 parseComparison = parseBinaryOp parseAdd
-  [ (TEq,  Eq)
-  , (TNeq, Neq)
-  , (TLt,  Lt)
-  , (TGt,  Gt)
-  , (TLe,  Le)
-  , (TGe,  Ge)
+  [ (TokenEq,  Eq)
+  , (TokenNeq, Neq)
+  , (TokenLt,  Lt)
+  , (TokenGt,  Gt)
+  , (TokenLe,  Le)
+  , (TokenGe,  Ge)
   ]
 
 -- Level 5: Addition / Subtraction
 parseAdd :: Parser Expr
-parseAdd = parseBinaryOp pMul
-  [ (TPlus,  Add)
-  , (TMinus, Sub)
+parseAdd = parseBinaryOp parseMul
+  [ (TokenPlus,  Add)
+  , (TokenMinus, Sub)
   ]
 
 -- Level 6: Multiplication / Division / Modulo
 parseMul :: Parser Expr
 parseMul = parseBinaryOp parseUnary
-  [ (TStar,    Mul)
-  , (TSlash,   Div)
-  , (TPercent, Mod)
+  [ (TokenStar,    Mul)
+  , (TokenSlash,   Div)
+  , (TokenPercent, Mod)
   ]
 
 -- Level 7: Unary operators
 parseUnary :: Parser Expr
 parseUnary = choice
-  [ do tok TMinus
+  [ do tok TokenMinus
        e <- parseUnary
        pure (Unary Neg e)
   , parseApp
@@ -116,8 +116,8 @@ parseFnApp :: Parser Expr
 parseFnApp = do
   func <- parseAtom
   choice
-    [ try (parseFnCallArgs func)   -- f(...)  or  f(a: 1, b: 2)
-    , do args <- many parseAtom    -- bare application: f a b
+    [ try (parseFnCallArgs func)  -- f(...)  or  f(a: 1, b: 2)
+    , do args <- many parseAtom   -- bare application: f a b
          pure $ case args of
            [] -> func
            _  -> App func (map Positional args)
@@ -126,22 +126,22 @@ parseFnApp = do
 -- Parses the argument list inside parentheses
 parseFnCallArgs :: Expr -> Parser Expr
 parseFnCallArgs func = do
-  tok TLParen
-  args <- parseArg `sepByTrail` tok TComma
-  tok TRParen
+  tok TokenParenL
+  args <- parseArg `sepByTrail` tok TokenComma
+  tok TokenParenR
   pure (App func args)
 
 -- A single argument: either named or positional
 parseArg :: Parser Arg
 parseArg = choice
   [ try parseNamedArg
-  , Positional <$> pExpr
+  , Positional <$> parseExpr
   ]
 
 parseNamedArg :: Parser Arg
 parseNamedArg = do
   name <- parseIdent
-  tok TColon
+  tok TokenColon
   value <- parseExpr
   pure (Named name value)
 
@@ -162,45 +162,45 @@ parseAtom = choice
 
 parseParens :: Parser Expr
 parseParens = do
-  tok TLParen
+  tok TokenParenL
   e <- parseExpr
-  tok TRParen
+  tok TokenParenR
   pure e
 
 -- -------------------- Collections --------------------
 
 parseArray :: Parser Expr
 parseArray = do
-  tok TLBracket
-  elems <- parseExpr `sepByTrail` tok TComma
-  tok TRBracket
+  tok TokenBracketL
+  elems <- parseExpr `sepByTrail` tok TokenComma
+  tok TokenBracketR
   pure (Array elems)
 
 parseList :: Parser Expr
 parseList = do
-  tok THashLBracket
-  elems <- parseExpr `sepByTrail` tok TComma
-  tok TRBracket
+  tok TokenHashBracketL
+  elems <- parseExpr `sepByTrail` tok TokenComma
+  tok TokenBracketR
   pure (List elems)
 
 parseTuple :: Parser Expr
 parseTuple = do
-  tok THashLParen
-  elems <- parseExpr `sepByTrail` tok TComma
-  tok TRParen
+  tok TokenHashParenL
+  elems <- parseExpr `sepByTrail` tok TokenComma
+  tok TokenParenR
   pure (Tuple elems)
 
 parseRecord :: Parser Expr
 parseRecord = do
-  tok THashLBrace
-  fields <- parseField `sepByTrail` tok TComma
-  tok TRBrace
+  tok TokenHashBraceL
+  fields <- parseField `sepByTrail` tok TokenComma
+  tok TokenBraceR
   pure (Record fields)
 
 parseField :: Parser (Name, Expr)
 parseField = do
-  name <- pIdent
-  tok TColon
+  name <- parseIdentifier
+  tok TokenColon
   value <- parseExpr
   pure (name, value)
 
@@ -214,23 +214,23 @@ parseLoop = choice
 
 parseLoopNormal :: Parser Expr
 parseLoopNormal = do
-  tok TLoop
+  tok TokenLoop
   choice
-    [ try pLoopOver
-    , pLoopWhile False  -- normal while
+    [ try parseLoopOver
+    , parseLoopWhile False  -- normal while
     ]
 
 parseLoopBang :: Parser Expr
 parseLoopBang = do
-  tok TLoopBang
+  tok TokenLoopBang
   parseLoopWhile True  -- inverted while
 
 -- Gemeinsame While-Logik
 parseLoopWhile :: Bool -> Parser Expr
 parseLoopWhile inverted = do
-  tok TLParen
+  tok TokenParenL
   cond <- parseExpr
-  tok TRParen
+  tok TokenParenR
   body <- parseLoopBody
   pure $ Loop $ if inverted
     then LoopWhileNot cond body
@@ -242,15 +242,15 @@ parseLoopOver :: Parser Expr
 parseLoopOver = do
   -- optional parentheses around the header
   (coll, name) <- choice
-    [ do tok TLParen
+    [ do tok TokenParenL
          c <- parseExpr
-         tok TAs
-         n <- parseIdent
-         tok TRParen
+         tok TokenAs
+         n <- parseIdentifier
+         tok TokenParenR
          pure (c, n)
     , do c <- parseExpr
-         tok TAs
-         n <- parseIdent
+         tok TokenAs
+         n <- parseIdentifier
          pure (c, n)
     ]
   body <- parseLoopBody
@@ -258,7 +258,7 @@ parseLoopOver = do
 
 parseLoopBody :: Parser Expr
 parseLoopBody = choice
-  [ do tok TDo
+  [ do tok TokenDo
        parseExpr
   , parseBlock
   ]
@@ -267,10 +267,10 @@ parseLoopBody = choice
 
 parseIf :: Parser Expr
 parseIf = do
-  tok TIf
+  tok TokenIf
   cond       <- parseExpr
   thenBranch <- parseThenBranch
-  elses      <- many pOrClause
+  elses      <- many parseOrClause
   pure (buildIfChain cond thenBranch elses)
 
 -- Helper: baut verschachtelte Ifs
@@ -278,12 +278,12 @@ buildIfChain :: Expr -> Expr -> [(Maybe Expr, Expr)] -> Expr
 buildIfChain cond thenBranch [] = If cond thenBranch Nothing
 buildIfChain cond thenBranch ((mcond, branch):rest) =
   If cond thenBranch (Just $ case mcond of
-    Nothing   -> branch
-    Just c    -> buildIfChain c branch rest)
+    Nothing -> branch
+    Just c  -> buildIfChain c branch rest)
 
 parseOrClause :: Parser (Maybe Expr, Expr)
 parseOrClause = do
-  tok TOr
+  tok TokenOr
   choice
     [ try $ do
         cond <- parseExpr
@@ -296,16 +296,16 @@ parseOrClause = do
 
 parseBranchBody :: Parser Expr
 parseBranchBody = choice
-  [ do tok TDo
+  [ do tok TokenDo
        parseExpr
   , parseBlock
   ]
 
 parseBlock :: Parser Expr
 parseBlock = do
-  tok TLBrace
+  tok TokenBraceL
   stmts <- many parseStmt
-  tok TRBrace
+  tok TokenBraceR
   pure (Block stmts)
 
 -- -------------------- switch --------------------
@@ -318,8 +318,8 @@ parseSwitch = choice
 
 parseSwitchNormal :: Parser Expr
 parseSwitchNormal = do
-  tok TSwitch
-  maybeScrutinee <- optional (tok TLParen *> parseExpr <* tok TRParen)
+  tok TokenSwitch
+  maybeScrutinee <- optional (tok TokenParenL *> parseExpr <* tok TokenParenR)     
   cases          <- parseSwitchBody
   pure $ case maybeScrutinee of
     Nothing  -> Switch SwitchNormal cases Nothing
@@ -327,8 +327,8 @@ parseSwitchNormal = do
 
 parseSwitchBang :: Parser Expr
 parseSwitchBang = do
-  tok TSwitchBang
-  maybeScrutinee <- optional (tok TLParen *> pExpr <* tok TRParen)
+  tok TokenSwitchBang
+  maybeScrutinee <- optional (tok TokenParenL *> pExpr <* tok TokenParenR)
   cases          <- parseSwitchBody
   pure $ case maybeScrutinee of
     Nothing  -> Switch SwitchInverted cases Nothing
@@ -336,9 +336,9 @@ parseSwitchBang = do
 
 parseSwitchBody :: Parser [SwitchCase]
 parseSwitchBody = do
-  tok TLBrace
+  tok TokenBraceL
   cases <- some parseSwitchCase
-  tok TRBrace
+  tok TokenBraceR
   pure cases
 
 parseSwitchCase :: Parser SwitchCase
@@ -355,7 +355,7 @@ parseNormalCase = do
 
 parseDefaultCase :: Parser SwitchCase
 parseDefaultCase = do
-  tok TOr
+  tok TokenOr
   body <- parseBranchBody
   pure (SwitchCase Nothing body)
 
@@ -365,18 +365,18 @@ parseDefaultCase = do
 
 parseVal :: Parser Stmt
 parseVal = do
-  tok TVal
+  tok TokenVal
   name <- parseIdent
-  tok TAssign
+  tok TokenAssign
   expr <- parseExpr
-  tok TSemicolon
+  tok TokenSemicolon
   pure (Val name expr)
 
 -- -------------------- fn --------------------
 
 parseFn :: Parser Stmt
 parseFn = do
-  tok TFn
+  tok TokenFn
   name <- parseIdent
 
   -- two styles:
@@ -388,27 +388,27 @@ parseFn = do
     ]
   where
     parseFnArrow = do
-      tok TAssign
+      tok TokenAssign
       params <- parseParams
-      tok TArrow
+      tok TokenArrow
       body <- parseFnBody
-      optional (tok TSemicolon)
+      optional (tok TokenSemicolon)
       pure (Fn name params body)
 
     parseFnClassic = do
       params <- parseParams
       body   <- parseBlock
-      optional (tok TSemicolon)
+      optional (tok TokenSemicolon)
       pure (Fn name params body)
 
 parseParams :: Parser [Name]
 parseParams = choice
-  [ do tok TLParen
-       ps <- parseIdent `sepByTrail` tok TComma
-       tok TRParen
+  [ do tok TokenParenL
+       ps <- parseIdentifier `sepByTrail` tok TokenComma
+       tok TokenParenR
        pure ps
-  , pure <$> parseIdent  -- single param without parens
-  , pure []              -- zero params
+  , pure <$> parseIdentifier  -- single param without parens
+  , pure []                   -- zero params
   ]
 
 parseFnBody :: Parser Expr
@@ -418,16 +418,16 @@ parseFnBody = choice
   ]
 
 parseBreak :: Parser Stmt
-parseBreak = tok TBreak *> optional (tok TSemicolon) *> pure Break
+parseBreak = tok TokenBreak *> optional (tok TokenSemicolon) *> pure Break
 
-pContinue :: Parser Stmt
-pContinue = tok TContinue *> optional (tok TSemicolon) *> pure Continue
+parseContinue :: Parser Stmt
+parseContinue = tok TokenContinue *> optional (tok TokenSemicolon) *> pure Continue
 
 parseReturn :: Parser Stmt
 parseReturn = do
-  tok TReturn
+  tok TokenReturn
   maybeExpr <- optional parseExpr
-  optional (tok TSemicolon)
+  optional (tok TokenSemicolon)
   pure (Return maybeExpr)
 
 parseStmt :: Parser Stmt
@@ -437,7 +437,7 @@ parseStmt = choice
   , parseReturn
   , parseBreak
   , parseContinue
-  , ExprStmt <$> parseExpr <* optional (tok TSemicolon)
+  , ExprStmt <$> parseExpr <* optional (tok TokenSemicolon)
   ]
 
 parseProgram :: Parser Program
