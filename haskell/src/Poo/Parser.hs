@@ -307,6 +307,57 @@ parseBlock = do
   tok TRBrace
   pure (Block stmts)
 
+-- -------------------- switch --------------------
+
+parseSwitch :: Parser Expr
+parseSwitch = choice
+  [ try parseSwitchBang
+  , parseSwitchNormal
+  ]
+
+parseSwitchNormal :: Parser Expr
+parseSwitchNormal = do
+  tok TSwitch
+  maybeScrutinee <- optional (tok TLParen *> parseExpr <* tok TRParen)
+  cases          <- parseSwitchBody
+  pure $ case maybeScrutinee of
+    Nothing  -> Switch SwitchNormal cases Nothing
+    Just scr -> Switch SwitchNormal cases (Just scr)
+
+parseSwitchBang :: Parser Expr
+parseSwitchBang = do
+  tok TSwitchBang
+  maybeScrutinee <- optional (tok TLParen *> pExpr <* tok TRParen)
+  cases          <- parseSwitchBody
+  pure $ case maybeScrutinee of
+    Nothing  -> Switch SwitchInverted cases Nothing
+    Just scr -> Switch SwitchInverted cases (Just scr)
+
+parseSwitchBody :: Parser [SwitchCase]
+parseSwitchBody = do
+  tok TLBrace
+  cases <- some parseSwitchCase
+  tok TRBrace
+  pure cases
+
+parseSwitchCase :: Parser SwitchCase
+parseSwitchCase = choice
+  [ try parseDefaultCase
+  , parseNormalCase
+  ]
+
+parseNormalCase :: Parser SwitchCase
+parseNormalCase = do
+  cond <- parseExpr
+  body <- parseBranchBody  -- "do expr" oder Block
+  pure (SwitchCase (Just cond) body)
+
+parseDefaultCase :: Parser SwitchCase
+parseDefaultCase = do
+  tok TOr
+  body <- parseBranchBody
+  pure (SwitchCase Nothing body)
+
 -- ----------------------------------------------------
 -- -------------------- Statements --------------------
 -- ----------------------------------------------------
