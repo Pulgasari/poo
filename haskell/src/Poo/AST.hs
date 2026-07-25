@@ -22,10 +22,15 @@ data UnaryOp
   | Not     -- optional, falls du ! später willst
   deriving (Show, Eq)
 
+data Arg
+  = Positional Expr
+  | Named Name Expr
+  deriving (Show, Eq)
+
 data Expr
   = Lit    Literal
   | Var    Name
-  | App    Expr    [Expr]             -- f(a, b)  or  f a
+  | App    Expr    [Arg]              -- f(a, b)  or  f a
   | Binary Expr    BinOp Expr
   | Unary  Expr    Expr
   | Unary  UnaryOp Expr
