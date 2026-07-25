@@ -48,6 +48,8 @@ pIdentOrKeyword = do
     "or"        -> TOr
     "loop!"     -> TLoopBang
     "loop"      -> TLoop
+    "switch!"   -> TSwitchBang
+    "switch"    -> TSwitch
     "break"     -> TBreak
     "continue"  -> TContinue
     "do"        -> TDo
