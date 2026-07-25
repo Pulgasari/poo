@@ -32,7 +32,10 @@ init_package :: proc (allocator := context.allocator) -> ^types.Object {
 
 // === helpers ===
 
-new_native_func :: proc (p: proc(^types.Object, []types.Value) -> types.Value, allocator := context.allocator) -> ^types.Function {
+new_native_func :: proc (
+  p: proc (^types.Object, []types.Value) -> types.Value, 
+  allocator := context.allocator
+) -> ^types.Function {
   fn := new(types.Function, allocator)
   fn.proc_ptr = p
   return fn
