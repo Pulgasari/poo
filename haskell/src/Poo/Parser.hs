@@ -157,6 +157,7 @@ parseAtom = choice
   , parseRecord
   , parseIf
   , parseLoop
+  , parseSwitch
   ]
 
 parseParens :: Parser Expr
