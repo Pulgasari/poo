@@ -2,30 +2,26 @@
 
 All value bindings are declared using the `val` keyword. 
 
-Mutability and immutability are controlled explicitly via the compile-time constant prefix (`#`) and the runtime sealing operator (`#=`).
+A compile-time constant could be defined by the `#`-prefix.
 
 ---
 
 ## Quick Syntax Overview
 
 ```poo
-// 1. Standard Value Binding (Mutable / Reassignable)
 val num = 123;
-num = 456; // allowed
 
-// 2. Sealed Value Binding (Immutable at Declaration)
-val str #= "moin!";
-str = "hello"; // error: Value is sealed
-
-// 3. Compile-Time Constant (Evaluated at Compile-Time)
-val #compilerState = "broken"; // Compile-time constant
+// Constant (Evaluated at Compile-Time)
+val #compilerState = "broken"; //compile-time constant
 ```
 
 ---
 
-## 1. Value Declaration (`val`)
+## Value Declaration (`val`)
 
-The `val` keyword is the sole declaration keyword in Poo. By **default**, a standard `val` declaration creates a binding that can be reassigned or mutated later in code execution.
+The `val` keyword is the sole declaration keyword in Poo.
+
+By **default**, a standard `val` declaration creates a binding that can be reassigned or mutated later in code execution.
 
 ```poo
 val cat = "miau";
@@ -35,7 +31,7 @@ cat =  "purr"; // allowed: reassigns binding
 
 ---
 
-## 2. Compile-Time Constants (`val #name`)
+## Compile-Time Constants (`val #name`)
 
 Adding the `#` prefix directly to the identifier name converts the declaration into a **compile-time constant**.
 
@@ -58,39 +54,11 @@ val #API_KEY = "poo_live_123456";
 
 ---
 
-## 3. Sealing Values (`#=`)
-
-The `#=` operator seals (freezes) a value recursively (deep-freeze) so that it becomes permanently immutable.
-
-### 3.1 Sealing on Declaration
-A value can be sealed directly when it is declared by substituting `=` with `#=`:
-
-```poo
-val exbf #= "you can't change me!";
-exbf = "new value"; // error: variable is sealed
-```
-
-When used on complex data structures (such as `Array`, `Map`, or `Tree`), `#=` performs a **deep-freeze**, making all nested properties, elements, and sub-structures recursively immutable as well.
-
-### 3.2 Late Sealing (Sealing at Runtime)
-The `#=` operator can also be used as an assignment operator at any later point in execution. This allows a value to be built dynamically and then locked down permanently.
-
-```poo
-val cat = "miau";
-
-cat += "!!!";  // allowed: 'cat' is currently "miau!!!"
-cat #= "wuff"; // allowed: assigned "wuff" and sealed permanently
-cat =  "meow";  // error: variable is sealed
-```
-
----
-
-## 4. Reassignment & Sealing Error Behavior
+## Reassignment & Sealing Error Behavior
 
 | Declaration / State | Reassignment | Mutation | Sealing |
 | :--- | :--- | :--- | :--- |
-| **Standard Value** | ✅ Allowed | ✅ Allowed | ✅ Allowed (locks variable) |
-| **Sealed Value** | ❌ Error | ❌ Error | ❌ Error (already sealed) |
+| **Value** | ✅ Allowed | ✅ Allowed | ✅ Allowed (locks variable) |
 | **Constant** | ❌ Error | ❌ Error | ❌ Error |
 
 Attempting to assign or mutate a sealed variable or compile-time constant throws a **Compiler/Runtime Error**:
@@ -101,11 +69,12 @@ Error: Cannot reassign or mutate sealed value 'cat'.
 
 ---
 
-## 5. Scope & Lifecycle
+## Scope & Lifecycle
 
 Bindings declared with `val` are **lexically scoped** to the block (`{ ... }`) in which they are defined.
 
-### 5.1 Block Scoping
+### Block Scoping
+
 ```poo
 {
   val temp = "inside block";
@@ -114,7 +83,8 @@ Bindings declared with `val` are **lexically scoped** to the block (`{ ... }`) i
 print(temp); // Error: 'temp' is not defined in this scope
 ```
 
-### 5.2 Variable Shadowing
+### Variable Shadowing
+
 Declaring a new `val` with the same name inside an inner block shadows the outer binding without modifying it:
 
 ```poo
@@ -130,7 +100,7 @@ print(score); // 10 (Outer score remains unchanged)
 
 ---
 
-## 6. Contextual & Temporary Bindings *(Tentative / Future Spec)*
+## Contextual & Temporary Bindings *(Tentative / Future Spec)*
 
 > [!NOTE]
 > Poo supports contextual or temporary value bindings (such as pattern match bindings, loop iterators, or inline callback identifiers) that are declared implicitly without the explicit `val` keyword.
