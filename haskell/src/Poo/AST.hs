@@ -54,6 +54,7 @@ data Stmt
   = Val Name Expr         -- val x = ...
   | Fn  Name [Name] Expr  -- fn name = params => body
   | ExprStmt Expr
+  | Return (Maybe Expr)   -- return;  or  return expr;
   deriving (Show, Eq)
 
 type Program = [Stmt]
