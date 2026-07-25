@@ -217,7 +217,7 @@ pLoopBody = choice
 pIf :: Parser Expr
 pIf = do
   tok TIf
-  cond <- pExpr
+  cond       <- pExpr
   thenBranch <- pThenBranch
   elseBranch <- optional pOrBranch
   pure (If cond thenBranch elseBranch)
@@ -235,7 +235,7 @@ pOrBranch = do
   -- either "or <cond> ..." or just "or ..."
   choice
     [ try $ do
-        cond <- pExpr
+        cond   <- pExpr
         branch <- pThenBranch
         pure (If cond branch Nothing)   -- simplified for now
     , pThenBranch
@@ -267,12 +267,28 @@ pFn :: Parser Stmt
 pFn = do
   tok TFn
   name <- pIdent
-  tok TAssign
-  params <- pParams
-  tok TArrow
-  body <- pExpr
-  tok TSemicolon
-  pure (Fn name params body)
+
+  -- two styles:
+  -- 1. fn name = params => body
+  -- 2. fn name (params) { body }
+  choice
+    [ try pFnArrow
+    , pFnClassic
+    ]
+  where
+    pFnArrow = do
+      tok TAssign
+      params <- pParams
+      tok TArrow
+      body <- pFnBody
+      optional (tok TSemicolon)
+      pure (Fn name params body)
+
+    pFnClassic = do
+      params <- pParams
+      body   <- pBlock
+      optional (tok TSemicolon)
+      pure (Fn name params body)
 
 pParams :: Parser [Name]
 pParams = choice
@@ -281,7 +297,13 @@ pParams = choice
        tok TRParen
        pure ps
   , pure <$> pIdent          -- single param without parens
-  , pure []                  -- no params
+  , pure []                  -- zero params
+  ]
+
+pFnBody :: Parser Expr
+pFnBody = choice
+  [ pBlock
+  , pExpr
   ]
 
 pStmt :: Parser Stmt
