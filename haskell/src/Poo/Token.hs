@@ -9,6 +9,10 @@ data Token
   | TNull
   | TUndefined
   | TIdent String
+  | THashLBracket   -- #[
+  | THashLParen     -- #(
+  | THashLBrace     -- #{
+  | TColon          -- :
 
   -- Keywords
   | TVal
