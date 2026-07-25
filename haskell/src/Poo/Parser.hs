@@ -32,21 +32,74 @@ pLiteral = token (\case
   TUndefined  -> Just LUndefined
   _           -> Nothing) mempty
 
--- Expressions (very simplified precedence for now)
+-- ============================================================
+-- Expressions with Operator Precedence
+-- ============================================================
+
+-- Precedence levels (from lowest to highest):
+-- 1. Pipe           (>>)
+-- 2. Logical Or     (||)
+-- 3. Logical And    (&&)
+-- 4. Comparison     (== != < > =< >=)
+-- 5. Addition       (+ -)
+-- 6. Multiplication (* / %)
+-- 7. Application / Atoms
+
 pExpr :: Parser Expr
 pExpr = pPipe
 
+-- Level 1: Pipe (left-associative)
 pPipe :: Parser Expr
 pPipe = do
-  left <- pBinary
-  option left $ do
-    tok TPipe
-    right <- pPipe
-    pure (Pipe left right)
+  left <- pOr
+  rest <- many (tok TPipe *> pOr)
+  pure $ foldl Pipe left rest
 
-pBinary :: Parser Expr
-pBinary = pApp  -- for now we keep it simple; operators come later
+-- Level 2: Logical Or
+pOr :: Parser Expr
+pOr = pBinaryOp pAnd [(TOrOp, Or)]
 
+-- Level 3: Logical And
+pAnd :: Parser Expr
+pAnd = pBinaryOp pComparison [(TAnd, And)]
+
+-- Level 4: Comparison
+pComparison :: Parser Expr
+pComparison = pBinaryOp pAdd
+  [ (TEq,  Eq)
+  , (TNeq, Neq)
+  , (TLt,  Lt)
+  , (TGt,  Gt)
+  , (TLe,  Le)
+  , (TGe,  Ge)
+  ]
+
+-- Level 5: Addition / Subtraction
+pAdd :: Parser Expr
+pAdd = pBinaryOp pMul
+  [ (TPlus,  Add)
+  , (TMinus, Sub)
+  ]
+
+-- Level 6: Multiplication / Division / Modulo
+pMul :: Parser Expr
+pMul = pBinaryOp pApp
+  [ (TStar,    Mul)
+  , (TSlash,   Div)
+  , (TPercent, Mod)
+  ]
+
+-- Helper for left-associative binary operators
+pBinaryOp :: Parser Expr -> [(Token, BinOp)] -> Parser Expr
+pBinaryOp higher ops = do
+  left <- higher
+  rest <- many $ do
+    op  <- choice [tok t *> pure binOp | (t, binOp) <- ops]
+    right <- higher
+    pure (op, right)
+  pure $ foldl (\acc (op, right) -> Binary acc op right) left rest
+
+-- Level 7: Function application + Atoms
 pApp :: Parser Expr
 pApp = do
   func <- pAtom
