@@ -19,11 +19,11 @@ tok :: Token -> Parser Token
 tok t = token (\x -> if x == t then Just x else Nothing) mempty
 
 -- Basic atoms
-pIdent :: Parser Name
-pIdent = token (\case TIdent n -> Just n; _ -> Nothing) mempty
+parseIdent :: Parser Name
+parseIdent = token (\case TIdent n -> Just n; _ -> Nothing) mempty
 
-pLiteral :: Parser Literal
-pLiteral = token (\case
+parseLiteral :: Parser Literal
+parseLiteral = token (\case
   TInt    i   -> Just (LInt    i)
   TFloat  f   -> Just (LFloat  f)
   TString s   -> Just (LString s)
@@ -45,27 +45,27 @@ pLiteral = token (\case
 -- 6. Multiplication (* / %)
 -- 7. Application / Atoms
 
-pExpr :: Parser Expr
-pExpr = pPipe
+parseExpr :: Parser Expr
+parseExpr = parsePipe
 
 -- Level 1: Pipe
-pPipe :: Parser Expr
-pPipe = do
+parsePipe :: Parser Expr
+parsePipe = do
   left <- pOr
-  rest <- many (tok TPipe *> pOr)
+  rest <- many (tok TPipe *> parseOr)
   pure $ foldl Pipe left rest
 
 -- Level 2: Logical Or
-pOr :: Parser Expr
-pOr = pBinaryOp pAnd [(TOrOp, Or)]
+parseOr :: Parser Expr
+parseOr = parseBinaryOp parseAnd [(TOrOp, Or)]
 
 -- Level 3: Logical And
-pAnd :: Parser Expr
-pAnd = pBinaryOp pComparison [(TAnd, And)]
+parseAnd :: Parser Expr
+parseAnd = parseBinaryOp parseComparison [(TAnd, And)]
 
 -- Level 4: Comparison
-pComparison :: Parser Expr
-pComparison = pBinaryOp pAdd
+parseComparison :: Parser Expr
+parseComparison = parseBinaryOp parseAdd
   [ (TEq,  Eq)
   , (TNeq, Neq)
   , (TLt,  Lt)
@@ -75,201 +75,201 @@ pComparison = pBinaryOp pAdd
   ]
 
 -- Level 5: Addition / Subtraction
-pAdd :: Parser Expr
-pAdd = pBinaryOp pMul
+parseAdd :: Parser Expr
+parseAdd = parseBinaryOp pMul
   [ (TPlus,  Add)
   , (TMinus, Sub)
   ]
 
 -- Level 6: Multiplication / Division / Modulo
-pMul :: Parser Expr
-pMul = pBinaryOp pUnary
+parseMul :: Parser Expr
+parseMul = parseBinaryOp parseUnary
   [ (TStar,    Mul)
   , (TSlash,   Div)
   , (TPercent, Mod)
   ]
 
 -- Level 7: Unary operators
-pUnary :: Parser Expr
-pUnary = choice
+parseUnary :: Parser Expr
+parseUnary = choice
   [ do tok TMinus
-       e <- pUnary
+       e <- parseUnary
        pure (Unary Neg e)
-  , pApp
+  , parseApp
   ]
 
 -- Level 8: Function application (supports positional + named args)
-pApp :: Parser Expr
-pApp = do
-  func <- pAtom
+parseFnApp :: Parser Expr
+parseFnApp = do
+  func <- parseAtom
   choice
-    [ try (pCallArgs func)     -- f(...)  or  f(a: 1, b: 2)
-    , do args <- many pAtom    -- bare application: f a b
+    [ try (parseFnCallArgs func)   -- f(...)  or  f(a: 1, b: 2)
+    , do args <- many parseAtom    -- bare application: f a b
          pure $ case args of
            [] -> func
            _  -> App func (map Positional args)
     ]
 
 -- Parses the argument list inside parentheses
-pCallArgs :: Expr -> Parser Expr
-pCallArgs func = do
+parseFnCallArgs :: Expr -> Parser Expr
+parseFnCallArgs func = do
   tok TLParen
-  args <- pArg `sepBy` tok TComma
+  args <- parseArg `sepBy` tok TComma
   tok TRParen
   pure (App func args)
 
 -- A single argument: either named or positional
-pArg :: Parser Arg
-pArg = choice
-  [ try pNamedArg
+parseArg :: Parser Arg
+parseArg = choice
+  [ try parseNamedArg
   , Positional <$> pExpr
   ]
 
-pNamedArg :: Parser Arg
-pNamedArg = do
-  name <- pIdent
+parseNamedArg :: Parser Arg
+parseNamedArg = do
+  name <- parseIdent
   tok TColon
-  value <- pExpr
+  value <- parseExpr
   pure (Named name value)
 
 -- Atoms (literals, variables, parentheses, collections, if)
-pAtom :: Parser Expr
-pAtom = choice
-  [ Lit <$> pLiteral
-  , Var <$> pIdent
-  , pParens
-  , pArray
-  , pList
-  , pTuple
-  , pRecord
-  , pIf
-  , pLoop
+parseAtom :: Parser Expr
+parseAtom = choice
+  [ Lit <$> parseLiteral
+  , Var <$> parseIdent
+  , parseParens
+  , parseArray
+  , parseList
+  , parseTuple
+  , parseRecord
+  , parseIf
+  , parseLoop
   ]
 
-pParens :: Parser Expr
-pParens = do
+parseParens :: Parser Expr
+parseParens = do
   tok TLParen
-  e <- pExpr
+  e <- parseExpr
   tok TRParen
   pure e
 
 -- -------------------- Collections --------------------
 
-pArray :: Parser Expr
-pArray = do
+parseArray :: Parser Expr
+parseArray = do
   tok TLBracket
-  elems <- pExpr `sepBy` tok TComma
+  elems <- parseExpr `sepBy` tok TComma
   tok TRBracket
   pure (Array elems)
 
-pList :: Parser Expr
-pList = do
+parseList :: Parser Expr
+parseList = do
   tok THashLBracket
-  elems <- pExpr `sepBy` tok TComma
+  elems <- parseExpr `sepBy` tok TComma
   tok TRBracket
   pure (List elems)
 
-pTuple :: Parser Expr
-pTuple = do
+parseTuple :: Parser Expr
+parseTuple = do
   tok THashLParen
-  elems <- pExpr `sepBy` tok TComma
+  elems <- parseExpr `sepBy` tok TComma
   tok TRParen
   pure (Tuple elems)
 
-pRecord :: Parser Expr
-pRecord = do
+parseRecord :: Parser Expr
+parseRecord = do
   tok THashLBrace
-  fields <- pField `sepBy` tok TComma
+  fields <- parseField `sepBy` tok TComma
   tok TRBrace
   pure (Record fields)
 
-pField :: Parser (Name, Expr)
-pField = do
+parseField :: Parser (Name, Expr)
+parseField = do
   name <- pIdent
   tok TColon
-  value <- pExpr
+  value <- parseExpr
   pure (name, value)
 
 -- -------------------- loop --------------------
 
-pLoop :: Parser Expr
-pLoop = do
+parseLoop :: Parser Expr
+parseLoop = do
   tok TLoop
   choice
-    [ try pLoopOver
-    , pLoopWhile
+    [ try parseLoopOver
+    , parseLoopWhile
     ]
 
 -- loop (collection as name) { body }
--- loop collection as name do expr
-pLoopOver :: Parser Expr
-pLoopOver = do
+-- loop  collection as name do expr
+parseLoopOver :: Parser Expr
+parseLoopOver = do
   -- optional parentheses around the header
   (coll, name) <- choice
     [ do tok TLParen
-         c <- pExpr
+         c <- parseExpr
          tok TAs
-         n <- pIdent
+         n <- parseIdent
          tok TRParen
          pure (c, n)
-    , do c <- pExpr
+    , do c <- parseExpr
          tok TAs
-         n <- pIdent
+         n <- parseIdent
          pure (c, n)
     ]
-  body <- pLoopBody
+  body <- parseLoopBody
   pure (Loop (LoopOver coll name body))
 
 -- loop (condition) { body }
 -- loop (condition) do expr
-pLoopWhile :: Parser Expr
-pLoopWhile = do
+parseLoopWhile :: Parser Expr
+parseLoopWhile = do
   tok TLParen
-  cond <- pExpr
+  cond <- parseExpr
   tok TRParen
-  body <- pLoopBody
+  body <- parseLoopBody
   pure (Loop (LoopWhile cond body))
 
-pLoopBody :: Parser Expr
-pLoopBody = choice
+parseLoopBody :: Parser Expr
+parseLoopBody = choice
   [ do tok TDo
-       pExpr
-  , pBlock
+       parseExpr
+  , parseBlock
   ]
 
 -- -------------------- if / or --------------------
 
-pIf :: Parser Expr
-pIf = do
+parseIf :: Parser Expr
+parseIf = do
   tok TIf
-  cond       <- pExpr
-  thenBranch <- pThenBranch
-  elseBranch <- optional pOrBranch
+  cond       <- parseExpr
+  thenBranch <- parseThenBranch
+  elseBranch <- optional parseOrBranch
   pure (If cond thenBranch elseBranch)
 
-pThenBranch :: Parser Expr
-pThenBranch = choice
+parseThenBranch :: Parser Expr
+parseThenBranch = choice
   [ do tok TDo
-       pExpr
-  , pBlock
+       parseExpr
+  , parseBlock
   ]
 
-pOrBranch :: Parser Expr
-pOrBranch = do
+parseOrBranch :: Parser Expr
+parseOrBranch = do
   tok TOr
   -- either "or <cond> ..." or just "or ..."
   choice
     [ try $ do
-        cond   <- pExpr
-        branch <- pThenBranch
+        cond   <- parseExpr
+        branch <- parseThenBranch
         pure (If cond branch Nothing)   -- simplified for now
-    , pThenBranch
+    , parseThenBranch
     ]
 
-pBlock :: Parser Expr
-pBlock = do
+parseBlock :: Parser Expr
+parseBlock = do
   tok TLBrace
-  stmts <- many pStmt
+  stmts <- many parseStmt
   tok TRBrace
   pure (Block stmts)
 
@@ -277,73 +277,73 @@ pBlock = do
 -- -------------------- Statements --------------------
 -- ----------------------------------------------------
 
-pVal :: Parser Stmt
-pVal = do
+parseVal :: Parser Stmt
+parseVal = do
   tok TVal
-  name <- pIdent
+  name <- parseIdent
   tok TAssign
-  expr <- pExpr
+  expr <- parseExpr
   tok TSemicolon
   pure (Val name expr)
 
 -- -------------------- fn --------------------
 
-pFn :: Parser Stmt
-pFn = do
+parseFn :: Parser Stmt
+parseFn = do
   tok TFn
-  name <- pIdent
+  name <- parseIdent
 
   -- two styles:
   -- 1. fn name = params => body
-  -- 2. fn name (params) { body }
+  -- 2. fn name  (params) { body }
   choice
-    [ try pFnArrow
-    , pFnClassic
+    [ try parseFnArrow
+    , parseFnClassic
     ]
   where
-    pFnArrow = do
+    parseFnArrow = do
       tok TAssign
-      params <- pParams
+      params <- parseParams
       tok TArrow
-      body <- pFnBody
+      body <- parseFnBody
       optional (tok TSemicolon)
       pure (Fn name params body)
 
-    pFnClassic = do
-      params <- pParams
-      body   <- pBlock
+    parseFnClassic = do
+      params <- parseParams
+      body   <- parseBlock
       optional (tok TSemicolon)
       pure (Fn name params body)
 
-pParams :: Parser [Name]
-pParams = choice
+parseParams :: Parser [Name]
+parseParams = choice
   [ do tok TLParen
-       ps <- pIdent `sepBy` tok TComma
+       ps <- parseIdent `sepBy` tok TComma
        tok TRParen
        pure ps
-  , pure <$> pIdent          -- single param without parens
-  , pure []                  -- zero params
+  , pure <$> parseIdent  -- single param without parens
+  , pure []              -- zero params
   ]
 
-pFnBody :: Parser Expr
-pFnBody = choice
-  [ pBlock
-  , pExpr
+parseFnBody :: Parser Expr
+parseFnBody = choice
+  [ parseBlock
+  , parseExpr
   ]
 
-pStmt :: Parser Stmt
-pStmt = choice
-  [ pVal
-  , pFn
-  , ExprStmt <$> pExpr <* optional (tok TSemicolon)
+parseStmt :: Parser Stmt
+parseStmt = choice
+  [ parseVal
+  , parseFn
+  , ExprStmt <$> parseExpr <* optional (tok TSemicolon)
   ]
 
-pProgram :: Parser Program
-pProgram = many pStmt <* eof
+parseProgram :: Parser Program
+parseProgram = many parseStmt <* eof
 
 -- Entry point
 parseProgram :: Text -> Either String Program
 parseProgram src = do
   tokens <- either (Left . errorBundlePretty) Right (tokenize src)
-  either (Left . errorBundlePretty) Right (parse pProgram "" tokens)
+            either (Left . errorBundlePretty) Right (parse parseProgram "" tokens)   
   
