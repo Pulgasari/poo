@@ -79,14 +79,19 @@ pOperator = choice
 
 pDelimiter :: Parser Token
 pDelimiter = choice
-  [ TLParen   <$ symbol "("
-  , TRParen   <$ symbol ")"
-  , TLBrace   <$ symbol "{"
-  , TRBrace   <$ symbol "}"
-  , TLBracket <$ symbol "["
-  , TRBracket <$ symbol "]"
-  , TComma    <$ symbol ","
-  , TSemicolon<$ symbol ";"
+  [ 
+   THashLBracket  <$ symbol "#["
+  , THashLParen   <$ symbol "#("
+  , THashLBrace   <$ symbol "#{"
+  , TColon        <$ symbol ":"
+  , TLParen       <$ symbol "("
+  , TRParen       <$ symbol ")"
+  , TLBrace       <$ symbol "{"
+  , TRBrace       <$ symbol "}"
+  , TLBracket     <$ symbol "["
+  , TRBracket     <$ symbol "]"
+  , TComma        <$ symbol ","
+  , TSemicolon    <$ symbol ";"
   ]
 
 pToken :: Parser Token
