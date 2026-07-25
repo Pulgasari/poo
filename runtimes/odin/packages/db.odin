@@ -12,11 +12,11 @@ Sqlite3_Ctx  :: struct{}
 Sqlite3_Stmt :: struct{}
 
 foreign sqlite3 {
-  sqlite3_close        :: proc (db: ^Sqlite3_Ctx) -> c.int ---
-  sqlite3_column_count :: proc (stmt: ^Sqlite3_Stmt) -> c.int ---
+  sqlite3_close        :: proc (  db: ^Sqlite3_Ctx )             -> c.int ---
+  sqlite3_column_count :: proc (stmt: ^Sqlite3_Stmt)             -> c.int ---
   sqlite3_column_name  :: proc (stmt: ^Sqlite3_Stmt, col: c.int) -> cstring ---
   sqlite3_column_text  :: proc (stmt: ^Sqlite3_Stmt, col: c.int) -> cstring ---
-  sqlite3_finalize     :: proc (stmt: ^Sqlite3_Stmt) -> c.int ---
+  sqlite3_finalize     :: proc (stmt: ^Sqlite3_Stmt)             -> c.int ---
   sqlite3_open         :: proc (filename: cstring, ppDb: ^^Sqlite3_Ctx) -> c.int ---
   sqlite3_prepare_v2   :: proc (db: ^Sqlite3_Ctx, zSql: cstring, nByte: c.int, ppStmt: ^^Sqlite3_Stmt, pzTail: ^cstring) -> c.int ---
   sqlite3_step         :: proc (stmt: ^Sqlite3_Stmt) -> c.int ---
