@@ -24,10 +24,10 @@ pIdent = token (\case TIdent n -> Just n; _ -> Nothing) mempty
 
 pLiteral :: Parser Literal
 pLiteral = token (\case
-  TInt i      -> Just (LInt i)
-  TFloat f    -> Just (LFloat f)
+  TInt    i   -> Just (LInt    i)
+  TFloat  f   -> Just (LFloat  f)
   TString s   -> Just (LString s)
-  TBool b     -> Just (LBool b)
+  TBool   b   -> Just (LBool   b)
   TNull       -> Just LNull
   TUndefined  -> Just LUndefined
   _           -> Nothing) mempty
