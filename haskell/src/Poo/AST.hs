@@ -17,15 +17,26 @@ data BinOp
   | And | Or
   deriving (Show, Eq)
 
+data UnaryOp
+  = Neg     -- -x
+  | Not     -- optional, falls du ! später willst
+  deriving (Show, Eq)
+
 data Expr
   = Lit    Literal
   | Var    Name
-  | App    Expr   [Expr]             -- f(a, b)  or  f a
-  | Binary Expr   BinOp Expr
-  | Pipe   Expr   Expr               -- a >> f
-  | If     Expr   Expr (Maybe Expr)  -- if ... or ...
-  | Lambda [Name] Expr               -- (a, b) => expr
+  | App    Expr    [Expr]             -- f(a, b)  or  f a
+  | Binary Expr    BinOp Expr
+  | Unary  Expr    Expr
+  | Unary  UnaryOp Expr
+  | Pipe   Expr    Expr               -- a >> f
+  | If     Expr    Expr (Maybe Expr)  -- if ... or ...
+  | Lambda [Name]  Expr               -- (a, b) => expr
   | Block  [Stmt]
+  | Array  [Expr]                     --  [1, 2, 3]
+  | List   [Expr]                     -- #[1, 2, 3]
+  | Tuple  [Expr]                     -- #(1, 2, 3)
+  | Record [(Name, Expr)]             -- #{a: 1, b: 2}
   deriving (Show, Eq)
 
 data Stmt
@@ -35,3 +46,5 @@ data Stmt
   deriving (Show, Eq)
 
 type Program = [Stmt]
+
+
