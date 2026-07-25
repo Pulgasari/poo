@@ -24,20 +24,21 @@ data Token
   | TAs
   | TReturn
 
-  -- Operators
-  | TPlus | TMinus | TStar | TSlash | TPercent
-  | TEq | TNeq | TLt | TGt | TLe | TGe
-  | TAnd | TOrOp
-  | TPipe                    -- >>
-  | TAssign                  -- =
+  -- Operators -----------------------------------
+  | TPlus | TMinus | TStar | TSlash | TPercent  --  + - * / %
+  | TEq   | TNeq   | TLt   | TGt   | TLe | TGe  --  == !== < > =< >=
+  | TAnd  | TOrOp                               -- && ||
+  | TPipe                                       -- >>
+  | TAssign                                     -- =
 
-  -- Delimiters
-  | TLParen | TRParen
-  | TLBrace | TRBrace
-  | TLBracket | TRBracket
-  | TComma | TSemicolon
-  | TArrow                   -- =>
-  | THash                    -- #
+  -- Delimiters -------------
+  | TLParen   | TRParen    -- ( )
+  | TLBrace   | TRBrace    -- [ ]
+  | TLBracket | TRBracket  -- { }
+  | TComma                 -- ,
+  | TSemicolon             -- ;
+  | TArrow                 -- =>
+  | THash                  -- #
 
   | TEOF
   deriving (Show, Eq)
