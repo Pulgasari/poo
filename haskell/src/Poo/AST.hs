@@ -46,8 +46,9 @@ data Expr
   deriving (Show, Eq)
 
 data LoopKind
-  = LoopWhile Expr Expr       -- loop (cond) { body }   or  loop (cond) do expr   
-  | LoopOver  Expr Name Expr  -- loop coll as name { body }
+  = LoopWhile    Expr Expr       -- loop  (cond) { body }   or  loop  (cond) do expr    
+  | LoopWhileNot Expr Expr       -- loop! (cond)            or  loop! (cond) do expr
+  | LoopOver     Expr Name Expr  -- loop collection as name { body }
   deriving (Show, Eq)
 
 data Stmt
@@ -55,6 +56,8 @@ data Stmt
   | Fn  Name [Name] Expr  -- fn name = params => body
   | ExprStmt Expr
   | Return (Maybe Expr)   -- return;  or  return expr;
+  | Break                 -- break;
+  | Continue              -- continue;
   deriving (Show, Eq)
 
 type Program = [Stmt]
