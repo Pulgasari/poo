@@ -43,6 +43,7 @@ data Expr
   | Tuple  [Expr]                     -- #(1, 2, 3)
   | Record [(Name, Expr)]             -- #{a: 1, b: 2}
   | Loop   LoopKind
+  | Switch SwitchKind [SwitchCase] (Maybe Expr)
   deriving (Show, Eq)
 
 data LoopKind
@@ -50,6 +51,16 @@ data LoopKind
   | LoopWhileNot Expr Expr       -- loop! (cond)            or  loop! (cond) do expr
   | LoopOver     Expr Name Expr  -- loop collection as name { body }
   deriving (Show, Eq)
+
+data SwitchKind
+  = SwitchNormal      -- switch  / switch  (expr)
+  | SwitchInverted    -- switch! / switch! (expr)
+  deriving (Show, Eq)
+
+data SwitchCase = SwitchCase
+  { caseCond :: Maybe Expr  -- Nothing = "or" (default case)
+  , caseBody :: Expr
+  } deriving (Show, Eq)
 
 data Stmt
   = Val Name Expr         -- val x = ...
