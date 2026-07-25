@@ -15,17 +15,19 @@ data Token
   | TColon          -- :
 
   -- Keywords
-  | TAs        -- as
-  | TBreak     -- break
-  | TContinue  -- continue
-  | TDo        -- do
-  | TFn        -- fn
-  | TIf        -- if
-  | TLoop      -- loop
-  | TLoopBang  -- loop!
-  | TOr        -- or
-  | TReturn    -- return
-  | TVal       -- val
+  | TAs         -- as
+  | TBreak      -- break
+  | TContinue   -- continue
+  | TDo         -- do
+  | TFn         -- fn
+  | TIf         -- if
+  | TLoop       -- loop
+  | TLoopBang   -- loop!
+  | TOr         -- or
+  | TReturn     -- return
+  | TSwitch     -- switch
+  | TSwitchBang -- switch!
+  | TVal        -- val
 
   -- Operators -----------------------------------
   | TPlus | TMinus | TStar | TSlash | TPercent  --  + - * / %
