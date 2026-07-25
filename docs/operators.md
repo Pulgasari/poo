@@ -39,6 +39,7 @@ This document specifies all built-in operators in Poo, categorized by their exec
 ### Collection Pipelines
 [`|>`](#--map-operator) ·
 [`|?`](#--filter-operator) ·
+[`|!`](#--filter-operator) ·
 [`|*`](#--reduce-operator) ·
 [`|.`](#--pluck-operator)
 
