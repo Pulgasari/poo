@@ -13,29 +13,29 @@ Poo provides three specialized function types:
 
 ```poo
 // 1. Standard Functions (fn)
-fn greet      => print("moin!");           // No args, single expression
-fn sum = a, b => a + b;                    // Positional args (optional parens/commas)
-fn calc(a, b) { return a + b; }            // Classic block syntax
+fn greet      => print("moin!");    // No args, single expression
+fn sum = a, b => a + b;             // Positional args (optional parens/commas)
+fn calc(a, b) { return a + b; }     // Classic block syntax
 
 // Standard Function Calling
-call();                                    // 0 args: Parens enforced
-call "hello";                              // 1 arg: Parens optional
-call(100, "hello");                        // Multi args (optional commas: call(100 "hello"))
-call(b: "hello", a: 100);                  // Named/lexical arguments
+call();                             // 0 args: Parens enforced
+call "hello";                       // 1 arg: Parens optional
+call(100, "hello");                 // Multi args (optional commas: call(100 "hello"))
+call(b: "hello", a: 100);           // Named/lexical arguments
 
 // 2. Generator Functions (fn*)
-fn* range = (max) => { yield 1; };         // Lazy iterator function
+fn* range = (max) => { yield 1; };  // Lazy iterator function
 
 // Generator Calling
 val gen = range(5);
-gen.next();                                // Advance generator
+gen.next();                         // Advance generator
 
 // 3. Pure Curried Functions (fn^)
-fn^ add = a, b => a + b;                   // Pure, auto-curried, no outer parens
+fn^ add = a, b => a + b;            // Pure, auto-curried, no outer parens
 
 // Pure Curried Calling
-val addFive = add 5;                       // Partial application
-addFive 10;                                // Evaluates to 15
+val addFive = add 5;                // Partial application
+addFive 10;                         // Evaluates to 15
 ```
 
 ---
@@ -50,11 +50,11 @@ Standard functions are general-purpose functions that support side effects, flex
 When declaring functions with arrow expressions, parentheses around parameter lists are optional. For zero-argument functions, empty parentheses `()` can also be omitted entirely.
 
 ```poo
-// Zero arguments
+// zero arguments
 fn doSomething = () => print("moin!");
 fn doSomething      => print("moin!");
 
-// With arguments (parentheses and commas are optional)
+// with arguments (parentheses and commas are optional)
 fn sum = (a, b) => print(a * b);
 fn sum =  a, b  => print(a * b);
 fn sum =  a  b  => print(a * b);
