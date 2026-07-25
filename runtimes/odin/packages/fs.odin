@@ -6,7 +6,10 @@ import "../../types"
 // === native function bindings ===
 
 // reads a file path string and returns POO string payload
-native_read_file :: proc (env: ^types.Object, args: []types.Value) -> types.Value {
+native_read_file :: proc (
+  env  : ^types.Object, 
+  args : []types.Value
+) -> types.Value {
   if (len(args) < 1) { return types.Value(types.Null{}) }
   
   path, ok := args[0].(string)
