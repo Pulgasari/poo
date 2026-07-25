@@ -353,6 +353,12 @@ parseFnBody = choice
   , parseExpr
   ]
 
+parseBreak :: Parser Stmt
+parseBreak = tok TBreak *> optional (tok TSemicolon) *> pure Break
+
+pContinue :: Parser Stmt
+pContinue = tok TContinue *> optional (tok TSemicolon) *> pure Continue
+
 parseReturn :: Parser Stmt
 parseReturn = do
   tok TReturn
@@ -365,6 +371,8 @@ parseStmt = choice
   [ parseVal
   , parseFn
   , parseReturn
+  , parseBreak
+  , parseContinue
   , ExprStmt <$> parseExpr <* optional (tok TSemicolon)
   ]
 
