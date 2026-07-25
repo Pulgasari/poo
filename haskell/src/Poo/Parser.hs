@@ -32,6 +32,19 @@ parseLiteral = token (\case
   TUndefined  -> Just LUndefined
   _           -> Nothing) mempty
 
+-- ============ HELPERS
+
+-- Allows trailing comma:  a, b, c,   or   a, b, c
+sepByTrail :: Parser a -> Parser sep -> Parser [a]
+sepByTrail p sep = do
+  x <- optional p
+  case x of
+    Nothing -> pure []
+    Just v  -> do
+      rest <- many (sep *> p)
+      _    <- optional sep          -- the trailing one
+      pure (v : rest)
+
 -- ============================================================
 -- Expressions with Precedence + Unary + Collections
 -- ============================================================
@@ -114,7 +127,7 @@ parseFnApp = do
 parseFnCallArgs :: Expr -> Parser Expr
 parseFnCallArgs func = do
   tok TLParen
-  args <- parseArg `sepBy` tok TComma
+  args <- parseArg `sepByTrail` tok TComma
   tok TRParen
   pure (App func args)
 
@@ -158,28 +171,28 @@ parseParens = do
 parseArray :: Parser Expr
 parseArray = do
   tok TLBracket
-  elems <- parseExpr `sepBy` tok TComma
+  elems <- parseExpr `sepByTrail` tok TComma
   tok TRBracket
   pure (Array elems)
 
 parseList :: Parser Expr
 parseList = do
   tok THashLBracket
-  elems <- parseExpr `sepBy` tok TComma
+  elems <- parseExpr `sepByTrail` tok TComma
   tok TRBracket
   pure (List elems)
 
 parseTuple :: Parser Expr
 parseTuple = do
   tok THashLParen
-  elems <- parseExpr `sepBy` tok TComma
+  elems <- parseExpr `sepByTrail` tok TComma
   tok TRParen
   pure (Tuple elems)
 
 parseRecord :: Parser Expr
 parseRecord = do
   tok THashLBrace
-  fields <- parseField `sepBy` tok TComma
+  fields <- parseField `sepByTrail` tok TComma
   tok TRBrace
   pure (Record fields)
 
@@ -327,7 +340,7 @@ parseFn = do
 parseParams :: Parser [Name]
 parseParams = choice
   [ do tok TLParen
-       ps <- parseIdent `sepBy` tok TComma
+       ps <- parseIdent `sepByTrail` tok TComma
        tok TRParen
        pure ps
   , pure <$> parseIdent  -- single param without parens
