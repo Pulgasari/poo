@@ -3,10 +3,10 @@ module Poo.AST where
 type Name = String
 
 data Literal
-  = LInt    Integer
-  | LFloat  Double
-  | LString String
-  | LBool   Bool
+  = LInt     Integer
+  | LFloat   Double
+  | LString  String
+  | LBool    Bool
   | LNull
   | LUndefined
   deriving (Show, Eq)
@@ -37,14 +37,25 @@ data Expr
   | List   [Expr]                     -- #[1, 2, 3]
   | Tuple  [Expr]                     -- #(1, 2, 3)
   | Record [(Name, Expr)]             -- #{a: 1, b: 2}
+  | Loop   LoopKind
+  deriving (Show, Eq)
+
+data LoopKind
+  = LoopWhile Expr Expr       -- loop (cond) { body }   or  loop (cond) do expr   
+  | LoopOver  Expr Name Expr  -- loop coll as name { body }
   deriving (Show, Eq)
 
 data Stmt
-  = Val Name Expr                -- val x = ...
-  | Fn  Name [Name] Expr          -- fn name = params => body
+  = Val Name Expr         -- val x = ...
+  | Fn  Name [Name] Expr  -- fn name = params => body
   | ExprStmt Expr
   deriving (Show, Eq)
 
 type Program = [Stmt]
+
+
+
+
+
 
 
