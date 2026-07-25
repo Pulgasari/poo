@@ -70,7 +70,6 @@ Coding sucks.
 [`yield`](#yield)
 
 [`=`](#)
-[`=#`](#)
 [`+=`](#)
 [`-=`](#)
 [`*=`](#)
@@ -121,7 +120,6 @@ Coding sucks.
 - [Destructuring](/docs/specs/destructuring.md)
 - [Pattern Matching](/docs/specs/pattern-matching.md)
 - [Typecasting](/docs/specs/typecasting.md)
-
 
 ---
 
