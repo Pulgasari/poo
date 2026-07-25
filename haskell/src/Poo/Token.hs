@@ -2,48 +2,52 @@ module Poo.Token where
 
 data Token
   -- Literals & Identifiers
-  = TInt Integer
-  | TFloat Double
-  | TString String
-  | TBool Bool
-  | TNull
-  | TUndefined
-  | TIdent String
-  | THashLBracket   -- #[
-  | THashLParen     -- #(
-  | THashLBrace     -- #{
-  | TColon          -- :
+  = TokenInt    Integer
+  | TokenFloat  Double
+  | TokenString String
+  | TokenBool   Bool
+  | TokenNull
+  | TokenUndefined
+  | TokenIdent String
+  | TokenHashBracketL   -- #[
+  | TokenHashParenL     -- #(
+  | TokenHashBraceL     -- #{
+  | TokenColon          -- :
 
   -- Keywords
-  | TAs         -- as
-  | TBreak      -- break
-  | TContinue   -- continue
-  | TDo         -- do
-  | TFn         -- fn
-  | TIf         -- if
-  | TLoop       -- loop
-  | TLoopBang   -- loop!
-  | TOr         -- or
-  | TReturn     -- return
-  | TSwitch     -- switch
-  | TSwitchBang -- switch!
-  | TVal        -- val
+  | TokenAs         -- as
+  | TokenBreak      -- break
+  | TokenContinue   -- continue
+  | TokenDo         -- do
+  | TokenFn         -- fn
+  | TokenIf         -- if
+  | TokenLoop       -- loop
+  | TokenLoopBang   -- loop!
+  | TokenOr         -- or
+  | TokenReturn     -- return
+  | TokenSwitch     -- switch
+  | TokenSwitchBang -- switch!
+  | TokenVal        -- val
 
   -- Operators -----------------------------------
-  | TPlus | TMinus | TStar | TSlash | TPercent  --  + - * / %
-  | TEq   | TNeq   | TLt   | TGt   | TLe | TGe  --  == !== < > =< >=
-  | TAnd  | TOrOp                               -- && ||
-  | TPipe                                       -- >>
-  | TAssign                                     -- =
+  | TokenPlus | TokenMinus  --  + -
+  | TokenStar | TokenSlash  --  * /
+  | TokenPercent            --  %
+  | TokenEq   | TokenNeq    --  == !=
+  | TokenLt   | TokenGt     --  < >
+  | TokenLe   | TokenGe     --  =< >=
+  | TokenAnd  | TokenOrOp   --  && ||
+  | TokenPipe               --  >>
+  | TokenAssign             -- =
 
   -- Delimiters -------------
-  | TLParen   | TRParen    -- ( )
-  | TLBrace   | TRBrace    -- [ ]
-  | TLBracket | TRBracket  -- { }
-  | TComma                 -- ,
-  | TSemicolon             -- ;
-  | TArrow                 -- =>
-  | THash                  -- #
+  | TokenParenL   | TokenParenR    -- ( )
+  | TokenBraceL   | TokenBraceR    -- [ ]
+  | TokenBracketL | TokenBracketR  -- { }
+  | TokenComma                     -- ,
+  | TokenSemicolon                 -- ;
+  | TokenArrow                     -- =>
+  | TokenHash                      -- #
 
-  | TEOF
+  | TokenEOF
   deriving (Show, Eq)
