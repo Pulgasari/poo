@@ -8,7 +8,6 @@ Coding sucks.
 </svg>
 </div>
 
-
 ---
 
 ## Basics & Overviews
@@ -75,7 +74,6 @@ Coding sucks.
 [`yield`](#yield)
 
 [`=`](#)
-[`=#`](#)
 [`+=`](#)
 [`-=`](#)
 [`*=`](#)
