@@ -7,6 +7,7 @@
 - *scan iteration* für `RegExp`
 - *escape* in `RegExp`
 - matching `RegExp` in `switch`
+- case-insensitive string comparison
 
 ## Datatype Names
 
