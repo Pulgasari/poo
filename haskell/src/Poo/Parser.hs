@@ -244,27 +244,36 @@ parseIf = do
   tok TIf
   cond       <- parseExpr
   thenBranch <- parseThenBranch
-  elseBranch <- optional parseOrBranch
-  pure (If cond thenBranch elseBranch)
+  elses      <- many pOrClause
+  pure (buildIfChain cond thenBranch elses)
 
-parseThenBranch :: Parser Expr
-parseThenBranch = choice
+-- Helper: baut verschachtelte Ifs
+buildIfChain :: Expr -> Expr -> [(Maybe Expr, Expr)] -> Expr
+buildIfChain cond thenBranch [] = If cond thenBranch Nothing
+buildIfChain cond thenBranch ((mcond, branch):rest) =
+  If cond thenBranch (Just $ case mcond of
+    Nothing   -> branch
+    Just c    -> buildIfChain c branch rest)
+
+parseOrClause :: Parser (Maybe Expr, Expr)
+parseOrClause = do
+  tok TOr
+  choice
+    [ try $ do
+        cond <- parseExpr
+        body <- parseBranchBody
+        pure (Just cond, body)
+    , do
+        body <- parseBranchBody
+        pure (Nothing, body)  - plain "or ..."
+    ]
+
+parseBranchBody :: Parser Expr
+parseBranchBody = choice
   [ do tok TDo
        parseExpr
   , parseBlock
   ]
-
-parseOrBranch :: Parser Expr
-parseOrBranch = do
-  tok TOr
-  -- either "or <cond> ..." or just "or ..."
-  choice
-    [ try $ do
-        cond   <- parseExpr
-        branch <- parseThenBranch
-        pure (If cond branch Nothing)   -- simplified for now
-    , parseThenBranch
-    ]
 
 parseBlock :: Parser Expr
 parseBlock = do
