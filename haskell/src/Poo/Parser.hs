@@ -206,12 +206,34 @@ parseField = do
 -- -------------------- loop --------------------
 
 parseLoop :: Parser Expr
-parseLoop = do
+parseLoop = choice
+  [ try parseLoopBang  -- loop! ...
+  , parseLoopNormal    -- loop ...
+  ]
+
+parseLoopNormal :: Parser Expr
+parseLoopNormal = do
   tok TLoop
   choice
-    [ try parseLoopOver
-    , parseLoopWhile
+    [ try pLoopOver
+    , pLoopWhile False  -- normal while
     ]
+
+parseLoopBang :: Parser Expr
+parseLoopBang = do
+  tok TLoopBang
+  parseLoopWhile True  -- inverted while
+
+-- Gemeinsame While-Logik
+parseLoopWhile :: Bool -> Parser Expr
+parseLoopWhile inverted = do
+  tok TLParen
+  cond <- parseExpr
+  tok TRParen
+  body <- parseLoopBody
+  pure $ Loop $ if inverted
+    then LoopWhileNot cond body
+    else LoopWhile    cond body
 
 -- loop (collection as name) { body }
 -- loop  collection as name do expr
@@ -232,16 +254,6 @@ parseLoopOver = do
     ]
   body <- parseLoopBody
   pure (Loop (LoopOver coll name body))
-
--- loop (condition) { body }
--- loop (condition) do expr
-parseLoopWhile :: Parser Expr
-parseLoopWhile = do
-  tok TLParen
-  cond <- parseExpr
-  tok TRParen
-  body <- parseLoopBody
-  pure (Loop (LoopWhile cond body))
 
 parseLoopBody :: Parser Expr
 parseLoopBody = choice
