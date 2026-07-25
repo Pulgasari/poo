@@ -118,6 +118,7 @@ pAtom = choice
   , pTuple
   , pRecord
   , pIf
+  , pLoop
   ]
 
 pParens :: Parser Expr
@@ -164,6 +165,53 @@ pField = do
   value <- pExpr
   pure (name, value)
 
+-- -------------------- loop --------------------
+
+pLoop :: Parser Expr
+pLoop = do
+  tok TLoop
+  choice
+    [ try pLoopOver
+    , pLoopWhile
+    ]
+
+-- loop (collection as name) { body }
+-- loop collection as name do expr
+pLoopOver :: Parser Expr
+pLoopOver = do
+  -- optional parentheses around the header
+  (coll, name) <- choice
+    [ do tok TLParen
+         c <- pExpr
+         tok TAs
+         n <- pIdent
+         tok TRParen
+         pure (c, n)
+    , do c <- pExpr
+         tok TAs
+         n <- pIdent
+         pure (c, n)
+    ]
+  body <- pLoopBody
+  pure (Loop (LoopOver coll name body))
+
+-- loop (condition) { body }
+-- loop (condition) do expr
+pLoopWhile :: Parser Expr
+pLoopWhile = do
+  tok TLParen
+  cond <- pExpr
+  tok TRParen
+  body <- pLoopBody
+  pure (Loop (LoopWhile cond body))
+
+pLoopBody :: Parser Expr
+pLoopBody = choice
+  [ do tok TDo
+       pExpr
+  , pBlock
+  ]
+
 -- -------------------- if / or --------------------
 
 pIf :: Parser Expr
@@ -200,7 +248,10 @@ pBlock = do
   tok TRBrace
   pure (Block stmts)
 
--- Statements
+-- ----------------------------------------------------
+-- -------------------- Statements --------------------
+-- ----------------------------------------------------
+
 pVal :: Parser Stmt
 pVal = do
   tok TVal
@@ -209,6 +260,8 @@ pVal = do
   expr <- pExpr
   tok TSemicolon
   pure (Val name expr)
+
+-- -------------------- fn --------------------
 
 pFn :: Parser Stmt
 pFn = do
