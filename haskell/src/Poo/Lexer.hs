@@ -80,7 +80,7 @@ pOperator = choice
 pDelimiter :: Parser Token
 pDelimiter = choice
   [ 
-   THashLBracket  <$ symbol "#["
+    THashLBracket <$ symbol "#["
   , THashLParen   <$ symbol "#("
   , THashLBrace   <$ symbol "#{"
   , TColon        <$ symbol ":"
