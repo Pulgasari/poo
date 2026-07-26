@@ -10,7 +10,7 @@ body {
 #app-body {
   display: flex;
   flex-direction: column;
-  background: #ff02;
+  background: #f002;
 
   > * {
     background: #0803;
