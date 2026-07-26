@@ -44,8 +44,14 @@
     //define({ key: 'bg', type: 'property' });
     //define({ key: 'fg', type: 'property' });
     alert('playground mitte');
+    
     function Main () {
-      return html`<div>coding sucks.</div>`;
+      return html`
+        <div id='playground'>
+          <textarea placeholder='enter poo code ...'></textarea>
+          <div id='console'>output</div>
+        </div>
+      `;
     }
     const $appBody = document.getElementById('app-body');
     aufbau.render(html`<${Main} />`, $appBody);
