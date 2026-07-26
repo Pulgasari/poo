@@ -24,7 +24,9 @@
       "@cosmonaut/lexer"     : "https://pulgasari.github.io/cosmonaut/packages/lexer/index.js",
       "@cosmonaut/lsd"       : "https://pulgasari.github.io/cosmonaut/packages/lsd/index.js",
       "@cosmonaut/parser"    : "https://pulgasari.github.io/cosmonaut/packages/parser/index.js",
-      "@cosmonaut/utils"     : "https://pulgasari.github.io/cosmonaut/packages/utils/index.js"
+      "@cosmonaut/utils"     : "https://pulgasari.github.io/cosmonaut/packages/utils/index.js",
+
+      "@poo/compiler"        : "https://pulgasari.github.io/poo/js-packages/compiler/index.js"
     }}
   </script>
 </head>
@@ -41,9 +43,10 @@
     //alert('playground start');
     import aufbau, { html } from '@aufbau/kit';
     const { define, update, signal, effect, useSignal, useSignalEffect } = aufbau;
+    import compilePOO from '@poo/compiler';
 
     function transformCode (code) {
-      return code;
+      return compilePOO(code);
     }
     //define({ key: 'bg', type: 'property' });
     //define({ key: 'fg', type: 'property' });
