@@ -6,6 +6,7 @@ html, body { height: 100%; overflow: hidden; }
 body       { height: 100dvh; }
 
 body { display:flex; flex-flow: column; }
+body > #app { flex: 1; }
 
 #app { display:flex; flex-flow: column; }
 #app > #app-header { flex: 0 0 auto; }
