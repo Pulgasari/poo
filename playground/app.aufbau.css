@@ -2,6 +2,21 @@
 @import url('https://pulgasari.github.io/aufbau/css/default.css');
 @import url('https://pulgasari.github.io/aufbau/css/themes/zombie.css');
 
+html, body { height: 100%; overflow: hidden; }
+body       { height: 100dvh; }
+
+body { display:flex; flex-flow: column; }
+body > #app-header    { flex: 0 0 auto; }
+body > #app-footer    { flex: 0 0 auto; }
+body > .markdown-body {
+  flex: 1;
+  min-height : 0;
+  overflow-y : auto;
+  margin     : 0!important;
+  padding    : 1rem!important;
+}
+
+
 body {
   background : var(--aufbau-bg);
   color      : var(--aufbau-fg);
@@ -11,6 +26,7 @@ body {
   display: flex;
   flex-direction: column;
   background: #f002;
+  padding: 1rem;
 
   > * {
     background: #0803;
