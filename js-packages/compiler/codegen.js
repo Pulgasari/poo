@@ -1,5 +1,5 @@
 // poo/compiler/codegen.js
-//
+
 // Translates poo AST nodes (produced by @cosmonaut/lsd's compiled parser
 // methods, see parser.js) into JavaScript source text. This is entirely
 // poo/compiler's own responsibility - @cosmonaut/lsd only takes source
@@ -40,7 +40,7 @@ const methods = {
   genLITERAL    : (g, node) => text(node.value),
 
   genValDecl : (g, node) => concat(
-    text(node.mode.isConst ? 'const ' : 'let '),
+    text('let '),
     text(node.name.value),
     text(' = '),
     g.genNode(node.value),
