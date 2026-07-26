@@ -53,15 +53,13 @@
     //alert('playground mitte');
 
     function Main () {
-      const  input = useSignal('');
+      const  input = useSignal("val str = 'coding sucks';");
       const output = useSignal('');
 
       useSignalEffect(() => {
         // Accessing input.value automatically subscribes this effect to changes
         const currentInput = input.value;
-        const timer = setTimeout(() => {
-          output.value = transformCode(currentInput);
-        }, 500);
+        const timer        = setTimeout(() => { output.value = transformCode(currentInput); }, 500);
 
         // Clean up pending execution when input changes before timeout completes
         return () => clearTimeout(timer);
