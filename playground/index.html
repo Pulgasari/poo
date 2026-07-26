@@ -46,7 +46,7 @@
     import compilePOO from '@poo/compiler';
 
     function transformCode (code) {
-      return compilePOO(code);
+      return compilePOO(code).code;
     }
     //define({ key: 'bg', type: 'property' });
     //define({ key: 'fg', type: 'property' });
@@ -60,7 +60,7 @@
         // Accessing input.value automatically subscribes this effect to changes
         const currentInput = input.value;
         const timer = setTimeout(() => {
-          output.value = transformCode(currentInput).code;
+          output.value = transformCode(currentInput);
         }, 500);
 
         // Clean up pending execution when input changes before timeout completes
