@@ -32,4 +32,18 @@ body {
   color      : var(--aufbau-fg);
 }
 
+/*
+
+#app {
+  auffbau-flex: column;
+}
+
+@auffbau-layout {
+  body       : flex column;
+  #app       : flex column;
+  #app-body  : flex column;
+  playground : flex column;
+}
+
+*/
 
