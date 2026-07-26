@@ -5,8 +5,14 @@
 
 import Parser from '@cosmonaut/parser';
 import { generateProgram } from './codegen.js';
+
 import { createLexer }     from './lexer.js';
 import { methods }         from './parser.js';
+
+// :::::: LEXER
+import { compileTokenizer } from '@cosmonaut/lsd';
+import lsd from './lsd.js';
+export const createLexer = compileTokenizer(lsd);
 
 export function compile (source) {
   const tokens = createLexer(source).tokenize();
