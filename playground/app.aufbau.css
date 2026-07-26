@@ -8,7 +8,7 @@ body       { height: 100dvh; }
 body { display:flex; flex-flow: column; }
 body > #app-header    { flex: 0 0 auto; }
 body > #app-footer    { flex: 0 0 auto; }
-body > .markdown-body {
+body > #app-body {
   flex: 1;
   min-height : 0;
   overflow-y : auto;
