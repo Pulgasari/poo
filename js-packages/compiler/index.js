@@ -14,6 +14,11 @@ import { compileTokenizer } from '@cosmonaut/lsd';
 import lsd from './lsd.js';
 export const createLexer = compileTokenizer(lsd);
 
+// :::::: PARSER
+import { compileParserMethods } from '@cosmonaut/lsd';
+import lsd from './lsd.js';
+export const methods = compileParserMethods(lsd);
+
 export function compile (source) {
   const tokens = createLexer(source).tokenize();
   const parser = new Parser(tokens, { methods, entry: 'Program' });
