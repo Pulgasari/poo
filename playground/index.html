@@ -60,7 +60,7 @@
         // Accessing input.value automatically subscribes this effect to changes
         const currentInput = input.value;
         const timer = setTimeout(() => {
-          output.value = transformCode(currentInput);
+          output.value = transformCode(currentInput).code;
         }, 500);
 
         // Clean up pending execution when input changes before timeout completes
