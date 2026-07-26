@@ -40,20 +40,44 @@
   <script type="module">
     //alert('playground start');
     import aufbau, { html } from '@aufbau/kit';
-    const { define, update, signal, effect } = aufbau;
+    const { define, update, signal, effect, useSignal, useSignalEffect } = aufbau;
+
+    function transformCode (code) {
+      return code;
+    }
     //define({ key: 'bg', type: 'property' });
     //define({ key: 'fg', type: 'property' });
     //alert('playground mitte');
-    
+
     function Main () {
+      const  input = useSignal('');
+      const output = useSignal('');
+
+      useSignalEffect(() => {
+        // Accessing input.value automatically subscribes this effect to changes
+        const currentInput = input.value;
+        const timer = setTimeout(() => {
+          output.value = transformCode(currentInput);
+        }, 500);
+
+        // Clean up pending execution when input changes before timeout completes
+        return () => clearTimeout(timer);
+      });
+
       return html`
         <div id='playground'>
-          <textarea id='code-input' placeholder='enter poo code ...'></textarea>
-          <textarea id='code-output' placeholder='...'></textarea>
+          <textarea
+            id='code-input'
+            placeholder='enter poo code ...'
+            value=${input}
+            onInput=${(e) => (input.value = e.target.value)}
+          ></textarea>
+          <div id='code-output'>${output}</div>
           <div id='console'>output</div>
         </div>
       `;
     }
+    
     const $appBody = document.getElementById('app-body');
     aufbau.render(html`<${Main} />`, $appBody);
     //alert('playground end');
