@@ -15,3 +15,14 @@ body {
     flex: 1 0 auto;
   }
 }
+
+#playground {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  > * {
+    flex: 1 0 auto;
+    background: #ff03;
+  }
+}
