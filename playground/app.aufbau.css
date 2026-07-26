@@ -4,3 +4,12 @@ body {
   background : var(--aufbau-bg);
   color      : var(--aufbau-fg);
 }
+
+#app-body {
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    flex: 1 0 auto;
+  }
+}
