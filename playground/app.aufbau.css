@@ -10,8 +10,10 @@ body {
 #app-body {
   display: flex;
   flex-direction: column;
+  background: #ff02;
 
   > * {
+    background: #0803;
     flex: 1 0 auto;
   }
 }
