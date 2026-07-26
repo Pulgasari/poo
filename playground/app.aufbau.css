@@ -1,4 +1,6 @@
+@import url('https://github.com/Pulgasari/aufbau/css/themes/zombie.css');
+
 body {
-  background: red;
-  color: yellow;
+  background : var(--aufbau-bg);
+  color      : var(--aufbau-fg);
 }
