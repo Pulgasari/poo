@@ -1,6 +1,6 @@
 let app = {};
 app.name     = 'POO';
-app.url      = 'https://pulgasari.github.io/poo/';
+app.url      = 'https://pulgasari.github.io/poo/docs/';
 app.url_repo = 'https://github.com/pulgasari/poo/';
 
 const headerItems = signal([
