@@ -4,8 +4,9 @@ app.url      = 'https://pulgasari.github.io/poo/docs/';
 app.url_repo = 'https://github.com/pulgasari/poo/';
 
 const headerItems = signal([
-  { label: '@Discord' , href: app.url      },
-  { label: '@GitHub'  , href: app.url_repo },
+  { label: 'Playground' , href: 'https://pulgasari.github.io/poo/playground/' },
+  { label: '@Discord'   , href: app.url      },
+  { label: '@GitHub'    , href: app.url_repo },
 ]);
 function Header () {
   return html`
