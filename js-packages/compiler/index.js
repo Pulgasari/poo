@@ -48,3 +48,5 @@ export function compile (source) {
 
   return { ast, code };
 }
+
+export default compile;
