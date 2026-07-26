@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>playground @ poo</title>
+  <link rel="stylesheet" href="./app.aufbau.css" />
+  <script type="importmap">
+    {"imports":{
+      "htm"                : "https://esm.sh/htm@3.1.1",
+      "preact"             : "https://esm.sh/preact@10.20.1",
+      "preact/hooks"       : "https://esm.sh/preact@10.20.1/hooks",
+      "@preact/signals"    : "https://esm.sh/@preact/signals@1.2.2?external=preact",
+      
+      "@aufbau/cache"      : "https://pulgasari.github.io/aufbau/cache/index.js",
+      "@aufbau/import"     : "https://pulgasari.github.io/aufbau/import/index.js",
+      "@aufbau/kit"        : "https://pulgasari.github.io/aufbau/kit/index.js",
+      "@aufbau/shaders"    : "https://pulgasari.github.io/aufbau/shaders/index.js",
+      "@aufbau/stylesheet" : "https://pulgasari.github.io/aufbau/stylesheet/index.js",
+
+      "@cosmonaut/doc"       : "https://pulgasari.github.io/cosmonaut/doc/index.js",
+      "@cosmonaut/generator" : "https://pulgasari.github.io/cosmonaut/generator/index.js",
+      "@cosmonaut/layouter"  : "https://pulgasari.github.io/cosmonaut/layouter/index.js",
+      "@cosmonaut/lexer"     : "https://pulgasari.github.io/cosmonaut/lexer/index.js",
+      "@cosmonaut/lsd"       : "https://pulgasari.github.io/cosmonaut/lsd/index.js",
+      "@cosmonaut/parser"    : "https://pulgasari.github.io/cosmonaut/parser/index.js"
+    }}
+  </script>
+</head>
+
+<body class="mobilefix">
+  
+  <div id='app'>
+    <div id='app-header'>header</div>
+    <div id='app-body'></div>
+    <div id='app-footer'>footer</div>
+  </div>
+
+  <script type="module">
+    import aufbau, { html } from './kit/index.js';
+    const { define, update, signal, effect } = aufbau;
+    //define({ key: 'bg', type: 'property' });
+    //define({ key: 'fg', type: 'property' });
+    
+    function Main () {
+      return html`<div>coding sucks.</div>`;
+    }
+    const $appBody = document.getElementById('app-body');
+    aufbau.render(html`<${Main} />`, $appBody);
+  </script>
+
+</body>
+</html>
