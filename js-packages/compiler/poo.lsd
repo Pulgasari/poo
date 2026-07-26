@@ -19,7 +19,7 @@ META TABLE :: operators == (
   associativity is String
   precedence    is Number
 ) {
-  assign   left   100  ( = += -= *= /= ??= #= )
+  assign   left   100  ( = += -= *= /= ??= )
   compare  idk    200  ( ~= ~== == === != !== < > =< >= <=> || && ?? )
   additive left   300  ( + - )
   multi    left   400  ( * / % )
@@ -71,16 +71,10 @@ META :: ObjDecl
 NODE == { name: String, body: Block }
 RULE == `obj` IDENTIFIER `=` Block => 2 4
 
-#### ValDeclarationOperator
-META :: ValDeclOp
-NODE == { isConst: Bool }
-RULE == `#=` => false
-RULE ==  `=` => true
-
 #### ValDeclaration
 META :: ValDecl
-NODE == { name, mode, value }
-RULE == `val` IDENTIFIER ValDeclOp Expr `;` => 2 3 4
+NODE == { name, value }
+RULE == `val` IDENTIFIER `=` Expr `;` => 2 4
 
 #### NamedPropDeclaration
 META :: NamedPropDecl
