@@ -38,12 +38,12 @@
   </div>
 
   <script type="module">
-    alert('playground start');
+    //alert('playground start');
     import aufbau, { html } from '@aufbau/kit';
     const { define, update, signal, effect } = aufbau;
     //define({ key: 'bg', type: 'property' });
     //define({ key: 'fg', type: 'property' });
-    alert('playground mitte');
+    //alert('playground mitte');
     
     function Main () {
       return html`
@@ -55,7 +55,7 @@
     }
     const $appBody = document.getElementById('app-body');
     aufbau.render(html`<${Main} />`, $appBody);
-    alert('playground end');
+    //alert('playground end');
   </script>
 
 </body>
