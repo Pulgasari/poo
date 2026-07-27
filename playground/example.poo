@@ -1,0 +1,5 @@
+val str     = 'coding sucks'; // comment
+val animals =  ['cat', 'dog'];
+val pets    = #['cat', 'dog'];
+
+pets += 'fish';
