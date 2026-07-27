@@ -4,6 +4,7 @@
 
 // ::: aufbau
 import aufbau, { html, useRef, useSignal, useSignalEffect, Fragment } from '@aufbau/kit';
+window.html = html;
 
 // ::: poo
 import compilePOO from '@poo/compiler';
@@ -20,11 +21,7 @@ import registerPoo from 'https://pulgasari.github.io/poo/js-packages/hljs/index.
 hljs.registerLanguage('poo', registerPoo); // Register POO custom syntax
 
 // Poo Example Code
-const pooExample = `val str     = 'coding sucks'; // comment
-val animals =  ['cat', 'dog'];
-val pets    = #['cat', 'dog'];
-
-pets += 'fish';`;
+const pooExample = await fetch('./example.poo').then((res) => res.text());
 
 function transformCode (code) {
   try       { return compilePOO(code).code; } 
