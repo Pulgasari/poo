@@ -17,7 +17,7 @@
 // still uses the full precedence-aware machinery below so that nothing
 // here needs to change once that parsing limitation is lifted.
 
-import Generator, { concat, text, indent, hardline, joinMap, print } from '@cosmonaut/generator';
+import Generator, { concat, text, indent, hardline, joinMap, print, genBinaryExpr as genBinaryExprHelper } from '@cosmonaut/generator';
 import lsd from './lsd.js';
 
 const operatorConfig = Object.fromEntries(
@@ -63,7 +63,7 @@ const methods = {
 
   genExprStatement : (g, node) => concat(g.genNode(node.expression), text(';')),
 
-  genBinaryExpr : (g, node) => g.genBinaryExpr(node, {
+  genBinaryExpr : (g, node) => g.genBinaryExprHelper(node, {
     getOperator : n => n.operator.value,
     getLeft     : n => n.left,
     getRight    : n => n.right,
@@ -99,7 +99,7 @@ const generator = new Generator({ methods });
 
 export function generateProgram (statements) {
   const bodyDoc = concat(...statements.map((stmt, i) => i === 0 ? generator.genNode(stmt) : concat(hardline, generator.genNode(stmt))));
-  const doc = concat(text(RUNTIME_IMPORT_HEADER), hardline, hardline, bodyDoc, hardline);
+  const     doc = concat(text(RUNTIME_IMPORT_HEADER), hardline, hardline, bodyDoc, hardline);
   return print(doc);
 }
 
