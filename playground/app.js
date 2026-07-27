@@ -73,6 +73,23 @@ pets += 'fish';`;
         </div>
       `;
     }
+
+function App () {
+  return html`
+    <>
+      <div id='app-header'>header</div>
+      <div id='app-body'><${Main}/></div>
+      <div id='app-footer'>footer</div>
+    </>
+  `;
+}   
     
-    const $appBody = document.getElementById('app-body');
-    aufbau.render(html`<${Main} />`, $appBody);
+const $body    = document.body;
+const $app     = document.getElementById('app');
+const $appBody = document.getElementById('app-body');
+
+aufbau.render(html`<${App}/>`, $app);
+
+
+
+
