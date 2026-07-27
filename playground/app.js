@@ -1,5 +1,5 @@
 import aufbau, { html, useRef, useSignal, useSignalEffect, Fragment } from '@aufbau/kit';
-//import Header from './components/Header.js';
+import Header from './components/Header.js';
 import compilePOO from '@poo/compiler';
 
 // Import: Highlight.js and POO language support
