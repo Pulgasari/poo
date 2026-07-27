@@ -15,10 +15,7 @@ body > #app { flex: 1; }
 #app { display:flex; flex-flow: column; }
 #app > #app-header { flex: 0 0 auto; }
 #app > #app-footer { flex: 0 0 auto; }
-#app > #app-body   { flex: 1; min-height: 0; overflow-y: auto;
-  padding    : 1rem!important;
-}
-
+#app > #app-body   { flex: 1; min-height: 0; overflow-y: auto; }
 
 #app-body     { display: flex; flex-direction: column; }
 #app-body > * { flex: 1 0 auto; }
@@ -31,6 +28,8 @@ body > #app { flex: 1; }
 
 #playground     { gap: 1rem; }
 #playground > * { background: #ff03; }
+
+#app > #app-body { padding: 1rem!important; }
 
 body {
   background : var(--aufbau-bg);
