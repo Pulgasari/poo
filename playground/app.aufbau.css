@@ -2,6 +2,10 @@
 @import url('https://pulgasari.github.io/aufbau/css/default.css');
 @import url('https://pulgasari.github.io/aufbau/css/themes/zombie.css');
 
+body {
+  aufbau-webfont: 'Hubot Sans';
+}
+
 html, body { height: 100%; overflow: hidden; }
 body       { height: 100dvh; }
 
