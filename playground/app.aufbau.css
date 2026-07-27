@@ -35,6 +35,7 @@ body {
 
 #code-input,
 #code-output {
+  background: #0804;
   display: flex;
   flex-direction: column;
 
