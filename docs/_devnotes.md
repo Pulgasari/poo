@@ -164,6 +164,29 @@ Array.anyLike = function (arg, checkFn) => {
 // Aufruf:
 return alternativeMatchers.anyLike (state, isDefined) ?? undefined;
 ```
+```javascript
+/**
+ * Combines multiple matchers into a single function.
+ * Evaluates matchers sequentially until one returns a value other than undefined.
+ *
+ * @param {...Function} matchers - Array or list of matcher functions
+ * @returns {Function} A unified matcher function
+ */
+export function createMatcherChain(...matchers) {
+  return (...args) => {
+    for (const matcher of matchers) {
+      const result = matcher(...args);
+      if (result !== undefined) return result;
+    }
+    return undefined;
+  };
+}
+
+// Usage:
+const combinedMatcher = createMatcherChain(matchA, matchB, matchC);
+const result = combinedMatcher(state);
+```
+
 
 
 
