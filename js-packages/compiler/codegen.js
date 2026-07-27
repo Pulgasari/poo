@@ -23,15 +23,15 @@ import lsd from './lsd.js';
 const operatorConfig = Object.fromEntries(
   lsd.meta.tables.operators.rows.flatMap(row =>
     (row.symbols ?? []).map(symbol => [symbol, {
-      precedence: Number(row.precedence) || 0,
-      associativity: row.associativity === 'right' ? 'right' : 'left',
+      precedence    : Number(row.precedence) || 0,
+      associativity : row.associativity === 'right' ? 'right' : 'left',
     }])
   )
 );
 
 const isBinaryExpr = node => node?.type === 'BinaryExpr';
 
-const RUNTIME_IMPORT_HEADER = "import * as poo from 'poo/runtime';";
+const RUNTIME_IMPORT_HEADER = "import * as poo from '@poo/runtime';";
 
 const methods = {
   genIDENTIFIER : (g, node) => text(node.value),
