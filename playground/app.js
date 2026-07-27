@@ -75,13 +75,11 @@ pets += 'fish';`;
     }
 
 function App () {
-  return html`
-    <>
-      <div id='app-header'>header</div>
-      <div id='app-body'><${Main}/></div>
-      <div id='app-footer'>footer</div>
-    </>
-  `;
+  return html`<${Fragment}>
+    <div id='app-header'>header</div>
+    <div id='app-body'><${Main}/></div>
+    <div id='app-footer'>footer</div>
+  </${Fragment}>`;
 }   
     
 const $body    = document.body;
