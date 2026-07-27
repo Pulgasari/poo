@@ -187,8 +187,36 @@ const combinedMatcher = createMatcherChain(matchA, matchB, matchC);
 const result = combinedMatcher(state);
 ```
 
+```javascript
+/**
+ * Returns the first non-undefined result from a list of matcher functions.
+ *
+ * @param {Array<Function>} matchers - List of functions to execute
+ * @param {*} arg - Argument passed to each matcher
+ * @param {Function} [isMatch] - Optional custom predicate (defaults to !== undefined)
+ * @returns {*}
+ */
+export function firstMatch(matchers, arg, isMatch = (val) => val !== undefined) {
+  for (const matcher of matchers) {
+    const result = matcher(arg);
+    if (isMatch(result)) return result;
+  }
+  return undefined;
+}
 
+/**
+ * Evaluates matchers sequentially and returns the first defined result.
+ */
+export const firstMatch = (matchers, arg) => {
+  for (const matcher of matchers) {
+    const res = matcher(arg);
+    if (res !== undefined) return res;
+  }
+};
 
+// Usage:
+const result = firstMatch(alternativeMatchers, state);
+```
 
 
 
