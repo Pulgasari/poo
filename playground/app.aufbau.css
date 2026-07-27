@@ -33,7 +33,14 @@ body {
   color      : var(--aufbau-fg);
 }
 
+#code-input,
+#code-output {
+  display: flex;
+  flex-direction: column;
 
+  > *:nth-child(1) { flex: 0 0 auto; }
+  > *:nth-child(2) { flex: 1 0 auto; }
+}
 
 /* Styling for the synchronized editor overlay */
     .editor-wrapper {
@@ -47,7 +54,7 @@ body {
     }
 
 #code-input-area,
-    .code-overlay {
+.code-overlay {
       position: absolute;
       top: 0;
       left: 0;
@@ -63,7 +70,7 @@ body {
       word-break: break-all;
       border: 1px solid #444;
       border-radius: 4px;
-    }
+}
 
     #code-input-area {
       color: transparent;
