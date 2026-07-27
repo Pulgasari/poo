@@ -142,7 +142,7 @@ const firstDefinedOr = (matchers, arg, fallback) => {
 // Aufruf:
 return firstDefined(alternativeMatchers, state, undefined);
 
-const firstDefinedOr = (matchers, arg, checkFn) => {
+const anyLike = (matchers, arg, checkFn) => {
   for (const matcher of matchers) {
     const result = matcher(arg);
     if (checkFn(result)) return result;
@@ -150,7 +150,7 @@ const firstDefinedOr = (matchers, arg, checkFn) => {
   return null;
 };
 // Aufruf:
-return firstDefined (alternativeMatchers, state, isDefined) ?? undefined;
+return anyLike (alternativeMatchers, state, isDefined) ?? undefined;
 ```
 
 
