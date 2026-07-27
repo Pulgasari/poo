@@ -2,9 +2,28 @@
 @import url('https://pulgasari.github.io/aufbau/css/default.css');
 @import url('https://pulgasari.github.io/aufbau/css/themes/zombie.css');
 
-body {
-  aufbau-webfont: 'Hubot Sans';
+@aufbau colors {
+  dark : black white;
+  lite : white black;
 }
+
+body {
+  aufbau-colors  : dark;
+  aufbau-webfont : 'Hubot Sans';
+}
+
+/*
+body {
+  background : var(--aufbau-bg);
+  color      : var(--aufbau-fg);
+}
+
+#app-body       { background: #f002; }
+#app-body   > * { background: #0803; }
+#playground > * { background: #ff03; }
+*/
+#code-input     { background: #0804; }
+#code-output    { background: #0804; }
 
 html, body { height: 100%; overflow: hidden; }
 body       { height: 100dvh; }
@@ -23,18 +42,15 @@ body > #app { flex: 1; }
 #playground     { display: flex; flex-direction: column; }
 #playground > * { flex: 1 0 auto; }
 
-#app-body     { background: #f002; padding: 1rem; }
-#app-body > * { background: #0803; }
-
-#playground     { gap: 1rem; }
-#playground > * { background: #ff03; }
-
+#app-body { padding: 1rem; }
 #app > #app-body { padding: 1rem!important; }
 
-body {
-  background : var(--aufbau-bg);
-  color      : var(--aufbau-fg);
-}
+#playground     { gap: 1rem; }
+
+
+
+
+
 #app-header {
   display         : flex;
   fley-flow       : row;
@@ -60,7 +76,6 @@ body {
 
 #code-input,
 #code-output {
-  background: #0804;
   display: flex;
   flex-direction: column;
 
