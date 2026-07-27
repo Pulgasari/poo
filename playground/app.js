@@ -1,25 +1,23 @@
 import aufbau, { html, useRef, useSignal, useSignalEffect, Fragment } from '@aufbau/kit';
-    //import Header from './components/Header.js';
-    import compilePOO from '@poo/compiler';
+//import Header from './components/Header.js';
+import compilePOO from '@poo/compiler';
 
-    // Import Highlight.js and POO language support
-    import hljs        from 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/+esm';
-    import registerPoo from 'https://pulgasari.github.io/poo/js-packages/hljs/index.js';
+// Import: Highlight.js and POO language support
+import hljs        from 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/+esm';
+import registerPoo from 'https://pulgasari.github.io/poo/js-packages/hljs/index.js';
+hljs.registerLanguage('poo', registerPoo); // Register POO custom syntax
 
-    // Register POO custom syntax
-    hljs.registerLanguage('poo', registerPoo);
-
-    // Poo Example Code
-    const pooExample = `val str     = 'coding sucks'; // comment
+// Poo Example Code
+const pooExample = `val str     = 'coding sucks'; // comment
 val animals =  ['cat', 'dog'];
 val pets    = #['cat', 'dog'];
 
 pets += 'fish';`;
 
-    function transformCode (code) {
-      try       { return compilePOO(code).code; } 
-      catch (e) { return '// Compilation error:\n' + e.message; }
-    }
+function transformCode (code) {
+  try       { return compilePOO(code).code; } 
+  catch (e) { return '// Compilation error:\n' + e.message; }
+}
 
     function Main () {
       const input  = useSignal(pooExample);
