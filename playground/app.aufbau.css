@@ -32,6 +32,28 @@ body {
   background : var(--aufbau-bg);
   color      : var(--aufbau-fg);
 }
+#app-header {
+  display         : flex;
+  fley-flow       : row;
+  align-items     : center;
+  justify-content : space-between;
+  gap             : 1rem;
+  padding         : 1rem;
+}
+#app-footer {
+  display         : flex;
+  fley-flow       : row;
+  align-items     : center;
+  justify-content : center;
+  gap             : 1rem;
+  padding         : 1rem;
+}
+#app-header nav {
+  display     : flex;
+  fley-flow   : row nowrap;
+  align-items : center;
+  gap         : 0.5rem;
+}
 
 #code-input,
 #code-output {
