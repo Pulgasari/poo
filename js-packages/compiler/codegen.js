@@ -1,5 +1,7 @@
 // poo/compiler/codegen.js
 
+// poo/compiler/codegen.js
+
 // Translates poo AST nodes (produced by @cosmonaut/lsd's compiled parser
 // methods, see parser.js) into JavaScript source text. This is entirely
 // poo/compiler's own responsibility - @cosmonaut/lsd only takes source
@@ -16,9 +18,18 @@
 // poo.lsd's own comment on the BinaryExpression block). genBinaryExpr
 // still uses the full precedence-aware machinery below so that nothing
 // here needs to change once that parsing limitation is lifted.
+//
+// NOTE: poo.lsd has a node type literally named "BinaryExpr". Generator's
+// own precedence-climbing helper of the same name lives at `g.$.genBinaryExpr`
+// (NOT `g.genBinaryExpr`) specifically to avoid this kind of name collision -
+// see Generator.js's constructor comment for the full rationale. Always call
+// it via `g.$.genBinaryExpr(...)`, never `g.genBinaryExpr(...)`.
 
-import Generator, { concat, text, indent, hardline, joinMap, print, genBinaryExpr as genBinaryExprHelper } from '@cosmonaut/generator';
+import Generator, { concat, hardline, indent, joinMap, print, text } from '@cosmonaut/generator';
 import lsd from './lsd.js';
+
+const RUNTIME_IMPORT_HEADER = "import * as poo from 'poo/runtime';";
+const isBinaryExpr = node => node?.type === 'BinaryExpr';
 
 const operatorConfig = Object.fromEntries(
   lsd.meta.tables.operators.rows.flatMap(row =>
@@ -28,10 +39,6 @@ const operatorConfig = Object.fromEntries(
     }])
   )
 );
-
-const isBinaryExpr = node => node?.type === 'BinaryExpr';
-
-const RUNTIME_IMPORT_HEADER = "import * as poo from '@poo/runtime';";
 
 const methods = {
   genIDENTIFIER : (g, node) => text(node.value),
@@ -63,7 +70,7 @@ const methods = {
 
   genExprStatement : (g, node) => concat(g.genNode(node.expression), text(';')),
 
-  genBinaryExpr : (g, node) => g.genBinaryExprHelper(node, {
+  genBinaryExpr : (g, node) => g.$.genBinaryExpr(node, {
     getOperator : n => n.operator.value,
     getLeft     : n => n.left,
     getRight    : n => n.right,
@@ -75,13 +82,13 @@ const methods = {
   genFnCall : (g, node) => {
     const argsNode = node.args;
     const argsDoc  = Array.isArray(argsNode)
-      ? g.genList(argsNode, { wrapper: '()' })
+      ? g.$.genList(argsNode, { wrapper: '()' })
       : concat(text('('), g.genNode(argsNode), text(')'));
     return concat(text(node.callee.value), argsDoc);
   },
 
-  genExprArgsList  : (g, node) => g.genList(node.items, { wrapper: null }),
-  genNamedArgsList : (g, node) => g.genList(node.args,  { wrapper: '{}' }),
+  genExprArgsList  : (g, node) => g.$.genList(node.items, { wrapper: null }),
+  genNamedArgsList : (g, node) => g.$.genList(node.args,  { wrapper: '{}' }),
   genNamedPropDecl : (g, node) => concat(text(node.key.value), text(': '), g.genNode(node.value)),
 
   genArrayLikeLiteral : (g, node) => {
@@ -89,7 +96,7 @@ const methods = {
       ? (node.kind === 'Record' ? text('{}') : text('[]'))
       : node.elements.type === 'NamedArgsList'
         ? g.genNode(node.elements)
-        : concat(text('['), g.genList(node.elements.items, { wrapper: null }), text(']'));
+        : concat(text('['), g.$.genList(node.elements.items, { wrapper: null }), text(']'));
 
     return concat(text('poo.makeArrayLike('), text(`'${node.kind}', `), elementsDoc, text(')'));
   },
@@ -99,7 +106,7 @@ const generator = new Generator({ methods });
 
 export function generateProgram (statements) {
   const bodyDoc = concat(...statements.map((stmt, i) => i === 0 ? generator.genNode(stmt) : concat(hardline, generator.genNode(stmt))));
-  const     doc = concat(text(RUNTIME_IMPORT_HEADER), hardline, hardline, bodyDoc, hardline);
+  const doc = concat(text(RUNTIME_IMPORT_HEADER), hardline, hardline, bodyDoc, hardline);
   return print(doc);
 }
 
