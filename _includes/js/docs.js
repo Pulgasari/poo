@@ -47,6 +47,8 @@ function Menu () {
   `;
 }
 
+import registerPoo from 'https://pulgasari.github.io/poo/js-packages/hljs/index.js';
+hljs.registerLanguage('poo', registerPoo);
 
 // Ausführung erst, wenn die Seite komplett geladen ist:
 window.addEventListener('DOMContentLoaded', () => {
