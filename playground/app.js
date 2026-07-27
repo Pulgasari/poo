@@ -14,19 +14,16 @@ if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
 }
 
 // ::: poo
-import compilePOO from '@poo/compiler';
+import  compilePOO from '@poo/compiler';
+import registerPoo from '@poo/hljs';
 
 // ::: misc
+import hljs from 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/+esm';
+hljs.registerLanguage('poo', registerPoo); // Register POO custom syntax
 
 // ::: components
 import Footer from './components/Footer.js';
 import Header from './components/Header.js';
-
-
-// Import: Highlight.js and POO language support
-import hljs        from 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/+esm';
-import registerPoo from 'https://pulgasari.github.io/poo/js-packages/hljs/index.js';
-hljs.registerLanguage('poo', registerPoo); // Register POO custom syntax
 
 // Poo Example Code
 const pooExample = await fetch('./example.poo').then((res) => res.text());
