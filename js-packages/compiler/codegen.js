@@ -1,7 +1,5 @@
 // poo/compiler/codegen.js
 
-// poo/compiler/codegen.js
-
 // Translates poo AST nodes (produced by @cosmonaut/lsd's compiled parser
 // methods, see parser.js) into JavaScript source text. This is entirely
 // poo/compiler's own responsibility - @cosmonaut/lsd only takes source
@@ -106,7 +104,7 @@ const generator = new Generator({ methods });
 
 export function generateProgram (statements) {
   const bodyDoc = concat(...statements.map((stmt, i) => i === 0 ? generator.genNode(stmt) : concat(hardline, generator.genNode(stmt))));
-  const doc = concat(text(RUNTIME_IMPORT_HEADER), hardline, hardline, bodyDoc, hardline);
+  const     doc = concat(text(RUNTIME_IMPORT_HEADER), hardline, hardline, bodyDoc, hardline);
   return print(doc);
 }
 
