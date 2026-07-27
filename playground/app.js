@@ -12,6 +12,7 @@ import compilePOO from '@poo/compiler';
 // ::: misc
 
 // ::: components
+import Footer from './components/Footer.js';
 import Header from './components/Header.js';
 
 
@@ -85,7 +86,7 @@ function App () {
   return html`<${Fragment}>
     <${Header}/>
     <div id='app-body'><${Main}/></div>
-    <div id='app-footer'>footer</div>
+    <${Footer}/>
   </${Fragment}>`;
 }   
     
