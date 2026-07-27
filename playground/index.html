@@ -13,7 +13,7 @@
     .editor-wrapper {
       position: relative;
       width: 100%;
-      height: 250px;
+      /*height: 250px;*/
     }
 
     #code-input,
@@ -111,11 +111,8 @@
     hljs.registerLanguage('poo', registerPoo);
 
     function transformCode (code) {
-      try {
-        return compilePOO(code).code;
-      } catch (err) {
-        return '// Compilation error:\n' + err.message;
-      }
+      try       { return compilePOO(code).code; } 
+      catch (e) { return '// Compilation error:\n' + e.message; }
     }
 
     function Main () {
@@ -163,8 +160,6 @@
           <div id='code-output'>
             <pre class='hljs'><code dangerouslySetInnerHTML=${{ __html: highlightedOutput }}></code></pre>
           </div>
-
-          <div id='console'>output</div>
         </div>
       `;
     }
