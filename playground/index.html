@@ -100,8 +100,7 @@
   </div>
 
   <script type="module">
-    import aufbau, { html } from '@aufbau/kit';
-    import { useRef } from 'preact/hooks';
+    import aufbau, { html, useRef, useSignal } from '@aufbau/kit';
     import compilePOO from '@poo/compiler';
 
     // Import Highlight.js and POO language support
@@ -120,7 +119,7 @@
     }
 
     function Main () {
-      const input = useSignal("str = 'coding sucks';");
+      const input  = useSignal("str = 'coding sucks';");
       const output = useSignal('');
       const preOverlayRef = useRef(null);
 
