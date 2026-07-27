@@ -5,6 +5,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>playground @ poo</title>
   <link rel="stylesheet" href="./app.aufbau.css" />
+  <!-- Highlight.js Theme -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css" />
+
+  <style>
+    /* Styling for the synchronized editor overlay */
+    .editor-wrapper {
+      position: relative;
+      width: 100%;
+      height: 250px;
+    }
+
+    #code-input,
+    .code-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 12px;
+      box-sizing: border-box;
+      font-family: monospace, monospace;
+      font-size: 14px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-all;
+      border: 1px solid #444;
+      border-radius: 4px;
+    }
+
+    #code-input {
+      color: transparent;
+      background: transparent;
+      caret-color: #fff;
+      z-index: 1;
+      resize: none;
+      outline: none;
+    }
+
+    .code-overlay {
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    #code-output pre {
+      margin: 0;
+      padding: 12px;
+      border-radius: 4px;
+      font-family: monospace, monospace;
+      font-size: 14px;
+      line-height: 1.5;
+      overflow: auto;
+    }
+  </style>
+
   <script type="importmap">
     {"imports":{
       "htm"                  : "https://esm.sh/htm@3.1.1",
@@ -44,40 +100,71 @@
   </div>
 
   <script type="module">
-    //alert('playground start');
     import aufbau, { html } from '@aufbau/kit';
-    const { define, update, signal, effect, useSignal, useSignalEffect } = aufbau;
+    import { useRef } from 'preact/hooks';
     import compilePOO from '@poo/compiler';
 
+    // Import Highlight.js and POO language support
+    import hljs        from 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/+esm';
+    import registerPoo from 'https://pulgasari.github.io/poo/js-packages/hljs/index.js';
+
+    // Register POO custom syntax
+    hljs.registerLanguage('poo', registerPoo);
+
     function transformCode (code) {
-      return compilePOO(code).code;
+      try {
+        return compilePOO(code).code;
+      } catch (err) {
+        return '// Compilation error:\n' + err.message;
+      }
     }
-    //define({ key: 'bg', type: 'property' });
-    //define({ key: 'fg', type: 'property' });
-    //alert('playground mitte');
 
     function Main () {
-      const  input = useSignal("str = 'coding sucks';");
+      const input = useSignal("str = 'coding sucks';");
       const output = useSignal('');
+      const preOverlayRef = useRef(null);
 
       useSignalEffect(() => {
-        // Accessing input.value automatically subscribes this effect to changes
         const currentInput = input.value;
-        const timer        = setTimeout(() => { output.value = transformCode(currentInput); }, 500);
+        const timer = setTimeout(() => { 
+          output.value = transformCode(currentInput); 
+        }, 300);
 
-        // Clean up pending execution when input changes before timeout completes
         return () => clearTimeout(timer);
       });
 
+      // Synchronize scrolling between the transparent textarea and the code overlay
+      const handleScroll = (e) => {
+        if (preOverlayRef.current) {
+          preOverlayRef.current.scrollTop  = e.target.scrollTop;
+          preOverlayRef.current.scrollLeft = e.target.scrollLeft;
+        }
+      };
+
+      // Generate highlighted HTML strings using Highlight.js
+      const highlightedInput  = hljs.highlight(input.value || '', { language: 'poo' }).value;
+      const highlightedOutput = output.value ? hljs.highlight(output.value, { language: 'javascript' }).value : '';
+
       return html`
         <div id='playground'>
-          <textarea
-            id='code-input'
-            placeholder='enter poo code ...'
-            value=${input}
-            onInput=${(e) => (input.value = e.target.value)}
-          ></textarea>
-          <div id='code-output'>${output}</div>
+          <!-- Input code editor container with visual overlay -->
+          <div class='editor-wrapper'>
+            <textarea
+              id='code-input'
+              placeholder='enter poo code ...'
+              value=${input}
+              onInput=${(e) => (input.value = e.target.value)}
+              onScroll=${handleScroll}
+              spellcheck="false"
+            ></textarea>
+            <pre ref=${preOverlayRef} class='code-overlay hljs'><code dangerouslySetInnerHTML=${{ __html: highlightedInput + '\n' }}></code></pre>
+          </div>
+
+          <!-- JavaScript highlighted output container -->
+          <div id='code-output'>
+            <pre class='hljs'><code dangerouslySetInnerHTML=${{ __html: highlightedOutput }}></code></pre>
+          </div>
+
           <div id='console'>output</div>
         </div>
       `;
@@ -85,7 +172,6 @@
     
     const $appBody = document.getElementById('app-body');
     aufbau.render(html`<${Main} />`, $appBody);
-    //alert('playground end');
   </script>
 
 </body>
