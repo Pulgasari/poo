@@ -5,6 +5,13 @@
 // ::: aufbau
 import aufbau, { html, useRef, useSignal, useSignalEffect, Fragment } from '@aufbau/kit';
 window.html = html; aufbau.init();
+// Register local Service Worker for network stylesheets
+if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+  navigator.serviceWorker
+    .register(new URL('./sw.js', import.meta.url), { type: 'module' })
+    .then((registration) => { console.log('[@aufbau/playground] Service worker registered with scope:', registration.scope); })
+    .catch((error)       => { console.error('[@aufbau/playground] Service worker registration failed:', error); });
+}
 
 // ::: poo
 import compilePOO from '@poo/compiler';
