@@ -45,6 +45,8 @@ body {
     #code-input {
       position relative;
     }
+
+#code-input-area,
     .code-overlay {
       position: absolute;
       top: 0;
@@ -63,7 +65,7 @@ body {
       border-radius: 4px;
     }
 
-    #code-input {
+    #code-input-area {
       color: transparent;
       background: transparent;
       caret-color: #fff;
