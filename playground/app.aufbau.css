@@ -1,6 +1,8 @@
-@import url('https://pulgasari.github.io/aufbau/css/reset.css');
-@import url('https://pulgasari.github.io/aufbau/css/default.css');
 @import url('https://pulgasari.github.io/aufbau/css/themes/zombie.css');
+
+@aufbau-config {
+  import: reset, default;
+}
 
 @aufbau colors {
   dark : black white;
@@ -8,7 +10,7 @@
 }
 
 body {
-  aufbau-colors  : lite;
+  aufbau-colors  : dark;
   aufbau-webfont : 'Hubot Sans';
 }
 
