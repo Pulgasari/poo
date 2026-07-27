@@ -153,6 +153,25 @@ const anyLike = (matchers, arg, checkFn) => {
 return anyLike (alternativeMatchers, state, isDefined) ?? undefined;
 ```
 
+```javascript
+Array.anyLike = function (arg, checkFn) => {
+  for (const matcher of this) {
+    const result = matcher(arg);
+    if (checkFn(result)) return result;
+  }
+  return null;
+};
+// Aufruf:
+return alternativeMatchers.anyLike (state, isDefined) ?? undefined;
+```
+
+
+
+
+
+
+
+
 
 
 
