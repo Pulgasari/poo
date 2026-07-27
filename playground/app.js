@@ -83,7 +83,7 @@ function transformCode (code) {
 
 function App () {
   return html`<${Fragment}>
-    <div id='app-header'><${Header}/></div>
+    <${Header}/>
     <div id='app-body'><${Main}/></div>
     <div id='app-footer'>footer</div>
   </${Fragment}>`;
