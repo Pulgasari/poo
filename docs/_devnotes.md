@@ -218,7 +218,8 @@ export const firstMatch = (matchers, arg) => {
 const result = firstMatch(alternativeMatchers, state);
 ```
 
-
+1. Lazy Execution / Short-Circuiting: Die Iteration muss sofort stoppen, sobald eine Bedingung erfüllt ist.
+2. Type/Value Transformation: Es soll nicht das ursprüngliche Element $A$ (oder ein bool) zurückgegeben werden, sondern das Ergebnis der Transformation $B$.
 
 
 
