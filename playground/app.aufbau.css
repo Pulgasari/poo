@@ -42,7 +42,9 @@ body {
       /*height: 250px;*/
     }
 
-    #code-input,
+    #code-input {
+      position relative;
+    }
     .code-overlay {
       position: absolute;
       top: 0;
