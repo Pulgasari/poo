@@ -110,13 +110,20 @@
     // Register POO custom syntax
     hljs.registerLanguage('poo', registerPoo);
 
+    // Poo Example Code
+    const pooExample = `val str     = 'coding sucks'; // comment
+val animals =  ['cat', 'dog'];
+val pets    = #['cat', 'dog'];
+
+pets += 'fish';`;
+
     function transformCode (code) {
       try       { return compilePOO(code).code; } 
       catch (e) { return '// Compilation error:\n' + e.message; }
     }
 
     function Main () {
-      const input  = useSignal("str = 'coding sucks';");
+      const input  = useSignal(pooExample);
       const output = useSignal('');
       const preOverlayRef = useRef(null);
 
