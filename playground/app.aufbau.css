@@ -1,7 +1,6 @@
-@import url('https://pulgasari.github.io/aufbau/css/themes/zombie.css');
-
 @aufbau-config {
-  import: reset, default;
+  import : reset, default;
+  themes : zombie;
 }
 
 @aufbau colors {
