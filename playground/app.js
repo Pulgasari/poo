@@ -1,6 +1,18 @@
+// app.js
+
+// :::::: IMPORTS
+
+// ::: aufbau
 import aufbau, { html, useRef, useSignal, useSignalEffect, Fragment } from '@aufbau/kit';
-import Header from './components/Header.js';
+
+// ::: poo
 import compilePOO from '@poo/compiler';
+
+// ::: misc
+
+// ::: components
+import Header from './components/Header.js';
+
 
 // Import: Highlight.js and POO language support
 import hljs        from 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/+esm';
@@ -74,7 +86,7 @@ function transformCode (code) {
 
 function App () {
   return html`<${Fragment}>
-    <div id='app-header'>header</div>
+    <div id='app-header'><${Header}/></div>
     <div id='app-body'><${Main}/></div>
     <div id='app-footer'>footer</div>
   </${Fragment}>`;
