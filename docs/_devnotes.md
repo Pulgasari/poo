@@ -129,4 +129,33 @@ prop player = {
 };
 ```
 
+##
+
+```javascript
+const firstDefinedOr = (matchers, arg, fallback) => {
+  for (const matcher of matchers) {
+    const result = matcher(arg);
+    if (result !== undefined) return result;
+  }
+  return fallback;
+};
+// Aufruf:
+return firstDefined(alternativeMatchers, state, undefined);
+
+const firstDefinedOr = (matchers, arg, checkFn) => {
+  for (const matcher of matchers) {
+    const result = matcher(arg);
+    if (checkFn(result)) return result;
+  }
+  return null;
+};
+// Aufruf:
+return firstDefined (alternativeMatchers, state, isDefined) ?? undefined;
+```
+
+
+
+
+
+
 
