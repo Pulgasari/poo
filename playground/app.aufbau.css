@@ -4,12 +4,13 @@
 }
 
 @aufbau colors {
-  dark : black white;
-  lite : white black;
+  dark   : black white;
+  lite   : white black;
+  soviet : red yellow;
 }
 
 body {
-  aufbau-colors  : dark;
+  aufbau-colors  : soviet;
   aufbau-webfont : 'Hubot Sans';
 }
 
