@@ -4,7 +4,7 @@
 
 // ::: aufbau
 import aufbau, { html, useRef, useSignal, useSignalEffect, Fragment } from '@aufbau/kit';
-window.html = html;
+window.html = html; aufbau.init();
 
 // ::: poo
 import compilePOO from '@poo/compiler';
