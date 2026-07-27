@@ -18,14 +18,15 @@ META TABLE :: operators == (
   group         is String
   associativity is String
   precedence    is Number
+  symbols       is String*
 ) {
   assign   left   100  ( = += -= *= /= ??= )
   compare  idk    200  ( ~= ~== == === != !== < > =< >= <=> || && ?? )
   additive left   300  ( + - )
   multi    left   400  ( * / % )
   pipe     left   500  ( >> >>> )
-  idk      idk    idk  ( |? |> |. )
-  idk      idk    idk  ( >=< )
+  idk      idk    600  ( |? |> |. )
+  idk      idk    700  ( >=< )
 }
 
 # //////////// TOKENIZER ///////////////////////////////////////////////
