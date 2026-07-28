@@ -30,22 +30,28 @@ body {
 html, body { height: 100%; overflow: hidden; }
 body       { height: 100dvh; }
 
-body { display:flex; flex-flow: column; }
+@aufbaut-trait .vert { display:flex; flex-flow: column; }
+
+
+
+body { aufbau-use: .vert; }
 body > #app { flex: 1; }
 
-#app { display:flex; flex-flow: column; }
+#app { aufbau-use: .vert; }
 #app > #app-header { flex: 0 0 auto; }
 #app > #app-footer { flex: 0 0 auto; }
 #app > #app-body   { flex: 1; min-height: 0; overflow-y: auto; }
 
-#app-body     { display: flex; flex-direction: column; }
+#app-body     { aufbau-use: .vert; }
 #app-body > * { flex: 1 0 auto; }
 
-#playground     { display: flex; flex-direction: column; }
+#playground     { aufbau-use: .vert; }
 #playground > * { flex: 1 0 auto; }
 
 #app-body { padding: 1rem; }
+/*
 #app > #app-body { padding: 1rem!important; }
+*/
 
 #playground     { gap: 1rem; }
 
@@ -139,6 +145,21 @@ body > #app { flex: 1; }
       line-height: 1.5;
       overflow: auto;
     }
+
+/*
+
+body { display:flex; flex-flow: column; }
+body > #app { flex: 1; }
+
+#app { display:flex; flex-flow: column; }
+#app > #app-header { flex: 0 0 auto; }
+#app > #app-footer { flex: 0 0 auto; }
+#app > #app-body   { flex: 1; min-height: 0; overflow-y: auto; }
+
+#app-body     { display: flex; flex-direction: column; }
+#app-body > * { flex: 1 0 auto; }
+
+*/
 
 /*
 
