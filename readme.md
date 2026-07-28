@@ -178,3 +178,12 @@ obj StyleResolver {
   fn resolve = (rules) => {} += rules |> .children |> { .property: .value };
 }
 ```
+
+```poo
+obj StyleResolver {
+  fn resolve = (rules) => {} += rules ... children ... { .property: .value };
+}
+```
+
+
+
