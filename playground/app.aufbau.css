@@ -7,10 +7,11 @@
   dark   : black white;
   lite   : white black;
   soviet : red yellow;
+  kobold : green yellow;
 }
 
 body {
-  aufbau-colors  : soviet;
+  aufbau-colors  : kobold;
   aufbau-webfont : 'Hubot Sans';
 }
 
