@@ -23,9 +23,10 @@ body {
 #app-body       { background: #f002; }
 #app-body   > * { background: #0803; }
 #playground > * { background: #ff03; }
-*/
 #code-input     { background: #0804; }
 #code-output    { background: #0804; }
+*/
+
 
 html, body { height: 100%; overflow: hidden; }
 body       { height: 100dvh; }
