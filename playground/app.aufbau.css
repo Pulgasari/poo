@@ -1,5 +1,9 @@
 /* add to reset.css maybe
 div { min-height: 0; }
+body {
+  background : var(--aufbau-bg);
+  color      : var(--aufbau-fg);
+}
 */
 
 @aufbau-config {
@@ -20,11 +24,6 @@ body {
 }
 
 /*
-body {
-  background : var(--aufbau-bg);
-  color      : var(--aufbau-fg);
-}
-
 #app-body       { background: #f002; }
 #app-body   > * { background: #0803; }
 #playground > * { background: #ff03; }
@@ -46,30 +45,14 @@ a { color: currentcolor; }
 
 
 body { aufbau-use: .vert; }
-/*
-body > #app { flex: 1; }
-*/
+  
 #app { aufbau-use: .vert; }
 #app > #app-header { flex: 0 0 auto; }
 #app > #app-footer { flex: 0 0 auto; }
 #app > #app-body   { flex: 1; min-height: 0; overflow-y: auto; }
 
-#app-body     { aufbau-use: .vert; }
-/*
-#app-body > * { flex: 1 0 auto; }
-*/
-
-#playground     { aufbau-use: .vert; }
-/*
-#playground > * { flex: 1 0 auto; }
-*/
-
-#app-body { padding: 1rem; }
-/*
-#app > #app-body { padding: 1rem!important; }
-*/
-
-#playground     { gap: 1rem; }
+#app-body   { aufbau-use: .vert; padding: 1rem; }
+#playground { aufbau-use: .vert; gap: 1rem; }
 
 
 
