@@ -7,7 +7,7 @@ body {
 */
 
 @aufbau-config {
-  import : reset, default;
+  import : reset, default, keyframes;
   themes : zombie;
 }
 
@@ -21,6 +21,7 @@ body {
 body {
   aufbau-colors  : kobold;
   aufbau-webfont : 'Hubot Sans';
+  aufbau-pattern : stripes rotate(45deg) colors(soviet) animate(slide 4s);
 }
 
 /*
