@@ -1,3 +1,7 @@
+/* add to reset.css maybe
+div { min-height: 0; }
+*/
+
 @aufbau-config {
   import : reset, default;
   themes : zombie;
