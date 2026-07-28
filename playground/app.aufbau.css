@@ -38,6 +38,7 @@ body       { height: 100dvh; }
   > * { flex: 1 0 auto; }
 }
 
+a { color: currentcolor; }
 
 
 body { aufbau-use: .vert; }
