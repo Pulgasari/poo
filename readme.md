@@ -153,3 +153,28 @@ fn whileLoop = cond => decorate (
     : loop          do @ += runWithBacktrack(p, cond) or break
 );
 ```
+
+---
+
+```javascript
+class StyleResolver {
+  resolve (rules) {
+    const result = {};
+    for (const rule of rules) {
+      for (const declaration of rule.children) {
+        result[declaration.property] = declaration.value;
+      }
+    }
+    return result;
+  }
+}
+```
+
+```poo
+obj StyleResolver {
+  // 1. Flattens child declarations from rules
+  // 2. Maps each declaration into a single-entry object
+  // 3. Merges all generated objects into a new root dictionary
+  fn resolve = (rules) => {} += rules |> .children |> { .property: .value };
+}
+```
