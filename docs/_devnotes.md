@@ -2,6 +2,7 @@
 
 ## TO DO
 
+- function overloading
 - evtl. datatypes mit `to_fingerprint` ausstatten
 - *named capture groups* für `RegExp`
 - *scan iteration* für `RegExp`
