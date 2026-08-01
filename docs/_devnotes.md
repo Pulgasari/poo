@@ -3,6 +3,7 @@
 ## TO DO
 
 - auto-trim strings (only for `'`? only not for `` ` ``?)
+- string comparison with `==` is case-insensitive
 - function overloading
 - evtl. datatypes mit `to_fingerprint` ausstatten
 - *named capture groups* für `RegExp`
