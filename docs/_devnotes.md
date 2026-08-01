@@ -2,6 +2,7 @@
 
 ## TO DO
 
+- auto-trim strings (only for `'`? only not for `` ` ``?)
 - function overloading
 - evtl. datatypes mit `to_fingerprint` ausstatten
 - *named capture groups* für `RegExp`
