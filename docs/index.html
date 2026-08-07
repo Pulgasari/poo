@@ -26,7 +26,7 @@ if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
 }
 
 createDocsFW({
-  index  : '$repo/readme.md',
+  index  : 'readme.md',
   target : '#app',
   brand: {
     title : 'poo'
@@ -37,7 +37,11 @@ createDocsFW({
   },
   
   sidebar: {
-    docs : '$repo/readme.md',
+    functions : 'functions.md',
+    keywords  : 'keywords.md',
+    operators : 'operators.md',
+    types     : 'types.md',
+    values    : 'values.md',
   },
 
   footerText : 'poo | 2026',
