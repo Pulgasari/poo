@@ -5,13 +5,19 @@
 
 import Cosmonaut from '@cosmonaut/compiler';
 
-const compiler = new Cosmonaut ({ grammar: './poo.lsd' });
+const compiler = new Cosmonaut ({ 
+  grammar : './poo.lsd',
+  codegen : './codegen.js',
+});
 
 export {
+  // the main export
+  compile  : compiler.compile   // the full process: poo-code in -> js-code out  
+  // extra
+  tokenize : compiler.tokenize, // step 1: poo-code or poo-file -> tokens
+  parse    : compiler.parse,    // step 2: tokens -> ast
+  generate : compiler.generate, // step 3: ast -> code
   compiler,
-  tokenize : compiler.tokenize, // poo-code or poo-file -> tokens
-  parse    : compiler.parse,    // tokens -> ast
-  generate : compiler.generate, // ast -> code
 };
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
