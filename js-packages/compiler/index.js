@@ -3,6 +3,19 @@
 // Public API: compile(source) -> { ast, code }. Everything downstream
 // (poo/worker) only ever needs this one function.
 
+import Cosmonaut from '@cosmonaut/compiler';
+
+const compiler = new Cosmonaut ({ grammar: './poo.lsd' });
+
+export {
+  compiler,
+  tokenize : compiler.tokenize, // poo-code or poo-file -> tokens
+  parse    : compiler.parse,    // tokens -> ast
+  generate : compiler.generate, // ast -> code
+};
+
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 // :::::: IMPORTS
 
 // ::: @cosmonaut
@@ -13,9 +26,6 @@ import Parser                   from '@cosmonaut/parser';
 // ::: @poo
 import { generateProgram } from './codegen.js';
 import lsd                 from './lsd.js';
-
-
-// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 // :::::: LEXER
 export const createLexer = compileTokenizer(lsd);
