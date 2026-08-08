@@ -11,7 +11,8 @@ const compiler = new Cosmonaut ({
 });
 
 export {
-  // the main export
+  // the main export which only is needed 
+  // for example used by poo/worker to live transform poo-code in browser
   compile  : compiler.compile   // the full process: poo-code in -> js-code out  
   // extra
   tokenize : compiler.tokenize, // step 1: poo-code or poo-file -> tokens
