@@ -6,8 +6,8 @@
 import Cosmonaut from '@cosmonaut/compiler';
 
 const compiler = new Cosmonaut ({ 
-  grammar : './poo.lsd',
-  codegen : './codegen.js',
+  spec    : './poo.lsd',
+  codegen : './codegen.js', // claude: or name it 'target'
 });
 
 export {
