@@ -20,7 +20,7 @@ const compiler = new Cosmonaut ({ spec, target });
 
 // Bound on the instance, so destructuring keeps them working
 // - that is how the Service Worker receives just the piece it needs.
-const { tokenize, parse, generate } = compiler;
+const { generate, parse, tokenize } = compiler;
 
 function compile (source) {
   const ast  = parse(source);
