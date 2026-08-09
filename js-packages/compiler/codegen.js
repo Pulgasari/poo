@@ -1,112 +1,141 @@
 // poo/compiler/codegen.js
 
-// Translates poo AST nodes (produced by @cosmonaut/lsd's compiled parser
-// methods, see parser.js) into JavaScript source text. This is entirely
-// poo/compiler's own responsibility - @cosmonaut/lsd only takes source
-// text to AST, nothing more (see its readme).
+// The JavaScript target: poo AST -> JS source text.
+//
+// A target is a FUNCTION OF THE SPEC, not a standalone module. Which
+// language this is (poo.lsd) and what it compiles to (this file) are two
+// separate axes - one spec, many targets - so this file receives the spec
+// rather than loading it, and never imports lsd.js.
 //
 // Runtime-backed literals (Record/Tuple/List/Array) compile to a call
-// against `poo.makeArrayLike(...)`, matching the namespace import style
-// codegen emits at the top of every generated file:
-//   import * as poo from 'poo/runtime';
+// against `poo.makeArrayLike(...)`, matching the namespace import emitted
+// at the top of every generated file.
 //
-// KNOWN LIMITATION (inherited from poo.lsd itself): BinaryExpression
-// currently only ever has a single "left OPERATOR right" pair (parsing
-// doesn't support chained/precedence-climbing expressions yet - see
-// poo.lsd's own comment on the BinaryExpression block). genBinaryExpr
-// still uses the full precedence-aware machinery below so that nothing
-// here needs to change once that parsing limitation is lifted.
+// NAMING: poo.lsd has a node type literally named "BinaryExpr", and the
+// Generator's own precedence-climbing helper is also called genBinaryExpr.
+// They do not collide because built-in patterns live under `g.$` while
+// registered node methods live on `g` directly - always call the helper as
+// g.$.genBinaryExpr(...), never g.genBinaryExpr(...).
 //
-// NOTE: poo.lsd has a node type literally named "BinaryExpr". Generator's
-// own precedence-climbing helper of the same name lives at `g.$.genBinaryExpr`
-// (NOT `g.genBinaryExpr`) specifically to avoid this kind of name collision -
-// see Generator.js's constructor comment for the full rationale. Always call
-// it via `g.$.genBinaryExpr(...)`, never `g.genBinaryExpr(...)`.
+// KNOWN LIMITATION (inherited from poo.lsd): BinaryExpr only ever holds a
+// single "left OPERATOR right" pair - the grammar has no precedence
+// climbing yet. The helper below is already precedence-aware, so nothing
+// here needs to change once that is lifted.
 
-import Generator, { concat, hardline, indent, joinMap, print, text } from '@cosmonaut/generator';
-import lsd from './lsd.js';
+import { concat, hardline, indent, joinMap, text } from '@cosmonaut/layouter';
 
-const RUNTIME_IMPORT_HEADER = "import * as poo from 'poo/runtime';";
-const isBinaryExpr = node => node?.type === 'BinaryExpr';
+const RUNTIME_IMPORT = "import * as poo from 'poo/runtime';";
+const isBinaryExpr   = node => node?.type === 'BinaryExpr';
 
-const operatorConfig = Object.fromEntries(
-  lsd.meta.tables.operators.rows.flatMap(row =>
-    (row.symbols ?? []).map(symbol => [symbol, {
-      precedence    : Number(row.precedence) || 0,
-      associativity : row.associativity === 'right' ? 'right' : 'left',
-    }])
-  )
-);
+// A Block production yields a plain array of statements, not a node.
+const genBody = (g, statements) => joinMap(statements ?? [], hardline, statement => g.genNode(statement));
 
-const methods = {
-  genIDENTIFIER : (g, node) => text(node.value),
-  genNUMBER     : (g, node) => text(node.value),
-  genSTRING     : (g, node) => text(node.value),
-  genLITERAL    : (g, node) => text(node.value),
+export default function jsTarget (spec) {
 
-  genValDecl : (g, node) => concat(
-    text('let '),
-    text(node.name.value),
-    text(' = '),
-    g.genNode(node.value),
-    text(';'),
-  ),
+  // The META TABLE in poo.lsd is the single source of truth for precedence
+  // and associativity - reading it here means the two can never drift.
+  const operators = Object.fromEntries(
+    spec.document.meta.tables.operators.rows.flatMap(row =>
+      (row.symbols ?? []).map(symbol => [symbol, {
+        precedence    : Number(row.precedence) || 0,
+        associativity : row.associativity === 'right' ? 'right' : 'left',
+      }])
+    )
+  );
 
-  genObjDecl : (g, node) => concat(
-    text(node.name.value),
-    text(' = poo.makeObject('),
-    g.genNode(node.body),
-    text(');'),
-  ),
+  return {
 
-  genFnDecl : (g, node) => concat(
-    text('function '), text(node.identifier.value),
-    text('('), joinMap(node.args ?? [], text(', '), a => text(a.value)), text(') {'),
-    indent(concat(hardline, joinMap(node.body, hardline, stmt => g.genNode(stmt)))),
-    hardline, text('}'),
-  ),
+    layout : { width: 80, indentSize: 2 },
 
-  genExprStatement : (g, node) => concat(g.genNode(node.expression), text(';')),
+    // Program is a transparent production, so parse() yields an array of
+    // statements rather than a single node. The preamble and the joining
+    // between top-level statements belong here, not in a gen* method.
+    entry : (g, statements) => concat(
+      text(RUNTIME_IMPORT),
+      hardline,
+      hardline,
+      genBody(g, statements),
+      hardline,
+    ),
 
-  genBinaryExpr : (g, node) => g.$.genBinaryExpr(node, {
-    getOperator : n => n.operator.value,
-    getLeft     : n => n.left,
-    getRight    : n => n.right,
-    operators   : operatorConfig,
-    isBinary    : isBinaryExpr,
-    genOperand  : (gg, n) => gg.genNode(n),
-  }),
+    methods : {
 
-  genFnCall : (g, node) => {
-    const argsNode = node.args;
-    const argsDoc  = Array.isArray(argsNode)
-      ? g.$.genList(argsNode, { wrapper: '()' })
-      : concat(text('('), g.genNode(argsNode), text(')'));
-    return concat(text(node.callee.value), argsDoc);
-  },
+      // :::::: Terminals
 
-  genExprArgsList  : (g, node) => g.$.genList(node.items, { wrapper: null }),
-  genNamedArgsList : (g, node) => g.$.genList(node.args,  { wrapper: '{}' }),
-  genNamedPropDecl : (g, node) => concat(text(node.key.value), text(': '), g.genNode(node.value)),
+      genIDENTIFIER : (g, node) => text(node.value),
+      genNUMBER     : (g, node) => text(node.value),
+      genSTRING     : (g, node) => text(node.value),
+      genLITERAL    : (g, node) => text(node.value),
 
-  genArrayLikeLiteral : (g, node) => {
-    const elementsDoc = !node.elements
-      ? (node.kind === 'Record' ? text('{}') : text('[]'))
-      : node.elements.type === 'NamedArgsList'
-        ? g.genNode(node.elements)
-        : concat(text('['), g.$.genList(node.elements.items, { wrapper: null }), text(']'));
+      // :::::: Declarations
 
-    return concat(text('poo.makeArrayLike('), text(`'${node.kind}', `), elementsDoc, text(')'));
-  },
-};
+      genValDecl : (g, node) => concat(
+        text('let '),
+        text(node.name.value),
+        text(' = '),
+        g.genNode(node.value),
+        text(';'),
+      ),
 
-const generator = new Generator({ methods });
+      genObjDecl : (g, node) => concat(
+        text(node.name.value),
+        text(' = poo.makeObject({'),
+        indent(concat(hardline, genBody(g, node.body))),
+        hardline, text('});'),
+      ),
 
-export function generateProgram (statements) {
-  const bodyDoc = concat(...statements.map((stmt, i) => i === 0 ? generator.genNode(stmt) : concat(hardline, generator.genNode(stmt))));
-  const     doc = concat(text(RUNTIME_IMPORT_HEADER), hardline, hardline, bodyDoc, hardline);
-  return print(doc);
+      genFnDecl : (g, node) => concat(
+        text('function '), text(node.identifier.value),
+        text('('), joinMap(node.args ?? [], text(', '), arg => text(arg.value)), text(') {'),
+        indent(concat(hardline, genBody(g, node.body))),
+        hardline, text('}'),
+      ),
+
+      // :::::: Statements
+
+      genExprStatement : (g, node) => concat(g.genNode(node.expression), text(';')),
+
+      // :::::: Expressions
+
+      genBinaryExpr : (g, node) => g.$.genBinaryExpr(node, {
+        operators,
+        getOperator : n => n.operator.value,
+        getLeft     : n => n.left,
+        getRight    : n => n.right,
+        isBinary    : isBinaryExpr,
+        genOperand  : (gg, n) => gg.genNode(n),
+      }),
+
+      // args is either a ParenCallArgs (a CallArgsList node, or null for
+      // "f()") or a SingleBareArg token.
+      genFnCall : (g, node) => {
+        const args = node.args == null
+          ? text('()')
+          : Array.isArray(node.args)
+            ? g.$.genList(node.args, { wrapper: '()' })
+            : concat(text('('), g.genNode(node.args), text(')'));
+
+        return concat(text(node.callee.value), args);
+      },
+
+      // :::::: Arguments
+
+      genExprArgsList  : (g, node) => g.$.genList(node.items, { wrapper: null }),
+      genNamedArgsList : (g, node) => g.$.genList(node.args,  { wrapper: '{}' }),
+      genNamedPropDecl : (g, node) => concat(text(node.key.value), text(': '), g.genNode(node.value)),
+
+      // :::::: Literals
+
+      genArrayLikeLiteral : (g, node) => {
+        const elements = !node.elements
+          ? (node.kind === 'Record' ? text('{}') : text('[]'))
+          : node.elements.type === 'NamedArgsList'
+            ? g.genNode(node.elements)
+            : concat(text('['), g.$.genList(node.elements.items, { wrapper: null }), text(']'));
+
+        return concat(text('poo.makeArrayLike('), text(`'${node.kind}', `), elements, text(')'));
+      },
+
+    },
+  };
 }
-
-export { generator };
-export default generator;
