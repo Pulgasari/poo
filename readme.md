@@ -123,6 +123,11 @@ Coding sucks.
 
 ---
 
+- Docs: [https://pulgasari.github.io/poo/docs](https://pulgasari.github.io/poo/docs/)
+- Playground: [https://pulgasari.github.io/poo/playground/](https://pulgasari.github.io/poo/playground/)
+
+---
+
 ## Let's code!
 
 A lot of people do like **JavaScript** ...
