@@ -1,5 +1,0 @@
-# exclude directories from the public site build
-exclude:
-  - _deprecated/
-  - haskell/
-  - runtimes/
