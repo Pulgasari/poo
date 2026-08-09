@@ -3,24 +3,6 @@
 // Public API: compile(source) -> { ast, code }. Everything downstream
 // (poo/worker) only ever needs this one function.
 
-import Cosmonaut from '@cosmonaut/compiler';
-
-const compiler = new Cosmonaut ({ 
-  spec    : './poo.lsd',
-  codegen : './codegen.js', // claude: or name it 'target'
-});
-
-export {
-  // the main export which only is needed 
-  // for example used by poo/worker to live transform poo-code in browser
-  compile  : compiler.compile   // the full process: poo-code in -> js-code out  
-  // extra
-  tokenize : compiler.tokenize, // step 1: poo-code or poo-file -> tokens
-  parse    : compiler.parse,    // step 2: tokens -> ast
-  generate : compiler.generate, // step 3: ast -> code
-  compiler,
-};
-
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 // :::::: IMPORTS
