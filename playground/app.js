@@ -3,7 +3,7 @@
 // :::::: IMPORTS
 
 // ::: aufbau
-import aufbau, { html, useRef, useSignal, useSignalEffect, Fragment } from '@aufbau/kit';
+import aufbau, { html, preact } from '@aufbau/kits/preact-htm';
 window.html = html; aufbau.init();
 // Register local Service Worker for network stylesheets
 if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
@@ -12,6 +12,8 @@ if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
     .then((registration) => { console.log('[@aufbau/playground] Service worker registered with scope:', registration.scope); })
     .catch((error)       => { console.error('[@aufbau/playground] Service worker registration failed:', error); });
 }
+
+const { useRef, useSignal, useSignalEffect, Fragment } = preact;
 
 // ::: poo
 import  compilePOO from '@poo/compiler';
