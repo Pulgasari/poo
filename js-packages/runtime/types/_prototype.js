@@ -14,6 +14,21 @@ function toWords(str) {
 
 // :::::: String
 
+/*
+const S = String.prototype;
+S.capitalize     = function ()       { return this.charAt(0).toUpperCase() + this.slice(1); };
+S.prefix         = function (prefix) { return this.startsWith(prefix) ? this : prefix + this; };
+S.suffix         = function (suffix) { return this.  endsWith(suffix) ? this : this + suffix; };
+S.unprefix       = function (prefix) { return this.startsWith(prefix) ? this.slice(prefix.length) : this; };
+S.unsuffix       = function (suffix) { return this.  endsWith(suffix) ? this.slice(0, -suffix.length) : this; };
+S.isCase         = function (name)   { return this === this.toCase(name); };
+S.toConstantCase = function ()       { return toWords(this).join('_').toUpperCase(); };
+S.toKebabCase    = function ()       { return toWords(this).join('-'); };
+S.toPascalCase   = function ()       { return toWords(this).map (word => word[0].toUpperCase() + word.slice(1)).join(''); };
+S.toSnakeCase    = function ()       { return toWords(this).join('_'); };
+S.toTitleCase    = function ()       { return toWords(this).map (word => word[0].toUpperCase() + word.slice(1)).join(' '); };
+*/
+
 String.prototype.capitalize = function () {
   return this.charAt(0).toUpperCase() + this.slice(1);
 };
