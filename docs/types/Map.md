@@ -3,7 +3,7 @@
 A `Map` is a dynamic dictionary holding key-value pairs. Keys can be of any data type.
 
 ```poo
-val config = { "host": "localhost", port: 8080 };
+val config = { 'host': 'localhost', port: 8080 };
 ```
 
 ---
@@ -45,8 +45,8 @@ val config = { "host": "localhost", port: 8080 };
 Adds or updates a key-value pair in-place.
 
 ```poo
-val map = { "a": 1 };
-map.add("b", 2);
+val map = { 'a': 1 };
+map.add('b', 2);
 ```
 
 ## bytesize
@@ -54,7 +54,7 @@ map.add("b", 2);
 Returns the memory size of the map in bytes.
 
 ```poo
-{ "a": 1 }.bytesize();
+{ 'a': 1 }.bytesize();
 ```
 
 ## clear
@@ -72,7 +72,7 @@ Modifies the map in-place to contain only the key-value differences found in ano
 
 ```poo
 val a = { "x": 1, "y": 2 };
-a.diff({ "x": 1, "y": 99 }); { "y": 99 }
+a.diff({ "x": 1, "y": 99 }); // { "y": 99 }
 ```
 
 ## entries
@@ -80,7 +80,7 @@ a.diff({ "x": 1, "y": 99 }); { "y": 99 }
 Returns a list/array of tuples representing `#(key, value)` pairs.
 
 ```poo
-{ "a": 1 }.entries(); [ #("a", 1) ]
+{ "a": 1 }.entries(); // [ #('a', 1) ]
 ```
 
 ## filter
@@ -106,7 +106,7 @@ Retrieves a value associated with the given key. Returns `nil` if missing.
 
 ```poo
 val map = { "host": "localhost" }
-map.get("host"); "localhost"
+map.get('host'); // 'localhost'
 ```
 
 ## has
@@ -130,7 +130,7 @@ Returns `true` if the map contains no entries.
 Returns a list/array containing all keys.
 
 ```poo
-{ "a": 1, "b": 2 }.keys(); ["a", "b"]
+{ "a": 1, "b": 2 }.keys(); // ["a", "b"]
 ```
 
 ## loop
@@ -138,7 +138,8 @@ Returns a list/array containing all keys.
 Iterates through all entries executing a callback.
 
 ```poo
-{ "a": 1 }.loop((val, key) => print(key, val));
+{ "a": 1 }.loop((value, key) => print(key, value));
+{ "a": 1 }.loop(print);
 ```
 
 ## merge
@@ -147,7 +148,7 @@ Merges another map into the current map in-place, **overwriting** existing keys.
 
 ```poo
 val cfg = { "theme": "dark", "volume": 50 };
-cfg.merge({ "theme": "light" }) # { "theme": "light", "volume": 50 };
+cfg.merge({ "theme": "light" }) // { "theme": "light", "volume": 50 };
 ```
 
 ## morph
@@ -156,7 +157,7 @@ Transforms map values in-place.
 
 ```poo
 val map = { "a": 1, "b": 2 };
-map.morph((val, key) => val * 10);
+map.morph((value, key) => value * 10);
 ```
 
 ## patch
@@ -165,7 +166,7 @@ Merges another map into the current map in-place, **filling only missing keys** 
 
 ```poo
 val user = { "theme": "light" };
-user.patch({ "theme": "dark", "volume": 80 }) # { "theme": "light", "volume": 80 };
+user.patch({ "theme": "dark", "volume": 80 }) // { "theme": "light", "volume": 80 };
 ```
 
 ## remove
@@ -244,5 +245,5 @@ val final_cfg = user.to_patch({ "theme": "dark", "volume": 80 });
 Returns a list/array containing all values.
 
 ```poo
-{ "a": 1, "b": 2 }.values(); [1, 2]
+{ "a": 1, "b": 2 }.values(); // [1, 2]
 ```
