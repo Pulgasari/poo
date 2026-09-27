@@ -36,7 +36,7 @@ Appends a new element to the end of the array in-place.
 ```poo
 val nums = [1, 2];
 nums.add(3); // [1, 2, 3]
-nums += 5 // [1, 2, 3, 5]
+nums += 5; // [1, 2, 3, 5]
 ```
 
 ## bytesize
@@ -70,7 +70,7 @@ nums.filter(x => x % 2 == 0); // [2, 4]
 Combines/aggregates all elements into a single result starting with an initial accumulator value.
 
 ```poo
-val sum = [1, 2, 3].fold((acc, x) => acc + x, 0) # 6
+val sum = [1, 2, 3].fold((acc, x) => acc + x, 0) // 6
 ```
 
 ## has
@@ -78,7 +78,7 @@ val sum = [1, 2, 3].fold((acc, x) => acc + x, 0) # 6
 Checks whether a given value exists in the array.
 
 ```poo
-[1, "test"].has("test") # true
+[1, "test"].has("test") // true
 ```
 
 ## is_empty
@@ -86,7 +86,7 @@ Checks whether a given value exists in the array.
 Returns `true` if the array contains no elements (`size == 0`).
 
 ```poo
-[].is_empty() # true
+[].is_empty() // true
 ```
 
 ## loop
@@ -94,7 +94,7 @@ Returns `true` if the array contains no elements (`size == 0`).
 Iterates over each element executing the callback for side-effects.
 
 ```poo
-[1, 2, 3].loop(x => print(x))
+[1, 2, 3].loop(x => print(x));
 ```
 
 ## morph
@@ -102,8 +102,8 @@ Iterates over each element executing the callback for side-effects.
 Transforms every element in-place using the transformation function.
 
 ```poo
-val numbers = [1, 2, 3]
-numbers.morph(x => x * 2) # [2, 4, 6]
+val numbers = [1, 2, 3];
+numbers.morph(x => x * 2); // [2, 4, 6]
 ```
 
 ## remove
@@ -111,8 +111,8 @@ numbers.morph(x => x * 2) # [2, 4, 6]
 Removes the first occurrence of the specified value in-place *(Tentative)*.
 
 ```poo
-val items = ["a", "b", "c"]
-items.remove("b") # ["a", "c"]
+val items = ['a', 'b', 'c'];
+items.remove('b'); // ['a', 'c']
 ```
 
 ## size
@@ -120,7 +120,7 @@ items.remove("b") # ["a", "c"]
 Returns the number of elements contained in the array.
 
 ```poo
-[10, 20, 30].size() # 3
+[10, 20, 30].size(); // 3
 ```
 
 ## to_filter
@@ -128,8 +128,8 @@ Returns the number of elements contained in the array.
 Returns a new array containing only elements that satisfy the predicate function (pure/copy).
 
 ```poo
-val numbers = [1, 2, 3, 4]
-val evens = numbers.to_filter(x => x % 2 == 0) # [2, 4]
+val numbers = [1, 2, 3, 4];
+val evens   = numbers.to_filter(x => x % 2 == 0); // [2, 4]
 ```
 
 ## to_morph
@@ -137,6 +137,6 @@ val evens = numbers.to_filter(x => x % 2 == 0) # [2, 4]
 Returns a new array with all elements transformed by the callback function (pure/copy).
 
 ```poo
-val numbers = [1, 2, 3]
-val doubled = numbers.to_morph(x => x * 2) # [2, 4, 6]
+val numbers = [1, 2, 3];
+val doubled = numbers.to_morph(x => x * 2); // [2, 4, 6]
 ```
